@@ -3,9 +3,6 @@
     width: 50%;
   }
 }
-.hide-md {
-  display: none !important;
-}
 
 .row {
   @include row;
@@ -15,6 +12,12 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (min-width: #{$break-point-tablet}px) {
+  .hide-md {
+    display: none !important;
+  }
+}
 @media (max-width: #{$break-point-tablet - 1}px) {
   .col {
     &-sm-12 {
@@ -22,9 +25,6 @@
     }
   }
   .hide-sm {
-    display: none !important;
-  }
-  .hide-md {
-    display: flex;
+    display: none;
   }
 }

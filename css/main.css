@@ -3,7 +3,6 @@
   padding: 0em;
   margin: 0em; }
 
-/* BASE ------------------------------------------- */
 h1,
 h2 {
   font-family: Arial; }
@@ -56,9 +55,6 @@ input[type="text"] {
 .col-md-6 {
   width: 50%; }
 
-.hide-md {
-  display: none !important; }
-
 .row {
   display: flex;
   flex-direction: row; }
@@ -67,15 +63,15 @@ input[type="text"] {
   display: flex;
   flex-direction: column; }
 
+@media (min-width: 768px) {
+  .hide-md {
+    display: none !important; } }
 @media (max-width: 767px) {
   .col-sm-12 {
     width: 100%; }
 
   .hide-sm {
-    display: none !important; }
-
-  .hide-md {
-    display: flex; } }
+    display: none; } }
 /* COMPONENTS ------------------------------------------- */
 .login-left {
   background-color: #1b1242;
