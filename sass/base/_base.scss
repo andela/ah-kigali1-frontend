@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+  padding: 0em;
+  margin: 0em;
+}
+
+/* BASE ------------------------------------------- */
+h1,
+h2 {
+  font-family: $font-family;
+}
+
+p {
+  font-family: $font-family;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
