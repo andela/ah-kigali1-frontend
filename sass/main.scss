@@ -1,10 +1,11 @@
-@import "./abstracts/mixin";
-@import "./abstracts/variables";
+@import './abstracts/mixin';
+@import './abstracts/variables';
 
-@import "./base/base";
-@import "./base/button";
-@import "./base/input";
+@import './base/base';
+@import './base/button';
+@import './base/input';
 
-@import "./layout/grid";
+@import './layout/grid';
 
-@import "./pages/auth";
+@import './pages/auth';
+@import './pages/reset-password';
