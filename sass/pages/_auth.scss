@@ -71,7 +71,6 @@ img.logo {
 @media (min-width: #{$break-point-desktop}px) {
   .auth {
     &-left {
-      padding-top: 4em;
       p {
         width: 50%;
         font-size: 1.5em;
@@ -97,7 +96,6 @@ img.logo {
 @media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
   .auth {
     &-left {
-      padding-top: 4em;
       p {
         width: 60%;
         font-size: 1.3em;
