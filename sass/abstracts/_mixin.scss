@@ -1,0 +1,68 @@
+@mixin row {
+  display: flex;
+  flex-direction: row;
+  @content;
+}
+
+@mixin column {
+  display: flex;
+  flex-direction: column;
+  @content;
+}
+@mixin icon {
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid $color-primary;
+  background-color: $white-secondary;
+  @content;
+}
+
+@mixin input {
+  border-radius: 0.5em;
+  padding: 0.8em 0em;
+  padding-left: 0.8em;
+  width: 100%;
+  border: 1px solid $color-primary;
+  font-size: $font-size;
+  margin-bottom: 0.8em;
+  margin-right: 0.8em;
+  background-color: $white-secondary;
+  &:focus {
+    background-color: $white-primary;
+    outline: none;
+  }
+  &::-webkit-input-placeholder {
+    color: $color-secondary;
+  }
+  @content;
+}
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin btn {
+  border-radius: 50px;
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px $color-shade;
+  border: 2px solid $color-primary;
+  font-family: $font-family;
+  color: $color-primary;
+  text-shadow: 0px 4px 4px $color-shade;
+  font-size: $font-size;
+  outline: none;
+  margin: 1.5em 0em;
+  cursor: pointer;
+  @content;
+}
+@mixin two-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
