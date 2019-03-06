@@ -178,3 +178,11 @@
   justify-content: space-between;
   @content;
 }
+@mixin action-btn__mobile {
+  @media (max-width: #{$break-point-tablet - 1}px) {
+    width: 8em;
+    height: 2em;
+    font-size: $font-size;
+    @content;
+  }
+}
