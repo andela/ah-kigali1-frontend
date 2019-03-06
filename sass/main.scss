@@ -12,6 +12,7 @@
 @import "./layout/card-latest";
 @import "./layout/main-card";
 // @import "./layout/navbar";
+@import "./layout/navbar";
 
 @import "./pages/auth";
 @import "./pages/search-results";
@@ -20,3 +21,6 @@
 @import "./pages/reset-password";
 @import "./pages/reading-stats";
 @import "./pages/update-profile";
+
+@import "./pages/auth";
+@import "./pages/landingPage";
