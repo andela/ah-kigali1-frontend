@@ -73,7 +73,7 @@ input[type="text"] {
   .hide-sm {
     display: none; } }
 /* COMPONENTS ------------------------------------------- */
-.login-left {
+.auth-left {
   background-color: #1b1242;
   display: flex;
   flex-direction: column;
@@ -82,31 +82,31 @@ input[type="text"] {
   justify-content: center;
   color: #e8f0fe;
   font-family: Arial; }
-  .login-left p {
+  .auth-left p {
     text-align: left; }
-  .login-left button {
+  .auth-left button {
     background-color: rgba(0, 0, 0, 0);
     border: 2px solid #e8f0fe;
     color: #e8f0fe; }
-.login-right {
+.auth-right {
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   justify-content: center; }
-  .login-right .pg-title {
+  .auth-right .pg-title {
     display: flex;
     justify-content: center;
     color: #1b1242;
     font-weight: bold;
     text-align: center; }
-  .login-right input[type="button"] {
+  .auth-right input[type="button"] {
     background-color: rgba(0, 0, 0, 0); }
-    .login-right input[type="button"]:hover {
+    .auth-right input[type="button"]:hover {
       background-color: #1b1242;
       color: #e8f0fe; }
-  .login-right p.password-reset {
+  .auth-right p.password-reset {
     float: right; }
 
 .socials {
@@ -142,52 +142,52 @@ img.logo {
 
 /* devices = laptops, desktops, tablets ---------------*/
 @media (min-width: 1025px) {
-  .login-left {
+  .auth-left {
     padding-top: 4em; }
-    .login-left p {
+    .auth-left p {
       width: 50%;
       font-size: 1.5em;
       margin: 1.4em 0em 0.6em 0em; }
-    .login-left button {
+    .auth-left button {
       width: 55%; }
-  .login-right .pg-title {
+  .auth-right .pg-title {
     font-size: 1.5em;
     margin: 0.5em 0em; }
-  .login .login-form {
+  .auth .auth-form {
     max-width: 60%; } }
 /*devices = Tablets, iPads-------------*/
 @media (min-width: 768px) and (max-width: 1024px) {
-  .login-left {
+  .auth-left {
     padding-top: 4em; }
-    .login-left p {
+    .auth-left p {
       width: 60%;
       font-size: 1.3em;
       margin: 1.4em 0em 0.6em 0em; }
-    .login-left button {
+    .auth-left button {
       width: 65%; }
-  .login-right .pg-title {
+  .auth-right .pg-title {
     font-size: 1.3em;
     margin: 0.5em 0em; }
-  .login .login-form {
+  .auth .auth-form {
     max-width: 70%; } }
 /*device = Mobile Phone------*/
 @media (max-width: 767px) {
-  .login-left {
+  .auth-left {
     display: none; }
-  .login-right {
+  .auth-right {
     background-color: #1b1242; }
-  .login .login-form {
+  .auth .auth-form {
     max-width: 80%; }
-    .login .login-form p {
+    .auth .auth-form p {
       color: rgba(232, 240, 254, 0.85);
       font-weight: 100;
       font-size: 0.8em; }
-    .login .login-form a {
+    .auth .auth-form a {
       color: #fff; }
-    .login .login-form .pg-title {
+    .auth .auth-form .pg-title {
       font-size: 0.95em;
       margin: 0.5em 0em; }
-    .login .login-form input[type="button"] {
+    .auth .auth-form input[type="button"] {
       background-color: rgba(0, 0, 0, 0);
       border: 2px solid #e8f0fe;
       color: #e8f0fe;

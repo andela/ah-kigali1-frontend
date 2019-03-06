@@ -1,5 +1,5 @@
 /* COMPONENTS ------------------------------------------- */
-.login {
+.auth {
   &-left {
     background-color: $color-primary;
     @include two-screen;
@@ -69,7 +69,7 @@ img.logo {
 
 /* devices = laptops, desktops, tablets ---------------*/
 @media (min-width: #{$break-point-desktop}px) {
-  .login {
+  .auth {
     &-left {
       padding-top: 4em;
       p {
@@ -87,7 +87,7 @@ img.logo {
         margin: 0.5em 0em;
       }
     }
-    .login-form {
+    .auth-form {
       max-width: 60%;
     }
   }
@@ -95,7 +95,7 @@ img.logo {
 
 /*devices = Tablets, iPads-------------*/
 @media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
-  .login {
+  .auth {
     &-left {
       padding-top: 4em;
       p {
@@ -113,7 +113,7 @@ img.logo {
         margin: 0.5em 0em;
       }
     }
-    .login-form {
+    .auth-form {
       max-width: 70%;
     }
   }
@@ -121,14 +121,14 @@ img.logo {
 
 /*device = Mobile Phone------*/
 @media (max-width: #{$break-point-tablet - 1}px) {
-  .login {
+  .auth {
     &-left {
       display: none;
     }
     &-right {
       background-color: $color-primary;
     }
-    .login-form {
+    .auth-form {
       max-width: 80%;
       p {
         color: $white-shade;
