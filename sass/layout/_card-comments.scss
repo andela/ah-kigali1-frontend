@@ -7,12 +7,14 @@
       flex: auto;
       flex-direction: row;
     }
+
     @include border-bottom-line;
   }
   .article-comments--new-text {
     margin-left: 5em;
     padding-top: 1.5em;
     border: none;
+    color: $color-primary;
     background-color: inherit;
   }
   .article-comments--existing__desktop {
@@ -42,6 +44,23 @@
       margin-right: 5em;
       .comment-edit {
         margin-right: 3em;
+      }
+    }
+  }
+  .article-comments--existing__desktop,
+  .article-comments--existing__mobile {
+    .article-comments--actions {
+      .comment-like {
+        .icons {
+          display: flex;
+
+          .likes {
+            margin-right: 0.5em;
+          }
+        }
+      }
+      .comment-delete {
+        color: red;
       }
     }
   }
@@ -77,6 +96,9 @@
       .article-comments--new,
       .article-comments--existing__mobile {
         display: block;
+        .comment-edit-delete {
+          margin-right: 0em;
+        }
         .comment-avatar-wrapper {
           margin-left: 1em;
         }
