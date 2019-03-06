@@ -89,9 +89,7 @@
     &.alt {
       flex-direction: row-reverse;
       .card-content {
-        <<<<<<<HEAD
-        padding: 1em 0.5em;
-        =======>>>>>>>[#164208608]Remove unnecessary comments &:before {
+        &:before {
           left: inherit;
           right: -10px;
         }

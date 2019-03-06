@@ -1,20 +1,19 @@
-/* Reading stats */
 .reading-stats {
+  width: 60%;
   margin: 11% auto;
   p {
     padding-top: 2%;
   }
 
   h1 {
-    font-size: $font-size--max;
+    font-size: 24px;
     color: $color-primary;
   }
-  &__categories {
+  .reading-stats__categories {
     @include row;
     margin-top: 4%;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     height: 103px;
-    justify-content: space-between;
     width: 100%;
     div {
       @include column {
@@ -30,25 +29,25 @@
           }
         }
       }
-      width: 24%;
+      width: 25%;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       p {
         line-height: 20px;
-        font-size: $font-size--max;
+        font-size: 24px;
         color: rgba(0, 0, 0, 0.5);
         padding-left: 10%;
         span {
           display: block;
           padding-bottom: 4%;
           line-height: 30px;
-          font-size: $font-size--max;
+          font-size: 36px;
           letter-spacing: 0.2em;
           color: rgba(0, 0, 0, 0.5);
         }
       }
     }
   }
-  &__graph {
+  .reading-stats__graph {
     margin-top: 10%;
     width: 100%;
     img {
@@ -59,13 +58,13 @@
   .story {
     @include row;
     margin-top: 5%;
-    &__description {
+    .story__description {
       width: 70%;
       p {
         margin: 1% 0;
       }
     }
-    &__activities {
+    .story__activities {
       width: 30%;
       @include row {
         justify-content: space-evenly;
@@ -81,16 +80,14 @@
     }
   }
 }
-
-/*device =desktops------*/
-@media (min-width: #{$break-point-tablet + 1}px) {
-  .reading-stats {
-    width: 60%;
+/*device = Mobile Phone (Landscape) tablet(portrait)------*/
+@media (min-width: #{$break-point-mobile}px) {
+  .menu {
+    display: none;
   }
 }
-
 /*device = Mobile Phone (Landscape) tablet(portrait)------*/
-@media (max-width: #{$break-point-tablet}px) {
+@media (max-width: #{$break-point-tablet - 1}px) {
   .reading-stats {
     width: 94%;
     margin: 11% 3%;
@@ -102,7 +99,7 @@
   .reading-stats {
     width: 94%;
     margin: 15% 3%;
-    &__categories {
+    .reading-stats__categories {
       @include row {
         flex-wrap: wrap;
       }
@@ -129,10 +126,10 @@
     }
     .story {
       flex-wrap: wrap;
-      &__description {
+      .story__description {
         width: 100%;
       }
-      &__activities {
+      .story__activities {
         width: 100%;
         flex-wrap: wrap;
         div {
@@ -142,6 +139,21 @@
               display: inline;
             }
           }
+        }
+      }
+    }
+  }
+  .nav-bar {
+    .profile-avatar {
+      div {
+        p {
+          display: none;
+        }
+        .nav-bar__image {
+          display: none;
+        }
+        .menu {
+          display: inline;
         }
       }
     }

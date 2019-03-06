@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+    <script>
+      tinymce.init({
+        selector: "textarea", // change this value according to your HTML
+        menubar: false, // removes the menubar
+        content_css: "../css/main.css",
+        plugins: [
+          "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "save table contextmenu directionality emoticons template paste textcolor",
+          "codesample "
+        ],
+        toolbar:
+          "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image codesample table | print preview media fullpage | forecolor backcolor emoticons"
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="../img/logo.svg" alt="Logo" id="logo" />
+      </div>
+      <div class="profile-avatar">
+        <div>
+          <img src="../img/avatar.jpg" alt="Image" class="nav-bar__image" />
+          <p>Joe Doe</p>
+          <img src="../img/menu.svg" alt="Menu" class="menu" />
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="buttons">
+        <button class="button--white">Save draft</button>
+        <button class="button--dark">Publish</button>
+      </div>
+      <div class="main-article">
+        <div class="title">
+          <input
+            name="title"
+            class="title__input"
+            type="text"
+            value="The title should come here"
+          />
+        </div>
+        <hr class="line__title" />
+
+        <div class="tags">
+          <span class="tag">First-Tag <i class="ico-times"></i></span>
+          <span class="tag">Second-Tag <i class="ico-times"></i></span>
+          <input type="text" name="tag" value="Add new" class="tag tag__new" />
+        </div>
+        <textarea class="article"> </textarea>
+      </div>
+    </div>
+  </body>
+</html>

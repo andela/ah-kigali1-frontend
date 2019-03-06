@@ -1,0 +1,23 @@
+{
+  "name": "titan-dev-ah-frontend",
+  "version": "1.0.0",
+  "description": "Front end of AH application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela/titan-dev-ah-frontend.git"
+  },
+  "keywords": [
+    "sass",
+    "react"
+  ],
+  "author": "Titan-Devs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela/titan-dev-ah-frontend/issues"
+  },
+  "homepage": "https://github.com/andela/titan-dev-ah-frontend#readme"
+}

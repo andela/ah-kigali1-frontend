@@ -51,4 +51,4 @@ yarn test
 - [Yves Iraguha](https://github.com/YvesIraguha) Our Young Talent , Marcus Rashford
 - [Fabrice Niomwungeri](https://github.com/niomwungeri-fabrice) Our Defender , Laurent Koscielny
 - [Musigwa Pacifique](https://github.com/Musigwa) Our Goal keeper, Still Looking for his nickname
-- [Espoir Murhabazi](https://github.com/espoirMur) Our Unsung , Hero Ngolo Kante
+- [Espoir Murhabazi](https://github.com/espoirMur) Our Unsung Heros,  Ngolo Kante

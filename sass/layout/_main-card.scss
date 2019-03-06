@@ -1,12 +1,11 @@
 .featured_article {
-  @include row {
-    margin-top: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
   .left {
     width: 65%;
     height: 510px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 14px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
     display: flex;
@@ -14,7 +13,6 @@
   .right {
     width: 35%;
     height: 500px;
-    margin-right: 10px;
     .top {
       height: 50%;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
@@ -31,102 +29,91 @@
   }
 }
 .article-card {
-  @include column {
-    width: 100%;
-  }
-  .avatar-wrapper {
-    @include row {
-    }
-    .avatar {
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      margin: 5px;
-      &.medium {
-        width: 50px;
-        height: 50px;
-      }
-    }
-    .name_minutes {
-      margin: 20px 0 0 4px;
-      &.medium {
-        margin: 10px 0 0 4px;
-      }
-      .date_read_time {
-        color: #8e8d92;
-      }
-      .author_name {
-        color: #000000;
-        font-weight: bold;
-      }
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.avatar-wrapper {
+  display: flex;
+  flex-direction: row;
+  .avatar {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    &.medium {
+      width: 50px;
+      height: 50px;
     }
   }
-  .tex-content {
-    .icons {
-      @include row {
-        margin: 5px 0 5px 0;
-        justify-content: space-between;
-        padding-left: 5px;
-      }
-      .right-icons {
-        margin-right: 5px;
-      }
-      div {
-        display: flex;
-        margin: 0 15px 0 3px;
-        img {
-          cursor: pointer;
-          height: 20px;
-          width: 20px;
-        }
-      }
-      .arrow-options {
-        text-align: right;
+  .name_minutes {
+    margin: 20px 0 0 4px;
+    &.medium {
+      margin: 10px 0 0 4px;
+    }
+    .date_read_time {
+      color: #8e8d92;
+    }
+    .author_name {
+      color: #000000;
+      font-weight: bold;
+      .author-name__blue .date_read_time__blue {
+        font-size: $font-size;
+        font-family: $font-family;
+        color: $color-primary;
       }
     }
-    h3 {
-      margin: 5px 0 5px 0;
-      padding-left: 5px;
-    }
-    .tex-content__body {
-      height: 35px;
-      overflow: hidden;
-      padding-left: 5px;
-    }
-  }
-  .main-article-img {
-    flex: 1;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
   }
 }
+.tex-content {
+  .icons {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0 5px 0;
+    justify-content: space-between;
+    padding-left: 5px;
+    div {
+      display: flex;
+      margin: 3px 15px 3px 3px;
+      img {
+        height: 20px;
+        width: 20px;
+      }
+    }
+    .arrow-options {
+      text-align: right;
+    }
+  }
+  h3 {
+    margin: 5px 0 5px 0;
+    padding-left: 5px;
+  }
+  .tex-content__body {
+    height: 35px;
+    overflow: hidden;
+    padding-left: 5px;
+  }
+}
+.main-article-img {
+  flex: 1;
+  width: 100%;
+  background-image: url("../img/background-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
 @media screen and (max-width: 768px) {
-  .featured_article {
-    .right {
-      margin-left: 10px;
-    }
+  .left {
+    margin-right: 0 !important;
   }
-  .article-card {
-    .avatar-wrapper {
-      .avatar {
-        width: 50px;
-        height: 50px;
-      }
-      .name_minutes {
-        margin: 10px 0 0 4px;
-      }
-    }
+  .avatar {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 5px !important;
   }
-  .latest_article_content {
-    .article_text {
-      .avatar-wrapper {
-        .name_minutes {
-          margin: 10px 0 0 4px;
-        }
-      }
-    }
+  .name_minutes {
+    margin: 10px 0 0 4px !important;
   }
 }
