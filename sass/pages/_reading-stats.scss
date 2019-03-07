@@ -9,7 +9,7 @@
     font-size: 24px;
     color: $color-primary;
   }
-  .reading-stats__categories {
+  &__categories {
     @include row;
     margin-top: 4%;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -47,7 +47,7 @@
       }
     }
   }
-  .reading-stats__graph {
+  &__graph {
     margin-top: 10%;
     width: 100%;
     img {
@@ -58,13 +58,13 @@
   .story {
     @include row;
     margin-top: 5%;
-    .story__description {
+    &__description {
       width: 70%;
       p {
         margin: 1% 0;
       }
     }
-    .story__activities {
+    &__activities {
       width: 30%;
       @include row {
         justify-content: space-evenly;
@@ -81,12 +81,6 @@
   }
 }
 /*device = Mobile Phone (Landscape) tablet(portrait)------*/
-@media (min-width: #{$break-point-mobile}px) {
-  .menu {
-    display: none;
-  }
-}
-/*device = Mobile Phone (Landscape) tablet(portrait)------*/
 @media (max-width: #{$break-point-tablet - 1}px) {
   .reading-stats {
     width: 94%;
@@ -99,7 +93,7 @@
   .reading-stats {
     width: 94%;
     margin: 15% 3%;
-    .reading-stats__categories {
+    &__categories {
       @include row {
         flex-wrap: wrap;
       }
@@ -126,10 +120,10 @@
     }
     .story {
       flex-wrap: wrap;
-      .story__description {
+      &__description {
         width: 100%;
       }
-      .story__activities {
+      &__activities {
         width: 100%;
         flex-wrap: wrap;
         div {
@@ -139,21 +133,6 @@
               display: inline;
             }
           }
-        }
-      }
-    }
-  }
-  .nav-bar {
-    .profile-avatar {
-      div {
-        p {
-          display: none;
-        }
-        .nav-bar__image {
-          display: none;
-        }
-        .menu {
-          display: inline;
         }
       }
     }
