@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../css/main.css" />
-    <title>Sign in</title>
+    <title>Sign up</title>
   </head>
-
   <body>
     <div class="auth">
       <div class="row">
@@ -20,13 +19,13 @@
                 class="logo"
               />
             </div>
-            <p>Join the community of like minded author, today!</p>
+            <p>Welcome to the community of like minded author!</p>
             <button
               type="submit"
               class="btn btn-block"
-              onclick="window.location='./sign-up.html'"
+              onclick="window.location='./sign-in.html'"
             >
-              Sign up
+              Sign in
             </button>
           </div>
         </div>
@@ -40,7 +39,7 @@
                   class="logo"
                 />
               </div>
-              <p class="pg-title">Sign in with</p>
+              <p class="pg-title">Sign up with</p>
               <div class="socials">
                 <div class="icon">
                   <img src="../img/fb-icon.svg" alt="logo" />
@@ -55,6 +54,12 @@
               <p class="pg-title">Or</p>
               <form>
                 <input
+                  type="text"
+                  name="username"
+                  id="auth-username"
+                  placeholder="Username"
+                />
+                <input
                   type="email"
                   name="email"
                   id="auth-email"
@@ -66,16 +71,17 @@
                   id="auth-password"
                   placeholder="Password"
                 />
-                <div class="">
-                  <p class="password-reset">
-                    <a href="#">Forgot password?</a>
-                  </p>
-                </div>
-                <input type="button" value="Sign in" />
+                <input
+                  type="password"
+                  name="confirm-password"
+                  id="auth-confirm-password"
+                  placeholder="Password"
+                />
+                <input type="button" value="Sign up" />
               </form>
               <div class="auth-link hide-md">
                 <p class="sign-up-link">
-                  Don't have an account? <a href="./sign-up.html">sign up</a>.
+                  Already have an account? <a href="./sign-in.html">sign in</a>.
                 </p>
               </div>
             </div>
