@@ -1,24 +1,11 @@
-@import './abstracts/mixin';
-@import './abstracts/variables';
+@import "./abstracts/mixin";
+@import "./abstracts/variables";
 
-@import './base/base';
-@import './base/button';
-@import './base/input';
+@import "./base/base";
+@import "./base/button";
+@import "./base/input";
 
-<<<<<<< HEAD
-@import './layout/grid';
-
-@import './pages/auth';
-@import './pages/reset-password';
-=======
 @import "./layout/grid";
-@import "./layout/article-card-lg";
-@import "./layout/nav-bar";
 
 @import "./pages/auth";
-@import "./pages/search-results";
-<<<<<<< HEAD
->>>>>>> [#164364254]Add search results page
-=======
-@import "./pages/user-settings";
->>>>>>> feat(user setting):Add user settings pages- Update password- Mute or unmute email notification- Delete my account
+@import "./pages/reset-password";
