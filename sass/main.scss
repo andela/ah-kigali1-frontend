@@ -5,7 +5,15 @@
 @import './base/button';
 @import './base/input';
 
+<<<<<<< HEAD
 @import './layout/grid';
 
 @import './pages/auth';
 @import './pages/reset-password';
+=======
+@import "./layout/grid";
+@import "./layout/article-card-lg";
+
+@import "./pages/auth";
+@import "./pages/search-results";
+>>>>>>> [#164364254]Add search results page
