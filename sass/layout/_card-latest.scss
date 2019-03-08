@@ -81,4 +81,21 @@
   .popular_article_title {
     margin: 10px 0 0 0 !important;
   }
+  .left-icons {
+    margin: 3px 5px 3px 3px !important;
+  }
+}
+@media screen and (max-width: 440px) {
+  .latest_article_content {
+    .pic {
+      height: 80%;
+    }
+  }
+  .latest_article_content {
+    .article_text {
+      .icons {
+        margin-left: -40%;
+      }
+    }
+  }
 }
