@@ -456,6 +456,19 @@ input[type=text]::-webkit-input-placeholder {
   .popular_article_title {
     margin: 10px 0 0 0 !important;
   }
+
+  .left-icons {
+    margin: 3px 5px 3px 3px !important;
+  }
+}
+@media screen and (max-width: 440px) {
+  .latest_article_content .pic {
+    height: 80%;
+  }
+
+  .latest_article_content .article_text .icons {
+    margin-left: -40%;
+  }
 }
 .featured_article {
   display: flex;
@@ -628,7 +641,7 @@ button {
   background-color: white;
   padding: 0.3em 2em;
   color: #1b1242;
-  margin-top: 1%;
+  margin-top: 10px;
   font-size: 20px;
   border: 1px solid #1b1242;
   border-radius: 25px;
