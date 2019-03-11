@@ -13,10 +13,9 @@
         display: none;
       }
       #articles:target,
-      #authors:target,
-      #tags:target {
+      #authors:target {
         display: block;
-        & :parent {
+        + section {
           background-color: green;
         }
       }
