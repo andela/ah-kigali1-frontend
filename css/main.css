@@ -55,6 +55,10 @@ input[type="text"] {
 
 .col-md-12 {
   width: 100%; }
+.col-md-11 {
+  width: 91.66%; }
+.col-md-10 {
+  width: 83.33%; }
 .col-md-8 {
   width: 66.66%; }
 .col-md-7 {
@@ -84,6 +88,10 @@ input[type="text"] {
 @media (min-width: 768px) and (max-width: 1024px) {
   .col-av-12 {
     width: 100%; }
+  .col-av-11 {
+    width: 91.66%; }
+  .col-av-10 {
+    width: 83.33%; }
   .col-av-8 {
     width: 66.66%; }
   .col-av-7 {
@@ -101,6 +109,10 @@ input[type="text"] {
 @media (max-width: 767px) {
   .col-sm-12 {
     width: 100%; }
+  .col-sm-11 {
+    width: 91.66%; }
+  .col-sm-10 {
+    width: 83.33%; }
   .col-sm-8 {
     width: 66.66%; }
   .col-sm-7 {
@@ -416,12 +428,10 @@ img.logo {
   .search-results .left-side .results section {
     display: none; }
   .search-results .left-side .results #articles:target,
-  .search-results .left-side .results #authors:target,
-  .search-results .left-side .results #tags:target {
+  .search-results .left-side .results #authors:target {
     display: block; }
-    .search-results .left-side .results #articles:target :parent,
-    .search-results .left-side .results #authors:target :parent,
-    .search-results .left-side .results #tags:target :parent {
+    .search-results .left-side .results #articles:target + section,
+    .search-results .left-side .results #authors:target + section {
       background-color: green; }
   .search-results .right-side {
     width: 18%; }
@@ -523,5 +533,111 @@ button.btn-fill {
 @media (max-width: 767px) {
   .left-side {
     width: 95%; } }
+.user-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  font-family: Arial; }
+  .user-settings h2.setting-title {
+    font-size: 1.5em;
+    margin-bottom: 15px; }
+  .user-settings h3 {
+    font-weight: normal;
+    font-size: 1.2em; }
+  .user-settings p {
+    font-size: 0.9em; }
+  .user-settings input[type="button"] {
+    background-color: transparent; }
+    .user-settings input[type="button"]:hover {
+      color: #fff;
+      background-color: #1b1242; }
+  .user-settings ul.settings-options {
+    list-style: none; }
+    .user-settings ul.settings-options li {
+      margin-bottom: 5px;
+      min-width: 50%; }
+      .user-settings ul.settings-options li a {
+        padding: 5px;
+        font-size: 1.2em; }
+        .user-settings ul.settings-options li a.active {
+          background-color: #e8f0fe;
+          border-left: 2px solid #1b1242; }
+  .user-settings section {
+    margin-bottom: 15px; }
+  .user-settings .notification-settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    .user-settings .notification-settings .notification-toggle {
+      position: relative;
+      display: block;
+      border: 1px solid #1b1242;
+      width: 80px;
+      height: 25px;
+      border-radius: 5px;
+      color: #e8f0fe; }
+      .user-settings .notification-settings .notification-toggle .on {
+        float: left;
+        padding: 2px 5px;
+        width: 50%;
+        height: 100%;
+        color: #1b1242; }
+      .user-settings .notification-settings .notification-toggle .off {
+        float: right;
+        padding: 2px 5px;
+        width: 50%;
+        height: 100%;
+        color: #1b1242; }
+      .user-settings .notification-settings .notification-toggle input[type="checkbox"] {
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%; }
+      .user-settings .notification-settings .notification-toggle input[type="checkbox"] + .on-off .off {
+        color: #fff;
+        background-color: #1b1242;
+        transition: background 200ms linear; }
+      .user-settings .notification-settings .notification-toggle input[type="checkbox"]:checked + .on-off .on {
+        color: #fff;
+        background-color: #1b1242;
+        transition: background 200ms linear; }
+      .user-settings .notification-settings .notification-toggle input[type="checkbox"]:checked + .on-off .off {
+        transition: background 200ms linear;
+        background-color: transparent;
+        color: #1b1242; }
+  .user-settings #account-settings {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(27, 18, 66, 0.25); }
+    .user-settings #account-settings h3,
+    .user-settings #account-settings p {
+      padding-bottom: 10px; }
+  .user-settings a.danger {
+    color: #f6214b;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 0.8em; }
+  @media (min-width: 768px) {
+    .user-settings {
+      height: 70vh; }
+      .user-settings .settings-content section {
+        display: none; }
+      .user-settings .settings-content #password-settings:target,
+      .user-settings .settings-content #email-settings:target,
+      .user-settings .settings-content #account-settings:target {
+        display: block; }
+      .user-settings .settings-content form input[type="button"] {
+        float: right;
+        max-width: 40%; }
+        .user-settings .settings-content form input[type="button"]:hover {
+          color: #fff;
+          background-color: #1b1242; } }
+  @media (max-width: 767px) {
+    .user-settings {
+      margin: 0px 15px; }
+      .user-settings section {
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(27, 18, 66, 0.25); } }
 
 /*# sourceMappingURL=main.css.map */
