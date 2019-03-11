@@ -267,7 +267,7 @@ img.logo {
   flex-direction: column;
   justify-content: space-between;
 }
-.reset-password__container .reset-password .reset-password__footer {
+.reset-password__container .reset-password__footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -276,42 +276,42 @@ img.logo {
   width: 100%;
   background: rgba(232, 240, 254, 0.85);
 }
-.reset-password__container .reset-password .reset-password__footer p {
+.reset-password__container .reset-password__footer p {
   font-size: 14px;
 }
-.reset-password__container .reset-password .reset-password__header {
+.reset-password__container .reset-password__header {
   display: flex;
   flex-direction: column;
 }
-.reset-password__container .reset-password .reset-password__header .logo {
+.reset-password__container .reset-password__header .logo {
   align-self: center;
 }
-.reset-password__container .reset-password .reset-password__header .logo img {
+.reset-password__container .reset-password__header .logo img {
   width: 73px;
 }
-.reset-password__container .reset-password .reset-password__header h1 {
+.reset-password__container .reset-password__header h1 {
   align-self: center;
   margin-top: 5.5%;
   color: #1b1242;
 }
-.reset-password__container .reset-password .reset-password__header h2,
-.reset-password__container .reset-password .reset-password__header h1 {
+.reset-password__container .reset-password__header h2,
+.reset-password__container .reset-password__header h1 {
   font-size: 24px;
 }
-.reset-password__container .reset-password .reset-password__header div {
+.reset-password__container .reset-password__header div {
   margin-top: 7%;
 }
-.reset-password__container .reset-password .reset-password__header div p {
+.reset-password__container .reset-password__header div p {
   margin-top: 3.5%;
   width: 60%;
 }
-.reset-password__container .reset-password .reset-password__header div form {
+.reset-password__container .reset-password__header div form {
   margin-top: 8.7%;
 }
-.reset-password__container .reset-password .reset-password__header div form .btn {
+.reset-password__container .reset-password__header div form .btn {
   background-color: rgba(0, 0, 0, 0);
 }
-.reset-password__container .reset-password .reset-password__header div form .btn:hover {
+.reset-password__container .reset-password__header div form .btn:hover {
   background: #1b1242;
   color: #fff;
 }
@@ -328,16 +328,16 @@ img.logo {
     width: 80%;
     height: 732px;
   }
-  .reset-password__container .reset-password .reset-password__header {
+  .reset-password__container .reset-password__header {
     margin-top: 15%;
   }
-  .reset-password__container .reset-password .reset-password__header div {
+  .reset-password__container .reset-password__header div {
     margin-left: 17.7%;
   }
-  .reset-password__container .reset-password .reset-password__header div form {
+  .reset-password__container .reset-password__header div form {
     width: 70%;
   }
-  .reset-password__container .reset-password .reset-password__footer {
+  .reset-password__container .reset-password__footer {
     width: 100%;
   }
 }
@@ -352,16 +352,16 @@ img.logo {
   .reset-password__container .reset-password {
     width: 100%;
   }
-  .reset-password__container .reset-password .reset-password__header {
+  .reset-password__container .reset-password__header {
     margin-top: 5%;
   }
-  .reset-password__container .reset-password .reset-password__header div {
+  .reset-password__container .reset-password__header div {
     margin-left: 7%;
   }
-  .reset-password__container .reset-password .reset-password__header div form input {
+  .reset-password__container .reset-password__header div form input {
     width: 90%;
   }
-  .reset-password__container .reset-password__footer {
+  .reset-password__container__footer {
     padding-top: 5%;
     width: 100%;
   }
