@@ -383,13 +383,14 @@ img.logo {
   margin-top: 4%;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   height: 103px;
+  justify-content: space-between;
   width: 100%;
 }
 .reading-stats__categories div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 25%;
+  width: 24%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .reading-stats__categories div:hover {
