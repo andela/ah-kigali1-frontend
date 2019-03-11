@@ -15,9 +15,6 @@
       #articles:target,
       #authors:target {
         display: block;
-        + section {
-          background-color: green;
-        }
       }
     }
   }
