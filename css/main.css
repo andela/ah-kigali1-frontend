@@ -19,7 +19,8 @@ a {
 }
 
 input[type=button],
-.btn {
+.btn,
+a[type=button] {
   border-radius: 50px;
   width: 100%;
   height: 45px;
@@ -173,9 +174,6 @@ img.logo {
 
 /* devices = laptops, desktops, tablets ---------------*/
 @media (min-width: 1025px) {
-  .auth-left {
-    padding-top: 4em;
-  }
   .auth-left p {
     width: 50%;
     font-size: 1.5em;
@@ -194,9 +192,6 @@ img.logo {
 }
 /*devices = Tablets, iPads-------------*/
 @media (min-width: 768px) and (max-width: 1024px) {
-  .auth-left {
-    padding-top: 4em;
-  }
   .auth-left p {
     width: 60%;
     font-size: 1.3em;
@@ -417,7 +412,7 @@ img.logo {
   display: block;
   padding-bottom: 4%;
   line-height: 30px;
-  font-size: 36px;
+  font-size: 24px;
   letter-spacing: 0.2em;
   color: rgba(0, 0, 0, 0.5);
 }
