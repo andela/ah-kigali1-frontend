@@ -372,7 +372,7 @@ input[type=text]::-webkit-input-placeholder {
 .latest_article_content {
   display: flex;
   justify-content: space-around;
-  margin: 10px 10px 0 0;
+  margin: 10px 10px 0 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
   height: 250px;
 }
@@ -431,11 +431,16 @@ input[type=text]::-webkit-input-placeholder {
   margin: 3px 15px 3px 3px;
 }
 .latest_article_content .article_text .icons div img {
+  cursor: pointer;
   height: 20px;
   width: 20px;
 }
 .latest_article_content .article_text .icons .arrow-options {
   text-align: right;
+}
+
+.latest_article_content:last-child {
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -450,7 +455,7 @@ input[type=text]::-webkit-input-placeholder {
   }
 
   .latest_article_content {
-    margin: 10px 0 0 0 !important;
+    margin: 10px 10px 0 10px !important;
   }
 
   .popular_article_title {
@@ -478,7 +483,8 @@ input[type=text]::-webkit-input-placeholder {
 .featured_article .left {
   width: 65%;
   height: 510px;
-  margin-right: 14px;
+  margin-right: 10px;
+  margin-left: 10px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
   display: flex;
@@ -486,6 +492,7 @@ input[type=text]::-webkit-input-placeholder {
 .featured_article .right {
   width: 35%;
   height: 500px;
+  margin-right: 10px;
 }
 .featured_article .right .top {
   height: 50%;
@@ -545,6 +552,7 @@ input[type=text]::-webkit-input-placeholder {
   margin: 3px 15px 3px 3px;
 }
 .article-card .tex-content .icons div img {
+  cursor: pointer;
   height: 20px;
   width: 20px;
 }
@@ -571,8 +579,8 @@ input[type=text]::-webkit-input-placeholder {
 }
 
 @media screen and (max-width: 768px) {
-  .left {
-    margin-right: 0 !important;
+  .right {
+    margin-left: 10px !important;
   }
 
   .avatar {
@@ -585,77 +593,146 @@ input[type=text]::-webkit-input-placeholder {
     margin: 10px 0 0 4px !important;
   }
 }
-img#logo {
-  margin-left: -17px;
-  width: 68px;
-  height: 27px;
-  padding-top: 7px;
+/* header */
+/* menu */
+/* menu icon */
+/* menu btn */
+/* 48em = 768px */
+a {
+  color: #fff;
 }
 
-.menu {
-  width: 30px;
-  margin-top: 40%;
-  padding-right: 10px;
+.header {
+  background-color: #1b1242;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  height: 50px;
 }
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-}
-
-ul {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
+.header ul {
   margin: 0;
   padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
 }
-ul li {
-  margin: 12px 15px 0 0;
-  border: 1px solid white;
-  border-radius: 900px;
-}
-ul li a {
-  color: white;
+.header li a {
+  display: block;
   text-decoration: none;
-  padding: 10px;
+  background-color: #1b1242;
+  color: white;
 }
-
-.hide-desktop {
+.header li a:hover {
+  background-color: #3c2892;
+}
+.header .menu-btn {
   display: none;
 }
-
-.container {
-  margin: 0.9em;
+.header .menu-btn:hover {
+  background-color: #fff;
 }
-
-header {
-  display: flex;
-  justify-content: space-between;
-  background: #1b1242;
-  height: 42px;
-  width: 100%;
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
 }
-
-button {
-  background-color: white;
-  padding: 0.3em 2em;
-  color: #1b1242;
-  margin-top: 10px;
-  font-size: 20px;
-  border: 1px solid #1b1242;
-  border-radius: 25px;
-  font-weight: bold;
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before {
+  top: 0;
+}
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+.header .ahlogo {
+  float: left;
+  margin-left: -8px;
+  width: 68px;
+  height: 35px;
+  margin-top: 8px;
+}
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 24px 20px;
+  position: relative;
+  user-select: none;
+}
+.header .menu-icon .navicon {
+  background: white;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background 0.2s ease-out;
+  width: 18px;
+}
+.header .menu-icon .navicon:before {
+  background: white;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
   width: 100%;
+  top: 5px;
+}
+.header .menu-icon .navicon:after {
+  background: white;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
+  width: 100%;
+  top: -5px;
 }
 
 @media screen and (max-width: 768px) {
-  .hide-mobile {
-    display: none;
+  .header li a {
+    padding: 10px;
   }
-
-  .show-mobile {
-    display: block;
+  .header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 50px;
+  }
+}
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    border: 1px solid white;
+    border-radius: 900px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 15px;
+    margin-right: 10px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+    background-color: #1b1242;
+  }
+  .header .menu-icon {
+    display: none;
   }
 }
 /* COMPONENTS ------------------------------------------- */
@@ -1279,7 +1356,7 @@ img.logo {
   background: #1b1242;
   height: 42px;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 60px;
 }
 
 .featured_article_title {
@@ -1324,10 +1401,22 @@ img.logo {
   display: flex;
   height: 250px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
-  margin-top: 10px;
+  margin: 10px 10px 0 0;
 }
 
 @media screen and (max-width: 768px) {
+  .popular_article_content {
+    margin: 10px 10px 0 10px !important;
+  }
+
+  .popular_article_content:last-child {
+    margin: 10px 10px 10px 10px !important;
+  }
+
+  .article_header {
+    margin-top: 60px;
+  }
+
   .featured_article {
     flex-wrap: wrap;
   }
