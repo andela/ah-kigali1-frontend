@@ -1,49 +1,29 @@
-@import './abstracts/mixin';
-@import './abstracts/variables';
+@import "./abstracts/mixin";
+@import "./abstracts/variables";
 
-@import './base/base';
-@import './base/button';
-@import './base/input';
+@import "./base/base";
+@import "./base/button";
+@import "./base/input";
 
-<<<<<<< HEAD
 @import "./layout/grid";
-
 @import "./layout/article-card-lg";
 @import "./layout/nav-bar";
-=======
-@import './layout/grid';
-@import './layout/article-card-lg';
-@import './layout/nav-bar';
->>>>>>> [#164203446] add landing page -  desktop view
+@import "./layout/card-latest";
+@import "./layout/main-card";
+@import "./layout/nav-bar-landing";
+@import "./layout/navbar";
+@import "./layout/card-comments";
 
-@import './layout/card-latest';
-@import './layout/main-card';
-@import './layout/nav-bar-landing';
-@import './layout/_card-comments';
-
-@import './pages/auth';
-@import './pages/search-results';
-@import './pages/landingPage';
-@import './pages/reading-stats';
-@import './pages/reset-password';
-@import './pages/auth';
-@import './pages/new-article';
-@import './pages/article';
-@import './pages/update-profile';
-@import './pages/category-articles.scss';
-@import './pages/user-settings';
-@import './layout/card-latest';
-@import './layout/main-card';
-@import './layout/navbar';
-@import './layout/_card-comments';
-
-@import './pages/auth';
-@import './pages/search-results';
-@import './pages/landingPage';
-@import './pages/reading-stats';
-@import './pages/reset-password';
-@import './pages/auth';
-@import './pages/new-article';
-@import './pages/article';
-@import './pages/update-profile';
-@import './pages/category-articles.scss';
+@import "./pages/auth";
+@import "./pages/user-settings";
+@import "./layout/grid";
+@import "./pages/search-results";
+@import "./pages/landingPage";
+@import "./pages/reading-stats";
+@import "./pages/reset-password";
+@import "./pages/new-article";
+@import "./pages/article";
+@import "./pages/update-profile";
+@import "./pages/category-articles.scss";
+@import "./pages/profile";
+@import "./layout/my-nav-bar";

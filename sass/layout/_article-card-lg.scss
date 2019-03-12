@@ -116,7 +116,6 @@
 
 .icon-action {
   @include row;
-  // justify-self: flex-end;
   padding: 7px 5px;
   cursor: pointer;
   span {
@@ -127,5 +126,22 @@
   img {
     width: $font-size;
     height: $font-size;
+  }
+}
+
+.main-article-img {
+  height: 100px;
+  margin-left: 3%;
+  margin-top: 3%;
+}
+
+.article-card {
+  margin-top: 5%;
+  .avatar-wrapper {
+    margin-left: 3%;
+    margin-top: 3%;
+  }
+  .tex-content {
+    margin-left: 3%;
   }
 }

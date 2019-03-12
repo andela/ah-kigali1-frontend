@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <!-- <nav> navigation bar here</nav> -->
+    <section class="nav-bar">
+      <div class="nav-container">
+        <div class="col-md-6 col-sm-3 brand-name">
+          <div class="brand">
+            <img
+              src="../img/quill-drawing-a-line.svg"
+              alt="logo"
+              class="brand"
+            />
+          </div>
+          <h3>
+            AH
+          </h3>
+        </div>
+        <div class="col-md-6 col-sm-9 user-actions">
+          <div class="search-filed">
+            <input type="search" name="search" placeholder="Search....." />
+          </div>
+          <div class="other-actions">
+            <!-- don't delete please, these are the code if user is not logged in  -->
+            <!-- <div class="auth-actions">
+              <div class="sign-up hide-sm">
+                <a href="./sign-up.html">Sign up today!</a>
+              </div>
+              <div class="sign-in hide-sm">
+                <a href="./sign-in.html" class="btn">Sign in</a>
+              </div>
+            </div> -->
+            <div class="menu-container hide-md">
+              <button class="menu-btn" id="menu-dropdown">
+                <img src="../img/menu-button.svg" alt="menu" class="menu" />
+              </button>
+            </div>
+            <button class="current-user hide-sm" id="user-dropdown">
+              <img src="../img/user.jpg" alt="user" class="user-avatar" />
+              <div class="user-name">
+                <p>John Doe</p>
+              </div>
+            </button>
+            <div class="drop-down">
+              <div class="up-arrow"></div>
+              <div class="drop-down-content">
+                <ul class="links">
+                  <li class="nav-link">
+                    <a href="#" class="main">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#">Stories</a>
+                  </li>
+                  <li>
+                    <a href="#">Profile</a>
+                  </li>
+                  <li>
+                    <a href="#">Settings</a>
+                  </li>
+                  <li>
+                    <a href="#">Sign out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="profile">
+      <div class="profile-left col-md-6">
+        <div class="profile-left--fixed">
+          <img src="../img/avatar.jpg" alt="Avatar" class="profile-avatar" />
+          <h1>Joe Doe</h1>
+          <h2>UI/UX designer</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididDuis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident.
+          </p>
+
+          <button class="btn">Edit</button>
+          <div class="socials">
+            <div class="icon">
+              <img src="../img/fb-icon.svg" alt="Facebook" />
+            </div>
+            <div class="icon">
+              <img src="../img/twitter-icon.svg" alt="Twitter" />
+            </div>
+            <div class="icon">
+              <img src="../img/google-plus-icon.svg" alt="Google" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-right col-md-6">
+        <div class="tabs">
+          <ul class="horizontal-list">
+            <li class="active"><a href="#latest">latest</a></li>
+            <li><a href="#bookmarks">Bookmarks</a></li>
+          </ul>
+        </div>
+        <div id="latest">
+          <div class="article-card">
+            <div class="avatar-wrapper">
+              <img
+                src="../img/avatar-1.jpg"
+                alt="Avatar"
+                class="avatar medium"
+              />
+              <div class="name_minutes medium">
+                <span class="author_name">Joe Doe</span> <br />
+                <span class="date_read_time">Nov 7,2018 . 3min read</span>
+              </div>
+            </div>
+            <div
+              class="main-article-img"
+              style="background-image: url(../img/background-2.jpg);"
+            ></div>
+            <div class="tex-content">
+              <h3>
+                Only I can change my life. No one can do it me
+              </h3>
+              <div class="tex-content__body">
+                Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
+              </div>
+              <div class="icons">
+                <div class="left-icons">
+                  <img src="../img/like-icon.svg" alt="likes" class="likes" />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/dislike-icon.svg"
+                    alt="dislikes"
+                    class="dislikes"
+                  />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/comment-icon.svg"
+                    alt="comments"
+                    class="comments"
+                  />
+                  <div class="numbers">3,844</div>
+                </div>
+                <div class="right-icons">
+                  <img
+                    src="../img/bookmark-icons.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="article-card">
+            <div class="avatar-wrapper">
+              <img
+                src="../img/avatar-1.jpg"
+                alt="Avatar"
+                class="avatar medium"
+              />
+              <div class="name_minutes medium">
+                <span class="author_name">Joe Doe</span> <br />
+                <span class="date_read_time">Nov 7,2018 . 3min read</span>
+              </div>
+            </div>
+            <div
+              class="main-article-img"
+              style="background-image: url(../img/background-2.jpg);"
+            ></div>
+            <div class="tex-content">
+              <h3>Only I can change my life. No one can do it me</h3>
+              <div class="tex-content__body">
+                Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
+              </div>
+              <div class="icons">
+                <div class="left-icons">
+                  <img src="../img/like-icon.svg" alt="likes" class="likes" />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/dislike-icon.svg"
+                    alt="dislikes"
+                    class="dislikes"
+                  />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/comment-icon.svg"
+                    alt="comments"
+                    class="comments"
+                  />
+                  <div class="numbers">3,844</div>
+                </div>
+                <div class="right-icons">
+                  <img
+                    src="../img/bookmark-icons.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="bookmarks">
+          <div class="article-card">
+            <div class="avatar-wrapper">
+              <img
+                src="../img/avatar-1.jpg"
+                alt="Avatar"
+                class="avatar medium"
+              />
+              <div class="name_minutes medium">
+                <span class="author_name">Joe Doe</span> <br />
+                <span class="date_read_time">Nov 7,2018 . 3min read</span>
+              </div>
+            </div>
+            <div
+              class="main-article-img"
+              style="background-image: url(../img/background-2.jpg);"
+            ></div>
+            <div class="tex-content">
+              <h3>Only I can change my life. No one can do it me</h3>
+              <div class="tex-content__body">
+                Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
+              </div>
+              <div class="icons">
+                <div class="left-icons">
+                  <img src="../img/like-icon.svg" alt="likes" class="likes" />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/dislike-icon.svg"
+                    alt="dislikes"
+                    class="dislikes"
+                  />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/comment-icon.svg"
+                    alt="comments"
+                    class="comments"
+                  />
+                  <div class="numbers">3,844</div>
+                </div>
+                <div class="right-icons">
+                  <img
+                    src="../img/bookmarked.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="article-card">
+            <div class="avatar-wrapper">
+              <img
+                src="../img/avatar-1.jpg"
+                alt="Avatar"
+                class="avatar medium"
+              />
+              <div class="name_minutes medium">
+                <span class="author_name">Joe Doe</span> <br />
+                <span class="date_read_time">Nov 7,2018 . 3min read</span>
+              </div>
+            </div>
+            <div
+              class="main-article-img"
+              style="background-image: url(../img/background-2.jpg);"
+            ></div>
+            <div class="tex-content">
+              <h3>Only I can change my life. No one can do it me</h3>
+              <div class="tex-content__body">
+                Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
+              </div>
+              <div class="icons">
+                <div class="left-icons">
+                  <img src="../img/like-icon.svg" alt="likes" class="likes" />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/dislike-icon.svg"
+                    alt="dislikes"
+                    class="dislikes"
+                  />
+                  <div class="numbers">3,844</div>
+                  <img
+                    src="../img/comment-icon.svg"
+                    alt="comments"
+                    class="comments"
+                  />
+                  <div class="numbers">3,844</div>
+                </div>
+                <div class="right-icons">
+                  <img
+                    src="../img/bookmarked.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
