@@ -161,8 +161,7 @@ input[type="text"] {
     padding: 0;
     list-style: none; }
   .blog-card .card-content {
-    padding: 0.3em 1em;
-    padding-top: 0em;
+    padding: 0.5em 1em;
     top: 0;
     background: #fff;
     position: relative;
@@ -208,9 +207,11 @@ input[type="text"] {
         flex-basis: 60%; }
       .blog-card.alt {
         flex-direction: row-reverse; }
-        .blog-card.alt .card-content:before {
-          left: inherit;
-          right: -10px; }
+        .blog-card.alt .card-content {
+          padding: 1em 0.5em; }
+          .blog-card.alt .card-content:before {
+            left: inherit;
+            right: -10px; }
         .blog-card.alt .details {
           padding-left: 25px; } }
   .blog-card .user-profile-img {
