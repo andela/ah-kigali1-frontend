@@ -366,8 +366,8 @@ img.logo {
     width: 100%;
   }
 }
+/* Reading stats */
 .reading-stats {
-  width: 60%;
   margin: 11% auto;
 }
 .reading-stats p {
@@ -449,8 +449,14 @@ img.logo {
   display: none;
 }
 
+/*device =desktops------*/
+@media (min-width: 769px) {
+  .reading-stats {
+    width: 60%;
+  }
+}
 /*device = Mobile Phone (Landscape) tablet(portrait)------*/
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .reading-stats {
     width: 94%;
     margin: 11% 3%;
