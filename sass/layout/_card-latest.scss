@@ -7,7 +7,6 @@
   .pic {
     width: 30%;
     margin: 5px;
-    background-image: url("../img/lifestyle.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -43,7 +42,7 @@
     }
     .tex-content__body {
       flex: 1;
-      max-height: 90px;
+      max-height: 115px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -52,9 +51,12 @@
       flex-direction: row;
       margin: 5px 0 5px 0;
       justify-content: space-between;
+      .right-icons {
+        margin-right: 5px;
+      }
       div {
         display: flex;
-        margin: 3px 15px 3px 3px;
+        margin: 0 15px 0 3px;
         img {
           cursor: pointer;
           height: 20px;
@@ -71,34 +73,36 @@
   margin-bottom: 10px;
 }
 @media screen and (max-width: 768px) {
-  .avatar {
-    width: 50px !important;
-    height: 50px !important;
-    margin: 0.3% !important;
-  }
-  .latest_article_title {
-    margin: 10px 0 0 0 !important;
-  }
   .latest_article_content {
-    margin: 10px 10px 0 10px !important;
-  }
-  .popular_article_title {
-    margin: 10px 0 0 0 !important;
-  }
-  .left-icons {
-    margin: 3px 5px 3px 3px !important;
+    margin: 10px 10px 0 10px;
+    .article_text {
+      .tex-content__body {
+        max-height: 125px;
+      }
+      .avatar-wrapper {
+        .avatar {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .icons {
+        .left-icons {
+          margin: 0 5px 0 3px;
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 440px) {
   .latest_article_content {
     .pic {
-      height: 80%;
+      height: 85%;
     }
   }
   .latest_article_content {
     .article_text {
       .icons {
-        margin-left: -40%;
+        margin-left: -42%;
       }
     }
   }

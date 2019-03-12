@@ -379,7 +379,6 @@ input[type=text]::-webkit-input-placeholder {
 .latest_article_content .pic {
   width: 30%;
   margin: 5px;
-  background-image: url("../img/lifestyle.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -416,7 +415,7 @@ input[type=text]::-webkit-input-placeholder {
 }
 .latest_article_content .article_text .tex-content__body {
   flex: 1;
-  max-height: 90px;
+  max-height: 115px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -426,9 +425,12 @@ input[type=text]::-webkit-input-placeholder {
   margin: 5px 0 5px 0;
   justify-content: space-between;
 }
+.latest_article_content .article_text .icons .right-icons {
+  margin-right: 5px;
+}
 .latest_article_content .article_text .icons div {
   display: flex;
-  margin: 3px 15px 3px 3px;
+  margin: 0 15px 0 3px;
 }
 .latest_article_content .article_text .icons div img {
   cursor: pointer;
@@ -444,35 +446,27 @@ input[type=text]::-webkit-input-placeholder {
 }
 
 @media screen and (max-width: 768px) {
-  .avatar {
-    width: 50px !important;
-    height: 50px !important;
-    margin: 0.3% !important;
-  }
-
-  .latest_article_title {
-    margin: 10px 0 0 0 !important;
-  }
-
   .latest_article_content {
-    margin: 10px 10px 0 10px !important;
+    margin: 10px 10px 0 10px;
   }
-
-  .popular_article_title {
-    margin: 10px 0 0 0 !important;
+  .latest_article_content .article_text .tex-content__body {
+    max-height: 125px;
   }
-
-  .left-icons {
-    margin: 3px 5px 3px 3px !important;
+  .latest_article_content .article_text .avatar-wrapper .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .latest_article_content .article_text .icons .left-icons {
+    margin: 0 5px 0 3px;
   }
 }
 @media screen and (max-width: 440px) {
   .latest_article_content .pic {
-    height: 80%;
+    height: 85%;
   }
 
   .latest_article_content .article_text .icons {
-    margin-left: -40%;
+    margin-left: -42%;
   }
 }
 .featured_article {
@@ -547,9 +541,12 @@ input[type=text]::-webkit-input-placeholder {
   justify-content: space-between;
   padding-left: 5px;
 }
+.article-card .tex-content .icons .right-icons {
+  margin-right: 5px;
+}
 .article-card .tex-content .icons div {
   display: flex;
-  margin: 3px 15px 3px 3px;
+  margin: 0 15px 0 3px;
 }
 .article-card .tex-content .icons div img {
   cursor: pointer;
@@ -571,7 +568,6 @@ input[type=text]::-webkit-input-placeholder {
 .article-card .main-article-img {
   flex: 1;
   width: 100%;
-  background-image: url("../img/background-2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -579,18 +575,20 @@ input[type=text]::-webkit-input-placeholder {
 }
 
 @media screen and (max-width: 768px) {
-  .right {
-    margin-left: 10px !important;
+  .featured_article .right {
+    margin-left: 10px;
   }
 
-  .avatar {
-    width: 50px !important;
-    height: 50px !important;
-    margin: 5px !important;
+  .article-card .avatar-wrapper .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .article-card .avatar-wrapper .name_minutes {
+    margin: 10px 0 0 4px;
   }
 
-  .name_minutes {
-    margin: 10px 0 0 4px !important;
+  .latest_article_content .article_text .avatar-wrapper .name_minutes {
+    margin: 10px 0 0 4px;
   }
 }
 /* header */
@@ -664,7 +662,6 @@ a {
 }
 .header .menu-icon {
   cursor: pointer;
-  display: inline-block;
   float: right;
   padding: 24px 20px;
   position: relative;
@@ -720,9 +717,8 @@ a {
   .header li a {
     border: 1px solid white;
     border-radius: 900px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-top: 15px;
+    padding: 10px 30px 10px 30px;
+    margin-top: 5px;
     margin-right: 10px;
   }
   .header .menu {
@@ -1405,12 +1401,26 @@ img.logo {
 }
 
 @media screen and (max-width: 768px) {
-  .popular_article_content {
-    margin: 10px 10px 0 10px !important;
+  .popular_latest_article {
+    flex-wrap: wrap;
   }
-
-  .popular_article_content:last-child {
-    margin: 10px 10px 10px 10px !important;
+  .popular_latest_article .article_header_right {
+    width: 100%;
+  }
+  .popular_latest_article .article_header_right .popular_article_title {
+    margin: 10px 0 0 0;
+  }
+  .popular_latest_article .article_header_right .popular_article_content {
+    margin: 10px 10px 0 10px;
+  }
+  .popular_latest_article .article_header_right .popular_article_content:last-child {
+    margin: 10px 10px 10px 10px;
+  }
+  .popular_latest_article .article_header_left {
+    width: 100%;
+  }
+  .popular_latest_article .article_header_left .latest_article_title {
+    margin: 10px 0 0 0;
   }
 
   .article_header {
@@ -1427,16 +1437,6 @@ img.logo {
     margin-bottom: 10px;
   }
   .featured_article .right {
-    width: 100%;
-  }
-
-  .popular_latest_article {
-    flex-wrap: wrap;
-  }
-  .popular_latest_article .article_header_left {
-    width: 100%;
-  }
-  .popular_latest_article .article_header_right {
     width: 100%;
   }
 }
