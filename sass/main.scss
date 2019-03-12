@@ -5,7 +5,6 @@
 @import './base/button';
 @import './base/input';
 
-@import './layout/grid';
 @import './layout/article-card-lg';
 @import './layout/nav-bar';
 
@@ -28,9 +27,9 @@
 @import './layout/card-latest';
 @import './layout/main-card';
 @import './layout/navbar';
-@import './layout/_card-comments';
+@import './layout/card-comments';
+@import './layout/grid';
 
-@import './pages/auth';
 @import './pages/search-results';
 @import './pages/landingPage';
 @import './pages/reading-stats';
@@ -40,3 +39,5 @@
 @import './pages/article';
 @import './pages/update-profile';
 @import './pages/category-articles.scss';
+@import './pages/profile';
+@import './layout/my-nav-bar';
