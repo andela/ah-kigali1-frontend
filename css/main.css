@@ -396,6 +396,8 @@ input[type=text]::-webkit-input-placeholder {
 .latest_article_content .article_text .avatar-wrapper {
   display: flex;
   flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .latest_article_content .article_text .avatar-wrapper .avatar {
   border-radius: 50%;
@@ -504,8 +506,8 @@ input[type=text]::-webkit-input-placeholder {
 
 .article-card {
   display: flex;
-  width: 100%;
   flex-direction: column;
+  width: 100%;
 }
 .article-card .avatar-wrapper {
   display: flex;
