@@ -1,5 +1,5 @@
+/* Reading stats */
 .reading-stats {
-  width: 60%;
   margin: 11% auto;
   p {
     padding-top: 2%;
@@ -81,8 +81,16 @@
     }
   }
 }
+
+/*device =desktops------*/
+@media (min-width: #{$break-point-tablet + 1}px) {
+  .reading-stats {
+    width: 60%;
+  }
+}
+
 /*device = Mobile Phone (Landscape) tablet(portrait)------*/
-@media (max-width: #{$break-point-tablet - 1}px) {
+@media (max-width: #{$break-point-tablet}px) {
   .reading-stats {
     width: 94%;
     margin: 11% 3%;
