@@ -1,0 +1,129 @@
+.search-results {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 4.6%;
+  .left-side {
+    .tabs {
+      padding: 1em 0em;
+    }
+    .results {
+      section {
+        display: none;
+      }
+      #articles:target,
+      #authors:target {
+        display: block;
+        + section {
+          background-color: green;
+        }
+      }
+    }
+  }
+  .right-side {
+    width: 18%;
+    h2 {
+      font-size: $font-size;
+      color: $color-primary;
+      margin: 5px 0px;
+    }
+    .tags-section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-bottom: 3em;
+      button.tags {
+        @include tag-or-follow-btn;
+      }
+    }
+    .authors-section {
+      width: 80%;
+      .author {
+        margin: 15px 0px;
+      }
+      .inline-author {
+        @include row {
+          align-items: center;
+        }
+        p {
+          margin-left: 15px;
+          color: $color-primary;
+          line-height: 23px;
+        }
+      }
+      p.author-bio {
+        font-size: 1em;
+        text-align: justify;
+        margin: 15px 0px;
+      }
+      span:after {
+        content: "";
+        border-top: 1px solid $color-primary;
+        display: inline-block;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+  }
+  .search-query > input {
+    border: 1px solid $color-primary;
+    color: $color-primary;
+    background-color: $white-secondary;
+    outline: none;
+    width: 100%;
+    padding: 0.5em 0.5em;
+    font-size: ($font-size);
+  }
+}
+
+ul.horizontal-list {
+  list-style: none;
+  li {
+    display: inline;
+    font-size: $font-size;
+    color: $color-primary;
+    padding: 0.5em;
+    cursor: pointer;
+  }
+  li.active {
+    text-decoration: underline;
+    text-decoration-color: $color-primary;
+    font-weight: bold;
+  }
+}
+
+button.following-btn {
+  @include tag-or-follow-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+}
+button.btn-fill {
+  background-color: $color-primary;
+  color: $white-secondary;
+}
+/* devices = laptops, desktops, tablets ---------------*/
+@media (min-width: #{$break-point-desktop}px) {
+  .left-side {
+    width: 70%;
+  }
+}
+
+/*devices = Tablets, iPads-------------*/
+@media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
+  .left-side {
+    width: 70%;
+  }
+}
+
+/*device = Mobile Phone------*/
+@media (max-width: #{$break-point-tablet - 1}px) {
+  .left-side {
+    width: 95%;
+  }
+}

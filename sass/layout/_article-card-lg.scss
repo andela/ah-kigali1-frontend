@@ -1,0 +1,131 @@
+.blog-card {
+  @include card {
+    margin: 15px 0px;
+  }
+  .meta {
+    position: relative;
+    z-index: 0;
+    height: 200px;
+    &:hover {
+      .article-thumbnail {
+        transform: scale(1.3) rotate(3deg);
+      }
+    }
+  }
+  .article-thumbnail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.2s;
+  }
+  .details,
+  .details ul {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card-content {
+    padding: 0.3em 1em;
+    padding-top: 0em;
+    top: 0;
+    background: $white-primary;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .more-info {
+      margin-left: 5px;
+    }
+    .info {
+      display: flex;
+      flex-direction: row;
+      h3.username {
+        font-size: $font-size;
+        padding: 0;
+        margin: 0;
+      }
+      span {
+        color: $color-grey;
+        font-size: $font-size * 0.8;
+      }
+    }
+    .card-text {
+      margin-top: 15px;
+    }
+    a.read-more {
+      text-decoration: underline;
+      color: $color-grey;
+      font-style: italic;
+      &:hover {
+        font-weight: bold;
+        color: $color-primary;
+      }
+    }
+  }
+  .user-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .push-left {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  @media (min-width: 640px) {
+    flex-direction: row;
+    .meta {
+      flex-basis: 40%;
+      height: auto;
+    }
+    .card-content {
+      flex-basis: 60%;
+    }
+    &.alt {
+      flex-direction: row-reverse;
+      .card-content {
+        &:before {
+          left: inherit;
+          right: -10px;
+        }
+      }
+      .details {
+        padding-left: 25px;
+      }
+    }
+  }
+  .user-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+.user-profile-img {
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+.icon-action {
+  @include row;
+  // justify-self: flex-end;
+  padding: 7px 5px;
+  cursor: pointer;
+  span {
+    padding-left: 5px;
+    font-size: ($font-size * 0.7);
+  }
+  align-items: center;
+  img {
+    width: $font-size;
+    height: $font-size;
+  }
+}

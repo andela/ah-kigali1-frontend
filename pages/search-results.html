@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Search results</title>
+  </head>
+
+  <body>
+    <div class="home-nav-bar">
+      <header>
+        <img src="../img/quill-drawing-a-line.svg" alt="logo" id="logo" />
+        <nav>
+          <!-- mobile navbar -->
+          <a href="#" class="hide-desktop show-mobile">
+            <img src="../img/menu-button.svg" alt="Menu" class="menu" />
+          </a>
+          <!-- desktop and tablet navbar -->
+          <ul class="desktop-menu show-desktop hide-mobile">
+            <li><a href="#">SIGN IN</a></li>
+            <li><a href="#">SIGN OUT</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <div class="search-results">
+      <div class="left-side">
+        <div class="search-query">
+          <input type="search" class="search-input" value="Hello world " />
+        </div>
+        <div class="tabs">
+          <ul class="horizontal-list">
+            <li class="active"><a href="#articles">Articles</a></li>
+            <li><a href="#authors">Authors</a></li>
+          </ul>
+        </div>
+        <div class="results">
+          <section id="articles">
+            <div class="col-md-12">
+              <div class="blog-card">
+                <div class="meta">
+                  <div
+                    class="article-thumbnail"
+                    style="background-image: url('../img/boyce-avenue.jpg')"
+                    style="background-position: 50% 50%;"
+                  ></div>
+                </div>
+                <div class="card-content">
+                  <div class="info">
+                    <img
+                      src="../img/user.jpg"
+                      alt="user"
+                      class="user-profile-img"
+                    />
+                    <div class="more-info">
+                      <h3 class="username">John Doe</h3>
+                      <span>Nov 7, 2018 3 min read</span>
+                    </div>
+                  </div>
+                  <div class="card-title">
+                    <h2>
+                      Why CSS Grid is better than Bootstrap for creating layouts
+                    </h2>
+                  </div>
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                    eum dolorum architecto obcaecati enim dicta praesentium,
+                    quam nobis! Neque ad aliquam facilis numquam. Veritatis,
+                    sit......
+                    <a href="#" class="read-more">Read more</a>
+                  </p>
+                  <div class="user-actions">
+                    <div class="push-left">
+                      <div class="icon-action">
+                        <img
+                          src="../img/like-icon.svg"
+                          alt="like"
+                          class="icon-like"
+                        />
+                        <span>898</span>
+                      </div>
+                      <div class="icon-action">
+                        <img
+                          src="../img/dislike-icon.svg"
+                          alt="dislike"
+                          class="icon-dislike"
+                        />
+                        <span>898</span>
+                      </div>
+                      <div class="icon-action">
+                        <img
+                          src="../img/comment-icon.svg"
+                          alt="like"
+                          class="icon-comment"
+                        />
+                        <span>898</span>
+                      </div>
+                    </div>
+                    <div class="push-right">
+                      <div class="icon-action">
+                        <img
+                          src="../img/bookmark-icons.svg"
+                          alt="bookmark"
+                          class="icon-bookmark"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- display author -->
+          <section id="authors">
+            <div class="col-md-6 col-av-12 col-sm-12">
+              <div class="blog-card">
+                <div class="col-md-3">
+                  <img
+                    src="../img/user.jpg"
+                    alt=""
+                    style="width: 100px; height: 100px; border-radius: 50%"
+                  />
+                </div>
+                <div class="col-md-9  col-sm-12">
+                  <div class="card-content">
+                    <div class="info">
+                      <div class="col-md-3 col-sm-4">
+                        <h3 class="username">John Doe</h3>
+                      </div>
+                      <div class="col-md-3 col-sm-4">
+                        <button class="following-btn btn-fill">
+                          Following
+                        </button>
+                      </div>
+                    </div>
+                    <p class="card-text">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Ad eum dolorum architecto obcaecati enim dicta
+                      praesentium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-av-12 col-sm-12">
+              <div class="blog-card">
+                <div class="col-md-3">
+                  <img
+                    src="../img/user.png"
+                    alt=""
+                    style="width: 100px; height: 100px; border-radius: 50%"
+                  />
+                </div>
+                <div class="col-md-9 col-sm-12">
+                  <div class="card-content">
+                    <div class="info">
+                      <div class="col-md-3 col-sm-4">
+                        <h3 class="username">John Doe</h3>
+                      </div>
+                      <div class="col-md-3 col-sm-4">
+                        <button class="following-btn">
+                          Follow
+                        </button>
+                      </div>
+                    </div>
+                    <p class="card-text">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Ad eum dolorum architecto obcaecati enim dicta
+                      praesentium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="right-side hide-sm">
+        <h2>#Tags</h2>
+        <div class="tags-section">
+          <button class="tags">life</button>
+          <button class="tags">Psychology of life</button>
+          <button class="tags">Self improvement</button>
+          <button class="tags">eBook</button>
+          <button class="tags">Change</button>
+          <button class="tags">Life changing</button>
+        </div>
+        <h2>Authors</h2>
+        <div class="authors-section">
+          <div class="author">
+            <div class="inline-author">
+              <div class="user-profile-img">
+                <img src="../img/user.png" alt="author" />
+              </div>
+              <p class="username">Joe Doe</p>
+            </div>
+            <span></span>
+            <p class="author-bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <button class="following-btn">Follow</button>
+          </div>
+          <div class="author">
+            <div class="inline-author">
+              <div class="user-profile-img">
+                <img src="../img/user.png" alt="author" />
+              </div>
+              <p class="username">Joe Doe</p>
+            </div>
+            <span></span>
+            <p class="author-bio">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <button class="following-btn btn-fill">Following</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

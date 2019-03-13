@@ -1,9 +1,6 @@
-.col {
-  &-md-6 {
-    width: 50%;
-  }
+.col-md {
+  @include col;
 }
-
 .row {
   @include row;
 }
@@ -18,11 +15,15 @@
     display: none !important;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .col-av {
+    @include col;
+  }
+}
 @media (max-width: #{$break-point-tablet - 1}px) {
-  .col {
-    &-sm-12 {
-      width: 100%;
-    }
+  .col-sm {
+    @include col;
   }
   .hide-sm {
     display: none;
