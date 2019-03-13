@@ -12,6 +12,15 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    .cat {
+      position: absolute;
+      color: white;
+      bottom: 0;
+      padding: 5px 50px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      background-color: $color-primary;
+    }
   }
   .article_text {
     display: flex;

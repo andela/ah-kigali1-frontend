@@ -1,8 +1,30 @@
+.category-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 60px 10px 10px 10px;
+  .category-left {
+    width: 90%;
+    margin-right: 45px;
+    .category-list {
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      overflow: auto;
+      li {
+        margin-right: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+  .category-right {
+    width: 10%;
+  }
+}
+
 .article_header {
   background: $color-primary;
   height: 42px;
   width: 100%;
-  margin-top: 10px;
 }
 .featured_article_title {
   color: white;
