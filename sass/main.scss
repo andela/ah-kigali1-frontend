@@ -7,31 +7,16 @@
 
 @import "./layout/grid";
 
-@import "./pages/auth";
-@import "./pages/reset-password";
 @import "./layout/article-card-lg";
 @import "./layout/nav-bar";
 @import "./layout/card-latest";
 @import "./layout/main-card";
 // @import "./layout/navbar";
 
-<<<<<<< HEAD
 @import "./pages/auth";
 @import "./pages/search-results";
 @import "./pages/user-settings";
-
-@import "./pages/auth";
 @import "./pages/landingPage";
-@import "./layout/grid";
-
-@import "./pages/auth";
 @import "./pages/reset-password";
-=======
-@import './pages/auth';
-@import './pages/search-results';
-@import './pages/user-settings';
-@import './pages/landingPage';
-@import './layout/grid';
-@import './pages/reset-password';
-@import './pages/reading-stats';
->>>>>>> [feature #164395296] acquire changes from master branch
+@import "./pages/reading-stats";
+@import "./pages/update-profile";
