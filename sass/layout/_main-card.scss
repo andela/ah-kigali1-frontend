@@ -1,0 +1,132 @@
+.featured_article {
+  @include row {
+    margin-top: 10px;
+  }
+  .left {
+    width: 65%;
+    height: 510px;
+    margin-right: 10px;
+    margin-left: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: flex;
+  }
+  .right {
+    width: 35%;
+    height: 500px;
+    margin-right: 10px;
+    .top {
+      height: 50%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .down {
+      height: 50%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      display: flex;
+    }
+  }
+}
+.article-card {
+  @include column {
+    width: 100%;
+  }
+  .avatar-wrapper {
+    @include row {
+    }
+    .avatar {
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      margin: 5px;
+      &.medium {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .name_minutes {
+      margin: 20px 0 0 4px;
+      &.medium {
+        margin: 10px 0 0 4px;
+      }
+      .date_read_time {
+        color: #8e8d92;
+      }
+      .author_name {
+        color: #000000;
+        font-weight: bold;
+      }
+    }
+  }
+  .tex-content {
+    .icons {
+      @include row {
+        margin: 5px 0 5px 0;
+        justify-content: space-between;
+        padding-left: 5px;
+      }
+      .right-icons {
+        margin-right: 5px;
+      }
+      div {
+        display: flex;
+        margin: 0 15px 0 3px;
+        img {
+          cursor: pointer;
+          height: 20px;
+          width: 20px;
+        }
+      }
+      .arrow-options {
+        text-align: right;
+      }
+    }
+    h3 {
+      margin: 5px 0 5px 0;
+      padding-left: 5px;
+    }
+    .tex-content__body {
+      height: 35px;
+      overflow: hidden;
+      padding-left: 5px;
+    }
+  }
+  .main-article-img {
+    flex: 1;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+}
+@media screen and (max-width: 768px) {
+  .featured_article {
+    .right {
+      margin-left: 10px;
+    }
+  }
+  .article-card {
+    .avatar-wrapper {
+      .avatar {
+        width: 50px;
+        height: 50px;
+      }
+      .name_minutes {
+        margin: 10px 0 0 4px;
+      }
+    }
+  }
+  .latest_article_content {
+    .article_text {
+      .avatar-wrapper {
+        .name_minutes {
+          margin: 10px 0 0 4px;
+        }
+      }
+    }
+  }
+}

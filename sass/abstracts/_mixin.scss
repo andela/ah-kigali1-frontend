@@ -9,6 +9,11 @@
   flex-direction: column;
   @content;
 }
+@mixin space-around {
+  display: flex;
+  justify-content: space-around;
+  @content;
+}
 @mixin icon {
   display: flex;
   justify-content: center;
