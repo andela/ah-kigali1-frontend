@@ -1,3 +1,37 @@
+.category-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 60px 20px 10px 20px;
+  .category-left {
+    width: 95%;
+    margin-right: 15px;
+    overflow: scroll;
+    .category-list {
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      .current {
+        font-weight: bold;
+      }
+      li {
+        margin-right: 15px;
+        cursor: pointer;
+        &:hover {
+          color: grey;
+        }
+      }
+    }
+  }
+  .category-right {
+    cursor: pointer;
+    &:hover {
+      color: grey;
+    }
+    .current {
+      font-weight: bold;
+    }
+  }
+}
 .article_header {
   background: $color-primary;
   height: 42px;
