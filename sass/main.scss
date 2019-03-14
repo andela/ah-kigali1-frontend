@@ -1,20 +1,21 @@
-@import "./abstracts/mixin";
-@import "./abstracts/variables";
+@import './abstracts/mixin';
+@import './abstracts/variables';
 
-@import "./base/base";
-@import "./base/button";
-@import "./base/input";
+@import './base/base';
+@import './base/button';
+@import './base/input';
 
-@import "./layout/grid";
-@import "./layout/article-card-lg";
-@import "./layout/nav-bar";
-@import "./layout/card-latest";
-@import "./layout/main-card";
+@import './layout/grid';
+@import './layout/article-card-lg';
+@import './layout/nav-bar';
+@import './layout/card-latest';
+@import './layout/main-card';
 // @import "./layout/navbar";
 
-@import "./pages/auth";
-@import "./pages/search-results";
-@import "./pages/user-settings";
-
-@import "./pages/auth";
-@import "./pages/landingPage";
+@import './pages/auth';
+@import './pages/search-results';
+@import './pages/user-settings';
+@import './pages/landingPage';
+@import './layout/grid';
+@import './pages/reset-password';
+@import './pages/reading-stats';
