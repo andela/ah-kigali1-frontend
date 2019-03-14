@@ -1332,6 +1332,8 @@ img.logo {
 }
 .category-container .category-right {
   cursor: pointer;
+  font-style: italic;
+  font-weight: bold;
 }
 .category-container .category-right:hover {
   color: grey;
