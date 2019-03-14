@@ -165,3 +165,9 @@
   border-bottom: $border-gray;
   border-bottom-width: 0.1em;
 }
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @content;
+}
