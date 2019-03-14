@@ -131,3 +131,10 @@
     width: 16.66%;
   }
 }
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @content;
+}
