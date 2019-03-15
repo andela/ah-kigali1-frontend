@@ -6,14 +6,17 @@ $color-primary: #1b1242;
 $color-secondary: rgba(27, 18, 66, 0.5);
 $color-shade: rgba(27, 18, 66, 0.25);
 $color-grey: #a2a2a2;
+$color-red: #f6214b;
+
 $font-size-small: 0.4em;
 $font-size: 1em;
 $font-family: Arial;
 $font-size-medium: 1.3em;
 $font-size-large: 1.75em;
+
+$border-gray: 1px solid $gray;
+$max-size-tablet: 1024;
+
 $break-point-desktop: 1025;
 $break-point-tablet: 768;
 $break-point-mobile: 479;
-$border-gray: 1px solid $gray;
-$max-size-tablet: 1024;
-$font-size: 11;

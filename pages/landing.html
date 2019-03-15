@@ -8,21 +8,74 @@
     <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <img src="../img/logo.svg" alt="Authors Heaven Logo" id="logo" />
-        <nav>
-          <!-- mobile navbar -->
-          <a href="#" class="hide-desktop show-mobile">
-            <img src="../img/menu-button.svg" alt="Menu" class="menu" />
-          </a>
-          <!-- desktop and tablet navbar -->
-          <ul class="desktop-menu show-desktop hide-mobile">
-            <li><a href="#">SIGN IN</a></li>
-            <li><a href="#">SIGN OUT</a></li>
-          </ul>
-        </nav>
-      </header>
+    <section class="nav-bar">
+      <div class="nav-container">
+        <div class="col-md-6 col-sm-3 brand-name">
+          <div class="brand">
+            <img
+              src="../img/quill-drawing-a-line.svg"
+              alt="logo"
+              class="brand"
+            />
+          </div>
+          <h3>
+            AH
+          </h3>
+        </div>
+        <div class="col-md-6 col-sm-9 user-actions">
+          <div class="search-filed">
+            <input type="search" name="search" placeholder="Search....." />
+          </div>
+          <div class="other-actions">
+            <!-- don't delete please, these are the code if user is not logged in  -->
+            <!-- <div class="auth-actions">
+                  <div class="sign-up hide-sm">
+                    <a href="./sign-up.html">Sign up today!</a>
+                  </div>
+                  <div class="sign-in hide-sm">
+                    <a href="./sign-in.html" class="btn">Sign in</a>
+                  </div>
+                </div> -->
+            <div class="menu-container hide-md">
+              <button class="menu-btn" id="menu-dropdown">
+                <img src="../img/menu-button.svg" alt="menu" class="menu" />
+              </button>
+            </div>
+            <button class="current-user hide-sm" id="user-dropdown">
+              <img src="../img/user.jpg" alt="user" class="user-avatar" />
+              <div class="user-name">
+                <p>John Doe</p>
+              </div>
+            </button>
+            <div class="drop-down">
+              <div class="up-arrow"></div>
+              <div class="drop-down-content">
+                <ul class="links">
+                  <li class="nav-link">
+                    <a href="./new-article.html" class="main">New Story</a>
+                  </li>
+                  <li>
+                    <a href="#">Profile</a>
+                  </li>
+                  <li>
+                    <a href="./authors-performance.html">Stats</a>
+                  </li>
+                  <li>
+                    <a href="./user-settings.html#password-settings"
+                      >Settings</a
+                    >
+                  </li>
+                  <li>
+                    <a href="./sign-in.html">Sign out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container main">
       <button class="hide-desktop show-mobile">Getting Started</button>
       <div class="article_header">
         <h2 class="featured_article_title">Featured Articles</h2>
@@ -42,12 +95,16 @@
               <h3>Only I can change my life. No one can do it me</h3>
               <div class="tex-content__body">
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                ribs chuck.
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
               </div>
               <div class="icons">
                 <div>
-                  <img src="../img/thumb-up-outline.svg" alt="likes" class="likes" />
+                  <img
+                    src="../img/thumb-up-outline.svg"
+                    alt="likes"
+                    class="likes"
+                  />
                   <div>3,844</div>
                   <img
                     src="../img/thumb-down-outline.svg"
@@ -63,7 +120,11 @@
                   <div>3,844</div>
                 </div>
                 <div>
-                  <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                  <img
+                    src="../img/bookmark.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
                   <img
                     src="../img/down-arrow.svg"
                     alt="options"
@@ -79,7 +140,11 @@
           <div class="top">
             <div class="article-card">
               <div class="avatar-wrapper">
-                <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar medium" />
+                <img
+                  src="../img/avatar-1.jpg"
+                  alt="Avatar"
+                  class="avatar medium"
+                />
                 <div class="name_minutes medium">
                   <span class="author_name">Joe Doe</span> <br />
                   <span class="date_read_time">Nov 7,2018 . 3min read</span>
@@ -89,9 +154,9 @@
               <div class="tex-content">
                 <h3>Only I can change my life. No one can do it me</h3>
                 <div class="tex-content__body">
-                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                  andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                  ribs chuck.
+                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky
+                  tongue andouille kevin meatloaf fatback shank bacon turkey
+                  turducken spare ribs chuck.
                 </div>
                 <div class="icons">
                   <div>
@@ -115,7 +180,11 @@
                     <div>3,844</div>
                   </div>
                   <div>
-                    <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                    <img
+                      src="../img/bookmark.svg"
+                      alt="bookmark"
+                      class="bookmark"
+                    />
                     <img
                       src="../img/down-arrow.svg"
                       alt="options"
@@ -129,7 +198,11 @@
           <div class="down">
             <div class="article-card">
               <div class="avatar-wrapper">
-                <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar medium" />
+                <img
+                  src="../img/avatar-1.jpg"
+                  alt="Avatar"
+                  class="avatar medium"
+                />
                 <div class="name_minutes medium">
                   <span class="author_name">Joe Doe</span> <br />
                   <span class="date_read_time">Nov 7,2018 . 3min read</span>
@@ -139,9 +212,9 @@
               <div class="tex-content">
                 <h3>Only I can change my life. No one can do it me</h3>
                 <div class="tex-content__body">
-                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                  andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                  ribs chuck.
+                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky
+                  tongue andouille kevin meatloaf fatback shank bacon turkey
+                  turducken spare ribs chuck.
                 </div>
                 <div class="icons">
                   <div>
@@ -165,7 +238,11 @@
                     <div>3,844</div>
                   </div>
                   <div>
-                    <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                    <img
+                      src="../img/bookmark.svg"
+                      alt="bookmark"
+                      class="bookmark"
+                    />
                     <img
                       src="../img/down-arrow.svg"
                       alt="options"
@@ -196,12 +273,16 @@
               <h3>Only I can change my life. No one can do it me</h3>
               <div class="tex-content__body">
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                ribs chuck.
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
               </div>
               <div class="icons">
                 <div>
-                  <img src="../img/thumb-up-outline.svg" alt="likes" class="likes" />
+                  <img
+                    src="../img/thumb-up-outline.svg"
+                    alt="likes"
+                    class="likes"
+                  />
                   <div>3,844</div>
                   <img
                     src="../img/thumb-down-outline.svg"
@@ -217,7 +298,11 @@
                   <div>3,844</div>
                 </div>
                 <div>
-                  <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                  <img
+                    src="../img/bookmark.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
                   <img
                     src="../img/down-arrow.svg"
                     alt="options"
@@ -241,12 +326,16 @@
               <h3>Only I can change my life. No one can do it me</h3>
               <div class="tex-content__body">
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                ribs chuck.
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
               </div>
               <div class="icons">
                 <div>
-                  <img src="../img/thumb-up-outline.svg" alt="likes" class="likes" />
+                  <img
+                    src="../img/thumb-up-outline.svg"
+                    alt="likes"
+                    class="likes"
+                  />
                   <div>3,844</div>
                   <img
                     src="../img/thumb-down-outline.svg"
@@ -262,7 +351,11 @@
                   <div>3,844</div>
                 </div>
                 <div>
-                  <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                  <img
+                    src="../img/bookmark.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
                   <img
                     src="../img/down-arrow.svg"
                     alt="options"
@@ -286,12 +379,16 @@
               <h3>Only I can change my life. No one can do it me</h3>
               <div class="tex-content__body">
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                ribs chuck.
+                andouille kevin meatloaf fatback shank bacon turkey turducken
+                spare ribs chuck.
               </div>
               <div class="icons">
                 <div>
-                  <img src="../img/thumb-up-outline.svg" alt="likes" class="likes" />
+                  <img
+                    src="../img/thumb-up-outline.svg"
+                    alt="likes"
+                    class="likes"
+                  />
                   <div>3,844</div>
                   <img
                     src="../img/thumb-down-outline.svg"
@@ -307,7 +404,11 @@
                   <div>3,844</div>
                 </div>
                 <div>
-                  <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                  <img
+                    src="../img/bookmark.svg"
+                    alt="bookmark"
+                    class="bookmark"
+                  />
                   <img
                     src="../img/down-arrow.svg"
                     alt="options"
@@ -325,7 +426,11 @@
           <div class="popular_article_content">
             <div class="article-card">
               <div class="avatar-wrapper">
-                <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar medium" />
+                <img
+                  src="../img/avatar-1.jpg"
+                  alt="Avatar"
+                  class="avatar medium"
+                />
                 <div class="name_minutes medium">
                   <span class="author_name">Joe Doe</span> <br />
                   <span class="date_read_time">Nov 7,2018 . 3min read</span>
@@ -335,9 +440,9 @@
               <div class="tex-content">
                 <h3>Only I can change my life. No one can do it me</h3>
                 <div class="tex-content__body">
-                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                  andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                  ribs chuck.
+                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky
+                  tongue andouille kevin meatloaf fatback shank bacon turkey
+                  turducken spare ribs chuck.
                 </div>
                 <div class="icons">
                   <div>
@@ -361,7 +466,11 @@
                     <div>3,844</div>
                   </div>
                   <div>
-                    <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                    <img
+                      src="../img/bookmark.svg"
+                      alt="bookmark"
+                      class="bookmark"
+                    />
                     <img
                       src="../img/down-arrow.svg"
                       alt="options"
@@ -375,7 +484,11 @@
           <div class="popular_article_content">
             <div class="article-card">
               <div class="avatar-wrapper">
-                <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar medium" />
+                <img
+                  src="../img/avatar-1.jpg"
+                  alt="Avatar"
+                  class="avatar medium"
+                />
                 <div class="name_minutes medium">
                   <span class="author_name">Joe Doe</span> <br />
                   <span class="date_read_time">Nov 7,2018 . 3min read</span>
@@ -385,9 +498,9 @@
               <div class="tex-content">
                 <h3>Only I can change my life. No one can do it me</h3>
                 <div class="tex-content__body">
-                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                  andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                  ribs chuck.
+                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky
+                  tongue andouille kevin meatloaf fatback shank bacon turkey
+                  turducken spare ribs chuck.
                 </div>
                 <div class="icons">
                   <div>
@@ -411,7 +524,11 @@
                     <div>3,844</div>
                   </div>
                   <div>
-                    <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                    <img
+                      src="../img/bookmark.svg"
+                      alt="bookmark"
+                      class="bookmark"
+                    />
                     <img
                       src="../img/down-arrow.svg"
                       alt="options"
@@ -425,7 +542,11 @@
           <div class="popular_article_content">
             <div class="article-card">
               <div class="avatar-wrapper">
-                <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar medium" />
+                <img
+                  src="../img/avatar-1.jpg"
+                  alt="Avatar"
+                  class="avatar medium"
+                />
                 <div class="name_minutes medium">
                   <span class="author_name">Joe Doe</span> <br />
                   <span class="date_read_time">Nov 7,2018 . 3min read</span>
@@ -435,9 +556,9 @@
               <div class="tex-content">
                 <h3>Only I can change my life. No one can do it me</h3>
                 <div class="tex-content__body">
-                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-                  andouille kevin meatloaf fatback shank bacon turkey turducken spare
-                  ribs chuck.
+                  Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky
+                  tongue andouille kevin meatloaf fatback shank bacon turkey
+                  turducken spare ribs chuck.
                 </div>
                 <div class="icons">
                   <div>
@@ -461,7 +582,11 @@
                     <div>3,844</div>
                   </div>
                   <div>
-                    <img src="../img/bookmark.svg" alt="bookmark" class="bookmark" />
+                    <img
+                      src="../img/bookmark.svg"
+                      alt="bookmark"
+                      class="bookmark"
+                    />
                     <img
                       src="../img/down-arrow.svg"
                       alt="options"
@@ -476,4 +601,15 @@
       </div>
     </div>
   </body>
+  <script>
+    let btn = document.querySelector("#user-dropdown");
+    let btn2 = document.querySelector("#menu-dropdown");
+    [btn, btn2].map(button => {
+      button.addEventListener("click", function() {
+        btn.classList.contains("active")
+          ? btn.classList.remove("active")
+          : btn.classList.add("active");
+      });
+    });
+  </script>
 </html>
