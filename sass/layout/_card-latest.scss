@@ -12,14 +12,24 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    cursor: pointer;
   }
   .article_text {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin-top: 10px;
+    @include column {
+      width: 70%;
+      margin-top: 10px;
+      .cat {
+        color: white;
+        background-color: $color-primary;
+        padding: 5px 0 5px 0;
+        width: 150px;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
     h3 {
       margin: 5px 0 5px 0;
+      cursor: pointer;
     }
     .avatar-wrapper {
       display: flex;
@@ -46,6 +56,7 @@
       max-height: 90px;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
     }
     .icons {
       display: flex;
