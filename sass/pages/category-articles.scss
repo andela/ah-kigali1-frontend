@@ -8,6 +8,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin-top: 85px;
   padding-top: 1%;
 
   .left-side {
@@ -98,7 +99,7 @@ body {
     padding: 0.5em 0.5em;
     font-size: ($font-size);
   }
-  /* devices = laptops, desktops, tablets ---------------*/
+  /* devices = laptops, desktops, tablets landscape ---------------*/
   @media (min-width: #{$break-point-desktop}px) {
     .category-results {
       padding-top: 1%;
