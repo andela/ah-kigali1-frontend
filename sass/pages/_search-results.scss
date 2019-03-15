@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 4.6%;
+  padding-top: 4.6%;
   .left-side {
     .tabs {
       padding: 1em 0em;
@@ -13,8 +13,7 @@
         display: none;
       }
       #articles:target,
-      #authors:target,
-      #tags:target {
+      #authors:target {
         display: block;
       }
     }
@@ -74,6 +73,28 @@
     padding: 0.5em 0.5em;
     font-size: ($font-size);
   }
+  /* devices = laptops, desktops, tablets ---------------*/
+  @media (min-width: #{$break-point-desktop}px) {
+    .left-side {
+      width: 70%;
+    }
+  }
+
+  /*devices = Tablets, iPads-------------*/
+  @media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
+    padding-top: 7%;
+    .left-side {
+      width: 70%;
+    }
+  }
+
+  /*device = Mobile Phone------*/
+  @media (max-width: #{$break-point-tablet - 1}px) {
+    padding-top: 20%;
+    .left-side {
+      width: 95%;
+    }
+  }
 }
 
 ul.horizontal-list {
@@ -104,24 +125,4 @@ button.following-btn {
 button.btn-fill {
   background-color: $color-primary;
   color: $white-secondary;
-}
-/* devices = laptops, desktops, tablets ---------------*/
-@media (min-width: #{$break-point-desktop}px) {
-  .left-side {
-    width: 70%;
-  }
-}
-
-/*devices = Tablets, iPads-------------*/
-@media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
-  .left-side {
-    width: 70%;
-  }
-}
-
-/*device = Mobile Phone------*/
-@media (max-width: #{$break-point-tablet - 1}px) {
-  .left-side {
-    width: 95%;
-  }
 }
