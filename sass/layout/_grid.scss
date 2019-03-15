@@ -8,6 +8,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 @media (min-width: #{$break-point-tablet}px) {
@@ -28,4 +29,8 @@
   .hide-sm {
     display: none;
   }
+}
+
+.main {
+  margin-top: 30px;
 }
