@@ -1,8 +1,7 @@
 body {
-  .container {
-    margin: 0;
-    margin-top: 30px;
+  .new-article-container {
     @include center;
+    flex-direction: column;
     .buttons {
       margin-top: 5em;
       margin-left: auto;
@@ -61,13 +60,6 @@ body {
         margin-left: 0.5em;
       }
     }
-    .article {
-      height: 100px;
-      border-style: none;
-      border-color: Transparent;
-      overflow: auto;
-    }
-
     .main-article {
       /*can be combined in one property*/
       border-radius: 10px;
