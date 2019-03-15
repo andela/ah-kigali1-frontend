@@ -6,8 +6,9 @@
   left: 0;
   right: 0;
   padding: 0 20px 0 20px;
-  top: 50px;
+  top: 42px;
   z-index: 2;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
   .category-left {
     width: 95%;
     margin-right: 15px;
@@ -47,6 +48,7 @@
   background: $color-primary;
   height: 42px;
   width: 100%;
+  margin-top: 105px;
 }
 .featured_article_title {
   color: white;
