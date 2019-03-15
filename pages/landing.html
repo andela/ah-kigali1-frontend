@@ -55,7 +55,7 @@
                     <a href="./new-article.html" class="main">New Story</a>
                   </li>
                   <li>
-                    <a href="#">Profile</a>
+                    <a href="./profile.html">Profile</a>
                   </li>
                   <li>
                     <a href="./authors-performance.html">Stats</a>
@@ -135,7 +135,6 @@
             </div>
           </div>
         </div>
-
         <div class="right">
           <div class="top">
             <div class="article-card">
@@ -602,13 +601,13 @@
     </div>
   </body>
   <script>
-    let btn = document.querySelector("#user-dropdown");
-    let btn2 = document.querySelector("#menu-dropdown");
+    let btn = document.querySelector('#user-dropdown');
+    let btn2 = document.querySelector('#menu-dropdown');
     [btn, btn2].map(button => {
-      button.addEventListener("click", function() {
-        btn.classList.contains("active")
-          ? btn.classList.remove("active")
-          : btn.classList.add("active");
+      button.addEventListener('click', function() {
+        btn.classList.contains('active')
+          ? btn.classList.remove('active')
+          : btn.classList.add('active');
       });
     });
   </script>
