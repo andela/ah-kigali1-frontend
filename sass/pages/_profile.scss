@@ -34,10 +34,16 @@
         text-align: justify;
       }
       button {
+        a {
+          color: $color-primary;
+        }
         background: $white-shade;
         &:hover {
           background: $color-primary;
           color: $white-primary;
+          a {
+            color: $white-primary;
+          }
         }
       }
     }
