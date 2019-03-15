@@ -87,7 +87,9 @@
             Excepteur sint occaecat cupidatat non proident.
           </p>
 
-          <button class="btn">Edit</button>
+          <button class="btn">
+            <a href="./update-profile.html" style="color:white;">Edit</a>
+          </button>
           <div class="socials">
             <div class="icon">
               <img src="../img/fb-icon.svg" alt="Facebook" />
@@ -318,4 +320,15 @@
       </div>
     </div>
   </body>
+  <script>
+    let btn = document.querySelector('#user-dropdown');
+    let btn2 = document.querySelector('#menu-dropdown');
+    [btn, btn2].map(button => {
+      button.addEventListener('click', function() {
+        btn.classList.contains('active')
+          ? btn.classList.remove('active')
+          : btn.classList.add('active');
+      });
+    });
+  </script>
 </html>
