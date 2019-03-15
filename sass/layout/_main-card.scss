@@ -13,7 +13,6 @@
   .right {
     width: 35%;
     height: 500px;
-    margin-right: 10px;
     .top {
       height: 50%;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
@@ -70,15 +69,14 @@
 
 .article-card {
   .tex-content {
-    width: 90%;
+    width: 94%;
     .icons {
       @include row {
-        margin: 5% 3% 1% 0;
+        margin: 1% 0% 1% 0;
         justify-content: space-between;
-        padding-left: 5px;
       }
       .right-icons {
-        margin-right: 5px;
+        margin-right: 0px;
       }
       div {
         display: flex;
@@ -97,22 +95,17 @@
       }
     }
     h3 {
-      margin: 3% 0 2% 0;
       padding-left: 5px;
-      cursor: pointer;
     }
     &__body {
-    .tex-content__body {
-      cursor: pointer;
       height: 35px;
       overflow: hidden;
       padding-left: 5px;
     }
   }
   .main-article-img {
-    cursor: pointer;
     flex: 1;
-    width: 90%;
+    width: 94%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -126,7 +119,7 @@
       padding: 5px 0 5px 0;
       width: 150px;
       text-align: center;
-      background-color: $color-primary;
+      background-color: #1b1242;
       cursor: pointer;
     }
   }
@@ -142,11 +135,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .featured_article {
-    .right {
-      margin-left: 10px;
-      margin-top: 0px;
-    }
+  .left {
+    margin-right: 0 !important;
   }
   .avatar {
     width: 50px !important;
@@ -156,5 +146,4 @@
   .name_minutes {
     margin: 10px 0 0 4px !important;
   }
-}
 }
