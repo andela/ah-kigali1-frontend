@@ -60,15 +60,8 @@ body {
         margin-left: 0.5em;
       }
     }
-    .article {
-      height: 100px;
-      border-style: none;
-      border-color: Transparent;
-      overflow: auto;
-    }
 
     .main-article {
-      /*can be combined in one property*/
       border-radius: 10px;
       border-top: 1px solid $gray;
       border-right: 1px solid $gray;

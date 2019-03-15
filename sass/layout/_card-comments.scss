@@ -45,6 +45,23 @@
       }
     }
   }
+  .article-comments--existing__desktop,
+  .article-comments--existing__mobile {
+    .article-comments--actions {
+      .comment-like {
+        .icons {
+          display: flex;
+
+          .likes {
+            margin-right: 0.5em;
+          }
+        }
+      }
+      .comment-delete {
+        color: red;
+      }
+    }
+  }
 
   .comment-avatar-wrapper {
     display: flex;
