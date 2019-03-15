@@ -8,14 +8,25 @@
 @import "./layout/grid";
 @import "./layout/article-card-lg";
 @import "./layout/nav-bar";
-@import "./layout/card-latest";
-@import "./layout/main-card";
-// @import "./layout/navbar";
-
 @import "./pages/auth";
 @import "./pages/search-results";
-@import "./pages/user-settings";
+@import "./layout/card-latest";
+@import "./layout/main-card";
+@import "./layout/navbar";
+@import "./layout/_card-comments";
 @import "./pages/landingPage";
+@import "./layout/grid";
+
+@import "./pages/reading-stats";
+@import "./pages/reading-stats";
+@import "./pages/performance-stats";
 @import "./pages/reset-password";
 @import "./pages/reading-stats";
-@import "./pages/update-profile";
+@import "./pages/performance-stats";
+@import "./pages/auth";
+@import "./pages/reset-password";
+@import "./pages/reading-stats";
+@import "./pages/performance-stats";
+
+@import "./pages/new-article";
+@import "./pages/article";
