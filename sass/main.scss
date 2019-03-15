@@ -12,7 +12,7 @@
 
 @import "./layout/card-latest";
 @import "./layout/main-card";
-@import "./layout/navbar";
+@import "./layout/nav-bar-landing";
 @import "./layout/_card-comments";
 
 @import "./pages/auth";
@@ -25,3 +25,4 @@
 @import "./pages/article";
 @import "./pages/update-profile";
 @import "./pages/category-articles.scss";
+@import "./pages/user-settings";
