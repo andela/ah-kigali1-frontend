@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Home - Author's Heaven</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="nav-bar">
+        <div class="nav-container">
+          <div class="col-md-6 col-sm-3 brand-name">
+            <div class="brand">
+              <img
+                src="../img/quill-drawing-a-line.svg"
+                alt="logo"
+                class="brand"
+              />
+            </div>
+            <h3>
+              AH
+            </h3>
+          </div>
+          <div class="col-md-6 col-sm-9 user-actions">
+            <div class="search-filed">
+              <input type="search" name="search" placeholder="Search....." />
+            </div>
+            <div class="other-actions">
+              <!-- don't delete please, these are the code if user is not logged in  -->
+              <!-- <div class="auth-actions">
+                    <div class="sign-up hide-sm">
+                      <a href="./sign-up.html">Sign up today!</a>
+                    </div>
+                    <div class="sign-in hide-sm">
+                      <a href="./sign-in.html" class="btn">Sign in</a>
+                    </div>
+                  </div> -->
+              <div class="menu-container hide-md">
+                <button class="menu-btn" id="menu-dropdown">
+                  <img src="../img/menu-button.svg" alt="menu" class="menu" />
+                </button>
+              </div>
+              <button class="current-user hide-sm" id="user-dropdown">
+                <img src="../img/user.jpg" alt="user" class="user-avatar" />
+                <div class="user-name">
+                  <p>John Doe</p>
+                </div>
+              </button>
+              <div class="drop-down">
+                <div class="up-arrow"></div>
+                <div class="drop-down-content">
+                  <ul class="links">
+                    <li class="nav-link">
+                      <a href="#" class="main">Profile</a>
+                    </li>
+                    <li>
+                      <a href="#">Stories</a>
+                    </li>
+                    <li>
+                      <a href="#">Profile</a>
+                    </li>
+                    <li>
+                      <a href="#">Settings</a>
+                    </li>
+                    <li>
+                      <a href="#">Sign out</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="category-container">
+        <div class="category-left">
+          <ul class="category-list">
+            <li class="current">HOME</li>
+            <li>TECH</li>
+            <li>CULTURE</li>
+            <li>FILM</li>
+            <li>FASHION</li>
+            <li>POLITICS</li>
+            <li>FITNESS</li>
+            <li>SCIENCE</li>
+            <li>BUSINESS</li>
+            <li>TRAVEL</li>
+            <li>LEISURE</li>
+            <li>FOOD</li>
+          </ul>
+        </div>
+        <div class="category-right">
+          MORE
+        </div>
+      </div>
+      <div class="category-title">
+        <h2 class="featured_article_title">Categories</h2>
+      </div>
+      <div class="categories">
+        <div class="category-box">
+          <div class="category-box-content">
+            <div class="title-category">TRAVEL</div>
+            <div
+              class="box-pic"
+              style="background-image: url(../img/travel.jpg);"
+            ></div>
+          </div>
+        </div>
+        <div class="category-box">
+          <div class="category-box-content">
+            <div class="title-category">NATURE</div>
+            <div
+              class="box-pic"
+              style="background-image: url(../img/coffee.jpg);"
+            ></div>
+          </div>
+        </div>
+        <div class="category-box">
+          <div class="category-box-content">
+            <div class="title-category">MUSIC</div>
+            <div
+              class="box-pic"
+              style="background-image: url(../img/boyce-avenue.jpg);"
+            ></div>
+          </div>
+        </div>
+        <div class="category-box">
+          <div class="category-box-content">
+            <div class="title-category">LIFESTYLE</div>
+            <div
+              class="box-pic"
+              style="background-image: url(../img/lifestyle.jpg);"
+            ></div>
+          </div>
+        </div>
+        <div class="category-box">
+          <div class="category-box-content">
+            <div class="title-category">NATURE</div>
+            <div
+              class="box-pic"
+              style="background-image: url(../img/background-2.jpg);"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let btn = document.querySelector("#user-dropdown");
+    let btn2 = document.querySelector("#menu-dropdown");
+    [btn, btn2].map(button => {
+      button.addEventListener("click", function() {
+        btn.classList.contains("active")
+          ? btn.classList.remove("active")
+          : btn.classList.add("active");
+      });
+    });
+  </script>
+</html>
