@@ -26,7 +26,10 @@
   <body>
     <section class="nav-bar">
       <div class="nav-container">
-        <div class="col-md-6 col-sm-3 brand-name">
+        <div
+          class="col-md-6 col-sm-3 brand-name"
+          onclick="location.href='./landing.html'"
+        >
           <div class="brand">
             <img
               src="../img/quill-drawing-a-line.svg"
@@ -43,15 +46,6 @@
             <input type="search" name="search" placeholder="Search....." />
           </div>
           <div class="other-actions">
-            <!-- don't delete please, these are the code if user is not logged in  -->
-            <!-- <div class="auth-actions">
-                    <div class="sign-up hide-sm">
-                      <a href="./sign-up.html">Sign up today!</a>
-                    </div>
-                    <div class="sign-in hide-sm">
-                      <a href="./sign-in.html" class="btn">Sign in</a>
-                    </div>
-                  </div> -->
             <div class="menu-container hide-md">
               <button class="menu-btn" id="menu-dropdown">
                 <img src="../img/menu-button.svg" alt="menu" class="menu" />
@@ -67,14 +61,17 @@
               <div class="up-arrow"></div>
               <div class="drop-down-content">
                 <ul class="links">
-                  <li class="nav-link">
+                  <li class="nav-link active">
                     <a href="./new-article.html" class="main">New Story</a>
                   </li>
                   <li>
-                    <a href="./profile.html">Profile</a>
+                    <a href="./profile.html#latest">Profile</a>
                   </li>
                   <li>
-                    <a href="./authors-performance.html">Stats</a>
+                    <a href="./authors-performance.html">Author's Stats</a>
+                  </li>
+                  <li>
+                    <a href="./reading-stats.html">Reading Stats</a>
                   </li>
                   <li>
                     <a href="./user-settings.html#password-settings"
@@ -116,4 +113,15 @@
       </div>
     </div>
   </body>
+  <script>
+    let btn = document.querySelector("#user-dropdown");
+    let btn2 = document.querySelector("#menu-dropdown");
+    [btn, btn2].map(button => {
+      button.addEventListener("click", function() {
+        btn.classList.contains("active")
+          ? btn.classList.remove("active")
+          : btn.classList.add("active");
+      });
+    });
+  </script>
 </html>

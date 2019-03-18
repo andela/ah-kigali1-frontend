@@ -11,7 +11,6 @@
     @include border-bottom-line;
   }
   .article-comments--new-text {
-    margin-left: 5em;
     padding-top: 1.5em;
     border: none;
     color: $color-primary;
@@ -87,7 +86,9 @@
 @media (max-width: #{$break-point-tablet - 1}px) {
   .article-content {
     .article-comments {
-      .article-comments--new,
+      .article-comments--new {
+        margin-left: 0;
+      }
       .article-comments--existing__desktop {
         display: none;
       }
