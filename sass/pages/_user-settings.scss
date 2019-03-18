@@ -1,5 +1,5 @@
 @mixin on-or-off {
-  padding: 2px 5px;
+  padding: 10px 10px;
   width: 50%;
   height: 100%;
   color: $color-primary;
@@ -59,8 +59,8 @@
       position: relative;
       display: block;
       border: 1px solid $color-primary;
-      width: 80px;
-      height: 25px;
+      width: 100px;
+      height: 40px;
       border-radius: 5px;
       color: $white-secondary;
       .on {
@@ -136,7 +136,7 @@
   }
 
   @media (max-width: #{$break-point-tablet - 1}px) {
-    margin: 0px 15px;
+    margin: 60px 15px 0px 15px;
     section {
       padding-bottom: 15px;
       border-bottom: 1px solid $color-shade;

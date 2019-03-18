@@ -1105,19 +1105,19 @@ button.btn-fill {
       position: relative;
       display: block;
       border: 1px solid #1b1242;
-      width: 80px;
-      height: 25px;
+      width: 100px;
+      height: 40px;
       border-radius: 5px;
       color: #e8f0fe; }
       .user-settings .notification-settings .notification-toggle .on {
         float: left;
-        padding: 2px 5px;
+        padding: 10px 10px;
         width: 50%;
         height: 100%;
         color: #1b1242; }
       .user-settings .notification-settings .notification-toggle .off {
         float: right;
-        padding: 2px 5px;
+        padding: 10px 10px;
         width: 50%;
         height: 100%;
         color: #1b1242; }
@@ -1166,7 +1166,7 @@ button.btn-fill {
           background-color: #1b1242; } }
   @media (max-width: 767px) {
     .user-settings {
-      margin: 0px 15px; }
+      margin: 60px 15px 0px 15px; }
       .user-settings section {
         padding-bottom: 15px;
         border-bottom: 1px solid rgba(27, 18, 66, 0.25); } }
