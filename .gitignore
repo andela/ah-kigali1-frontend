@@ -1,1 +1,11 @@
 .sass-cache
+node_modules
+
+# yarn ignored files/folders
+yarn.*
+yarn-*
+
+#dist folders
+
+.DS_Store
+dist

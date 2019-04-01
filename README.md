@@ -30,6 +30,10 @@ After that start or build the application by running
   yarn start #  For local development
 ```
 
+```bash
+  yarn build #  For production
+```
+
 ## Running the tests
 
 ```bash
@@ -50,5 +54,5 @@ yarn test
 - [Luc Abayo ](https://github.com/abayo-luc) Our CR7, Christiano Ronaldo
 - [Yves Iraguha](https://github.com/YvesIraguha) Our Young Talent , Marcus Rashford
 - [Fabrice Niomwungeri](https://github.com/niomwungeri-fabrice) Our Defender , Laurent Koscielny
-- [Musigwa Pacifique](https://github.com/Musigwa) Our Goal keeper, Still Looking for his nickname
-- [Espoir Murhabazi](https://github.com/espoirMur) Our Unsung Heros,  Ngolo Kante
+- [Musigwa Pacifique](https://github.com/Musigwa) Our Goal keeper, Hyun Woo Cho
+- [Espoir Murhabazi](https://github.com/espoirMur) Our Unsung Heros, Ngolo Kante
