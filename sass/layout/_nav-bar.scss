@@ -15,6 +15,7 @@
     }
     .brand-name,
     .auth-actions {
+      cursor: pointer;
       @include row {
         align-items: center;
       }
@@ -156,14 +157,12 @@
             line-height: 10px;
           }
           padding: 5px;
-          &:first-child {
-            &::after {
-              content: "";
-              border-top: 1px solid $color-grey;
-              display: inline-block;
-              width: 100%;
-              margin: 0px;
-              padding: 0px;
+          &.active {
+            background-color: $white-secondary;
+            border-left: 1px solid $color-primary;
+            font-weight: bold;
+            &:first-child {
+              text-transform: uppercase;
             }
           }
         }

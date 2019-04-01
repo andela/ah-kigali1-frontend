@@ -65,6 +65,20 @@ body {
         margin-right: 16px;
       }
     }
+    .article-comments {
+      .new-comment-section {
+        @include column;
+        width: 100%;
+        input[type="button"] {
+          width: 30%;
+          float: right;
+          &:hover {
+            background-color: $color-primary;
+            color: $white-primary;
+          }
+        }
+      }
+    }
     @media (max-width: #{$break-point-tablet - 1}px) {
       .article {
         width: 90%;
@@ -126,6 +140,16 @@ body {
         height: 100vh;
         flex-direction: row;
         align-items: center;
+      }
+      .article-comments {
+        .new-comment-section {
+          @include column;
+          input[type="button"] {
+            width: 100%;
+            float: right;
+            background-color: transparent;
+          }
+        }
       }
     }
   }

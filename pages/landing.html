@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
-   <section class="nav-bar">
+    <section class="nav-bar">
       <div class="nav-container">
         <div class="col-md-6 col-sm-3 brand-name">
-          <div class="brand">
+          <div class="brand" onclick="location.href='./landing.html'">
             <img
               src="../img/quill-drawing-a-line.svg"
               alt="logo"
@@ -27,15 +27,6 @@
             <input type="search" name="search" placeholder="Search....." />
           </div>
           <div class="other-actions">
-            <!-- don't delete please, these are the code if user is not logged in  -->
-            <!-- <div class="auth-actions">
-                  <div class="sign-up hide-sm">
-                    <a href="./sign-up.html">Sign up today!</a>
-                  </div>
-                  <div class="sign-in hide-sm">
-                    <a href="./sign-in.html" class="btn">Sign in</a>
-                  </div>
-                </div> -->
             <div class="menu-container hide-md">
               <button class="menu-btn" id="menu-dropdown">
                 <img src="../img/menu-button.svg" alt="menu" class="menu" />
@@ -55,10 +46,13 @@
                     <a href="./new-article.html" class="main">New Story</a>
                   </li>
                   <li>
-                    <a href="./profile.html">Profile</a>
+                    <a href="./profile.html#latest">Profile</a>
                   </li>
                   <li>
-                    <a href="./authors-performance.html">Stats</a>
+                    <a href="./authors-performance.html">Author's Stats</a>
+                  </li>
+                  <li>
+                    <a href="./reading-stats.html">Reading Stats</a>
                   </li>
                   <li>
                     <a href="./user-settings.html#password-settings"
@@ -79,20 +73,23 @@
       <div class="category-left">
         <ul class="category-list">
           <li class="current">HOME</li>
-          <li>TECH</li>
-          <li>CULTURE</li>
-          <li>FILM</li>
-          <li>FASHION</li>
-          <li>POLITICS</li>
-          <li>FITNESS</li>
-          <li>SCIENCE</li>
-          <li>BUSINESS</li>
-          <li>TRAVEL</li>
-          <li>LEISURE</li>
-          <li>FOOD</li>
+          <li onclick="location.href='./caterogy-articles.html';">TECH</li>
+          <li onclick="location.href='./caterogy-articles.html';">CULTURE</li>
+          <li onclick="location.href='./caterogy-articles.html';">FILM</li>
+          <li onclick="location.href='./caterogy-articles.html';">FASHION</li>
+          <li onclick="location.href='./caterogy-articles.html';">POLITICS</li>
+          <li onclick="location.href='./caterogy-articles.html';">FITNESS</li>
+          <li onclick="location.href='./caterogy-articles.html';">SCIENCE</li>
+          <li onclick="location.href='./caterogy-articles.html';">BUSINESS</li>
+          <li onclick="location.href='./caterogy-articles.html';">TRAVEL</li>
+          <li onclick="location.href='./caterogy-articles.html';">LEISURE</li>
+          <li onclick="location.href='./caterogy-articles.html';">FOOD</li>
         </ul>
       </div>
-      <div class="category-right">
+      <div
+        class="category-right"
+        onclick="location.href='./more-category.html';"
+      >
         MORE
       </div>
     </div>
@@ -102,7 +99,11 @@
     <div class="featured_article">
       <div class="left">
         <div class="article-card">
-          <div class="avatar-wrapper">
+          <div
+            class="avatar-wrapper"
+            onclick="location.href='./profile.html#latest'"
+            style="cursor: pointer"
+          >
             <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar" />
             <div class="name_minutes medium-main">
               <span class="author_name">Joe Doe</span> <br />
@@ -116,8 +117,13 @@
             <span class="cat">TECH</span>
           </div>
           <div class="tex-content">
-            <h3>Only I can change my life. No one can do it me</h3>
-            <div class="tex-content__body">
+            <h3 onclick="location.href='./article.html'">
+              Only I can change my life. No one can do it me
+            </h3>
+            <div
+              class="tex-content__body"
+              onclick="location.href='./article.html'"
+            >
               Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
               andouille kevin meatloaf fatback shank bacon turkey turducken
               spare ribs chuck.
@@ -157,7 +163,11 @@
       <div class="right">
         <div class="top">
           <div class="article-card">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img
                 src="../img/avatar-1.jpg"
                 alt="Avatar"
@@ -175,8 +185,13 @@
               <span class="cat">FOOD</span>
             </div>
             <div class="tex-content">
-              <h3>Only I can change my life. No one can do it me</h3>
-              <div class="tex-content__body">
+              <h3 onclick="location.href='./article.html'">
+                Only I can change my life. No one can do it me
+              </h3>
+              <div
+                class="tex-content__body"
+                onclick="location.href='./article.html'"
+              >
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
                 andouille kevin meatloaf fatback shank bacon turkey turducken
                 spare ribs chuck.
@@ -220,7 +235,11 @@
         </div>
         <div class="down">
           <div class="article-card">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img
                 src="../img/avatar-1.jpg"
                 alt="Avatar"
@@ -238,8 +257,13 @@
               <span class="cat">FITNESS</span>
             </div>
             <div class="tex-content">
-              <h3>Only I can change my life. No one can do it me</h3>
-              <div class="tex-content__body">
+              <h3 onclick="location.href='./article.html'">
+                Only I can change my life. No one can do it me
+              </h3>
+              <div
+                class="tex-content__body"
+                onclick="location.href='./article.html'"
+              >
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
                 andouille kevin meatloaf fatback shank bacon turkey turducken
                 spare ribs chuck.
@@ -289,15 +313,24 @@
             style="background-image: url(../img/lifestyle.jpg)"
           ></div>
           <div class="article_text">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar" />
               <div class="name_minutes">
                 <span class="author_name">Joe Doe</span> <br />
                 <span class="date_read_time">Nov 7,2018 . 3min read</span>
               </div>
             </div>
-            <h3>Only I can change my life. No one can do it me</h3>
-            <div class="tex-content__body">
+            <h3 onclick="location.href='./article.html'">
+              Only I can change my life. No one can do it me
+            </h3>
+            <div
+              class="tex-content__body"
+              onclick="location.href='./article.html'"
+            >
               Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
               andouille kevin meatloaf fatback shank bacon turkey turducken
               spare ribs chuck.
@@ -342,15 +375,24 @@
           ></div>
 
           <div class="article_text">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar" />
               <div class="name_minutes">
                 <span class="author_name">Joe Doe</span> <br />
                 <span class="date_read_time">Nov 7,2018 . 3min read</span>
               </div>
             </div>
-            <h3>Only I can change my life. No one can do it me</h3>
-            <div class="tex-content__body">
+            <h3 onclick="location.href='./article.html'">
+              Only I can change my life. No one can do it me
+            </h3>
+            <div
+              class="tex-content__body"
+              onclick="location.href='./article.html'"
+            >
               Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
               andouille
             </div>
@@ -393,15 +435,24 @@
             style="background-image: url(../img/lifestyle.jpg)"
           ></div>
           <div class="article_text">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img src="../img/avatar-1.jpg" alt="Avatar" class="avatar" />
               <div class="name_minutes">
                 <span class="author_name">Joe Doe</span> <br />
                 <span class="date_read_time">Nov 7,2018 . 3min read</span>
               </div>
             </div>
-            <h3>Only I can change my life. No one can do it me</h3>
-            <div class="tex-content__body">
+            <h3 onclick="location.href='./article.html'">
+              Only I can change my life. No one can do it me
+            </h3>
+            <div
+              class="tex-content__body"
+              onclick="location.href='./article.html'"
+            >
               Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
               andouille kevin meatloaf fatback shank bacon turkey turducken
               spare ribs chuck.
@@ -445,7 +496,11 @@
         </div>
         <div class="popular_article_content">
           <div class="article-card">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img
                 src="../img/avatar-1.jpg"
                 alt="Avatar"
@@ -463,8 +518,13 @@
               <span class="cat">SCIENCE</span>
             </div>
             <div class="tex-content">
-              <h3>Only I can change my life. No one can do it me</h3>
-              <div class="tex-content__body">
+              <h3 onclick="location.href='./article.html'">
+                Only I can change my life. No one can do it me
+              </h3>
+              <div
+                class="tex-content__body"
+                onclick="location.href='./article.html'"
+              >
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
                 andouille kevin meatloaf fatback shank bacon turkey turducken
                 spare ribs chuck.
@@ -508,7 +568,11 @@
         </div>
         <div class="popular_article_content">
           <div class="article-card">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img
                 src="../img/avatar-1.jpg"
                 alt="Avatar"
@@ -526,8 +590,13 @@
               <span class="cat">POLITICS</span>
             </div>
             <div class="tex-content">
-              <h3>Only I can change my life. No one can do it me</h3>
-              <div class="tex-content__body">
+              <h3 onclick="location.href='./article.html'">
+                Only I can change my life. No one can do it me
+              </h3>
+              <div
+                class="tex-content__body"
+                onclick="location.href='./article.html'"
+              >
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
                 andouille kevin meatloaf fatback shank bacon turkey turducken
                 spare ribs chuck.
@@ -571,7 +640,11 @@
         </div>
         <div class="popular_article_content">
           <div class="article-card">
-            <div class="avatar-wrapper">
+            <div
+              class="avatar-wrapper"
+              onclick="location.href='./profile.html#latest'"
+              style="cursor: pointer"
+            >
               <img
                 src="../img/avatar-1.jpg"
                 alt="Avatar"
@@ -589,8 +662,13 @@
               <span class="cat">CULTURE</span>
             </div>
             <div class="tex-content">
-              <h3>Only I can change my life. No one can do it me</h3>
-              <div class="tex-content__body">
+              <h3 onclick="location.href='./article.html'">
+                Only I can change my life. No one can do it me
+              </h3>
+              <div
+                class="tex-content__body"
+                onclick="location.href='./article.html'"
+              >
                 Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
                 andouille kevin meatloaf fatback shank bacon turkey turducken
                 spare ribs chuck.
