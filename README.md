@@ -1,6 +1,5 @@
 # Authors Haven - A Social platform for the creative at heart.
 
-## Badges should come here
 [![Build Status](https://travis-ci.com/andela/titan-dev-ah-frontend.svg?branch=develop)](https://travis-ci.com/andela/titan-dev-ah-frontend) [![Coverage Status](https://coveralls.io/repos/github/andela/titan-dev-ah-frontend/badge.svg?branch=ch-configure-coveralls-%23165054461)](https://coveralls.io/github/andela/titan-dev-ah-frontend?branch=ch-configure-coveralls-%23165054461)
 ## Vision
 

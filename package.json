@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --hot",
     "build": "webpack --mode production",
-    "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "coveralls": "jest --coverage"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
