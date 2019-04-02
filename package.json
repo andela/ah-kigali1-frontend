@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "Front end of AH application",
   "main": "index.js",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
   "scripts": {
     "start": "webpack-dev-server --open --hot",
     "build": "webpack",
