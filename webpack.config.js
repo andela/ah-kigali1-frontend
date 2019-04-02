@@ -14,5 +14,5 @@ module.exports = {
     ]
   },
   mode: "development",
-  plugins: [new HtmlPackPlugin({ template: "index.html" })]
+  plugins: [new HtmlPackPlugin({ template: "./public/index.html" })]
 };

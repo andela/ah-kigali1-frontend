@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --open --hot",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
