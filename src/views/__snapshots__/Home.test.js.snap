@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component it matches the snapshot 1`] = `
+<div>
+  <h2
+    className="home-container"
+  >
+    Hello world, from Titan-Devs
+  </h2>
+</div>
+`;

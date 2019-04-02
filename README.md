@@ -1,7 +1,7 @@
 # Authors Haven - A Social platform for the creative at heart.
 
 ## Badges should come here
-
+[![Build Status](https://travis-ci.com/andela/titan-dev-ah-frontend.svg?branch=develop)](https://travis-ci.com/andela/titan-dev-ah-frontend)
 ## Vision
 
 Create a community of like minded authors to foster inspiration and innovation by leveraging the modern web.
