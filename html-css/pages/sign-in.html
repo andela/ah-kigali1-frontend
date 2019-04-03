@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Sign in</title>
+  </head>
+
+  <body>
+    <div class="auth">
+      <div class="row">
+        <div class="col-md-6 hide-sm">
+          <div class="auth-left">
+            <div class="logo">
+              <img
+                src="../img/quill-drawing-a-line.svg"
+                alt="logo"
+                class="logo"
+              />
+            </div>
+            <p>Join the community of like minded author, today!</p>
+            <button
+              type="submit"
+              class="btn btn-block"
+              onclick="window.location='./sign-up.html'"
+            >
+              Sign up
+            </button>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="auth-right">
+            <div class="auth-form">
+              <div class="hide-md logo">
+                <img
+                  src="../img/quill-drawing-a-line.svg"
+                  alt="logo"
+                  class="logo"
+                />
+              </div>
+              <p class="pg-title">Sign in with</p>
+              <div class="socials">
+                <div class="icon">
+                  <img src="../img/fb-icon.svg" alt="logo" />
+                </div>
+                <div class="icon">
+                  <img src="../img/twitter-icon.svg" alt="logo" />
+                </div>
+                <div class="icon">
+                  <img src="../img/google-plus-icon.svg" alt="logo" />
+                </div>
+              </div>
+              <p class="pg-title">Or</p>
+              <form>
+                <input
+                  type="email"
+                  name="email"
+                  id="auth-email"
+                  placeholder="Email"
+                />
+                <input
+                  type="password"
+                  name="password"
+                  id="auth-password"
+                  placeholder="Password"
+                />
+                <div class="">
+                  <p class="password-reset">
+                    <a href="#">Forgot password?</a>
+                  </p>
+                </div>
+                <input
+                  type="button"
+                  value="Sign in"
+                  onclick="location.href='./landing.html';"
+                />
+              </form>
+              <div class="auth-link hide-md">
+                <p class="sign-up-link">
+                  Don't have an account? <a href="./sign-up.html">sign up</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

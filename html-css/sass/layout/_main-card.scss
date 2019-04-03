@@ -1,0 +1,149 @@
+.featured_article {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  .left {
+    width: 65%;
+    height: 510px;
+    margin-right: 14px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: flex;
+  }
+  .right {
+    width: 35%;
+    height: 500px;
+    .top {
+      height: 50%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .down {
+      height: 50%;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      display: flex;
+    }
+  }
+}
+.article-card {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.avatar-wrapper {
+  display: flex;
+  flex-direction: row;
+  .avatar {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    &.medium {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .name_minutes {
+    margin: 20px 0 0 4px;
+    &.medium {
+      margin: 10px 0 0 4px;
+    }
+    .date_read_time {
+      color: #8e8d92;
+    }
+    .author_name {
+      color: #000000;
+      font-weight: bold;
+      .author-name__blue .date_read_time__blue {
+        font-size: $font-size;
+        font-family: $font-family;
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+.article-card {
+  .tex-content {
+    width: 94%;
+    .icons {
+      @include row {
+        margin: 1% 0% 1% 0;
+        justify-content: space-between;
+      }
+      .right-icons {
+        margin-right: 0px;
+      }
+      div {
+        display: flex;
+        margin: 0 15px 0 3px;
+        img {
+          cursor: pointer;
+          height: 20px;
+          width: 20px;
+        }
+      }
+      .right-icons {
+        // background-color: aqua;
+      }
+      .arrow-options {
+        text-align: right;
+      }
+    }
+    h3 {
+      padding-left: 5px;
+    }
+    &__body {
+      height: 35px;
+      overflow: hidden;
+      padding-left: 5px;
+    }
+  }
+  .main-article-img {
+    flex: 1;
+    width: 94%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    .cat {
+      position: absolute;
+      color: white;
+      bottom: 0;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      padding: 5px 0 5px 0;
+      width: 150px;
+      text-align: center;
+      background-color: #1b1242;
+      cursor: pointer;
+    }
+  }
+}
+.main-article-img {
+  flex: 1;
+  width: 100%;
+  background-image: url("../img/background-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .left {
+    margin-right: 0 !important;
+  }
+  .avatar {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 5px !important;
+  }
+  .name_minutes {
+    margin: 10px 0 0 4px !important;
+  }
+}

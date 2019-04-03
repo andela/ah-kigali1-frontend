@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+    <script>
+      tinymce.init({
+        selector: "textarea", // change this value according to your HTML
+        menubar: false, // removes the menubar
+        content_css: "../css/main.css",
+        plugins: [
+          "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+          "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+          "save table contextmenu directionality emoticons template paste textcolor",
+          "codesample "
+        ],
+        toolbar:
+          "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image codesample table | print preview media fullpage | forecolor backcolor emoticons"
+      });
+    </script>
+  </head>
+
+  <body>
+    <section class="nav-bar">
+      <div class="nav-container">
+        <div class="col-md-6 col-sm-3 brand-name">
+          <div class="brand">
+            <img
+              src="../img/quill-drawing-a-line.svg"
+              alt="logo"
+              class="brand"
+            />
+          </div>
+          <h3>
+            AH
+          </h3>
+        </div>
+        <div class="col-md-6 col-sm-9 user-actions">
+          <div class="search-filed">
+            <input type="search" name="search" placeholder="Search....." />
+          </div>
+          <div class="other-actions">
+            <!-- don't delete please, these are the code if user is not logged in  -->
+            <!-- <div class="auth-actions">
+                    <div class="sign-up hide-sm">
+                      <a href="./sign-up.html">Sign up today!</a>
+                    </div>
+                    <div class="sign-in hide-sm">
+                      <a href="./sign-in.html" class="btn">Sign in</a>
+                    </div>
+                  </div> -->
+            <div class="menu-container hide-md">
+              <button class="menu-btn" id="menu-dropdown">
+                <img src="../img/menu-button.svg" alt="menu" class="menu" />
+              </button>
+            </div>
+            <button class="current-user hide-sm" id="user-dropdown">
+              <img src="../img/user.jpg" alt="user" class="user-avatar" />
+              <div class="user-name">
+                <p>John Doe</p>
+              </div>
+            </button>
+            <div class="drop-down">
+              <div class="up-arrow"></div>
+              <div class="drop-down-content">
+                <ul class="links">
+                  <li class="nav-link">
+                    <a href="./new-article.html" class="main">New Story</a>
+                  </li>
+                  <li>
+                    <a href="./profile.html">Profile</a>
+                  </li>
+                  <li>
+                    <a href="./authors-performance.html">Stats</a>
+                  </li>
+                  <li>
+                    <a href="./user-settings.html#password-settings"
+                      >Settings</a
+                    >
+                  </li>
+                  <li>
+                    <a href="./sign-in.html">Sign out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="new-article-container container">
+      <div class="buttons">
+        <button class="button--white">Save draft</button>
+        <button class="button--dark">Publish</button>
+      </div>
+      <div class="main-article">
+        <div class="title">
+          <input
+            name="title"
+            class="title__input"
+            type="text"
+            value="The title should come here"
+          />
+        </div>
+        <hr class="line__title" />
+
+        <div class="tags">
+          <span class="tag">First-Tag <i class="ico-times"></i></span>
+          <span class="tag">Second-Tag <i class="ico-times"></i></span>
+          <input type="text" name="tag" value="Add new" class="tag tag__new" />
+        </div>
+        <textarea class="article"> </textarea>
+      </div>
+    </div>
+  </body>
+</html>
