@@ -6,7 +6,18 @@
   "scripts": {
     "start": "webpack-dev-server --open --hot",
     "build": "webpack --mode production",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
   },
   "repository": {
     "type": "git",
