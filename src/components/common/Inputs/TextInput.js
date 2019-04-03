@@ -8,6 +8,7 @@ const TextInput = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   ...props
 }) => (
   <input
@@ -18,6 +19,7 @@ const TextInput = ({
     placeholder={placeholder}
     value={value}
     onChange={onChange}
+    onBlur={onBlur}
   />
 );
 
@@ -28,7 +30,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
-  onKeyDown: PropTypes.func
+  onKeyDown: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
 TextInput.defaultProps = {
@@ -46,7 +49,8 @@ TextInput.defaultProps = {
 TextInput.defaultProps = {
   id: "",
   value: "",
-  onKeyDown: () => ""
+  onKeyDown: () => "",
+  onBlur: () => {}
 };
 
 export default TextInput;

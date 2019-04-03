@@ -8,6 +8,7 @@ const props = {
   name: "email",
   placeholder: "Email",
   onChange: jest.fn(),
+  onBlur: jest.fn(),
   value: ""
 };
 describe("Login component", () => {

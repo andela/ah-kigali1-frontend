@@ -1,6 +1,5 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
-
 @import "./abstracts/mixin";
 @import "./abstracts/variables";
 @import "./base/base";
@@ -15,7 +14,6 @@ $fa-font-path: "~font-awesome/fonts";
 @import "./layout/card-latest";
 @import "./layout/main-card";
 @import "./layout/card-comments";
-
 @import "./pages/auth";
 @import "./pages/user-settings";
 @import "./layout/grid";

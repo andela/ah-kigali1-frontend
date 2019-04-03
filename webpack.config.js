@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const dotenv = require("dotenv-webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: path.join(__dirname, "./src/index.js"),
@@ -9,6 +9,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
     filename: "index.js"
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "./src/assets/"),
+    hot: true,
+    historyApiFallback: true,
+    port: 8000
   },
   module: {
     rules: [
@@ -45,17 +51,13 @@ module.exports = {
     modules: [path.resolve(__dirname, "src"), "node_modules"]
   },
   plugins: [
-    new dotenv(),
+    new Dotenv(),
     new HtmlPackPlugin({ template: "./public/index.html" }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
     })
   ],
-  devServer: {
-    historyApiFallback: true,
-    port: 8000
-  },
   node: {
     fs: "empty"
   }

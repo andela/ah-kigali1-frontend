@@ -1,4 +1,5 @@
 /* COMPONENTS ------------------------------------------- */
+
 .auth {
   &-left {
     background-color: $color-primary;
@@ -36,6 +37,7 @@
     div.auth-errors {
       text-align: center;
       font-size: 12px;
+      margin-bottom: 2px;
     }
   }
 }
@@ -43,6 +45,7 @@
 .socials {
   @include center;
 }
+
 .icon {
   @include icon {
     width: 3em;
@@ -72,6 +75,7 @@ img.logo {
 }
 
 /* devices = laptops, desktops, tablets ---------------*/
+
 @media (min-width: #{$break-point-desktop}px) {
   .auth {
     &-left {
@@ -97,6 +101,7 @@ img.logo {
 }
 
 /*devices = Tablets, iPads-------------*/
+
 @media (min-width: #{$break-point-tablet}px) and (max-width: #{$break-point-desktop - 1}px) {
   .auth {
     &-left {
@@ -122,6 +127,7 @@ img.logo {
 }
 
 /*device = Mobile Phone------*/
+
 @media (max-width: #{$break-point-tablet - 1}px) {
   .auth {
     &-left {
@@ -155,7 +161,6 @@ img.logo {
   .logo {
     margin-bottom: 1em;
   }
-
   .icon {
     @include icon {
       width: 2.5em;

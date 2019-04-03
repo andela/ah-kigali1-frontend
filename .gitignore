@@ -14,3 +14,4 @@ yarn-*
 .coveralls.yml
 package-lock.json
 **/__snapshots__
+html-css/main.*

@@ -53,4 +53,36 @@ export default class Validator {
     }
     return false;
   }
+
+  /**
+   * @description checks if an email syntax is right or wrong
+   * @param { String } email
+   * @returns { Boolean } Boolean
+   */
+
+  static isEmailValid(email) {
+    const emailRegex = /^([a-z_.!@#$%^&*0-9]{3,25})@([a-z]{3,20})\.([a-z]){2,7}(\.[a-z]{2,5})?$/i;
+    return emailRegex.test(email);
+  }
+
+  /**
+   * @description checks if a password syntax is right
+   * @param {String} password to be tested
+   * @returns {Boolean} returns true or false
+   */
+  static isPasswordValid(password) {
+    const passwordRegex = /^([a-z0-9]).{8,}$/;
+
+    return passwordRegex.test(password);
+  }
+
+  /**
+   * @description checks if a username syntax is right
+   * @param {String} name to be tested
+   * @return {Boolean} returns true or false
+   */
+  static isUsernameValid(name) {
+    const usernameRegex = /^([a-zA-Z0-9!@#$%^_&.*]){3,20}$/;
+    return usernameRegex.test(name);
+  }
 }
