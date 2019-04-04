@@ -16,7 +16,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2016,
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
@@ -34,7 +34,7 @@
       "sourceType": "module"
     },
     "eol-last": ["error", "always"],
-    "import/prefer-default-export": "on",
+    "import/prefer-default-export": "off",
     "import/resolver": {
       "node": {
         "extensions": [".js"]

@@ -2,7 +2,7 @@
   background: $color-primary;
   height: 42px;
   width: 100%;
-  margin-top: 105px;
+  margin-top: 10px;
 }
 .featured_article_title {
   color: white;
@@ -49,28 +49,6 @@
 }
 // mobile view
 @media screen and (max-width: 768px) {
-  .popular_latest_article {
-    flex-wrap: wrap;
-    .article_header_right {
-      width: 100%;
-      .popular_article_title {
-        margin: 10px 0 0 0;
-      }
-      .popular_article_content {
-        margin: 10px 10px 0 10px;
-      }
-      .popular_article_content:last-child {
-        margin: 10px 10px 10px 10px;
-      }
-    }
-
-    .article_header_left {
-      width: 100%;
-      .latest_article_title {
-        margin: 10px 0 0 0;
-      }
-    }
-  }
   .featured_article {
     flex-wrap: wrap;
     .left {
