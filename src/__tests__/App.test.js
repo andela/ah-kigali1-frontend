@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import App from "../App";
 
-describe("App component", () => {
+describe("App component ", () => {
   test("should have home component", () => {
     const wrapper = shallow(<App />);
     expect(wrapper.exists(".app-container")).toEqual(false);
