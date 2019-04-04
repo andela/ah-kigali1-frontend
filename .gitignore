@@ -6,3 +6,7 @@ dist
 coverage
 
 .vscode
+.vscode
+html-css/main.*
+yarn.*
+yarn-*
