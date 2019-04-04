@@ -10,3 +10,4 @@ coverage
 html-css/main.*
 yarn.*
 yarn-*
+.DS_Store 
