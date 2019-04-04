@@ -8,6 +8,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js"
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, "./src/assets/"),
+    hot: true,
+    historyApiFallback: true
+  },
   module: {
     rules: [
       { test: /\.(js)$/, use: "babel-loader" },
