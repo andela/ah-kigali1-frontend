@@ -5,11 +5,10 @@ dist
 coverage
 
 .vscode
-.vscode
 html-css/main.*
 html-css/*.css
 html-css/**/*.css*
 yarn.*
 yarn-*
 .DS_Store 
-
+package-lock.json
