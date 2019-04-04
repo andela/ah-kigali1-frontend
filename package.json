@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --hot",
     "build": "webpack --mode production",
     "test": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "yarn test && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
     "coverageThreshold": {
