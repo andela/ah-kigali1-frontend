@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Home from "./views/home";
+import Home from "./views/Home";
 
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app-container">
         <Home />
       </div>
     );
