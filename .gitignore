@@ -4,4 +4,4 @@ dist
 .coveralls.yml
 coverage
 
-.vscode/
+.vscode
