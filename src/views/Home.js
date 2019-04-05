@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "../index.css";
 
-const mapStateToProps = state => {
-  return { articles: state.articles };
-};
+const mapStateToProps = state => ({ articles: state.articles });
 
 const connectedArticles = ({ articles }) => (
   <div>
