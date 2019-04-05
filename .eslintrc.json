@@ -23,7 +23,7 @@
     "prettier/prettier": "error",
     "newlines-between": "always",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "single"],
     "parserOptions": {
       "allowImportExportEverywhere": true,
       "sourceType": "module"

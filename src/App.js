@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Home from './views/Home';
+import React, { Component } from "react";
+import Home from "./views/Home";
 
 export default class App extends Component {
   render() {
