@@ -1,5 +1,4 @@
 .nav-bar {
-  z-index: 1000;
   background-color: $color-primary;
   color: $white-secondary;
   font-family: $font-family;
@@ -15,7 +14,6 @@
     }
     .brand-name,
     .auth-actions {
-      cursor: pointer;
       @include row {
         align-items: center;
       }
@@ -97,7 +95,11 @@
     input[type="search"] {
       width: 3%;
       background-color: transparent;
-      background-image: url("../../img/search.svg");
+<<<<<<< HEAD:html-css/sass/layout/_my-nav-bar.scss
+      background-image: url("../../../src/assets/img/search.svg");
+=======
+      background-image: url("../img/search.svg");
+>>>>>>> ft(add): user sign in:src/styles/layout/_my-nav-bar.scss
       min-height: 30px;
       background-size: 30px 20px;
       background-repeat: no-repeat;
@@ -157,12 +159,14 @@
             line-height: 10px;
           }
           padding: 5px;
-          &.active {
-            background-color: $white-secondary;
-            border-left: 1px solid $color-primary;
-            font-weight: bold;
-            &:first-child {
-              text-transform: uppercase;
+          &:first-child {
+            &::after {
+              content: "";
+              border-top: 1px solid $color-grey;
+              display: inline-block;
+              width: 100%;
+              margin: 0px;
+              padding: 0px;
             }
           }
         }
