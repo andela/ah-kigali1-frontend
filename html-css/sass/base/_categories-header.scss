@@ -24,7 +24,8 @@
       .current {
         font-weight: bold;
       }
-      li {
+      li,
+      button {
         margin-right: 15px;
         cursor: pointer;
         &:hover {
