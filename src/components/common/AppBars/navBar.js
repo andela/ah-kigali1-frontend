@@ -27,7 +27,7 @@ class Navbar extends Component {
             <div className="col-md-6 col-sm-3 brand-name">
               <div className="brand">
                 <img
-                  src={require("../../assets/img/quill-drawing-a-line.svg")}
+                  src={require("../../../assets/img/quill-drawing-a-line.svg")}
                   alt="logo"
                   className="brand"
                 />
@@ -53,7 +53,7 @@ class Navbar extends Component {
                 <div className="menu-container hide-md">
                   {/* <button className="menu-btn" id="menu-dropdown">
                     <img
-                      src={require("../../assets/img/menu-button.svg")}
+                      src={require("../../../assets/img/menu-button.svg")}
                       alt="menu"
                       className="menu"
                     />
@@ -66,7 +66,7 @@ class Navbar extends Component {
                   id="user-dropdown"
                 >
                   <img
-                    src={require("../../assets/img/user.jpg")}
+                    src={require("../../../assets/img/user.jpg")}
                     alt="user"
                     className="user-avatar"
                   />
