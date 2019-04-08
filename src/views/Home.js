@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Confirm from "../components/common/Buttons/confirm";
@@ -14,11 +13,7 @@ class Home extends Component {
         <Navbar />
         <div style={{ margin: 3 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
-          <Confirm
-            style={{ width: "40%" }}
-            title="Save"
-            onClick={() => console.log("button clicked")}
-          />
+          <Confirm style={{ width: "40%" }} title="Save" />
           <Input
             style={{ width: "40%" }}
             type="email"
