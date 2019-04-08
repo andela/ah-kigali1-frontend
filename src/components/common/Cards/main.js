@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+/* eslint global-require: "off" */
 
 export default class MainCard extends Component {
   render() {

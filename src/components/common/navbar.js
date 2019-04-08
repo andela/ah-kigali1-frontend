@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+/* eslint global-require: "off" */
 
 class Navbar extends Component {
   constructor(props) {
@@ -7,13 +8,15 @@ class Navbar extends Component {
       toggle: "none"
     };
   }
-  toggleOptions = () => {
+
+  toggleOptions() {
     this.setState(state => ({
       toggle: state.toggle === "none" ? "block" : "none"
     }));
-  };
+  }
 
   render() {
+    const { toggle } = this.state;
     return (
       <div>
         <section
@@ -57,6 +60,7 @@ class Navbar extends Component {
                   </button> */}
                 </div>
                 <button
+                  type="button"
                   className="current-user hide-sm"
                   onClick={() => this.toggleOptions()}
                   id="user-dropdown"
@@ -70,10 +74,7 @@ class Navbar extends Component {
                     <p>John Doe</p>
                   </div>
                 </button>
-                <div
-                  className="drop-down"
-                  style={{ display: this.state.toggle }}
-                >
+                <div className="drop-down" style={{ display: toggle }}>
                   <div className="up-arrow" />
                   <div className="drop-down-content">
                     <ul className="links">
