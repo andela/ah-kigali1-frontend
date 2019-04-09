@@ -1,6 +1,12 @@
-.home-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+.container {
+  border-bottom: '1px solid red';
+  width: '70%';
+}
+
+.btn {
+  background-color: 'green';
+  color: 'white';
+  height: '35px';
+  width: '170px';
+  border-radius: '10px';
 }
