@@ -6,8 +6,6 @@ import "./style/main.scss";
 
 export default () => (
   <Provider store={store}>
-    <div className="app-container">
-      <Home />
-    </div>
+    <Home />
   </Provider>
 );
