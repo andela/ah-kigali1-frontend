@@ -1,7 +1,7 @@
-const initialState = {};
-/* eslint-disable no-unused-vars */
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
+import { combineReducers } from "redux";
+import sampleReducers from "./sampleReducers";
 
-export default rootReducer;
+const reducers = combineReducers({
+  sample: sampleReducers
+});
+export default reducers;
