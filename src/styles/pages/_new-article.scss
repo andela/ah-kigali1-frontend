@@ -12,24 +12,20 @@ body {
         margin-right: 1em;
       }
     }
-    .button--white {
-      @include btn {
-        width: 7em;
-        height: 2em;
-      }
-
-      @include action-btn__mobile {
-        background-color: transparent;
-      }
-    }
     .button--dark {
       @include btn {
         width: 7em;
         height: 2em;
-        color: $white-shade;
-        background-color: $color-primary;
       }
-
+      &:hover {
+        background: $color-primary;
+        color: $white-primary;
+      }
+      &:disabled {
+        background: $gray;
+        border: none;
+        color: $white-primary;
+      }
       @include action-btn__mobile;
     }
 
@@ -37,6 +33,24 @@ body {
       height: 4em;
 
       .title__input {
+        margin-left: 0.45em;
+        margin: auto;
+        border: none;
+        background: blue($color: #000000);
+        font-family: $font-family;
+        font-size: $font-size-large;
+        text-transform: capitalize;
+        @media (max-width: #{$break-point-tablet - 1}px) {
+          font-size: $font-size-medium;
+          text-transform: capitalize;
+          font-family: $font-family;
+        }
+      }
+    }
+    .description {
+      height: 4em;
+
+      .description__input {
         margin-left: 0.45em;
         margin: auto;
         border: none;
@@ -61,7 +75,6 @@ body {
       }
     }
     .main-article {
-      /*can be combined in one property*/
       border-radius: 10px;
       border-top: 1px solid $gray;
       border-right: 1px solid $gray;
@@ -84,4 +97,11 @@ body {
       @include horizontal-line;
     }
   }
+}
+
+.add_tag {
+  max-width: 150px;
+  min-width: 100px;
+  height: 30%;
+  width: 19%;
 }

@@ -26,4 +26,21 @@ export default class Validator {
     }
     return errors;
   }
+
+  static newArticleValidation(data) {
+    let error;
+    const { title, body, description } = data;
+    if (!title || title.length < 10) {
+      error = "Title should be more than 10 characters long";
+      return error;
+    }
+    if (!description || description.length < 10) {
+      error = "Description should be more than 10 characters long";
+      return error;
+    }
+    if (body.length < 100) {
+      error = "Body should be more than 100 words";
+      return error;
+    }
+  }
 }
