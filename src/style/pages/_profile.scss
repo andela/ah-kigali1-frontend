@@ -1,0 +1,116 @@
+.profile {
+  @include row {
+    flex-wrap: wrap;
+  }
+
+  &-left {
+    &--fixed {
+      width: 100%;
+      @include column {
+        align-items: center;
+      }
+      h1,
+      h2,
+      p,
+      button,
+      .socials {
+        width: 100%;
+        padding: 0.5% 0;
+      }
+      h1,
+      h2 {
+        text-align: center;
+      }
+      h1 {
+        padding-top: 3%;
+        font-size: $font-size;
+      }
+      h2 {
+        font-size: $font-size--min;
+        font-weight: lighter;
+        padding-bottom: 3%;
+      }
+      p {
+        text-align: justify;
+      }
+      button {
+        a {
+          color: $color-primary;
+        }
+        background: $white-shade;
+        &:hover {
+          background: $color-primary;
+          color: $white-primary;
+          a {
+            color: $white-primary;
+          }
+        }
+      }
+    }
+  }
+  &-right {
+    margin-top: 10%;
+    #latest {
+      display: none;
+      &:target {
+        display: block;
+      }
+    }
+    #bookmarks {
+      display: none;
+      &:target {
+        display: block;
+      }
+    }
+  }
+}
+.profile-avatar {
+  margin-top: 20%;
+  height: 175px;
+  width: auto;
+  border-radius: 50%;
+}
+
+/* devices = laptops, desktops, tablets ---------------*/
+@media (min-width: #{$break-point-tablet + 1}px) {
+  .profile {
+    height: 723px;
+    margin: 5% 14.7% 5% 5.3%;
+    &-left {
+      &--fixed {
+        position: sticky;
+        top: 8%;
+      }
+    }
+    .col-md-6 {
+      width: 50%;
+    }
+    &-left {
+      h1,
+      h2,
+      p,
+      button,
+      .socials {
+        width: 60%;
+      }
+    }
+  }
+}
+
+@media (max-width: #{$break-point-tablet}px) {
+  .profile {
+    margin: 2% 3%;
+    .col-md-6 {
+      width: 100%;
+    }
+    &-left {
+      h1,
+      h2,
+      p,
+      button,
+      .socials {
+        width: 70%;
+      }
+    }
+  }
+}

@@ -1,0 +1,172 @@
+/* COMPONENTS ------------------------------------------- */
+
+.update-profile-container {
+  @include flex-center;
+  @include column;
+  padding: 2em 0em;
+  border: 1px solid rgba(27, 18, 66, 0.1);
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .update {
+    @include row;
+    p,
+    h2 {
+      color: $color-primary;
+    }
+    &-left {
+      background-color: $white-primary;
+      @include column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 50%;
+      .logo-container {
+        @include flex-center;
+        @include column;
+        margin-bottom: 3em;
+        img {
+          margin-bottom: 1em;
+        }
+      }
+
+      .avatar-container {
+        @include center;
+        input[type="file"] {
+          position: absolute;
+          opacity: 0;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .avatar {
+          @include center;
+          border-radius: 50%;
+          height: 15vw;
+          width: 15vw;
+        }
+      }
+    }
+    &-right {
+      @include flex-center;
+      @include column;
+      width: 50%;
+      .button {
+        @include btn;
+        background-color: $color-primary;
+        color: $white-primary;
+      }
+    }
+  }
+}
+
+/* devices = laptops, desktops, tablets landscape orientation---------------*/
+@media (min-width: #{$break-point-desktop}px) {
+  .update-profile-container {
+    margin: 5em 10em;
+    max-width: 80%;
+    .update {
+      &-left {
+        .avatar-container {
+          @include center;
+          input[type="file"] {
+            height: 15vw;
+            width: 15vw;
+          }
+        }
+        .avatar {
+          height: 15vw;
+          width: 15vw;
+        }
+      }
+      &-right {
+        p {
+          text-align: center;
+          float: center;
+          font-size: 1.5em;
+          margin-bottom: 1em;
+        }
+      }
+      .update-form {
+        max-width: 60%;
+        min-height: 100%;
+      }
+    }
+  }
+}
+
+/* devices = tablets portrait orientation. ---------------*/
+@media (max-width: #{$max-size-tablet}px) {
+  .update-profile-container {
+    margin: 3em;
+    .update {
+      &-left {
+        .avatar-container {
+          input[type="file"] {
+            height: 20vw;
+            width: 20vw;
+          }
+          .avatar {
+            height: 20vw;
+            width: 20vw;
+          }
+        }
+      }
+      &-right {
+        p {
+          text-align: center;
+          float: center;
+          font-size: 1.5em;
+          margin-bottom: 1em;
+        }
+      }
+      .update-form {
+        max-width: 90%;
+        min-height: 100%;
+      }
+    }
+  }
+}
+
+/* devices = mobile phones. ---------------*/
+@media (max-width: #{$break-point-mobile}px) {
+  .update-profile-container {
+    max-width: 80rem;
+    margin: 2rem;
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    border: 1px solid transparent;
+    box-shadow: none;
+    .update {
+      flex-wrap: wrap;
+      &-left {
+        width: 100%;
+        .logo-container {
+          display: none;
+        }
+        .avatar-container {
+          margin-bottom: 1.5em;
+          input[type="file"] {
+            height: 30vw;
+            width: 30vw;
+          }
+          .avatar {
+            height: 30vw;
+            width: 30vw;
+          }
+        }
+      }
+      &-right {
+        width: 100%;
+        p {
+          display: none;
+          text-align: center;
+          float: center;
+          font-size: 1.5em;
+          margin-bottom: 1em;
+        }
+      }
+      .update-form {
+        max-width: 100%;
+        min-height: 100%;
+      }
+    }
+  }
+}

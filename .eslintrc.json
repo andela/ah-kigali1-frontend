@@ -22,6 +22,9 @@
   "rules": {
     "prettier/prettier": "error",
     "newlines-between": "always",
+    "react/prefer-stateless-function": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "quotes": ["error", "double"],
     "parserOptions": {
