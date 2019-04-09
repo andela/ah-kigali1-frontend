@@ -54,6 +54,10 @@ describe("Login component", () => {
         .simulate("click");
       expect(Login.prototype.handleNavigation.calledOnce).toBe(true);
     });
+    it("should render component with initial props", () => {
+      expect(component.state().email).toBe("");
+      expect(component.state().password).toBe("");
+    });
     it("should call handleTextInput when user enter input", () => {
       component
         .find(TextInput)
