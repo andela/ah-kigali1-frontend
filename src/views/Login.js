@@ -134,7 +134,7 @@ const mapStateToProps = state => {
   const { login } = state;
   return {
     ...login,
-    errorMessage: login.errors.message
+    message: login.errors.message
   };
 };
 
