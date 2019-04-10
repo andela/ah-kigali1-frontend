@@ -25,6 +25,7 @@ export default (state = INITIAL_STATE, action) => {
     case SUBMITTING_LOGIN_CREDENTIALS:
       return {
         ...state,
+        errors: {},
         isSubmitting: true
       };
     case LOGIN_FAILED:

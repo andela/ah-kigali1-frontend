@@ -9,10 +9,10 @@ import {
 } from "../actionTypes";
 
 const BASE_URL = "http://localhost:3000/api/v1";
-export const handleTextInput = (field, value) => {
+export const handleTextInput = (name, value) => {
   return {
     type: LOGIN_INPUT_CHANGE,
-    payload: { name: field, value }
+    payload: { name, value }
   };
 };
 

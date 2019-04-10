@@ -16,14 +16,14 @@ export class Login extends Component {
   }
 
   handleOnChange(e) {
-    const { name: field, value } = e.target;
-    const { handleTextInput: changeInput } = this.props;
-    changeInput(field, value);
+    const { name, value } = e.target;
+    const { handleTextInput } = this.props;
+    handleTextInput(name, value);
   }
 
   handleSubmit() {
-    const { email, password, handleSignIn: signUser } = this.props;
-    signUser({ email, password });
+    const { email, password, handleSignIn } = this.props;
+    handleSignIn({ email, password });
   }
 
   handleNavigation() {

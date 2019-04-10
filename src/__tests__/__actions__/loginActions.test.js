@@ -14,12 +14,13 @@ import {
   LOGIN_INPUT_CHANGE
 } from "../../redux/actionTypes";
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
-const data = { name: "email", value: "luc.bayo@gmail.com" };
+let data;
 const mockStore = configureMockStore([thunk]);
 let store;
 
 describe("Login action creators", () => {
   describe("handle user input action creator", () => {
+    data = { name: "email", value: "luc.bayo@gmail.com" };
     it("should create an action to update text input value", () => {
       const expectedAction = {
         type: LOGIN_INPUT_CHANGE,
@@ -39,6 +40,7 @@ describe("Login action creators", () => {
     });
     it("dispatches LOGIN_SUCCESS after successfully signing in", () => {
       store = mockStore({ login: reduxStore.login });
+      data = { name: "email", value: "luc.bayo@gmail.com" };
       const payload = {
         message: "Sign in failed",
         token: "qwertyuiop123456789"
