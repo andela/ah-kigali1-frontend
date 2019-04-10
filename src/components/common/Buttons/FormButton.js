@@ -7,15 +7,18 @@ const FormButton = props => {
       type="button"
       value={props.value}
       onClick={props.onClick}
+      disabled={props.disabled}
     />
   );
 };
 
 FormButton.prototype = {
   value: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool
 };
 FormButton.defaultProps = {
-  value: "Submit"
+  value: "Submit",
+  disabled: false
 };
 export default FormButton;

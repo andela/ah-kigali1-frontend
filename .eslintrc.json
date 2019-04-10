@@ -15,7 +15,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2015,
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
@@ -26,7 +26,8 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double", "backtick"],
+    "allowTemplateLiterals": true,
     "parserOptions": {
       "allowImportExportEverywhere": true,
       "sourceType": "module"

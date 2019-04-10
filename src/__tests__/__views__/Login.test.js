@@ -1,30 +1,37 @@
 import React from "react";
 import { shallow } from "enzyme";
 import sinon from "sinon";
-import Login from "../../views/Login";
+import { Login } from "../../views/Login";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
-const setUp = (props = {}) => {
-  const state = {
+import ButtonIcon from "../../components/common/Socials/ButtonIcon";
+let [handleTextInput, handleSignIn] = new Array(2).fill(jest.fn());
+const setUp = () => {
+  const props = {
+    isSubmitting: false,
     email: "",
     password: "",
-    isSubmitting: false
+    errors: {},
+    successMessage: null,
+    token: null,
+    handleSignIn: handleSignIn,
+    handleTextInput: handleTextInput
   };
   const wrapper = shallow(<Login {...props} />);
-  return { state, wrapper };
+  return { props, wrapper };
 };
 describe("Login component", () => {
   let component;
   beforeEach(() => {
-    sinon.spy(Login.prototype, "handleTextInput");
+    sinon.spy(Login.prototype, "handleOnChange");
     sinon.spy(Login.prototype, "handleSubmit");
     sinon.spy(Login.prototype, "handleNavigation");
-    const { wrapper, state } = setUp();
+    const { wrapper } = setUp();
     component = wrapper;
   });
   afterEach(() => {
-    Login.prototype.handleTextInput.restore();
+    Login.prototype.handleOnChange.restore();
     Login.prototype.handleSubmit.restore();
     Login.prototype.handleNavigation.restore();
   });
@@ -41,13 +48,13 @@ describe("Login component", () => {
       expect(component.find(`[data-test="logo"]`).length).toBe(2);
       expect(component.find(`[data-test="login-form"]`).length).toBe(1);
       expect(component.find(`[data-test="nav-link"]`).length).toBe(2);
-      expect(component.find(`[data-test="socials"] .icon`).length).toBe(3);
+      expect(component.find(ButtonIcon).length).toBe(3);
     });
     it("should render two TextInputs and button", () => {
       expect(component.find(TextInput).length).toBe(2);
       expect(component.find(FormButton).length).toBe(1);
     });
-    it("should navigate to signup page", () => {
+    it("should navigate to sign up page", () => {
       component
         .find(BasicButton)
         .at(0)
@@ -55,10 +62,11 @@ describe("Login component", () => {
       expect(Login.prototype.handleNavigation.calledOnce).toBe(true);
     });
     it("should render component with initial props", () => {
-      expect(component.state().email).toBe("");
-      expect(component.state().password).toBe("");
+      for (let input in component.find(TextInput)) {
+        expect(input.props().value).toBe("");
+      }
     });
-    it("should call handleTextInput when user enter input", () => {
+    it("should call handleOnChange when user enter input", () => {
       component
         .find(TextInput)
         .at(0)
@@ -69,8 +77,8 @@ describe("Login component", () => {
           }
         });
 
-      expect(Login.prototype.handleTextInput.calledOnce).toBe(true);
-      expect(component.state().email).toEqual("luc.bayo@gmail.com");
+      expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
+      expect(handleTextInput).toBeCalledWith("email", "luc.bayo@gmail.com");
     });
     it("should update password input value", () => {
       component
@@ -82,8 +90,8 @@ describe("Login component", () => {
             value: "password"
           }
         });
-      expect(Login.prototype.handleTextInput.calledOnce).toBe(true);
-      expect(component.state().password).toEqual("password");
+      expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
+      expect(handleTextInput).toBeCalledWith("password", "password");
     });
     it("should submit user input", () => {
       component
@@ -91,7 +99,6 @@ describe("Login component", () => {
         .at(0)
         .simulate("click");
       expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
-      expect(component.state().isSubmitting).toBe(true);
     });
   });
 });

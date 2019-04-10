@@ -12,8 +12,6 @@ const TextInput = props => (
   />
 );
 
-export default TextInput;
-
 TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
@@ -25,3 +23,5 @@ TextInput.propTypes = {
 TextInput.defaultProps = {
   value: ""
 };
+
+export default TextInput;

@@ -1,33 +1,33 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
 import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
 import BasicButton from "../components/common/Buttons/BasicButton";
+import ButtonIcon from "../components/common/Socials/ButtonIcon";
 
-export default class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: "",
-      password: "",
-      isSubmitting: false
-    };
-    this.handleTextInput = this.handleTextInput.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
   }
-  handleTextInput(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+
+  handleOnChange(e) {
+    const { name, value } = e.target;
+    this.props.handleTextInput(name, value);
   }
+
   handleSubmit() {
-    this.setState({
-      isSubmitting: true
-    });
+    const { email, password } = this.props;
+    this.props.handleSignIn({ email, password });
   }
+
   handleNavigation() {
     return null;
   }
+
   render() {
     return (
       <div className="auth" data-test="login">
@@ -64,24 +64,9 @@ export default class Login extends Component {
                 </div>
                 <p className="pg-title">Sign in with</p>
                 <div className="socials" data-test="socials">
-                  <div className="icon">
-                    <img
-                      src={require("../assets/icons/fb-icon.svg")}
-                      alt="fb"
-                    />
-                  </div>
-                  <div className="icon">
-                    <img
-                      src={require("../assets/icons/twitter-icon.svg")}
-                      alt="G"
-                    />
-                  </div>
-                  <div className="icon">
-                    <img
-                      src={require("../assets/icons/google-plus-icon.svg")}
-                      alt="G"
-                    />
-                  </div>
+                  <ButtonIcon name="fb" alt="fb" />
+                  <ButtonIcon name="twitter" alt="twitter" />
+                  <ButtonIcon name="google-plus" alt="G" />
                 </div>
                 <p className="pg-title">Or</p>
                 <form data-test="login-form">
@@ -90,17 +75,20 @@ export default class Login extends Component {
                     name="email"
                     id="auth-email"
                     placeholder="Email"
-                    onChange={e => this.handleTextInput(e)}
-                    value={this.state.email}
+                    onChange={e => this.handleOnChange(e)}
+                    value={this.props.email}
                   />
                   <TextInput
                     type="password"
                     name="password"
                     id="auth-password"
                     placeholder="Password"
-                    onChange={e => this.handleTextInput(e)}
-                    value={this.state.password}
+                    onChange={e => this.handleOnChange(e)}
+                    value={this.props.password}
                   />
+                  <div className="auth-errors">
+                    <p className="danger">{this.props.errors.message}</p>
+                  </div>
                   <div className="">
                     <p className="password-reset" data-test="nav-link">
                       <a href="#">Forgot password?</a>
@@ -108,6 +96,7 @@ export default class Login extends Component {
                   </div>
                   <FormButton
                     value="Sign In"
+                    disabled={this.props.isSubmitting}
                     onClick={() => this.handleSubmit()}
                   />
                 </form>
@@ -124,3 +113,15 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { login } = state;
+  return {
+    ...login
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleTextInput, handleSignIn }
+)(Login);
