@@ -1,11 +1,3 @@
 build/**
 /coverage/**
-/docs/**
-/jsdoc/**
-/templates/**
-/tests/bench/**
-/tests/fixtures/**
-/tests/performance/**
-/tmp/**
-/lib/util/unicode/is-combining-character.js
 /scr/styles/**
