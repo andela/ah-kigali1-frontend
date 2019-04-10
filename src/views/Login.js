@@ -68,9 +68,9 @@ export class Login extends Component {
                 </div>
                 <p className="pg-title">Sign in with</p>
                 <div className="socials" data-test="socials">
-                  <ButtonIcon name="fb" alt="fb" />
-                  <ButtonIcon name="twitter" alt="twitter" />
-                  <ButtonIcon name="google-plus" alt="G" />
+                  <ButtonIcon iconName="fb" alt="fb" />
+                  <ButtonIcon iconName="twitter" alt="twitter" />
+                  <ButtonIcon iconName="google-plus" alt="G" />
                 </div>
                 <p className="pg-title">Or</p>
                 <form data-test="login-form">

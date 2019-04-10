@@ -1,20 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 const ButtonIcon = props => {
+  const { className, iconName, alt } = props;
   return (
-    <div className={`icon ${props.className}`} onClick={props.onClick}>
+    <div className={`icon ${className}`}>
       <img
-        src={require(`../../../assets/icons/${props.name}-icon.svg`)}
-        alt={props.alt}
+        src={require(`../../../assets/icons/${iconName}-icon.svg`)}
+        alt={alt}
       />
     </div>
   );
 };
 
-ButtonIcon.prototype = {
+ButtonIcon.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string,
-  alt: PropTypes.string,
-  onClick: PropTypes.func
+  iconName: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired
+};
+ButtonIcon.defaultProps = {
+  className: ""
 };
 export default ButtonIcon;

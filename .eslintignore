@@ -8,3 +8,4 @@ build/**
 /tests/performance/**
 /tmp/**
 /lib/util/unicode/is-combining-character.js
+/scr/styles/**
