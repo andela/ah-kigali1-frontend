@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import FormButton from "../../../components/common/Buttons/FormButton";
-import sinon from "sinon";
-const setUp = (props = {}) => {
-  return shallow(<FormButton {...props} />);
+
+const setUp = (prop = {}) => {
+  return shallow(<FormButton {...prop} />);
 };
 const props = {
   value: "Submit",

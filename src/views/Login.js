@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
 import TextInput from "../components/common/Inputs/TextInput";
@@ -15,20 +16,23 @@ export class Login extends Component {
   }
 
   handleOnChange(e) {
-    const { name, value } = e.target;
-    this.props.handleTextInput(name, value);
+    const { name: field, value } = e.target;
+    const { handleTextInput: changeInput } = this.props;
+    changeInput(field, value);
   }
 
   handleSubmit() {
-    const { email, password } = this.props;
-    this.props.handleSignIn({ email, password });
+    const { email, password, handleSignIn: signUser } = this.props;
+    signUser({ email, password });
   }
 
   handleNavigation() {
-    return null;
+    const { message } = this.props;
+    return message;
   }
 
   render() {
+    const { email, password, message, isSubmitting } = this.props;
     return (
       <div className="auth" data-test="login">
         <div className="row">
@@ -76,7 +80,7 @@ export class Login extends Component {
                     id="auth-email"
                     placeholder="Email"
                     onChange={e => this.handleOnChange(e)}
-                    value={this.props.email}
+                    value={email}
                   />
                   <TextInput
                     type="password"
@@ -84,25 +88,26 @@ export class Login extends Component {
                     id="auth-password"
                     placeholder="Password"
                     onChange={e => this.handleOnChange(e)}
-                    value={this.props.password}
+                    value={password}
                   />
                   <div className="auth-errors">
-                    <p className="danger">{this.props.errors.message}</p>
+                    <p className="danger">{message}</p>
                   </div>
                   <div className="">
                     <p className="password-reset" data-test="nav-link">
-                      <a href="#">Forgot password?</a>
+                      <a href="/">Forgot password?</a>
                     </p>
                   </div>
                   <FormButton
                     value="Sign In"
-                    disabled={this.props.isSubmitting}
+                    disabled={isSubmitting}
                     onClick={() => this.handleSubmit()}
                   />
                 </form>
                 <div className="auth-link hide-md">
                   <p className="sign-up-link">
-                    Don't have an account? <a href="./sign-up.html">sign up</a>.
+                    Don &apos; t have an account?{" "}
+                    <a href="./sign-up.html">sign up</a>.
                   </p>
                 </div>
               </div>
@@ -114,10 +119,22 @@ export class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  handleSignIn: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  handleTextInput: PropTypes.func.isRequired,
+  message: PropTypes.string
+};
+Login.defaultProps = {
+  message: ""
+};
 const mapStateToProps = state => {
   const { login } = state;
   return {
-    ...login
+    ...login,
+    errorMessage: login.errors.message
   };
 };
 

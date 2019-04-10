@@ -1,8 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
 import BasicButton from "../../../components/common/Buttons/BasicButton";
-const setUp = (props = {}) => {
-  return shallow(<BasicButton {...props} />);
+
+const setUp = (prop = {}) => {
+  return shallow(<BasicButton {...prop} />);
 };
 const props = {
   className: "btn btn-lock",

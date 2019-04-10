@@ -1,4 +1,5 @@
 import "@babel/polyfill";
+
 import axios from "axios";
 import {
   LOGIN_INPUT_CHANGE,
@@ -7,30 +8,12 @@ import {
   LOGIN_SUCCESS
 } from "../actionTypes";
 
-export const handleTextInput = (name, value) => {
+const BASE_URL = "http://localhost:3000/api/v1";
+export const handleTextInput = (field, value) => {
   return {
     type: LOGIN_INPUT_CHANGE,
-    payload: { name, value }
+    payload: { name: field, value }
   };
-};
-
-export const handleSignIn = ({ email, password }) => async dispatch => {
-  try {
-    dispatch(updateIsSubmitting());
-    const response = await axios.post(
-      `http://localhost:3000/api/v1/users/login`,
-      {
-        email,
-        password
-      }
-    );
-    const { token, message } = response.data;
-    await localStorage.setItem("token", token);
-    dispatch(loginSuccess({ token, message }));
-  } catch (error) {
-    const { message, errors = {} } = error.response.data;
-    dispatch(loginFailed({ message, errors }));
-  }
 };
 
 const updateIsSubmitting = () => {
@@ -53,4 +36,20 @@ const loginFailed = payload => {
     type: LOGIN_FAILED,
     payload: { message, errors }
   };
+};
+
+export const handleSignIn = ({ email, password }) => async dispatch => {
+  try {
+    dispatch(updateIsSubmitting());
+    const response = await axios.post(`${BASE_URL}/users/login`, {
+      email,
+      password
+    });
+    const { token, message } = response.data;
+    await localStorage.setItem("token", token);
+    dispatch(loginSuccess({ token, message }));
+  } catch (error) {
+    const { message, errors = {} } = error.response.data;
+    dispatch(loginFailed({ message, errors }));
+  }
 };

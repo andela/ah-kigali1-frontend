@@ -15,7 +15,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2015,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
@@ -35,7 +35,9 @@
     "eol-last": ["error", "always"],
     "import/prefer-default-export": "on",
     "import/resolver": {
-      "node": { "extensions": [".js"] }
+      "node": {
+        "extensions": [".js"]
+      }
     },
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -43,9 +45,24 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
+    "global-require": "off",
+    "no-named-as-default": "off",
+    "no-shadow": [
+      "error",
+      {
+        "builtinGlobals": true,
+        "hoist": "all",
+        "allow": []
+      }
+    ],
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }],
-    "no-shadow": ["error", { "allow": ["req", "res", "err", "done"] }],
+    "import/no-unresolved": [
+      2,
+      {
+        "commonjs": true
+      }
+    ],
+    "import/no-named-as-default": "off",
     "valid-jsdoc": [
       "error",
       {

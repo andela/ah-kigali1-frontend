@@ -6,7 +6,8 @@ import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
 import ButtonIcon from "../../components/common/Socials/ButtonIcon";
-let [handleTextInput, handleSignIn] = new Array(2).fill(jest.fn());
+
+const [handleTextInput, handleSignIn] = new Array(2).fill(jest.fn());
 const setUp = () => {
   const props = {
     isSubmitting: false,
@@ -15,8 +16,8 @@ const setUp = () => {
     errors: {},
     successMessage: null,
     token: null,
-    handleSignIn: handleSignIn,
-    handleTextInput: handleTextInput
+    handleSignIn,
+    handleTextInput
   };
   const wrapper = shallow(<Login {...props} />);
   return { props, wrapper };
@@ -37,7 +38,7 @@ describe("Login component", () => {
   });
   describe("component render", () => {
     it("should render without an error", () => {
-      expect(component.find(`[data-test="login"]`).length).toBe(1);
+      expect(component.find('[data-test="login"]').length).toBe(1);
       expect(component).toMatchSnapshot();
     });
     it("should render two part of the screen", () => {
@@ -62,9 +63,9 @@ describe("Login component", () => {
       expect(Login.prototype.handleNavigation.calledOnce).toBe(true);
     });
     it("should render component with initial props", () => {
-      for (let input in component.find(TextInput)) {
+      component.find(TextInput).forEach(input => {
         expect(input.props().value).toBe("");
-      }
+      });
     });
     it("should call handleOnChange when user enter input", () => {
       component
