@@ -4,8 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const token = localStorage.getItem("token");
+const DEV_BASE_USER = process.env.API_URL;
 export default axios.create({
-  baseURL: process.env.API_BASE_URL,
+  baseURL: DEV_BASE_USER,
   headers: {
     Authorization: `Bearer ${token}`
   }

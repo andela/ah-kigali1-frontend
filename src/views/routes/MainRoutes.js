@@ -6,6 +6,9 @@ import NewArticle from "../NewArticle";
 import EditArticle from "../EditArticle";
 import ReadArticle from "../ReadArticle";
 import NotFound from "../NotFound";
+import EditProfile from "../EditProfile";
+import Profile from "../Profile";
+import Settings from "../Settings";
 
 export const routes = [
   {
@@ -23,8 +26,21 @@ export const routes = [
   {
     path: "/articles/:slug/edit",
     component: EditArticle
+  },
+  {
+    path: "/profiles/:username",
+    component: Profile
+  },
+  {
+    path: "/profiles/:username/edit",
+    component: EditProfile
+  },
+  {
+    path: "/settings",
+    component: Settings
   }
 ];
+
 export default class MainRoutes extends Component {
   render() {
     return (

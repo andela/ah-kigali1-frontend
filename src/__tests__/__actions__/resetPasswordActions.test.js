@@ -20,6 +20,8 @@ let data;
 const mockStore = configureMockStore([thunk]);
 let store;
 
+const { API_URL } = process.env;
+
 describe("ResetPassword action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
@@ -57,7 +59,7 @@ describe("ResetPassword action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${process.env.API_BASE_URL}/users/reset_password`, {
+      moxios.stubRequest(`${API_URL}/users/reset_password`, {
         status: 200,
         response: {
           ...payload
@@ -80,7 +82,7 @@ describe("ResetPassword action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${process.env.API_BASE_URL}/users/reset_password`, {
+      moxios.stubRequest(`${API_URL}/users/reset_password`, {
         status: 404,
         response: {
           ...payload

@@ -109,6 +109,7 @@
     font-style: italic;
     text-decoration: underline;
     font-size: $font-size * 0.8;
+    cursor: pointer;
   }
   @media (min-width: #{$break-point-tablet}px) {
     height: 70vh;
@@ -116,12 +117,14 @@
       section {
         display: none;
       }
-      #password-settings:target,
-      #email-settings:target,
-      #account-settings:target {
+      #password-settings,
+      #email-settings,
+      #account-settings {
         display: block;
       }
-
+      .setting-stitle {
+        margin-bottom: 10px;
+      }
       form {
         input[type="button"] {
           float: right;

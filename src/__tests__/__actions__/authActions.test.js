@@ -23,6 +23,7 @@ dotenv.config();
 let data;
 const mockStore = configureMockStore([thunk]);
 let store;
+const { API_URL } = process.env;
 
 describe("Login action creators", () => {
   describe("handle user input action creator", () => {
@@ -65,7 +66,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${process.env.API_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${API_URL}/users/login`, {
         status: 201,
         response: {
           ...payload
@@ -88,7 +89,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${process.env.API_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${API_URL}/users/login`, {
         status: 400,
         response: {
           ...payload

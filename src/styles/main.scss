@@ -1,10 +1,12 @@
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
 @import "./abstracts/mixin";
 @import "./abstracts/variables";
-
 @import "./base/base";
 @import "./base/button";
 @import "./base/input";
-@import "./base//categories-header";
+@import "./base/categories-header";
 @import "./layout/grid";
 @import "./layout/article-card-lg";
 @import "./layout/nav-bar";
@@ -27,3 +29,5 @@
 @import "./pages/profile";
 @import "./layout/my-nav-bar";
 @import "./base/message";
+@import "./base/loading";
+@import "./base/on_off";

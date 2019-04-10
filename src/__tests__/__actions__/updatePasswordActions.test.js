@@ -14,6 +14,9 @@ import {
 dotenv.config();
 const mockStore = configureMockStore([thunk]);
 let store;
+
+const { API_URL } = process.env;
+
 describe("update password actions ceators", () => {
   beforeEach(() => {
     moxios.install(axios);
@@ -39,15 +42,12 @@ describe("update password actions ceators", () => {
       password: "password"
     };
 
-    moxios.stubRequest(
-      `${process.env.API_BASE_URL}/users/${params.token}/password`,
-      {
-        status: 404,
-        response: {
-          ...payload
-        }
+    moxios.stubRequest(`${API_URL}/users/${params.token}/password`, {
+      status: 404,
+      response: {
+        ...payload
       }
-    );
+    });
     const expectedActions = [
       {
         type: UPDATING_PASSWORD
@@ -63,21 +63,19 @@ describe("update password actions ceators", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
   it("dispatches PASSWORD_UPDATE_SUCCESS", () => {
     const payload = { message: "Password updated successfully" };
     const params = {
       token: "1234567qwertyui",
       password: "password"
     };
-    moxios.stubRequest(
-      `${process.env.API_BASE_URL}/users/${params.token}/password`,
-      {
-        status: 200,
-        response: {
-          ...payload
-        }
+    moxios.stubRequest(`${API_URL}/users/${params.token}/password`, {
+      status: 200,
+      response: {
+        ...payload
       }
-    );
+    });
     const expectedActions = [
       {
         type: UPDATING_PASSWORD

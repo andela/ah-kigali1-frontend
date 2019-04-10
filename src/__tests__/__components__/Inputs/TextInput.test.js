@@ -18,6 +18,7 @@ describe("Login component", () => {
   test("should match the snapshot", () => {
     expect(toJson(component)).toMatchSnapshot();
   });
+
   test("should have input tag for email with initial state", () => {
     expect(component.props().value).toEqual("");
     expect(component.props().placeholder).toEqual("Email");
