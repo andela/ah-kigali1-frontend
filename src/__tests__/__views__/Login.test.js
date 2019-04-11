@@ -42,7 +42,6 @@ describe("Login component", () => {
   describe("component render", () => {
     it("should render without an error", () => {
       expect(component.find(`[data-test="login"]`).length).toBe(1);
-      expect(component).toMatchSnapshot();
     });
     it("should render two part of the screen", () => {
       expect(component.find(`[data-test="auth-left"]`).length).toBe(1);

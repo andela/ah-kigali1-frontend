@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Login component component render should render without an error 1`] = `ShallowWrapper {}`;
