@@ -9,18 +9,14 @@ import {
 } from "../actionTypes";
 
 const BASE_URL = "http://localhost:3000/api/v1";
-export const handleTextInput = (name, value) => {
-  return {
-    type: LOGIN_INPUT_CHANGE,
-    payload: { name, value }
-  };
-};
+export const handleTextInput = (name, value) => ({
+  type: LOGIN_INPUT_CHANGE,
+  payload: { name, value }
+});
 
-const updateIsSubmitting = () => {
-  return {
-    type: SUBMITTING_LOGIN_CREDENTIALS
-  };
-};
+const updateIsSubmitting = () => ({
+  type: SUBMITTING_LOGIN_CREDENTIALS
+});
 
 const loginSuccess = payload => {
   const { token, message } = payload;

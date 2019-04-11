@@ -47,6 +47,7 @@
     "comma-dangle": 0,
     "global-require": "off",
     "no-named-as-default": "off",
+    "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
     "no-shadow": [
       "error",
