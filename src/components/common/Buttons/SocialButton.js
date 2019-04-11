@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ButtonIcon = props => {
+const SocialButton = props => {
   const { className, iconName, alt } = props;
   return (
     <div className={`icon ${className}`}>
@@ -13,12 +13,12 @@ const ButtonIcon = props => {
   );
 };
 
-ButtonIcon.propTypes = {
+SocialButton.propTypes = {
   className: PropTypes.string,
   iconName: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired
 };
-ButtonIcon.defaultProps = {
+SocialButton.defaultProps = {
   className: ""
 };
-export default ButtonIcon;
+export default SocialButton;

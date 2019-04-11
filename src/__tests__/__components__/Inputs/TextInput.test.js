@@ -1,8 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
 import TextInput from "../../../components/common/Inputs/TextInput";
+
 const props = {
   type: "text",
+  name: "email",
   placeholder: "Email",
   onChange: jest.fn(),
   value: ""

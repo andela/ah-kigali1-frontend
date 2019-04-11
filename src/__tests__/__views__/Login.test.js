@@ -2,12 +2,15 @@ import React from "react";
 import { shallow } from "enzyme";
 import sinon from "sinon";
 import { Login } from "../../views/Login";
+import Validator from "../../utils/validator";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
-import ButtonIcon from "../../components/common/Socials/ButtonIcon";
+import SocialButton from "../../components/common/Buttons/SocialButton";
 
 const [handleTextInput, handleSignIn] = new Array(2).fill(jest.fn());
+jest.mock("../../utils/validator");
+
 const setUp = () => {
   const props = {
     isSubmitting: false,
@@ -38,7 +41,7 @@ describe("Login component", () => {
   });
   describe("component render", () => {
     it("should render without an error", () => {
-      expect(component.find('[data-test="login"]').length).toBe(1);
+      expect(component.find(`[data-test="login"]`).length).toBe(1);
       expect(component).toMatchSnapshot();
     });
     it("should render two part of the screen", () => {
@@ -49,7 +52,7 @@ describe("Login component", () => {
       expect(component.find(`[data-test="logo"]`).length).toBe(2);
       expect(component.find(`[data-test="login-form"]`).length).toBe(1);
       expect(component.find(`[data-test="nav-link"]`).length).toBe(2);
-      expect(component.find(ButtonIcon).length).toBe(3);
+      expect(component.find(SocialButton).length).toBe(3);
     });
     it("should render two TextInputs and button", () => {
       expect(component.find(TextInput).length).toBe(2);
@@ -94,12 +97,32 @@ describe("Login component", () => {
       expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
       expect(handleTextInput).toBeCalledWith("password", "password");
     });
-    it("should submit user input", () => {
+    it("returns validation errors", () => {
+      const staticFormData = jest.fn();
+      staticFormData.mockReturnValue({
+        email: "Email is required"
+      });
+      Validator.formData = staticFormData.bind(Validator);
       component
         .find(FormButton)
         .at(0)
         .simulate("click");
       expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
+      expect(staticFormData).toBeCalledWith({ email: "", password: "" });
+    });
+    it("should call handleSubmit", () => {
+      const staticFormData = jest.fn();
+      staticFormData.mockReturnValue({});
+      Validator.formData = staticFormData.bind(Validator);
+      component
+        .find(FormButton)
+        .at(0)
+        .simulate("click");
+      expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
+      expect(staticFormData).toBeCalledWith({
+        email: "",
+        password: ""
+      });
     });
   });
 });

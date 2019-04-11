@@ -1,27 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-const TextInput = props => (
+
+const TextInput = ({
+  name,
+  type,
+  id,
+  placeholder,
+  value,
+  onChange,
+  ...props
+}) => (
   <input
     {...props}
-    name={props.name}
-    type={props.type}
-    id={props.id}
-    placeholder={props.placeholder}
-    value={props.value}
-    onChange={props.onChange}
+    name={name}
+    type={type}
+    id={id}
+    placeholder={placeholder}
+    value={value}
+    onChange={onChange}
   />
 );
 
 TextInput.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   id: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
+  placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   value: PropTypes.string
 };
 TextInput.defaultProps = {
-  value: ""
+  value: "",
+  id: ""
 };
 
 export default TextInput;

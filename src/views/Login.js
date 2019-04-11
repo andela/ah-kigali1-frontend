@@ -2,28 +2,44 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
+import { isEmpty } from "../utils/helperFunctions";
+import Validator from "../utils/validator";
 import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
 import BasicButton from "../components/common/Buttons/BasicButton";
-import ButtonIcon from "../components/common/Socials/ButtonIcon";
+import SocialButton from "../components/common/Buttons/SocialButton";
 
 export class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      errors: {}
+    };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   handleOnChange(e) {
+    this.setState({
+      errors: {}
+    });
     const { name, value } = e.target;
-    const { handleTextInput } = this.props;
-    handleTextInput(name, value);
+    const { handleTextInput: textInput } = this.props;
+    textInput(name, value);
   }
 
   handleSubmit() {
-    const { email, password, handleSignIn } = this.props;
-    handleSignIn({ email, password });
+    const { email, password, handleSignIn: signIn } = this.props;
+    const errors = Validator.formData({ email, password });
+    if (!isEmpty(errors)) {
+      return this.setState({
+        errors: {
+          ...errors
+        }
+      });
+    }
+    signIn({ email, password });
   }
 
   handleNavigation() {
@@ -33,6 +49,7 @@ export class Login extends Component {
 
   render() {
     const { email, password, message, isSubmitting } = this.props;
+    const { errors } = this.state;
     return (
       <div className="auth" data-test="login">
         <div className="row">
@@ -68,9 +85,9 @@ export class Login extends Component {
                 </div>
                 <p className="pg-title">Sign in with</p>
                 <div className="socials" data-test="socials">
-                  <ButtonIcon iconName="fb" alt="fb" />
-                  <ButtonIcon iconName="twitter" alt="twitter" />
-                  <ButtonIcon iconName="google-plus" alt="G" />
+                  <SocialButton iconName="fb" alt="fb" />
+                  <SocialButton iconName="twitter" alt="twitter" />
+                  <SocialButton iconName="google-plus" alt="G" />
                 </div>
                 <p className="pg-title">Or</p>
                 <form data-test="login-form">
@@ -91,7 +108,9 @@ export class Login extends Component {
                     value={password}
                   />
                   <div className="auth-errors">
-                    <p className="danger">{message}</p>
+                    <p className="danger">
+                      {message || errors.email || errors.password}
+                    </p>
                   </div>
                   <div className="">
                     <p className="password-reset" data-test="nav-link">
