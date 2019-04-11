@@ -1,5 +1,4 @@
 import moxios from "moxios";
-import axios from "../../utils/axios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import reduxStore from "../../redux/store";
@@ -13,6 +12,7 @@ import {
   LOGIN_FAILED,
   LOGIN_INPUT_CHANGE
 } from "../../redux/actionTypes";
+
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
 let data;
 const mockStore = configureMockStore([thunk]);
