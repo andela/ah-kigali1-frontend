@@ -1,4 +1,5 @@
 import React from "react";
+import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
 import TextInput from "../../../components/common/Inputs/TextInput";
 
@@ -13,6 +14,9 @@ describe("Login component", () => {
   let component;
   beforeEach(() => {
     component = shallow(<TextInput {...props} />);
+  });
+  test("should match the snapshot", () => {
+    expect(toJson(component)).toMatchSnapshot();
   });
   test("should have input tag for email with initial state", () => {
     expect(component.props().value).toEqual("");

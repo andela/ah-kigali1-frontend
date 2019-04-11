@@ -1,5 +1,5 @@
 describe("Home component", () => {
-  test("matches the snapshot", () => {
+  test("matches the true", () => {
     expect(true).toBe(true);
   });
 });

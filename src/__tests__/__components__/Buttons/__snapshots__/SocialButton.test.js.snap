@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SocialButton should render SocialButton component 1`] = `
+<div
+  className="icon "
+>
+  <img
+    alt="fb"
+    src="test-file-stub"
+  />
+</div>
+`;

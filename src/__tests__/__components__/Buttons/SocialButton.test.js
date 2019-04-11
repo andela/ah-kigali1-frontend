@@ -1,4 +1,5 @@
 import React from "react";
+import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
 import SocialButton from "../../../components/common/Buttons/SocialButton";
 
@@ -13,6 +14,6 @@ describe("SocialButton", () => {
     component = setUp(props);
   });
   it("should render SocialButton component", () => {
-    expect(component).toBeDefined();
+    expect(toJson(component)).toMatchSnapshot();
   });
 });

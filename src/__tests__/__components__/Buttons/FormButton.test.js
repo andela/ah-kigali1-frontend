@@ -1,4 +1,5 @@
 import React from "react";
+import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
 import FormButton from "../../../components/common/Buttons/FormButton";
 
@@ -11,6 +12,9 @@ describe("Basic button", () => {
   let component;
   beforeEach(() => {
     component = setUp(props);
+  });
+  test("should match the snapshot", () => {
+    expect(toJson(component)).toMatchSnapshot();
   });
   test("should render button", () => {
     expect(component.props().value).toEqual(props.value);
