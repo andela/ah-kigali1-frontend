@@ -2,9 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import FormButton from "../../../components/common/Buttons/FormButton";
 
-const setUp = (prop = {}) => {
-  return shallow(<FormButton {...prop} />);
-};
+const setUp = props => shallow(<FormButton {...props} />);
 const props = {
   value: "Submit",
   onClick: jest.fn()

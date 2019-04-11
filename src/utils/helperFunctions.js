@@ -3,14 +3,11 @@
  * @param {*} value - input to validate
  * @returns {boolean} -true or false
  */
-export const isEmpty = (value = "") => {
-  return (
-    value === null ||
-    value === "undefined" ||
-    (typeof value === "object" && Object.keys(value).length === 0) ||
-    (typeof value === "string" && value.trim().length === 0)
-  );
-};
+export const isEmpty = value =>
+  value === null ||
+  value === undefined ||
+  (typeof value === "object" && Object.keys(value).length === 0) ||
+  (typeof value === "string" && value.trim().length === 0);
 
 /**
  * @description capitalize the initial letter

@@ -2,9 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import SocialButton from "../../../components/common/Buttons/SocialButton";
 
-const setUp = (props = {}) => {
-  return shallow(<SocialButton {...props} />);
-};
+const setUp = props => shallow(<SocialButton {...props} />);
 const props = {
   iconName: "fb",
   alt: "fb"

@@ -2,9 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import BasicButton from "../../../components/common/Buttons/BasicButton";
 
-const setUp = (prop = {}) => {
-  return shallow(<BasicButton {...prop} />);
-};
+const setUp = props => shallow(<BasicButton {...props} />);
 const props = {
   className: "btn btn-lock",
   title: "Submit",
