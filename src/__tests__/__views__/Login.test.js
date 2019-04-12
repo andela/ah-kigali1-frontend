@@ -9,9 +9,9 @@ import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
 import SocialButton from "../../components/common/Buttons/SocialButton";
 
-const [handleTextInput, handleSignIn, mockedFormData] = new Array(3).fill(
-  jest.fn()
-);
+const [handleTextInput, handleSignIn, mockedFormData, socialAuth] = new Array(
+  4
+).fill(jest.fn());
 jest.mock("../../utils/validator");
 
 const props = {
@@ -165,6 +165,24 @@ describe("Login component", () => {
       expect(mapStateToProps({ login: { ...INITIAL_STATE } })).toEqual({
         ...INITIAL_STATE
       });
+    });
+    it("calls login with facebook", () => {
+      findElement(SocialButton, 0).simulate("click");
+      global.open = jest.fn();
+      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
+      expect(socialAuth).toBeCalledWith("facebook");
+    });
+    it("calls login with twitter ", () => {
+      findElement(SocialButton, 1).simulate("click");
+      global.open = jest.fn();
+      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
+      expect(socialAuth).toBeCalledWith("twitter");
+    });
+    it("calls login with Google ", () => {
+      findElement(SocialButton, 2).simulate("click");
+      global.open = jest.fn();
+      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
+      expect(socialAuth).toBeCalledWith("google");
     });
   });
 });

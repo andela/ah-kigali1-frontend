@@ -65,16 +65,19 @@ exports[`Login component component snapshot should match the right snapshot 1`] 
               alt="fb"
               className=""
               iconName="fb"
+              onClick={[Function]}
             />
             <SocialButton
               alt="twitter"
               className=""
               iconName="twitter"
+              onClick={[Function]}
             />
             <SocialButton
               alt="G"
               className=""
               iconName="google-plus"
+              onClick={[Function]}
             />
           </div>
           <p

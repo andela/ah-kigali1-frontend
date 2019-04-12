@@ -5,13 +5,16 @@ import axios from "../../utils/axios";
 import reduxStore from "../../redux/store";
 import {
   handleSignIn,
-  handleTextInput
+  handleTextInput,
+  socialAuth
 } from "../../redux/actions/loginActions";
 import {
   SUBMITTING_LOGIN_CREDENTIALS,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  LOGIN_INPUT_CHANGE
+  LOGIN_INPUT_CHANGE,
+  IS_OPENING_SOCIAL_AUTH_PROVIDER,
+  CANCEL_SOCIAL_AUTH
 } from "../../redux/actionTypes";
 
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
@@ -88,6 +91,35 @@ describe("Login action creators", () => {
 
       return store.dispatch(handleSignIn({ ...data })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+    it("dispatches IS_OPENING_SOCIAL_AUTH_PROVIDER action creator", () => {
+      global.open = jest.fn();
+      const expectedAction = [
+        {
+          type: IS_OPENING_SOCIAL_AUTH_PROVIDER
+        }
+      ];
+      return store.dispatch(socialAuth("something")).then(() => {
+        expect(store.getActions()).toEqual(expectedAction);
+      });
+    });
+
+    it("dispatches CANCEL_SOCIAL_AUTH action creator", () => {
+      /* eslint no-throw-literal: "off" */
+      global.open = jest.fn(() => {
+        throw "error";
+      });
+      const expectedAction = [
+        {
+          type: IS_OPENING_SOCIAL_AUTH_PROVIDER
+        },
+        {
+          type: CANCEL_SOCIAL_AUTH
+        }
+      ];
+      return store.dispatch(socialAuth("something")).then(() => {
+        expect(store.getActions()).toEqual(expectedAction);
       });
     });
   });
