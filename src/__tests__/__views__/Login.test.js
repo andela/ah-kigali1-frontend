@@ -80,7 +80,7 @@ describe("Login component", () => {
       findElement(TextInput, 0).simulate("change", {
         target: {
           name: "email",
-          value: "luc.bayo@gmail.com"
+          value: "me@example.com"
         }
       });
 

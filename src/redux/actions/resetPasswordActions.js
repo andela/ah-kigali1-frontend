@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import {
   RESET_PASSWORD_INPUT_CHANGE,
   SENDING_RESET_PASSWORD_LINK,
@@ -6,7 +6,6 @@ import {
   RESET_PASSWORD_LINK_FAILED
 } from "../actionTypes";
 
-const BASE_URL = "http://localhost:3000/api/v1";
 export const handleInputChange = (name, value) => ({
   type: RESET_PASSWORD_INPUT_CHANGE,
   payload: { name, value }
@@ -17,7 +16,7 @@ export const sendResetLink = ({ email }) => async dispatch => {
     dispatch({
       type: SENDING_RESET_PASSWORD_LINK
     });
-    const response = await axios.post(`${BASE_URL}/users/reset_password`, {
+    const response = await axios.post(`/users/reset_password`, {
       email
     });
     const { message } = response.data;
