@@ -8,7 +8,7 @@ import {
   SUBMITTING_LOGIN_CREDENTIALS
 } from "../../redux/actionTypes";
 
-const emailInput = { name: "email", value: "luc.bayo@gmail.com" };
+const emailInput = { name: "email", value: "me@example.com" };
 const passwordInput = { name: "email", value: "password" };
 
 describe("Login reducers", () => {

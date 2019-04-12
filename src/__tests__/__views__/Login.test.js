@@ -85,7 +85,7 @@ describe("Login component", () => {
       });
 
       expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
-      expect(handleTextInput).toBeCalledWith("email", "luc.bayo@gmail.com");
+      expect(handleTextInput).toBeCalledWith("email", "me@example.com");
     });
     it("should update password input value", () => {
       findElement(TextInput, 1).simulate("change", {
