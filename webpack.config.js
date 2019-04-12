@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+
 module.exports = {
   entry: "./src/index.js",
   output: {
