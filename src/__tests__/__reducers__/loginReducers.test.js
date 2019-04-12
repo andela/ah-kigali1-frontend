@@ -5,7 +5,9 @@ import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   LOGIN_INPUT_CHANGE,
-  SUBMITTING_LOGIN_CREDENTIALS
+  SUBMITTING_LOGIN_CREDENTIALS,
+  IS_OPENING_SOCIAL_AUTH_PROVIDER,
+  CANCEL_SOCIAL_AUTH
 } from "../../redux/actionTypes";
 
 const emailInput = { name: "email", value: "me@example.com" };
@@ -73,6 +75,24 @@ describe("Login reducers", () => {
       ...INITIAL_STATE,
       loginSuccess: true,
       token: successPayload.token
+    });
+  });
+  it("should handle  IS_OPENING_SOCIAL_AUTH_PROVIDER", () => {
+    expect(
+      loginReducers(INITIAL_STATE, {
+        type: IS_OPENING_SOCIAL_AUTH_PROVIDER
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      isSubmitting: true
+    });
+    expect(
+      loginReducers(INITIAL_STATE, {
+        type: CANCEL_SOCIAL_AUTH
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      isSubmitting: false
     });
   });
 });
