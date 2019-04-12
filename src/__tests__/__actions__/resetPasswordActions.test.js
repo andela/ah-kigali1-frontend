@@ -1,6 +1,7 @@
 import moxios from "moxios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
+import axios from "../../utils/axios";
 import reduxStore from "../../redux/store";
 import {
   handleInputChange,
@@ -32,11 +33,11 @@ describe("ResetPassword action creators", () => {
 
   describe("handle sign action creator", () => {
     beforeEach(() => {
-      moxios.install();
+      moxios.install(axios);
       store = mockStore({});
     });
     afterEach(() => {
-      moxios.uninstall();
+      moxios.uninstall(axios);
     });
     it("dispatches RESET_PASSWORD_LINK_SUCCESS after successfully sending link", () => {
       store = mockStore({ login: reduxStore.resetPassword });

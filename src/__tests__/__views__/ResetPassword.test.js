@@ -20,6 +20,10 @@ const setUp = () => {
   const wrapper = shallow(<ResetPassword {...props} />);
   return { props, wrapper };
 };
+const findElement = (element, index) =>
+  setUp()
+    .wrapper.find(element)
+    .at(index);
 describe("Login component", () => {
   let component;
   beforeEach(() => {
@@ -43,25 +47,19 @@ describe("Login component", () => {
       });
     });
     it("should call handleOnChange when user enter input", () => {
-      component
-        .find(TextInput)
-        .at(0)
-        .simulate("change", {
-          target: {
-            name: "email",
-            value: "example@yahoo.com"
-          }
-        });
+      findElement(TextInput, 0).simulate("change", {
+        target: {
+          name: "email",
+          value: "example@yahoo.com"
+        }
+      });
 
       expect(ResetPassword.prototype.handleOnChange.calledOnce).toBe(true);
       expect(handleInputChange).toBeCalledWith("email", "example@yahoo.com");
     });
 
     it("returns validation errors", () => {
-      component
-        .find(FormButton)
-        .at(0)
-        .simulate("click");
+      findElement(FormButton, 0).simulate("click");
       expect(ResetPassword.prototype.handleSubmit.calledOnce).toBe(true);
       expect(sendResetLink).toBeCalledWith({ ...userInput });
     });
