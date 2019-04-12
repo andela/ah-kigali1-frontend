@@ -1,6 +1,6 @@
 import "@babel/polyfill";
 
-import axios from "axios";
+import axios from "../../utils/axios";
 import {
   LOGIN_INPUT_CHANGE,
   SUBMITTING_LOGIN_CREDENTIALS,
@@ -8,7 +8,6 @@ import {
   LOGIN_SUCCESS
 } from "../actionTypes";
 
-const BASE_URL = "http://localhost:3000/api/v1";
 export const handleTextInput = (name, value) => ({
   type: LOGIN_INPUT_CHANGE,
   payload: { name, value }
@@ -37,7 +36,7 @@ const loginFailed = payload => {
 export const handleSignIn = ({ email, password }) => async dispatch => {
   try {
     dispatch(updateIsSubmitting());
-    const response = await axios.post(`${BASE_URL}/users/login`, {
+    const response = await axios.post("/users/login", {
       email,
       password
     });

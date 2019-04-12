@@ -1,6 +1,7 @@
 import moxios from "moxios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
+import axios from "../../utils/axios";
 import reduxStore from "../../redux/store";
 import {
   handleSignIn,
@@ -32,11 +33,11 @@ describe("Login action creators", () => {
 
   describe("handle sign action creator", () => {
     beforeEach(() => {
-      moxios.install();
+      moxios.install(axios);
       store = mockStore({});
     });
     afterEach(() => {
-      moxios.uninstall();
+      moxios.uninstall(axios);
     });
     it("dispatches LOGIN_SUCCESS after successfully signing in", () => {
       store = mockStore({ login: reduxStore.login });

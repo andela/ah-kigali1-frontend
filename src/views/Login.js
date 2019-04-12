@@ -149,7 +149,7 @@ Login.propTypes = {
 Login.defaultProps = {
   message: ""
 };
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const { login } = state;
   return {
     ...login,

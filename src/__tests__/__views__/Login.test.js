@@ -1,7 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import sinon from "sinon";
-import { Login } from "../../views/Login";
+import { Login, mapStateToProps } from "../../views/Login";
+import { INITIAL_STATE } from "../../redux/reducers/loginReducers";
 import Validator from "../../utils/validator";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
@@ -25,6 +26,12 @@ const setUp = () => {
   const wrapper = shallow(<Login {...props} />);
   return { props, wrapper };
 };
+
+const findElement = (element, index) =>
+  setUp()
+    .wrapper.find(element)
+    .at(index);
+
 describe("Login component", () => {
   let component;
   beforeEach(() => {
@@ -70,29 +77,23 @@ describe("Login component", () => {
       });
     });
     it("should call handleOnChange when user enter input", () => {
-      component
-        .find(TextInput)
-        .at(0)
-        .simulate("change", {
-          target: {
-            name: "email",
-            value: "luc.bayo@gmail.com"
-          }
-        });
+      findElement(TextInput, 0).simulate("change", {
+        target: {
+          name: "email",
+          value: "luc.bayo@gmail.com"
+        }
+      });
 
       expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
       expect(handleTextInput).toBeCalledWith("email", "luc.bayo@gmail.com");
     });
     it("should update password input value", () => {
-      component
-        .find(TextInput)
-        .at(1)
-        .simulate("change", {
-          target: {
-            name: "password",
-            value: "password"
-          }
-        });
+      findElement(TextInput, 1).simulate("change", {
+        target: {
+          name: "password",
+          value: "password"
+        }
+      });
       expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
       expect(handleTextInput).toBeCalledWith("password", "password");
     });
@@ -102,10 +103,7 @@ describe("Login component", () => {
         email: "Email is required"
       });
       Validator.formData = staticFormData.bind(Validator);
-      component
-        .find(FormButton)
-        .at(0)
-        .simulate("click");
+      findElement(FormButton, 0).simulate("click");
       expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
       expect(staticFormData).toBeCalledWith({ email: "", password: "" });
     });
@@ -113,14 +111,16 @@ describe("Login component", () => {
       const staticFormData = jest.fn();
       staticFormData.mockReturnValue({});
       Validator.formData = staticFormData.bind(Validator);
-      component
-        .find(FormButton)
-        .at(0)
-        .simulate("click");
+      findElement(FormButton, 0).simulate("click");
       expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
       expect(staticFormData).toBeCalledWith({
         email: "",
         password: ""
+      });
+    });
+    it("returns all mapped props from redux", () => {
+      expect(mapStateToProps({ login: { ...INITIAL_STATE } })).toEqual({
+        ...INITIAL_STATE
       });
     });
   });
