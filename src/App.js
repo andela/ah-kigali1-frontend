@@ -2,10 +2,11 @@ import React from "react";
 import { Provider } from "react-redux";
 import "./styles/main.scss";
 import store from "./redux/store";
-import Login from "./views/Login";
+// import Login from "./views/Login";
+import ResetPassword from "./views/ResetPassword";
 
 export default () => (
   <Provider store={store}>
-    <Login />
+    <ResetPassword />
   </Provider>
 );

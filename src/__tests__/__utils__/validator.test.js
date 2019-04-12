@@ -3,7 +3,7 @@ import Validator from "../../utils/validator";
 describe("Validator Class", () => {
   it("should validator formData", () => {
     const validFormData = {
-      email: "luc.bayo@gmail.com",
+      email: "me@example.com",
       password: "password"
     };
     const invalidFormData = {
