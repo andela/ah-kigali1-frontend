@@ -1,17 +1,13 @@
-import { 
-  SOME_ACTION,
+import axios from "axios";
+import { nullRemover } from "../../helpers/helpers";
+import {
   SET_PROFILE,
   SET_LOADING,
   SET_ERROR,
   SET_FORM_INPUT,
-  SET_SUCCESS
+  SET_SUCCESS,
+  SET_IMAGE
 } from "../actionTypes";
-
-export const sampleActionCreator = () => {
-  return {
-    type: SOME_ACTION
-  };
-};
 
 export const setCurrentUser = user => ({
   type: SET_PROFILE,
@@ -36,56 +32,75 @@ export const handleFormInput = payload => ({
   type: SET_FORM_INPUT,
   payload
 });
-
-export const fetchCurrentUser = () => dispatch => {
+export const setImage = file => ({
+  type: SET_IMAGE,
+  payload: file
+});
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJpZCI6ImNjNGZiNWNjLWVmNTQtNGY5ZS1iODE2LTg2MzM1NGEyNjliYiIsInJvbGVJZCI6IjcwNzBmMWY0LTI2ODYtNGU2Mi04NGViLTMzOThiZTJlZjU0NCIsImlhdCI6MTU1NDg2NzEwOH0.7hP-pDPNoDZ6E5wf30lFu-0uFsxkQUkHZ8hMdrqyhfE";
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`
+  }
+};
+export const fetchCurrentUser = username => dispatch => {
   dispatch(setLoading(true));
-  return fetch("http://localhost:4000/api/v1/profiles/username", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(response => {
-      return response.json().then(json => {
-        return response.ok ? json : Promise.reject(json);
-      });
+  return axios
+    .get(`http://localhost:4000/api/v1/profiles/${username}`, {
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-    .then(data => {
-      const { profile } = data;
-      dispatch(setCurrentUser(profile));
+    .then(response => {
+      const { profile } = response.data;
+      dispatch(setCurrentUser(nullRemover(profile)));
       dispatch(setLoading(false));
     })
     .catch(error => {
-      dispatch(setError(error.error));
+      const { message } = error.response.data;
+      dispatch(setError(message));
       dispatch(setLoading(false));
     });
 };
-let token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJpZCI6ImNjNGZiNWNjLWVmNTQtNGY5ZS1iODE2LTg2MzM1NGEyNjliYiIsInJvbGVJZCI6IjcwNzBmMWY0LTI2ODYtNGU2Mi04NGViLTMzOThiZTJlZjU0NCIsImlhdCI6MTU1NDgwMjAxNn0.nAvpaNeRdCJ4TQI8kHTsCkNIMtGrSDZjziptIrTI-38";
-export const saveUpdatedUser = profile => dispatch => {
-  dispatch(setLoading(true));
-  console.log(profile);
-  return fetch("http://localhost:4000/api/v1/profiles/username", {
-    method: "PUT",
-    body: JSON.stringify({ profile }),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    }
-  })
+
+export const saveUpdatedUser = (updatedProfile, username) => dispatch => {
+  return axios
+    .put(
+      `http://localhost:4000/api/v1/profiles/${username}`,
+      { profile: updatedProfile },
+      config
+    )
     .then(response => {
-      return response.json().then(json => {
-        return response.ok ? json : Promise.reject(json);
-      });
-    })
-    .then(data => {
-      const { profile, message } = data;
-      dispatch(setCurrentUser(profile));
+      const { profile, message } = response.data;
+      dispatch(setCurrentUser(nullRemover(profile)));
       dispatch(setSuccess(message));
-      dispatch(setLoading(false));
     })
-    .catch(error => {
-      dispatch(setError(error.error));
-      dispatch(setLoading(false));
+    .catch(errorResponse => {
+      const { error } = errorResponse.response.data;
+      dispatch(setError(error));
+    });
+};
+
+export const uploadImage = file => dispatch => {
+  const cloudName = process.env.CLOUD_NAME;
+  const unsignedUploadPreset = process.env.UNSIGNED_UPLOAD_PRESET;
+  const baseUrl = process.env.CLOUDINARY_URL;
+  const url = `${baseUrl}/${cloudName}/upload`;
+  const fd = new FormData();
+  fd.append("upload_preset", unsignedUploadPreset);
+  fd.append("file", file);
+  return axios
+    .post(url, fd, {
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+    .then(res => {
+      // eslint-disable-next-line camelcase
+      const { secure_url } = res.data;
+      dispatch(setImage(secure_url));
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch(setError(err));
     });
 };

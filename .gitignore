@@ -12,3 +12,4 @@ yarn.*
 yarn-*
 .DS_Store 
 package-lock.json
+.env

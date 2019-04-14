@@ -26,7 +26,7 @@ class MainRoute extends Component {
             </Route>
             <Route path="/login" component={Login} />
             <Route path="/profiles" component={Profile} />
-            <Route path="/profiles/edit" component={EditProfile} />
+            <Route path="/profiles-edit" component={EditProfile} />
             <Route component={NotFound} />
           </Switch>
         </div>

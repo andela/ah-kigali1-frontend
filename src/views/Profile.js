@@ -1,33 +1,45 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable global-require */
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { fetchCurrentUser } from "../redux/actions";
-import Loading from "../components/Spinner/loading";
+import { Loading } from "../components/common/Spinner/Loading";
+import Confirm from "../components/common/Buttons/confirm";
 
-class Profile extends Component {
+const usernameFromLocalStorage = "username";
+export class Profile extends Component {
+  componentDidMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.fetchCurrentUser(usernameFromLocalStorage);
+  }
+
   render() {
+    const { bio, lastName, firstName, image } = this.props.profile;
+    const { loading, error, history } = this.props;
+    if (loading) {
+      return <Loading />;
+    }
+    if (error) {
+      return <div>{error}</div>;
+    }
     return (
       <div className="profile">
         <div className="profile-left col-md-6">
           <div className="profile-left--fixed">
-            <img
-              src={require("../assets/img/avatar.jpg")}
-              alt="Avatar"
-              className="profile-avatar"
-            />
-            <h1>Joe Doe</h1>
+            <img src={image} alt="Avatar" className="profile-avatar" />
+            <h1>
+              {firstName} {lastName}
+            </h1>
             <h2>UI/UX designer</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididDuis aute irure dolor in reprehenderit in
-              voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident.
-            </p>
-
-            <button type="submit" className="btn">
-              Edit
-            </button>
+            <p>{bio}</p>
+            <Confirm
+              title="Edit"
+              onClick={() => history.push("/profiles-edit")}
+            />
             <div className="socials">
               <div className="icon">
                 <img
@@ -295,14 +307,17 @@ class Profile extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     profile: state.user.profile,
     loading: state.user.loading,
     error: state.user.error
   };
 };
-const mapDispatchToProps = dispatch => {
-  return { fetchCurrentUser: () => dispatch(fetchCurrentUser()) };
-};
-export default Profile;
+export const mapDispatchToProps = dispatch => ({
+  fetchCurrentUser: username => dispatch(fetchCurrentUser(username))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Profile));
