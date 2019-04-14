@@ -100,7 +100,6 @@ export const uploadImage = file => dispatch => {
       dispatch(setImage(secure_url));
     })
     .catch(err => {
-      console.log(err);
       dispatch(setError(err));
     });
 };

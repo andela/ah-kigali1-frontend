@@ -204,13 +204,11 @@ describe("profile actions", () => {
       //     headers: { "X-Requested-With": "XMLHttpRequest" }
       //   })
       //     .persist()
-      //     .log(console.log)
       //     .post("")
       //     .reply(200, { status: 200 });
       //   return store.dispatch(uploadImage(file)).then(() => {
       //     const actions = store.getActions();
-      //     // console.log(actions);
-      //     // console.log(actions);
+
       //     // expect(Array.isArray(actions)).toBe(true);
       //   });
       // });
