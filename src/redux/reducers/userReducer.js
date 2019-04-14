@@ -3,13 +3,15 @@ import {
   SET_LOADING,
   SET_ERROR,
   SET_FORM_INPUT,
-  SET_SUCCESS
+  SET_SUCCESS,
+  SET_IMAGE
 } from "../actionTypes";
+
 const initialState = {
   profile: {
     email: "",
     username: "",
-    address: null,
+    address: "",
     allowNotifications: true,
     bio: "",
     firstName: "",
@@ -39,6 +41,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, error: payload };
     case SET_SUCCESS:
       return { ...state, message: payload };
+    case SET_IMAGE:
+      return { ...state, profile: { ...state.profile, image: payload } };
     default:
       return state;
   }

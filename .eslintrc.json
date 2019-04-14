@@ -16,11 +16,17 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2016,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "plugins": ["react", "prettier"],
   "rules": {
+    "react/jsx-no-bind": [
+      2,
+      {
+        "allowArrowFunctions": true
+      }
+    ],
     "prettier/prettier": "error",
     "newlines-between": "always",
     "react/prefer-stateless-function": "off",

@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -46,6 +47,7 @@ module.exports = {
   },
   mode: "development",
   plugins: [
+    new Dotenv(),
     new HtmlPackPlugin({ template: "./public/index.html" }),
     new MiniCssExtractPlugin({
       filename: "[name].css",

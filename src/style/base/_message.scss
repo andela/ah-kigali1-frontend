@@ -1,0 +1,39 @@
+// file edited from https://codepen.io/SufferMyJoy/pen/GgRJwv?editors=1100
+$color_1: #059;
+$color_2: #270;
+$color_3: #9F6000;
+$color_4: #D8000C;
+$font_family_1: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$background_color_1: #BEF;
+$background_color_2: #DFF2BF;
+$background_color_3: #FEEFB3;
+$background_color_4: #FFBABA;
+
+.info-msg {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: $color_1;
+	background-color: $background_color_1;
+}
+.success-msg {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: $color_2;
+	background-color: $background_color_2;
+}
+.warning-msg {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: $color_3;
+	background-color: $background_color_3;
+}
+.error-msg {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 3px 3px 3px 3px;
+	color: $color_4;
+	background-color: $background_color_4;
+}

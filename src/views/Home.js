@@ -6,6 +6,8 @@ import Navbar from "../components/common/AppBars/navBar";
 import MainCard from "../components/common/Cards/main";
 import Latest from "../components/common/Cards/latest";
 import CategoryBar from "../components/common/AppBars/categoryBar";
+import SuccessMessage from "../components/common/Message/success";
+import ErrorMessage from "../components/common/Message/error";
 
 const cats = [
   "TECH",
@@ -25,10 +27,13 @@ class Home extends Component {
     return (
       <div>
         <Navbar />
+
         <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
         <div style={{ margin: 3, marginTop: 120 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
           <Confirm style={{ width: "40%" }} title="Save" />
+          <SuccessMessage title="Success" />
+          <ErrorMessage title="Error" />
           <Input
             style={{ width: "40%" }}
             type="email"
