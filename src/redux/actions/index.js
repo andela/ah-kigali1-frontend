@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import axios from "axios";
 import { nullRemover } from "../../helpers/helpers";
 import {
@@ -65,41 +66,67 @@ export const fetchCurrentUser = username => dispatch => {
 };
 
 export const saveUpdatedUser = (updatedProfile, username) => dispatch => {
-  return axios
-    .put(
-      `http://localhost:4000/api/v1/profiles/${username}`,
-      { profile: updatedProfile },
-      config
-    )
-    .then(response => {
-      const { profile, message } = response.data;
-      dispatch(setCurrentUser(nullRemover(profile)));
-      dispatch(setSuccess(message));
-    })
-    .catch(errorResponse => {
-      const { error } = errorResponse.response.data;
-      dispatch(setError(error));
-    });
+  axios.put('')
+  // return axios
+  //   .put(
+  //     `http://localhost:4000/api/v1/profiles/${username}`,
+  //     { profile: updatedProfile },
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     }
+  //   )
+  //   .then(response => {
+  //     console.log(response.config.data);
+  //     // const { profile, message } = response.data;
+  //     // dispatch(setCurrentUser(nullRemover(profile)));
+  //     // dispatch(setSuccess(message));
+  //   })
+  //   .catch(errorResponse => {
+  //     console.log("hello", errorResponse);
+  //     // const { error } = errorResponse.response.data;
+  //     // dispatch(setError(error));
+  //     // setError(error);
+  //   });
 };
 
 export const uploadImage = file => dispatch => {
-  const cloudName = process.env.CLOUD_NAME;
-  const unsignedUploadPreset = process.env.UNSIGNED_UPLOAD_PRESET;
-  const baseUrl = process.env.CLOUDINARY_URL;
-  const url = `${baseUrl}/${cloudName}/upload`;
+  // const cloudName = process.env.CLOUD_NAME;
+  // const unsignedUploadPreset = process.env.UNSIGNED_UPLOAD_PRESET;
+  // const baseUrl = process.env.CLOUDINARY_URL;
+  const url = "https://api.cloudinary.com/v1_1/dtzujn9pi/upload";
   const fd = new FormData();
-  fd.append("upload_preset", unsignedUploadPreset);
+  fd.append("upload_preset", "m2zsnlpc");
   fd.append("file", file);
-  return axios
-    .post(url, fd, {
-      headers: { "X-Requested-With": "XMLHttpRequest" }
-    })
-    .then(res => {
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    body: fd
+  })
+    .then(response => response.json())
+    .then(response => {
       // eslint-disable-next-line camelcase
-      const { secure_url } = res.data;
+      const { secure_url } = response;
       dispatch(setImage(secure_url));
+      return response;
     })
-    .catch(err => {
-      dispatch(setError(err));
+    .catch(response => {
+      dispatch(setError(response.message));
+      return response.message;
     });
+  // return axios
+  //   .post(url, fd, {
+  //     headers: { "X-Requested-With": "XMLHttpRequest" }
+  //   })
+  //   .then(res => {
+  //     const { secure_url } = res.data;
+  //     dispatch(setImage(secure_url));
+  //   })
+  //   .catch(err => {
+  //     dispatch(setError(err));
+  //   });
 };
