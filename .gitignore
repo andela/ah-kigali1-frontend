@@ -3,7 +3,6 @@ node_modules
 dist
 .coveralls.yml
 coverage
-
 .vscode
 html-css/main.*
 html-css/*.css
