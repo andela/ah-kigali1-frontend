@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import Button from "../components/common/Buttons/BasicButton";
 import { Comments } from "./Comments";
 import { ReportingForm } from "../components/reportingForm/ReportingForm";
+import RatingForm from "../components/common/RatingForm/RatingForm";
 import {
   fetchArticle,
   deleteArticle
@@ -17,6 +18,7 @@ import {
   markHighlightSection
 } from "../redux/actions/highlightCommentActions";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
+import { fetchRatings, rateArticle } from "../redux/actions/ratingActions";
 
 import {
   inputHandleAsync,
@@ -45,7 +47,6 @@ import authorImage from "../assets/img/user.jpg";
 import dislikeIcon from "../assets/img/dislike-icon.svg";
 import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 import moreIcon from "../assets/icons/more.svg";
-import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 import Loading from "../components/Animations/LoadingDots";
@@ -58,10 +59,12 @@ export const mapStateToProps = ({
   following,
   fetchedComments,
   user,
-  highlights
+  highlights,
+  rate
 }) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
+  rate,
   article: fetchedArticle,
   following,
   commentBody: fetchedComments.body,
@@ -94,7 +97,9 @@ export const mapDispatchToProps = dispatch => ({
   onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug)),
   markHighlight: (articleBody, save = false) =>
     dispatch(markHighlightSection(articleBody, save)),
-  fetchHighLights: slug => dispatch(fetchHighLights(slug))
+  fetchHighLights: slug => dispatch(fetchHighLights(slug)),
+  fetchRatings: slug => dispatch(fetchRatings(slug)),
+  rateArticle: (slug, rate) => dispatch(rateArticle(slug, rate))
 });
 
 export class Article extends Component {
@@ -140,6 +145,7 @@ export class Article extends Component {
       fetchOneArticle
     } = this.props;
     if (article && nextProps.match.params.slug !== article.slug) {
+      this.setState({ slug: nextProps.match.params.slug });
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
@@ -355,7 +361,12 @@ export class Article extends Component {
       updatedBody,
       onSetBodyEdit,
       loading,
-      highlights
+      highlights,
+      profile,
+      rate,
+      following: followObject,
+      fetchRatings,
+      rateArticle
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -387,7 +398,6 @@ export class Article extends Component {
       location: { host, pathname }
     } = window;
     const currentUrl = `${host}${pathname}`;
-    const { following: followObject } = this.props;
     if (typeof followObject.status === "boolean") {
       following = followObject.status;
     }
@@ -548,7 +558,12 @@ export class Article extends Component {
                   image={emailIcon}
                   href={`mailto:?subject=Sharing the inspiring article&body=${currentUrl}`}
                 />
-                <img className="share-icon" src={ratingIcon} alt="logo" />
+                <RatingForm
+                  fetchRatings={fetchRatings}
+                  rate={rate}
+                  rateArticle={rateArticle}
+                  slug={slug}
+                />
                 <img
                   className="share-icon"
                   src={moreIcon}
@@ -635,6 +650,9 @@ Article.propTypes = {
   markHighlight: PropTypes.func,
   fetchHighLights: PropTypes.func,
   highlights: PropTypes.shape({}),
+  rate: PropTypes.shape({}).isRequired,
+  fetchRatings: PropTypes.func.isRequired,
+  rateArticle: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,

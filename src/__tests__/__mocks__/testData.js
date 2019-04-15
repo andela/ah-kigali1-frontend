@@ -30,6 +30,12 @@ export const article3 = {
 };
 export const props1 = {
   deleteOneArticle: jest.fn(() => "Hello world"),
+  rate: {
+    rate: {
+      ratings: [{ averageRating: "4" }]
+    }
+  },
+  fetchRatings: jest.fn(),
   currentUser: {
     firstName: "Yves",
     lastName: "John",
@@ -152,6 +158,9 @@ export const props1 = {
 };
 export const props2 = {
   deleteOneArticle: jest.fn(() => "Hello world"),
+  rate: {
+    ratings: [{ averageRating: "4" }]
+  },
   currentUser: {
     firstName: "Yves",
     lastName: "John",
