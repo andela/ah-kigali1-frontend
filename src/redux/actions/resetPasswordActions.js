@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import axios from "../../utils/axios";
 import {
   RESET_PASSWORD_INPUT_CHANGE,

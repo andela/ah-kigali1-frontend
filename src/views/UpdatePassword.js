@@ -39,9 +39,10 @@ export class UpdatePassword extends Component {
       confirmPassword,
       handleUpdatePassword: submitNewPassword
     } = this.props;
-    const errors =
-      Validator.formData({ password, confirmPassword }) ||
-      Validator.isMatch(password, confirmPassword);
+    const errors = {
+      ...Validator.formData({ password, confirmPassword }),
+      ...Validator.isMatch("password", password, confirmPassword)
+    };
     if (!isEmpty(errors)) {
       this.setState({
         errors

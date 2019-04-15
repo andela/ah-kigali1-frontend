@@ -5,7 +5,7 @@ import {
   PASSWORD_UPDATE_FAILED
 } from "../actionTypes";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   isSubmitting: false,
   errors: {}
 };
