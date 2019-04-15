@@ -19,10 +19,10 @@ export default class Validator {
     return errors;
   }
 
-  static isMatch(firstValue, secondValue) {
+  static isMatch(field, password, confirmPassword) {
     const errors = {};
-    if (firstValue === secondValue) {
-      errors.message = `${capitalize(firstValue)} miss match`;
+    if (password !== confirmPassword) {
+      errors.message = `Your ${field}s  do not match!`;
     }
     return errors;
   }

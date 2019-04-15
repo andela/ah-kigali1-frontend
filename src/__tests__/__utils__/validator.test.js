@@ -16,4 +16,10 @@ describe("Validator Class", () => {
       password: "Password is required"
     });
   });
+  it("should validate matching of two values", () => {
+    expect(Validator.isMatch("password", "1234", "1234ad")).toEqual({
+      message: "Your passwords  do not match!"
+    });
+    expect(Validator.isMatch("password", "1234", "1234")).toEqual({});
+  });
 });
