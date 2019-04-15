@@ -35,7 +35,10 @@ const loginFailed = payload => {
   };
 };
 
-export const handleSignIn = ({ email, password }) => async dispatch => {
+export const handleSignIn = (
+  { email, password },
+  callback
+) => async dispatch => {
   try {
     dispatch(updateIsSubmitting());
     const response = await axios.post("/users/login", {
@@ -43,8 +46,9 @@ export const handleSignIn = ({ email, password }) => async dispatch => {
       password
     });
     const { token, message } = response.data;
-    await localStorage.setItem("token", token);
     dispatch(loginSuccess({ token, message }));
+    await localStorage.setItem("token", token);
+    callback();
   } catch (error) {
     const { message, errors = {} } = error.response.data;
     dispatch(loginFailed({ message, errors }));

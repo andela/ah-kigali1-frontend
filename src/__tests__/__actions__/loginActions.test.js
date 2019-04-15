@@ -49,6 +49,7 @@ describe("Login action creators", () => {
         message: "Sign in failed",
         token: "qwertyuiop123456789"
       };
+      const mockedCallback = jest.fn();
       const expectedActions = [
         {
           type: SUBMITTING_LOGIN_CREDENTIALS
@@ -65,13 +66,17 @@ describe("Login action creators", () => {
           ...payload
         }
       });
-      return store.dispatch(handleSignIn(data)).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(handleSignIn({ ...data }, mockedCallback))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          expect(mockedCallback.mock.calls.length).toBe(1);
+        });
     });
     it("dispatches LOGIN_FAILED after providing invalid credentials", () => {
       store = mockStore({ login: reduxStore.login });
       const payload = { message: "Sign in failed", errors: {} };
+      const mockedCallback = jest.fn();
       const expectedActions = [
         {
           type: SUBMITTING_LOGIN_CREDENTIALS
@@ -89,9 +94,12 @@ describe("Login action creators", () => {
         }
       });
 
-      return store.dispatch(handleSignIn({ ...data })).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(handleSignIn({ ...data }, mockedCallback))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          expect(mockedCallback.mock.calls.length).toBe(0);
+        });
     });
     it("dispatches IS_OPENING_SOCIAL_AUTH_PROVIDER action creator", () => {
       global.open = jest.fn();
