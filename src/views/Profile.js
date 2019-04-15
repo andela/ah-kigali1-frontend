@@ -308,11 +308,19 @@ export class Profile extends Component {
   }
 }
 Profile.propTypes = {
-  error: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
-  history: PropTypes.objectOf(this.props).isRequired,
-  profile: PropTypes.objectOf(this.props).isRequired,
-  fetchCurrentUser: PropTypes.func.isRequired
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  fetchCurrentUser: PropTypes.func.isRequired,
+  profile: PropTypes.object
+};
+Profile.defaultProps = {
+  history: {},
+  error: "",
+  loading: false,
+  profile: {}
 };
 export const mapStateToProps = state => ({
   profile: state.user.profile,
