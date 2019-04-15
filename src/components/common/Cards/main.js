@@ -1,36 +1,63 @@
 import React, { Component } from "react";
-/* eslint global-require: "off" */
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { stringToHtmlElement } from "../../../utils/helpers/bodyParser";
+import calculateTimeStamp from "../../../utils/helpers/calculateTimeStamp";
 
-export default class MainCard extends Component {
+/* eslint global-require: "off" */
+export class MainCard extends Component {
+  redirectToArticle = () => {
+    const { article, history } = this.props;
+    return history.push(`/articles/${article.slug}`);
+  };
+
   render() {
+    const { article } = this.props;
+    const {
+      title,
+      body,
+      readTime,
+      createdAt,
+      author,
+      comments,
+      likesCount
+    } = article;
+    const { firstName, lastName, image, username } = author;
+
     return (
-      <div className="left">
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+      <div className="left" onClick={() => this.redirectToArticle()}>
         <div className="article-card">
           <div className="avatar-wrapper">
             <img
-              src={require("../../../assets/img/avatar-1.jpg")}
+              src={image || require("../../../assets/img/author.svg")}
               alt="Avatar"
               className="avatar"
             />
             <div className="name_minutes medium-main">
-              <span className="author_name">Joe Doe</span> <br />
-              <span className="date_read_time">Nov 7,2018 . 3min read</span>
+              <span className="author_name">
+                {username && firstName && lastName
+                  ? `${firstName} ${lastName}`
+                  : username}
+              </span>
+              <br />
+              <span className="date_read_time">
+                {calculateTimeStamp(createdAt)}, {readTime}min read
+              </span>
             </div>
           </div>
           <div
             className="main-article-img"
             style={{
-              backgroundImage: require("../../../assets/img/background-2.jpg")
+              backgroundImage: `url(${stringToHtmlElement(body).firstImage})`
             }}
           >
             <span className="cat">TECH</span>
           </div>
           <div className="tex-content">
-            <h3>Only I can change my life. No one can do it me</h3>
+            <h3>{title}</h3>
             <div className="tex-content__body">
-              Bacon ipsum dolor sit amet bresaola shoulder ribeye jerky tongue
-              andouille kevin meatloaf fatback shank bacon turkey turducken
-              spare ribs chuck.
+              {stringToHtmlElement(body).body}
             </div>
             <div className="icons">
               <div className="left-icons">
@@ -39,7 +66,7 @@ export default class MainCard extends Component {
                   alt="likes"
                   className="likes"
                 />
-                <div className="numbers">3,844</div>
+                <div className="numbers">{likesCount}</div>
                 <img
                   src={require("../../../assets/img/thumb-down-outline.svg")}
                   alt="dislikes"
@@ -51,7 +78,7 @@ export default class MainCard extends Component {
                   alt="comments"
                   className="comments"
                 />
-                <div className="numbers">3,844</div>
+                <div className="numbers">{comments.length}</div>
               </div>
               <div className="right-icons">
                 <img
@@ -67,3 +94,25 @@ export default class MainCard extends Component {
     );
   }
 }
+
+MainCard.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  article: PropTypes.shape({
+    title: PropTypes.string,
+    body: PropTypes.string,
+    readTime: PropTypes.number,
+    createdAt: PropTypes.string,
+    author: PropTypes.shape({
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      image: PropTypes.string,
+      username: PropTypes.string
+    }),
+    comments: PropTypes.string,
+    likesCount: PropTypes.number
+  }).isRequired
+};
+
+export default withRouter(MainCard);

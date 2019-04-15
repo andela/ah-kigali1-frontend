@@ -72,6 +72,11 @@ body {
         border-right: none;
         border-left: none;
       }
+      .article-text {
+        p {
+          margin-top: 20px;
+        }
+      }
     }
 
     .article-others {
@@ -99,6 +104,17 @@ body {
         display: none;
       }
     }
+    .article-text {
+      height: 100vh;
+      overflow: scroll;
+      p {
+        margin-top: 20px;
+        a {
+          color: #3498db;
+          text-decoration: underline;
+        }
+      }
+    }
   }
   @media (max-width: #{$break-point-tablet - 1}px) {
     .article-container {
@@ -108,6 +124,9 @@ body {
         .article-text {
           height: 100vh;
           overflow: scroll;
+          p {
+            margin-top: 20px;
+          }
         }
         .article-title {
           text-align: left;
@@ -129,4 +148,11 @@ body {
       }
     }
   }
+}
+
+.delete_article {
+  width: 20%;
+  height: 20px;
+  min-width: 60px;
+  max-width: 100px;
 }

@@ -4,6 +4,7 @@ import resetPasswordReducers from "./resetPasswordReducers";
 import updatePasswordReducers from "./updatePasswordReducers";
 import socialAuthReducers from "./socialAuthReducers";
 import articleReducer from "./articleReducer";
+import { articleReducer } from "./articleReducers";
 
 export default combineReducers({
   auth: loginReducers,
@@ -11,5 +12,6 @@ export default combineReducers({
   login: loginReducers,
   resetPassword: resetPasswordReducers,
   updatePassword: updatePasswordReducers,
-  socialAuth: socialAuthReducers
+  socialAuth: socialAuthReducers,
+  fetchedArticle: articleReducer
 });

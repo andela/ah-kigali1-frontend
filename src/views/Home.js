@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
+import "@babel/polyfill";
 import React, { Component } from "react";
 import BasicButton from "../components/common/Buttons/BasicButton";
 import Input from "../components/common/Inputs/TextInput";
 import Navbar from "../components/common/AppBars/navBar";
-import MainCard from "../components/common/Cards/main";
+
 import Latest from "../components/common/Cards/latest";
 import CategoryBar from "../components/common/AppBars/categoryBar";
 
@@ -29,22 +30,13 @@ class Home extends Component {
         <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
         <div style={{ margin: 3, marginTop: 120 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
-          <BasicButton style={{ width: "40%" }} title="Save" />
-          <Input
+          <BasicButton
             style={{ width: "40%" }}
-            type="email"
-            name="email"
-            placeholder="Your email"
-          />
-          <Input
-            style={{ width: "60%" }}
-            type="password"
-            name="email"
-            placeholder="Enter your password"
+            title="Save"
+            onClick={() => <p>Clicked</p>}
           />
         </div>
         <div className="featured_article">
-          <MainCard />
           <Latest />
         </div>
         <Latest />
@@ -52,7 +44,6 @@ class Home extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({ articles: state.articles });
+const mapStateToProps = state => ({ ...state });
 
 export default connect(mapStateToProps)(Home);
