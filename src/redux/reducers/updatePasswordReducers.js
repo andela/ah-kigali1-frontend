@@ -34,8 +34,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isSubmitting: false,
         errors: {
-          ...payload.errors,
-          message: payload.message
+          message: payload.message,
+          ...payload.errors
         }
       };
     default:

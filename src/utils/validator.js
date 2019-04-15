@@ -18,4 +18,12 @@ export default class Validator {
     });
     return errors;
   }
+
+  static isMatch(firstValue, secondValue) {
+    const errors = {};
+    if (firstValue === secondValue) {
+      errors.message = `${capitalize(firstValue)} miss match`;
+    }
+    return errors;
+  }
 }

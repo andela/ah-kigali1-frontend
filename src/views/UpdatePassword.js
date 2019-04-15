@@ -22,11 +22,9 @@ export class UpdatePassword extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { errors } = nextProps;
-    if (errors) {
-      this.setState({
-        errors
-      });
-    }
+    this.setState({
+      errors
+    });
   }
 
   handleOnChange(e) {
@@ -41,18 +39,14 @@ export class UpdatePassword extends Component {
       confirmPassword,
       handleUpdatePassword: submitNewPassword
     } = this.props;
-    const errors = Validator.formData({ password, confirmPassword });
+    const errors =
+      Validator.formData({ password, confirmPassword }) ||
+      Validator.isMatch(password, confirmPassword);
     if (!isEmpty(errors)) {
-      return this.setState({
+      this.setState({
         errors
       });
-    }
-    if (password !== confirmPassword) {
-      return this.setState({
-        errors: {
-          message: "Password miss match "
-        }
-      });
+      return;
     }
     submitNewPassword(password);
   }
