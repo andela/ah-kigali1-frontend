@@ -45,7 +45,7 @@ module.exports = {
       }
     ]
   },
-  mode: "development",
+  mode: "development && test",
   plugins: [
     new Dotenv(),
     new HtmlPackPlugin({ template: "./public/index.html" }),
