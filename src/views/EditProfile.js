@@ -162,7 +162,7 @@ export const mapDispatchToProps = dispatch => {
     fetchCurrentUser: username => dispatch(fetchCurrentUser(username)),
     onInputChange: payload => dispatch(handleFormInput(payload)),
     saveUpdatedUser: (data, username) =>
-      dispatch(saveUpdatedUser(data, username)),
+      dispatch(saveUpdatedUser(data, "usernamee")),
     uploadImage: file => dispatch(uploadImage(file))
   };
 };
