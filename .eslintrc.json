@@ -50,6 +50,7 @@
     "no-named-as-default": "off",
     "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
+    "react/forbid-prop-types": "off",
     "no-shadow": [
       "error",
       {
