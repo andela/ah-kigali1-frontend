@@ -1,4 +1,3 @@
-import "@babel/polyfill";
 import axios from "axios";
 import { nullRemover } from "../../helpers/helpers";
 import {
@@ -10,6 +9,13 @@ import {
   SET_IMAGE
 } from "../actionTypes";
 
+const {
+  TOKEN,
+  API_URL,
+  CLOUDINARY_URL,
+  CLOUD_NAME,
+  UNSIGNED_UPLOAD_PRESET
+} = process.env;
 export const setCurrentUser = user => ({
   type: SET_PROFILE,
   payload: user
@@ -37,8 +43,7 @@ export const setImage = file => ({
   type: SET_IMAGE,
   payload: file
 });
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJpZCI6ImNjNGZiNWNjLWVmNTQtNGY5ZS1iODE2LTg2MzM1NGEyNjliYiIsInJvbGVJZCI6IjcwNzBmMWY0LTI2ODYtNGU2Mi04NGViLTMzOThiZTJlZjU0NCIsImlhdCI6MTU1NDg2NzEwOH0.7hP-pDPNoDZ6E5wf30lFu-0uFsxkQUkHZ8hMdrqyhfE";
+const token = TOKEN;
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -48,7 +53,7 @@ const config = {
 export const fetchCurrentUser = username => dispatch => {
   dispatch(setLoading(true));
   return axios
-    .get(`http://localhost:4000/api/v1/profiles/${username}`, {
+    .get(`${API_URL}/profiles/${username}`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -66,39 +71,23 @@ export const fetchCurrentUser = username => dispatch => {
 };
 
 export const saveUpdatedUser = (updatedProfile, username) => dispatch => {
-  axios.put('')
-  // return axios
-  //   .put(
-  //     `http://localhost:4000/api/v1/profiles/${username}`,
-  //     { profile: updatedProfile },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     }
-  //   )
-  //   .then(response => {
-  //     console.log(response.config.data);
-  //     // const { profile, message } = response.data;
-  //     // dispatch(setCurrentUser(nullRemover(profile)));
-  //     // dispatch(setSuccess(message));
-  //   })
-  //   .catch(errorResponse => {
-  //     console.log("hello", errorResponse);
-  //     // const { error } = errorResponse.response.data;
-  //     // dispatch(setError(error));
-  //     // setError(error);
-  //   });
+  return axios
+    .put(`${API_URL}/profiles/${username}`, { profile: updatedProfile }, config)
+    .then(response => {
+      const { profile, message } = response.data;
+      dispatch(setCurrentUser(nullRemover(profile)));
+      dispatch(setSuccess(message));
+    })
+    .catch(errorResponse => {
+      const { error } = errorResponse.response.data;
+      dispatch(setError(error));
+    });
 };
 
 export const uploadImage = file => dispatch => {
-  // const cloudName = process.env.CLOUD_NAME;
-  // const unsignedUploadPreset = process.env.UNSIGNED_UPLOAD_PRESET;
-  // const baseUrl = process.env.CLOUDINARY_URL;
-  const url = "https://api.cloudinary.com/v1_1/dtzujn9pi/upload";
+  const url = `${CLOUDINARY_URL}/${CLOUD_NAME}/upload`;
   const fd = new FormData();
-  fd.append("upload_preset", "m2zsnlpc");
+  fd.append("upload_preset", UNSIGNED_UPLOAD_PRESET);
   fd.append("file", file);
   return fetch(url, {
     method: "POST",
@@ -118,15 +107,4 @@ export const uploadImage = file => dispatch => {
       dispatch(setError(response.message));
       return response.message;
     });
-  // return axios
-  //   .post(url, fd, {
-  //     headers: { "X-Requested-With": "XMLHttpRequest" }
-  //   })
-  //   .then(res => {
-  //     const { secure_url } = res.data;
-  //     dispatch(setImage(secure_url));
-  //   })
-  //   .catch(err => {
-  //     dispatch(setError(err));
-  //   });
 };

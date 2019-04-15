@@ -19,14 +19,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
-    "react/jsx-no-bind": [
-      2,
-      {
-        "allowArrowFunctions": true
-      }
-    ],
+    "class-methods-use-this": 0,
     "prettier/prettier": "error",
     "newlines-between": "always",
     "react/prefer-stateless-function": "off",
@@ -40,7 +35,7 @@
       "sourceType": "module"
     },
     "eol-last": ["error", "always"],
-    "import/prefer-default-export": "off",
+    "import/prefer-default-export": "on",
     "import/resolver": {
       "node": {
         "extensions": [".js"]

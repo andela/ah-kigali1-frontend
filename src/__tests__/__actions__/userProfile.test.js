@@ -22,7 +22,7 @@ import {
   SET_SUCCESS
 } from "../../redux/actionTypes";
 
-const { API_URL = "http://localhost:4000/api/v1" } = process.env;
+const { API_URL, CLOUDINARY_URL, CLOUD_NAME } = process.env;
 const mockStore = configureStore([thunk]);
 let store;
 describe("profile actions", () => {
@@ -144,6 +144,22 @@ describe("profile actions", () => {
     });
     describe("saveUpdatedUser()", () => {
       test("should updated user successfully", () => {
+        const expectedResults = [
+          {
+            type: SET_PROFILE,
+            payload: {
+              address: "Rwanda-Kigali",
+              bio:
+                "Lorem Ipsum is simply dummy text of the printing and typesetting indus",
+              email: "admin@email.com",
+              firstName: "Fabrice",
+              lastName: "NIYOMWUNGERI",
+              phone: "0786993847",
+              username: "username"
+            }
+          },
+          { type: SET_SUCCESS, payload: "Profile updated successfully" }
+        ];
         const payload = {
           address: "Rwanda-Kigali",
           bio:
@@ -151,74 +167,82 @@ describe("profile actions", () => {
           email: "admin@email.com",
           firstName: "Fabrice",
           lastName: "NIYOMWUNGERI",
-          phone: "0786993847"
+          phone: "0786993847",
+          username: "username"
         };
         moxios.stubRequest(`${API_URL}/profiles/username`, {
-          status: 200,
-          message: "No user with that name"
+          response: {
+            profile: payload,
+            message: "Profile updated successfully"
+          }
         });
         return store.dispatch(saveUpdatedUser(payload, "username")).then(() => {
           const actions = store.getActions();
-          console.log(actions);
-          // expect(Array.isArray(actions)).toBe(true);
-          // expect(actions[1].payload).toEqual("Profile updated successfully");
+          expect(actions).toEqual(expectedResults);
+          expect(Array.isArray(actions)).toBe(true);
+          expect(actions[1].payload).toEqual("Profile updated successfully");
         });
       });
-      // test("should fail to update user information", () => {
-      //   const payload = {
-      //     address: "Rwanda-Kigali",
-      //     bio:
-      //       "Lorem Ipsum is simply dummy text of the printing and typesetting indus",
-      //     email: "admin@email.com",
-      //     firstName: "Fabrice",
-      //     lastName: "NIYOMWUNGERI",
-      //     phone: "0786993847"
-      //   };
-      //   nock(API_URL)
-      //     .log(console.log)
-      //     .put("/profiles/usernamee")
-      //     .reply(403, {
-      //       status: 403
-      //     });
-      //   return store
-      //     .dispatch(saveUpdatedUser(payload, "usernamee"))
-      //     .then(() => {
-      //       const actions = store.getActions();
-      //       expect(actions[0].payload).toEqual("Not authorized");
-      //     });
-      // });
+      test("should fail to update", () => {
+        const expectedResults = [
+          { type: "SET_ERROR", payload: "Not authorized" }
+        ];
+        const payload = {
+          address: "Rwanda-Kigali",
+          bio:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting indus",
+          email: "admin@email.com",
+          firstName: "Fabrice",
+          lastName: "NIYOMWUNGERI",
+          phone: "0786993847",
+          username: "username"
+        };
+        moxios.stubRequest(`${API_URL}/profiles/usernamee`, {
+          status: 403,
+          response: {
+            error: "Not authorized"
+          }
+        });
+        return store
+          .dispatch(saveUpdatedUser(payload, "usernamee"))
+          .then(() => {
+            const actions = store.getActions();
+            expect(actions).toEqual(expectedResults);
+            expect(Array.isArray(actions)).toBe(true);
+            expect(actions[0].payload).toEqual("Not authorized");
+          });
+      });
     });
-    // describe("uploadImage()", () => {
-    //   test("should upload image successfully", () => {
-    //     const file = {
-    //       File: {
-    //         lastModified: 1547533967696,
-    //         name: "Photo-Passport3-black.jpg",
-    //         size: 89373,
-    //         type: "image/jpeg",
-    //         webkitRelativePath: ""
-    //       }
-    //     };
-    //     const expectedResults = [
-    //       {
-    //         type: "SET_IMAGE",
-    //         payload:
-    //           "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
-    //       }
-    //     ];
-    //     nock("https://api.cloudinary.com")
-    //       .post("/v1_1/dtzujn9pi/upload")
-    //       .reply(200, {
-    //         status: 200,
-    //         message: "OK",
-    //         secure_url:
-    //           "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
-    //       });
-    //     return store.dispatch(uploadImage(file)).then(r => {
-    //       const actions = store.getActions();
-    //       expect(actions).toEqual(expectedResults);
-    //     });
-    //   });
-    // });
+    describe("uploadImage()", () => {
+      test("should upload image successfully", () => {
+        const file = {
+          File: {
+            lastModified: 1547533967696,
+            name: "Photo-Passport3-black.jpg",
+            size: 89373,
+            type: "image/jpeg",
+            webkitRelativePath: ""
+          }
+        };
+        const expectedResults = [
+          {
+            type: "SET_IMAGE",
+            payload:
+              "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
+          }
+        ];
+        nock(CLOUDINARY_URL)
+          .post(`/${CLOUD_NAME}/upload`)
+          .reply(200, {
+            status: 200,
+            secure_url:
+              "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
+          });
+        return store.dispatch(uploadImage(file)).then(r => {
+          const actions = store.getActions();
+          expect(actions).toEqual(expectedResults);
+        });
+      });
+    });
   });
 });

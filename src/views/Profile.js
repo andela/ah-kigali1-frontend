@@ -1,25 +1,25 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable global-require */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchCurrentUser } from "../redux/actions";
+import PropTypes from "prop-types";
+import { fetchCurrentUser as getCurrentUser } from "../redux/actions";
 import { Loading } from "../components/common/Spinner/Loading";
 import Confirm from "../components/common/Buttons/confirm";
 
-const usernameFromLocalStorage = "username";
+const usernameFromLocalStorage = "Iraguha1";
 export class Profile extends Component {
   componentDidMount() {
-    // eslint-disable-next-line react/prop-types
-    this.props.fetchCurrentUser(usernameFromLocalStorage);
+    const { fetchCurrentUser } = this.props;
+    fetchCurrentUser(usernameFromLocalStorage);
   }
 
   render() {
-    const { bio, lastName, firstName, image } = this.props.profile;
-    const { loading, error, history } = this.props;
+    const {
+      profile: { bio, lastName, firstName, image },
+      loading,
+      error,
+      history
+    } = this.props;
     if (loading) {
       return <Loading />;
     }
@@ -307,15 +307,21 @@ export class Profile extends Component {
     );
   }
 }
-export const mapStateToProps = state => {
-  return {
-    profile: state.user.profile,
-    loading: state.user.loading,
-    error: state.user.error
-  };
+Profile.propTypes = {
+  error: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  history: PropTypes.objectOf(this.props).isRequired,
+  profile: PropTypes.objectOf(this.props).isRequired,
+  fetchCurrentUser: PropTypes.func.isRequired
 };
+export const mapStateToProps = state => ({
+  profile: state.user.profile,
+  loading: state.user.loading,
+  error: state.user.error
+});
+
 export const mapDispatchToProps = dispatch => ({
-  fetchCurrentUser: username => dispatch(fetchCurrentUser(username))
+  getCurrentUser: username => dispatch(getCurrentUser(username))
 });
 export default connect(
   mapStateToProps,

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable global-require */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fieldRemover } from "../helpers/helpers";
@@ -14,11 +12,10 @@ import {
 import ErrorMessage from "../components/common/Message/error";
 import SuccessMessage from "../components/common/Message/success";
 
-const usernameFromLocalStorage = "username";
+const usernameFromLocalStorage = "Iraguha1";
 
 export class EditProfile extends Component {
   componentDidMount() {
-    // eslint-disable-next-line react/prop-types
     this.props.fetchCurrentUser(usernameFromLocalStorage);
   }
 
@@ -162,7 +159,7 @@ export const mapDispatchToProps = dispatch => {
     fetchCurrentUser: username => dispatch(fetchCurrentUser(username)),
     onInputChange: payload => dispatch(handleFormInput(payload)),
     saveUpdatedUser: (data, username) =>
-      dispatch(saveUpdatedUser(data, "usernamee")),
+      dispatch(saveUpdatedUser(data, username)),
     uploadImage: file => dispatch(uploadImage(file))
   };
 };
