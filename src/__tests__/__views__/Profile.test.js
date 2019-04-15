@@ -39,7 +39,7 @@ describe("Profile", () => {
   });
   test("should test dispatch", () => {
     const dispatch = jest.fn();
-    mapDispatchToProps(dispatch).fetchCurrentUser();
+    mapDispatchToProps(dispatch).getCurrentUser();
     expect(props.fetchCurrentUser).toHaveBeenCalled();
   });
 });
