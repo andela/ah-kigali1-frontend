@@ -6,6 +6,7 @@
     "node": true,
     "jest": true
   },
+  "parser": "babel-eslint",
   "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "globals": {
     "Atomics": "readonly",

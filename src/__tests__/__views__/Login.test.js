@@ -1,6 +1,6 @@
 import React from "react";
+import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
-import sinon from "sinon";
 import { Login, mapStateToProps } from "../../views/Login";
 import { INITIAL_STATE } from "../../redux/reducers/loginReducers";
 import Validator from "../../utils/validator";
@@ -9,113 +9,138 @@ import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
 import SocialButton from "../../components/common/Buttons/SocialButton";
 
-const [handleTextInput, handleSignIn] = new Array(2).fill(jest.fn());
+const [handleTextInput, handleSignIn, mockedFormData] = new Array(3).fill(
+  jest.fn()
+);
 jest.mock("../../utils/validator");
 
-const setUp = () => {
-  const props = {
-    isSubmitting: false,
-    email: "",
-    password: "",
-    errors: {},
-    successMessage: null,
-    token: null,
-    handleSignIn,
-    handleTextInput
-  };
-  const wrapper = shallow(<Login {...props} />);
-  return { props, wrapper };
+const props = {
+  isSubmitting: false,
+  email: "",
+  password: "",
+  errors: {},
+  successMessage: null,
+  token: null,
+  handleSignIn,
+  handleTextInput
 };
+const warper = shallow(<Login {...props} />);
 
-const findElement = (element, index) =>
-  setUp()
-    .wrapper.find(element)
-    .at(index);
+const findElement = (element, index) => warper.find(element).at(index);
 
 describe("Login component", () => {
-  let component;
-  beforeEach(() => {
-    sinon.spy(Login.prototype, "handleOnChange");
-    sinon.spy(Login.prototype, "handleSubmit");
-    sinon.spy(Login.prototype, "handleNavigation");
-    const { wrapper } = setUp();
-    component = wrapper;
+  describe("component snapshot", () => {
+    it("should match the right snapshot", () => {
+      expect(toJson(warper)).toMatchSnapshot();
+    });
   });
-  afterEach(() => {
-    Login.prototype.handleOnChange.restore();
-    Login.prototype.handleSubmit.restore();
-    Login.prototype.handleNavigation.restore();
+
+  describe("component instance", () => {
+    let instance;
+    const formData = {
+      email: {
+        name: "email",
+        value: "luc.bayo@gmail.com"
+      },
+      password: {
+        name: "password",
+        value: "password"
+      }
+    };
+    beforeEach(() => {
+      instance = warper.instance();
+      jest.spyOn(instance, "handleOnChange");
+      jest.spyOn(instance, "handleSubmit");
+    });
+    afterEach(() => {
+      instance.handleOnChange.mockClear();
+      instance.handleSubmit.mockClear();
+      mockedFormData.mockClear();
+      handleSignIn.mockClear();
+      handleTextInput.mockClear();
+    });
+    it("handles input change for email field", () => {
+      findElement(TextInput, 0).simulate("change", {
+        target: formData.email
+      });
+      expect(instance.handleOnChange.mock.calls.length).toBe(1);
+      expect(instance.handleOnChange).toHaveBeenCalledWith({
+        target: formData.email
+      });
+      expect(handleTextInput).toHaveBeenCalledWith(
+        formData.email.name,
+        formData.email.value
+      );
+    });
+    it("handles input change for email field", () => {
+      findElement(TextInput, 1).simulate("change", {
+        target: formData.password
+      });
+      expect(instance.handleOnChange.mock.calls.length).toBe(1);
+      expect(instance.handleOnChange).toHaveBeenCalledWith({
+        target: formData.password
+      });
+    });
+    it("should signIn user if email and password are provided", () => {
+      mockedFormData.mockReturnValue({});
+      Validator.formData = mockedFormData.bind(Validator);
+      warper.setProps({
+        password: formData.password.value,
+        email: formData.email.value
+      });
+      findElement(FormButton, 0).simulate("click");
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      expect(handleSignIn).toHaveBeenCalledWith({
+        email: formData.email.value,
+        password: formData.password.value
+      });
+    });
+    it("should not signIn user if email and password are not provided", () => {
+      mockedFormData.mockReturnValue({ email: "Email is required" });
+      Validator.formData = mockedFormData.bind(Validator);
+      findElement(FormButton, 0).simulate("click");
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      expect(handleSignIn).not.toHaveBeenCalledWith({
+        email: props.email,
+        password: props.password
+      });
+    });
   });
-  describe("component render", () => {
+  describe("rendered component", () => {
+    let instance;
+    beforeEach(() => {
+      instance = warper.instance();
+      jest.spyOn(instance, "handleNavigation");
+    });
+    afterEach(() => [
+      warper.setProps({
+        ...props
+      })
+    ]);
     it("should render without an error", () => {
-      expect(component.find(`[data-test="login"]`).length).toBe(1);
+      expect(warper.find(`[data-test="login"]`).length).toBe(1);
     });
     it("should render two part of the screen", () => {
-      expect(component.find(`[data-test="auth-left"]`).length).toBe(1);
-      expect(component.find(`[data-test="auth-right"]`).length).toBe(1);
+      expect(warper.find(`[data-test="auth-left"]`).length).toBe(1);
+      expect(warper.find(`[data-test="auth-right"]`).length).toBe(1);
     });
     it("should render all basic components", () => {
-      expect(component.find(`[data-test="logo"]`).length).toBe(2);
-      expect(component.find(`[data-test="login-form"]`).length).toBe(1);
-      expect(component.find(`[data-test="nav-link"]`).length).toBe(2);
-      expect(component.find(SocialButton).length).toBe(3);
+      expect(warper.find(`[data-test="logo"]`).length).toBe(2);
+      expect(warper.find(`[data-test="login-form"]`).length).toBe(1);
+      expect(warper.find(`[data-test="nav-link"]`).length).toBe(2);
+      expect(warper.find(SocialButton).length).toBe(3);
     });
     it("should render two TextInputs and button", () => {
-      expect(component.find(TextInput).length).toBe(2);
-      expect(component.find(FormButton).length).toBe(1);
+      expect(warper.find(TextInput).length).toBe(2);
+      expect(warper.find(FormButton).length).toBe(1);
     });
     it("should navigate to sign up page", () => {
-      component
-        .find(BasicButton)
-        .at(0)
-        .simulate("click");
-      expect(Login.prototype.handleNavigation.calledOnce).toBe(true);
+      findElement(BasicButton, 0).simulate("click");
+      expect(instance.handleNavigation.mock.calls.length).toBe(1);
     });
     it("should render component with initial props", () => {
-      component.find(TextInput).forEach(input => {
+      warper.find(TextInput).forEach(input => {
         expect(input.props().value).toBe("");
-      });
-    });
-    it("should call handleOnChange when user enter input", () => {
-      findElement(TextInput, 0).simulate("change", {
-        target: {
-          name: "email",
-          value: "luc.bayo@gmail.com"
-        }
-      });
-
-      expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
-      expect(handleTextInput).toBeCalledWith("email", "luc.bayo@gmail.com");
-    });
-    it("should update password input value", () => {
-      findElement(TextInput, 1).simulate("change", {
-        target: {
-          name: "password",
-          value: "password"
-        }
-      });
-      expect(Login.prototype.handleOnChange.calledOnce).toBe(true);
-      expect(handleTextInput).toBeCalledWith("password", "password");
-    });
-    it("returns validation errors", () => {
-      const staticFormData = jest.fn();
-      staticFormData.mockReturnValue({
-        email: "Email is required"
-      });
-      Validator.formData = staticFormData.bind(Validator);
-      findElement(FormButton, 0).simulate("click");
-      expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
-      expect(staticFormData).toBeCalledWith({ email: "", password: "" });
-    });
-    it("should call handleSubmit", () => {
-      const staticFormData = jest.fn();
-      staticFormData.mockReturnValue({});
-      Validator.formData = staticFormData.bind(Validator);
-      findElement(FormButton, 0).simulate("click");
-      expect(Login.prototype.handleSubmit.calledOnce).toBe(true);
-      expect(staticFormData).toBeCalledWith({
-        email: "",
-        password: ""
       });
     });
     it("returns all mapped props from redux", () => {

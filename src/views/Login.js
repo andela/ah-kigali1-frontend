@@ -15,37 +15,35 @@ export class Login extends Component {
     this.state = {
       errors: {}
     };
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
-  handleOnChange(e) {
+  handleOnChange = e => {
     this.setState({
       errors: {}
     });
     const { name, value } = e.target;
     const { handleTextInput: textInput } = this.props;
     textInput(name, value);
-  }
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { email, password, handleSignIn: signIn } = this.props;
     const errors = Validator.formData({ email, password });
     if (!isEmpty(errors)) {
-      return this.setState({
+      this.setState({
         errors: {
           ...errors
         }
       });
+      return;
     }
     signIn({ email, password });
-  }
+  };
 
-  handleNavigation() {
+  handleNavigation = () => {
     const { message } = this.props;
     return message;
-  }
+  };
 
   render() {
     const { email, password, message, isSubmitting } = this.props;

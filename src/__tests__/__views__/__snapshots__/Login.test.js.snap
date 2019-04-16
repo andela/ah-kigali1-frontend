@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component component snapshot should match the right snapshot 1`] = `
+<div
+  className="auth"
+  data-test="login"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6 hide-sm"
+    >
+      <div
+        className="auth-left"
+        data-test="auth-left"
+      >
+        <div
+          className="logo"
+        >
+          <img
+            alt="logo"
+            className="logo"
+            data-test="logo"
+            src="test-file-stub"
+          />
+        </div>
+        <p>
+          Join the community of like minded author, today!
+        </p>
+        <BasicButton
+          className="btn btn-block"
+          data-test="nav-link"
+          onClick={[Function]}
+          title="Sign Up"
+        />
+      </div>
+    </div>
+    <div
+      className="col-md-6 col-sm-12"
+    >
+      <div
+        className="auth-right"
+        data-test="auth-right"
+      >
+        <div
+          className="auth-form"
+        >
+          <div
+            className="hide-md logo"
+          >
+            <img
+              alt="logo"
+              className="logo"
+              data-test="logo"
+              src="test-file-stub"
+            />
+          </div>
+          <p
+            className="pg-title"
+          >
+            Sign in with
+          </p>
+          <div
+            className="socials"
+            data-test="socials"
+          >
+            <SocialButton
+              alt="fb"
+              className=""
+              iconName="fb"
+            />
+            <SocialButton
+              alt="twitter"
+              className=""
+              iconName="twitter"
+            />
+            <SocialButton
+              alt="G"
+              className=""
+              iconName="google-plus"
+            />
+          </div>
+          <p
+            className="pg-title"
+          >
+            Or
+          </p>
+          <form
+            data-test="login-form"
+          >
+            <TextInput
+              id="auth-email"
+              name="email"
+              onChange={[Function]}
+              placeholder="Email"
+              type="email"
+              value=""
+            />
+            <TextInput
+              id="auth-password"
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+              value=""
+            />
+            <div
+              className="auth-errors"
+            >
+              <p
+                className="danger"
+              />
+            </div>
+            <div
+              className=""
+            >
+              <p
+                className="password-reset"
+                data-test="nav-link"
+              >
+                <a
+                  href="/"
+                >
+                  Forgot password?
+                </a>
+              </p>
+            </div>
+            <FormButton
+              disabled={false}
+              onClick={[Function]}
+              value="Sign In"
+            />
+          </form>
+          <div
+            className="auth-link hide-md"
+          >
+            <p
+              className="sign-up-link"
+            >
+              Don ' t have an account?
+               
+              <a
+                href="./sign-up.html"
+              >
+                sign up
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
