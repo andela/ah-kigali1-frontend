@@ -96,13 +96,17 @@ describe("Login component", () => {
       });
     });
     it("should not signIn user if email and password are not provided", () => {
-      mockedFormData.mockReturnValue({ email: "Email is required" });
+      const errors = { email: "Email is required" };
+      mockedFormData.mockReturnValue({ ...errors });
       Validator.formData = mockedFormData.bind(Validator);
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(handleSignIn).not.toHaveBeenCalledWith({
         email: props.email,
         password: props.password
+      });
+      expect(warper.state().errors).toEqual({
+        ...errors
       });
     });
   });

@@ -10,12 +10,9 @@ import BasicButton from "../components/common/Buttons/BasicButton";
 import SocialButton from "../components/common/Buttons/SocialButton";
 
 export class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: {}
-    };
-  }
+  state = {
+    errors: {}
+  };
 
   handleOnChange = e => {
     this.setState({
