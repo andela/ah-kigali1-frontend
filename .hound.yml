@@ -5,3 +5,4 @@ scss:
   enabled: false
 exclude:
   - "*.scss"
+  - "*css"
