@@ -58,6 +58,11 @@ export class UpdatePassword extends Component {
     });
   };
 
+  handleNavigation = path => {
+    const { history } = this.props;
+    history.push(`/${path}`);
+  };
+
   render() {
     const { password, confirmPassword, isSubmitting } = this.props;
     const { errors } = this.state;
@@ -131,7 +136,8 @@ UpdatePassword.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   handleUpdatePassword: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 export default connect(
   mapStateToProps,

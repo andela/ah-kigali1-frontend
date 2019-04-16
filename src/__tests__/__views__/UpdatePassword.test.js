@@ -13,6 +13,7 @@ const [
   mockIsMatch
 ] = new Array(4).fill(jest.fn());
 const token = "1234567qwertyu";
+const callback = jest.fn();
 const props = {
   isSubmitting: false,
   password: "password",
@@ -20,7 +21,8 @@ const props = {
   handleInputChange,
   handleUpdatePassword,
   errors: {},
-  location: { search: `?token=${token}` }
+  location: { search: `?token=${token}` },
+  history: { push: callback }
 };
 const warper = shallow(<UpdatePassword {...props} />);
 const findElement = (element, index) => warper.find(element).at(index);
