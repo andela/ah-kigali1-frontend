@@ -3,5 +3,3 @@ eslint:
   config_file: .eslintrc
 scss:
   enabled: false
-exclude:
-  - "src/style/**"
