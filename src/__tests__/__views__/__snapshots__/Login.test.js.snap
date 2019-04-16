@@ -18,11 +18,9 @@ exports[`Login component component snapshot should match the right snapshot 1`] 
         <div
           className="logo"
         >
-          <img
-            alt="logo"
+          <Logo
             className="logo"
             data-test="logo"
-            src="test-file-stub"
           />
         </div>
         <p>
@@ -49,11 +47,9 @@ exports[`Login component component snapshot should match the right snapshot 1`] 
           <div
             className="hide-md logo"
           >
-            <img
-              alt="logo"
+            <Logo
               className="logo"
               data-test="logo"
-              src="test-file-stub"
             />
           </div>
           <p

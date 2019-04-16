@@ -8,6 +8,7 @@ import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
 import BasicButton from "../components/common/Buttons/BasicButton";
 import SocialButton from "../components/common/Buttons/SocialButton";
+import Logo from "../components/common/Logo";
 
 export class Login extends Component {
   state = {
@@ -51,12 +52,7 @@ export class Login extends Component {
           <div className="col-md-6 hide-sm">
             <div className="auth-left" data-test="auth-left">
               <div className="logo">
-                <img
-                  src={require("../assets/img/quill-drawing-a-line.svg")}
-                  alt="logo"
-                  className="logo"
-                  data-test="logo"
-                />
+                <Logo data-test="logo" />
               </div>
               <p>Join the community of like minded author, today!</p>
               <BasicButton
@@ -71,12 +67,7 @@ export class Login extends Component {
             <div className="auth-right" data-test="auth-right">
               <div className="auth-form">
                 <div className="hide-md logo">
-                  <img
-                    src={require("../assets/img/quill-drawing-a-line.svg")}
-                    alt="logo"
-                    className="logo"
-                    data-test="logo"
-                  />
+                  <Logo data-test="logo" />
                 </div>
                 <p className="pg-title">Sign in with</p>
                 <div className="socials" data-test="socials">
@@ -115,7 +106,7 @@ export class Login extends Component {
                   <FormButton
                     value="Sign In"
                     disabled={isSubmitting}
-                    onClick={() => this.handleSubmit()}
+                    onClick={this.handleSubmit}
                   />
                 </form>
                 <div className="auth-link hide-md">
