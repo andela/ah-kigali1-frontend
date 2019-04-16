@@ -19,7 +19,7 @@ describe("Update password reducers", () => {
       ...INITIAL_STATE
     });
   });
-  it("returns state with update password and confirm password", () => {
+  it("updates the state on UPDATE_PASSWORD_INPUT_CHANGE action", () => {
     expect(
       updatePassword(INITIAL_STATE, {
         type: UPDATE_PASSWORD_INPUT_CHANGE,
@@ -37,6 +37,40 @@ describe("Update password reducers", () => {
     ).toEqual({
       ...INITIAL_STATE,
       [data.confirmPassword.field]: data.confirmPassword.value
+    });
+  });
+  it("updates state on  UPDATING_PASSWORD", () => {
+    expect(
+      updatePassword(INITIAL_STATE, {
+        type: UPDATING_PASSWORD
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      isSubmitting: true
+    });
+  });
+  it("updates state on PASSWORD_UPDATE_SUCCESS", () => {
+    const payload = { message: "Password updated successfully" };
+    expect(
+      updatePassword(INITIAL_STATE, {
+        type: PASSWORD_UPDATE_SUCCESS,
+        payload
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      message: payload.message
+    });
+  });
+  it("updates state on  PASSWORD_UPDATE_FAILED", () => {
+    const payload = { message: "Invalid password", errors: {} };
+    expect(
+      updatePassword(INITIAL_STATE, {
+        type: PASSWORD_UPDATE_FAILED,
+        payload: { ...payload }
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      errors: { message: payload.message, ...payload.errors }
     });
   });
 });
