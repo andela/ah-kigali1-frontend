@@ -9,13 +9,6 @@ import {
   SET_IMAGE
 } from "../actionTypes";
 
-const {
-  TOKEN,
-  API_URL,
-  CLOUDINARY_URL,
-  CLOUD_NAME,
-  UNSIGNED_UPLOAD_PRESET
-} = process.env;
 export const setCurrentUser = user => ({
   type: SET_PROFILE,
   payload: user
@@ -43,7 +36,7 @@ export const setImage = file => ({
   type: SET_IMAGE,
   payload: file
 });
-const token = TOKEN;
+const token = process.env.TOKEN;
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -53,7 +46,7 @@ const config = {
 export const fetchCurrentUser = username => dispatch => {
   dispatch(setLoading(true));
   return axios
-    .get(`${API_URL}/profiles/${username}`, {
+    .get(`${process.env.API_URL}/profiles/${username}`, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -70,9 +63,13 @@ export const fetchCurrentUser = username => dispatch => {
     });
 };
 
-export const saveUpdatedUser = (updatedProfile, username) => dispatch => {
-  return axios
-    .put(`${API_URL}/profiles/${username}`, { profile: updatedProfile }, config)
+export const saveUpdatedUser = (updatedProfile, username) => dispatch =>
+  axios
+    .put(
+      `${process.env.API_URL}/profiles/${username}`,
+      { profile: updatedProfile },
+      config
+    )
     .then(response => {
       const { profile, message } = response.data;
       dispatch(setCurrentUser(nullRemover(profile)));
@@ -82,12 +79,11 @@ export const saveUpdatedUser = (updatedProfile, username) => dispatch => {
       const { error } = errorResponse.response.data;
       dispatch(setError(error));
     });
-};
 
 export const uploadImage = file => dispatch => {
-  const url = `${CLOUDINARY_URL}/${CLOUD_NAME}/upload`;
+  const url = `${process.env.CLOUDINARY_URL}/${process.env.CLOUD_NAME}/upload`;
   const fd = new FormData();
-  fd.append("upload_preset", UNSIGNED_UPLOAD_PRESET);
+  fd.append("upload_preset", process.env.UNSIGNED_UPLOAD_PRESET);
   fd.append("file", file);
   return fetch(url, {
     method: "POST",
