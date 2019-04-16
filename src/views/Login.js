@@ -38,10 +38,7 @@ export class Login extends Component {
     signIn({ email, password });
   };
 
-  handleNavigation = () => {
-    const { message } = this.props;
-    return message;
-  };
+  handleNavigation = () => null;
 
   render() {
     const { email, password, message, isSubmitting } = this.props;
