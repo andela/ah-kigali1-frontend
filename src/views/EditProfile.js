@@ -12,13 +12,12 @@ import {
 import ErrorMessage from "../components/common/Message/error";
 import SuccessMessage from "../components/common/Message/success";
 
-const usernameFromLocalStorage = "Iraguha1";
+const usernameFromLocalStorage = "username";
 
 export class EditProfile extends Component {
   componentDidMount() {
     this.props.fetchCurrentUser(usernameFromLocalStorage);
   }
-
   handleChange = e => {
     this.props.onInputChange({ field: e.target.name, value: e.target.value });
   };

@@ -11,6 +11,7 @@ import Login from "./Login";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import Navbar from "../components/common/AppBars/navBar";
+import Settings from "./Settings";
 
 class MainRoute extends Component {
   render() {
@@ -27,6 +28,7 @@ class MainRoute extends Component {
             <Route path="/login" component={Login} />
             <Route path="/profiles" component={Profile} />
             <Route path="/profiles-edit" component={EditProfile} />
+            <Route path="/settings" component={Settings} />
             <Route component={NotFound} />
           </Switch>
         </div>
