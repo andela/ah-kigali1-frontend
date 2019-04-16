@@ -15,7 +15,7 @@ let props = {
     lastName: "NIYOMWUNGERI",
     bio: "software dev"
   },
-  fetchCurrentUser: jest.fn()
+  currentUser: jest.fn()
 };
 describe("Profile", () => {
   test("renders without crashing", () => {
@@ -39,7 +39,7 @@ describe("Profile", () => {
   });
   test("should test dispatch", () => {
     const dispatch = jest.fn();
-    mapDispatchToProps(dispatch).getCurrentUser();
-    expect(props.fetchCurrentUser).toHaveBeenCalled();
+    mapDispatchToProps(dispatch).currentUser();
+    expect(props.currentUser).toHaveBeenCalled();
   });
 });

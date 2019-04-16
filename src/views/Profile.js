@@ -9,8 +9,8 @@ import Confirm from "../components/common/Buttons/confirm";
 const usernameFromLocalStorage = "Iraguha1";
 export class Profile extends Component {
   componentDidMount() {
-    const { fetchCurrentUser } = this.props;
-    fetchCurrentUser(usernameFromLocalStorage);
+    const { currentUser } = this.props;
+    currentUser(usernameFromLocalStorage);
   }
 
   render() {
@@ -313,7 +313,7 @@ Profile.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  fetchCurrentUser: PropTypes.func.isRequired,
+  currentUser: PropTypes.func.isRequired,
   profile: PropTypes.object
 };
 Profile.defaultProps = {
@@ -329,7 +329,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  getCurrentUser: username => dispatch(getCurrentUser(username))
+  currentUser: username => dispatch(getCurrentUser(username))
 });
 export default connect(
   mapStateToProps,
