@@ -5,3 +5,4 @@ scss:
   enabled: false
 exclude:
   - "*.scss"
+fail_on_violations: true
