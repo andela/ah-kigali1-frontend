@@ -6,6 +6,7 @@
     "node": true,
     "jest": true
   },
+  "parser": "babel-eslint",
   "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "globals": {
     "Atomics": "readonly",
@@ -26,7 +27,8 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "allowTemplateLiterals": true,
     "parserOptions": {
       "allowImportExportEverywhere": true,
       "sourceType": "module"
@@ -34,7 +36,9 @@
     "eol-last": ["error", "always"],
     "import/prefer-default-export": "on",
     "import/resolver": {
-      "node": { "extensions": [".js"] }
+      "node": {
+        "extensions": [".js"]
+      }
     },
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -42,9 +46,24 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
+    "global-require": "off",
+    "no-named-as-default": "off",
+    "arrow-body-style": ["error", "as-needed"],
+    "import/no-dynamic-require": "off",
+    "no-shadow": [
+      "error",
+      {
+        "hoist": "functions"
+      }
+    ],
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }],
-    "no-shadow": ["error", { "allow": ["req", "res", "err", "done"] }],
+    "import/no-unresolved": [
+      2,
+      {
+        "commonjs": true
+      }
+    ],
+    "import/no-named-as-default": "off",
     "valid-jsdoc": [
       "error",
       {

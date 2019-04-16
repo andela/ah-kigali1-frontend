@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Confirm from "../components/common/Buttons/confirm";
-import Input from "../components/common/Inputs/input";
+import Input from "../components/common/Inputs/TextInput";
 import Navbar from "../components/common/AppBars/navBar";
 import MainCard from "../components/common/Cards/main";
 import Latest from "../components/common/Cards/latest";

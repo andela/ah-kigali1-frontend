@@ -1,11 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
+import "./styles/main.scss";
 import store from "./redux/store";
-import Home from "./views/Home";
-import "./style/main.scss";
+import Login from "./views/Login";
 
 export default () => (
   <Provider store={store}>
-    <Home />
+    <Login />
   </Provider>
 );
