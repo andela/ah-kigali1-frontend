@@ -33,9 +33,13 @@ describe("update password actions ceators", () => {
   });
   it("dispatches PASSWORD_UPDATE_FAILED", () => {
     const payload = { message: "Invalid or expired token", errors: {} };
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.bHVjLmJheW9AZ21haWwuY29t.izmRITmo5Ru923DNd0AzpC2ULtO26-nUJU2vzS7hhGc";
-    moxios.stubRequest(`${DEV_BASE_URL}/users/${token}/password`, {
+    const params = {
+      token:
+        "eyJhbGciOiJIUzI1NiJ9.bHVjLmJheW9AZ21haWwuY29t.izmRITmo5Ru923DNd0AzpC2ULtO26-nUJU2vzS7hhGc",
+      password: "password"
+    };
+
+    moxios.stubRequest(`${DEV_BASE_URL}/users/${params.token}/password`, {
       status: 404,
       response: {
         ...payload
@@ -50,15 +54,20 @@ describe("update password actions ceators", () => {
         payload: { ...payload }
       }
     ];
-    return store.dispatch(actions.handleUpdatePassword("password")).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    return store
+      .dispatch(actions.handleUpdatePassword({ ...params }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
   it("dispatches PASSWORD_UPDATE_SUCCESS", () => {
     const payload = { message: "Password updated successfully" };
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.bHVjLmJheW9AZ21haWwuY29t.izmRITmo5Ru923DNd0AzpC2ULtO26-nUJU2vzS7hhGc";
-    moxios.stubRequest(`${DEV_BASE_URL}/users/${token}/password`, {
+    const params = {
+      token:
+        "eyJhbGciOiJIUzI1NiJ9.bHVjLmJheW9AZ21haWwuY29t.izmRITmo5Ru923DNd0AzpC2ULtO26-nUJU2vzS7hhGc",
+      password: "password"
+    };
+    moxios.stubRequest(`${DEV_BASE_URL}/users/${params.token}/password`, {
       status: 200,
       response: {
         ...payload
@@ -73,8 +82,10 @@ describe("update password actions ceators", () => {
         payload: { ...payload }
       }
     ];
-    return store.dispatch(actions.handleUpdatePassword("password")).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    return store
+      .dispatch(actions.handleUpdatePassword({ ...params }))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
 });

@@ -8,16 +8,22 @@ import {
   handleUpdatePassword
 } from "../redux/actions/updatePasswordActions";
 import Validator from "../utils/validator";
-import { isEmpty } from "../utils/helperFunctions";
+import { isEmpty, parseURL } from "../utils/helperFunctions";
 
 export class UpdatePassword extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      errors: {}
-    };
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  state = {
+    token: "",
+    errors: {}
+  };
+
+  componentDidMount() {
+    const {
+      location: { search }
+    } = this.props;
+    const token = parseURL("?token=", search);
+    this.setState({
+      token
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,30 +33,30 @@ export class UpdatePassword extends Component {
     });
   }
 
-  handleOnChange(e) {
+  handleOnChange = e => {
     const { value, name } = e.target;
     const { handleInputChange: onChangeAction } = this.props;
     onChangeAction(name, value);
-  }
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const {
       password,
       confirmPassword,
-      handleUpdatePassword: submitNewPassword
+      handleUpdatePassword: updatePasswordAction
     } = this.props;
+    const { token } = this.state;
     const errors = {
       ...Validator.formData({ password, confirmPassword }),
       ...Validator.isMatch("password", password, confirmPassword)
     };
-    if (!isEmpty(errors)) {
-      this.setState({
-        errors
-      });
-      return;
+    if (isEmpty(errors)) {
+      return updatePasswordAction({ token, password });
     }
-    submitNewPassword(password);
-  }
+    this.setState({
+      errors
+    });
+  };
 
   render() {
     const { password, confirmPassword, isSubmitting } = this.props;
@@ -124,7 +130,8 @@ UpdatePassword.propTypes = {
   confirmPassword: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   handleUpdatePassword: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 export default connect(
   mapStateToProps,

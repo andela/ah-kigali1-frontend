@@ -115,11 +115,11 @@ exports[`Login component component snapshot should match the right snapshot 1`] 
                 className="password-reset"
                 data-test="nav-link"
               >
-                <a
-                  href="/"
+                <Link
+                  to="/reset_password"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </p>
             </div>
             <FormButton
@@ -134,13 +134,12 @@ exports[`Login component component snapshot should match the right snapshot 1`] 
             <p
               className="sign-up-link"
             >
-              Don ' t have an account?
-               
-              <a
-                href="./sign-up.html"
+              Don ' t have an account? 
+              <Link
+                to="/"
               >
                 sign up
-              </a>
+              </Link>
               .
             </p>
           </div>

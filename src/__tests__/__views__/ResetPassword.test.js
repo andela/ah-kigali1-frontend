@@ -1,50 +1,55 @@
 import React from "react";
 import { shallow } from "enzyme";
-import sinon from "sinon";
+import toJson from "enzyme-to-json";
 import { ResetPassword } from "../../views/ResetPassword";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 
-const [handleInputChange, sendResetLink] = new Array(2).fill(jest.fn());
+const [handleInputChange, sendResetLink, mockedFormData] = new Array(3).fill(
+  jest.fn()
+);
 const userInput = { email: "me@example.com" };
-const setUp = () => {
-  const props = {
-    handleInputChange,
-    email: userInput.email,
-    sendResetLink,
-    failedMessage: "",
-    isSubmitting: false,
-    isSuccess: false,
-    successMessage: ""
-  };
-  const wrapper = shallow(<ResetPassword {...props} />);
-  return { props, wrapper };
+
+const props = {
+  handleInputChange,
+  email: userInput.email,
+  sendResetLink,
+  failedMessage: "",
+  isSubmitting: false,
+  isSuccess: false,
+  successMessage: ""
 };
-const findElement = (element, index) =>
-  setUp()
-    .wrapper.find(element)
-    .at(index);
+const warper = shallow(<ResetPassword {...props} />);
+const findElement = (element, index) => warper.find(element).at(index);
+
 describe("Login component", () => {
-  let component;
-  beforeEach(() => {
-    sinon.spy(ResetPassword.prototype, "handleOnChange");
-    sinon.spy(ResetPassword.prototype, "handleSubmit");
-    const { wrapper } = setUp();
-    component = wrapper;
-  });
-  afterEach(() => {
-    ResetPassword.prototype.handleOnChange.restore();
-    ResetPassword.prototype.handleSubmit.restore();
-  });
   describe("component render", () => {
+    it("should match the snapshot", () => {
+      expect(toJson(warper)).toMatchSnapshot();
+    });
     it("should render two TextInputs and button", () => {
-      expect(component.find(TextInput).length).toBe(1);
-      expect(component.find(FormButton).length).toBe(1);
+      expect(warper.find(TextInput).length).toBe(1);
+      expect(warper.find(FormButton).length).toBe(1);
     });
     it("should render component with initial props", () => {
-      component.find(TextInput).forEach(input => {
+      warper.find(TextInput).forEach(input => {
         expect(input.props().value).toBe(userInput.email);
       });
+    });
+  });
+  describe("component properites", () => {
+    let instance;
+    beforeEach(() => {
+      instance = warper.instance();
+      jest.spyOn(instance, "handleOnChange");
+      jest.spyOn(instance, "handleSubmit");
+    });
+    afterEach(() => {
+      instance.handleOnChange.mockClear();
+      instance.handleSubmit.mockClear();
+      handleInputChange.mockClear();
+      sendResetLink.mockClear();
+      mockedFormData.mockClear();
     });
     it("should call handleOnChange when user enter input", () => {
       findElement(TextInput, 0).simulate("change", {
@@ -53,15 +58,22 @@ describe("Login component", () => {
           value: "example@yahoo.com"
         }
       });
-
-      expect(ResetPassword.prototype.handleOnChange.calledOnce).toBe(true);
+      expect(instance.handleOnChange.mock.calls.length).toBe(1);
       expect(handleInputChange).toBeCalledWith("email", "example@yahoo.com");
     });
-
-    it("returns validation errors", () => {
+    it("returns sendResetLink action creator", () => {
       findElement(FormButton, 0).simulate("click");
-      expect(ResetPassword.prototype.handleSubmit.calledOnce).toBe(true);
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(sendResetLink).toBeCalledWith({ ...userInput });
+    });
+    it("returns validation errors", () => {
+      warper.setProps({
+        email: ""
+      });
+      findElement(FormButton, 0).simulate("click");
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      expect(sendResetLink.mock.calls.length).toBe(0);
+      expect(sendResetLink).not.toBeCalledWith({ email: warper.props().email });
     });
   });
 });

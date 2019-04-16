@@ -7,25 +7,33 @@ import {
 } from "../redux/actions/resetPasswordActions";
 import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
+import { isEmpty } from "../utils/helperFunctions";
 
 export class ResetPassword extends Component {
-  constructor(props) {
-    super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    validationMessage: ""
+  };
 
-  handleOnChange(e) {
+  handleOnChange = e => {
+    this.setState({
+      validationMessage: ""
+    });
     const { name, value } = e.target;
     const { handleInputChange: handleChange } = this.props;
     handleChange(name, value);
-  }
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { email } = this.props;
     const { sendResetLink: handleReset } = this.props;
+    if (isEmpty(email)) {
+      this.setState({
+        validationMessage: "Email is required"
+      });
+      return;
+    }
     handleReset({ email });
-  }
+  };
 
   render() {
     const {
@@ -35,6 +43,7 @@ export class ResetPassword extends Component {
       isSuccess,
       successMessage
     } = this.props;
+    const { validationMessage } = this.state;
     return (
       <div className="reset-password__container">
         <div className="reset-password">
@@ -67,7 +76,9 @@ export class ResetPassword extends Component {
                   />
                   {failedMessage ? (
                     <div className="auth-errors">
-                      <p className="danger">{failedMessage}</p>
+                      <p className="danger">
+                        {validationMessage || failedMessage}
+                      </p>
                     </div>
                   ) : (
                     ""
@@ -75,7 +86,7 @@ export class ResetPassword extends Component {
                   <FormButton
                     value="Sign In"
                     disabled={isSubmitting}
-                    onClick={() => this.handleSubmit()}
+                    onClick={this.handleSubmit}
                   />
                 </form>
               </div>

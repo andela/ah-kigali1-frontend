@@ -12,13 +12,11 @@ export const handleInputChange = (field, value) => ({
   payload: { field, value }
 });
 
-export const handleUpdatePassword = password => async dispatch => {
+export const handleUpdatePassword = ({ token, password }) => async dispatch => {
   try {
     dispatch({
       type: UPDATING_PASSWORD
     });
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.bHVjLmJheW9AZ21haWwuY29t.izmRITmo5Ru923DNd0AzpC2ULtO26-nUJU2vzS7hhGc";
     const response = await axios.put(`/users/${token}/password`, {
       password
     });

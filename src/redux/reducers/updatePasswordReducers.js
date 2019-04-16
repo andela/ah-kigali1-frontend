@@ -7,6 +7,8 @@ import {
 
 export const INITIAL_STATE = {
   isSubmitting: false,
+  password: "",
+  confirmPassword: "",
   errors: {}
 };
 
@@ -16,6 +18,7 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_PASSWORD_INPUT_CHANGE:
       return {
         ...state,
+        errors: {},
         [payload.field]: payload.value
       };
     case UPDATING_PASSWORD:

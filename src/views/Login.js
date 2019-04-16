@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
 import { isEmpty } from "../utils/helperFunctions";
 import Validator from "../utils/validator";
@@ -97,7 +98,7 @@ export class Login extends Component {
                   </div>
                   <div className="">
                     <p className="password-reset" data-test="nav-link">
-                      <a href="/">Forgot password?</a>
+                      <Link to="/reset_password">Forgot password?</Link>
                     </p>
                   </div>
                   <FormButton
@@ -108,8 +109,7 @@ export class Login extends Component {
                 </form>
                 <div className="auth-link hide-md">
                   <p className="sign-up-link">
-                    Don &apos; t have an account?{" "}
-                    <a href="./sign-up.html">sign up</a>.
+                    Don &apos; t have an account? <Link to="/">sign up</Link>.
                   </p>
                 </div>
               </div>

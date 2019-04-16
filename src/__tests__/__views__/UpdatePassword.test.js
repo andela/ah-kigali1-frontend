@@ -1,5 +1,4 @@
 import React from "react";
-import sinon from "sinon";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import { UpdatePassword } from "../../views/UpdatePassword";
@@ -7,33 +6,34 @@ import Validator from "../../utils/validator";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 
-const [handleInputChange, handleUpdatePassword] = new Array(2).fill(jest.fn());
-let mockFormData = jest.fn();
-let mockIsMatch = jest.fn();
-const setUp = newProps => {
-  const props = {
-    isSubmitting: false,
-    password: "password",
-    confirmPassword: "password",
-    handleInputChange,
-    handleUpdatePassword,
-    errors: {},
-    ...newProps
-  };
-  return shallow(<UpdatePassword {...props} />);
+const [
+  handleInputChange,
+  handleUpdatePassword,
+  mockFormData,
+  mockIsMatch
+] = new Array(4).fill(jest.fn());
+const token = "1234567qwertyu";
+const props = {
+  isSubmitting: false,
+  password: "password",
+  confirmPassword: "password",
+  handleInputChange,
+  handleUpdatePassword,
+  errors: {},
+  location: { search: `?token=${token}` }
 };
-const findElement = (element, index, props = {}) =>
-  setUp(props)
-    .find(element)
-    .at(index);
-
+const warper = shallow(<UpdatePassword {...props} />);
+const findElement = (element, index) => warper.find(element).at(index);
+const dataFromForm = {
+  password: { name: "password", value: "password" },
+  confirmPassword: { name: "confirmPassword", value: "password" }
+};
 describe("Update Password", () => {
   describe("test snapshot", () => {
     it("should match the snapshot", () => {
-      const component = setUp();
       expect(toJson(UpdatePassword)).toMatchSnapshot();
-      expect(component.find(TextInput).length).toEqual(2);
-      expect(component.find(FormButton).length).toEqual(1);
+      expect(warper.find(TextInput).length).toEqual(2);
+      expect(warper.find(FormButton).length).toEqual(1);
     });
   });
   describe("test component life cycle", () => {
@@ -41,86 +41,81 @@ describe("Update Password", () => {
       const errorPayload = {
         message: "Password too short"
       };
-      const component = setUp();
-      component.setProps({
+      warper.setProps({
         errors: {
           ...errorPayload
         }
       });
-      expect(component.state().errors).toEqual({
+      expect(warper.state().token).toEqual(token);
+      expect(warper.state().errors).toEqual({
         ...errorPayload
       });
     });
   });
-
-  describe("test methods", () => {
+  describe("component method", () => {
+    let instance;
     beforeEach(() => {
-      sinon.spy(UpdatePassword.prototype, "handleOnChange");
-      sinon.spy(UpdatePassword.prototype, "handleSubmit");
+      instance = warper.instance();
+      jest.spyOn(instance, "handleOnChange");
+      jest.spyOn(instance, "handleSubmit");
     });
     afterEach(() => {
-      UpdatePassword.prototype.handleOnChange.restore();
-      UpdatePassword.prototype.handleSubmit.restore();
-      handleUpdatePassword.mockRestore();
-      handleUpdatePassword.mockRestore();
-      mockFormData.mockRestore();
-      mockIsMatch.mockRestore();
+      instance.handleOnChange.mockClear();
+      instance.handleSubmit.mockClear();
+      handleInputChange.mockClear();
+      handleUpdatePassword.mockClear();
+      mockFormData.mockClear();
+      mockIsMatch.mockClear();
+      warper.setProps({
+        ...props
+      });
     });
-    describe("TextInput", () => {
-      it("returns handleOnChangeText for password field", () => {
-        findElement(TextInput, 0).simulate("change", {
-          target: {
-            name: "password",
-            value: "password"
-          }
-        });
-        expect(UpdatePassword.prototype.handleOnChange.calledOnce).toBe(true);
-        expect(handleInputChange).toBeCalledWith("password", "password");
+    it("responds to user input on password field", () => {
+      findElement(TextInput, 0).simulate("change", {
+        target: {
+          ...dataFromForm.password
+        }
       });
-      it("returns handleOnChangeText for confirm password", () => {
-        findElement(TextInput, 1).simulate("change", {
-          target: {
-            name: "confirmPassword",
-            value: "password"
-          }
-        });
-        expect(UpdatePassword.prototype.handleOnChange.calledOnce).toBe(true);
-        expect(handleInputChange).toBeCalledWith("confirmPassword", "password");
+      expect(instance.handleOnChange.mock.calls.length).toBe(1);
+      expect(handleInputChange).toBeCalledWith(
+        dataFromForm.password.name,
+        dataFromForm.password.value
+      );
+    });
+    it("responds to user input for  confirmPassword field", () => {
+      findElement(TextInput, 1).simulate("change", {
+        target: {
+          ...dataFromForm.confirmPassword
+        }
       });
-      it("should call handleUpdate if password match", () => {
-        Validator.formData = mockFormData.bind(Validator);
-        Validator.isMatch = mockIsMatch.bind(Validator);
-        findElement(FormButton, 0).simulate("click");
-        expect(UpdatePassword.prototype.handleSubmit.calledOnce).toBe(true);
-        expect(mockFormData).toBeCalledWith({
-          password: "password",
-          confirmPassword: "password"
-        });
-        expect(handleUpdatePassword).toBeCalledWith("password");
+      expect(instance.handleOnChange.mock.calls.length).toBe(1);
+      expect(handleInputChange).toBeCalledWith(
+        dataFromForm.confirmPassword.name,
+        dataFromForm.confirmPassword.value
+      );
+    });
+    it("should return validation errors", () => {
+      mockFormData.mockReturnValue({});
+      mockIsMatch.mockReturnValue({ message: "Password miss match" });
+      Validator.formData = mockFormData.bind(Validator);
+      Validator.isMatch = mockIsMatch.bind(Validator);
+      findElement(FormButton, 0).simulate("click");
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      expect(handleUpdatePassword).not.toBeCalledWith({
+        token: warper.state().token,
+        password: dataFromForm.password.value
       });
-      it("should not call handleUpdate if password mismatch", () => {
-        mockIsMatch = jest.fn(() => ({
-          message: "hello world"
-        }));
-        Validator.formData = mockFormData.bind(Validator);
-        Validator.isMatch = mockIsMatch.bind(Validator);
-        findElement(FormButton, 0, { password: "helloworld" }).simulate(
-          "click"
-        );
-        expect(UpdatePassword.prototype.handleSubmit.calledOnce).toBe(true);
-        expect(handleUpdatePassword).not.toHaveBeenCalled();
-      });
-      it("should not call handleUpdate if password mismatch", () => {
-        mockFormData = jest.fn(() => ({
-          password: " Password is required"
-        }));
-        Validator.formData = mockFormData.bind(Validator);
-        Validator.isMatch = mockIsMatch.bind(Validator);
-        findElement(FormButton, 0, { password: "helloworld" }).simulate(
-          "click"
-        );
-        expect(UpdatePassword.prototype.handleSubmit.calledOnce).toBe(true);
-        expect(handleUpdatePassword).not.toHaveBeenCalled();
+    });
+    it("should return validation errors", () => {
+      mockFormData.mockReturnValue({});
+      mockIsMatch.mockReturnValue({});
+      Validator.formData = mockFormData.bind(Validator);
+      Validator.isMatch = mockIsMatch.bind(Validator);
+      findElement(FormButton, 0).simulate("click");
+      expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      expect(handleUpdatePassword).toBeCalledWith({
+        token: warper.state().token,
+        password: dataFromForm.password.value
       });
     });
   });
