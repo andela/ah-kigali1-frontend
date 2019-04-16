@@ -6,7 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 import Home from "./Home";
-import NotFound from "./Not-Found";
+import NotFound from "./NotFound";
 import Login from "./Login";
 
 class MainRoute extends Component {
