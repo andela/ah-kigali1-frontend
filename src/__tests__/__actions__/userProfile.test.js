@@ -238,7 +238,7 @@ describe("profile actions", () => {
             secure_url:
               "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
           });
-        return store.dispatch(uploadImage(file)).then(r => {
+        return store.dispatch(uploadImage(file)).then(() => {
           const actions = store.getActions();
           expect(actions).toEqual(expectedResults);
         });

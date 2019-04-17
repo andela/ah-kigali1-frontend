@@ -18,7 +18,6 @@ class MainRoute extends Component {
       <Router>
         <div>
           <Navbar />
-
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path="/">

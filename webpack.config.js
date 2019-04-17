@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+// const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
@@ -53,6 +53,6 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css"
     }),
-    new ErrorOverlayPlugin()
+    // new ErrorOverlayPlugin()
   ]
 };

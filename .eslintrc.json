@@ -19,9 +19,8 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "jsx-a11y"],
+  "plugins": ["react", "prettier"],
   "rules": {
-    "class-methods-use-this": 0,
     "prettier/prettier": "error",
     "newlines-between": "always",
     "react/prefer-stateless-function": "off",
