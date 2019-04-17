@@ -15,4 +15,4 @@ after_success:
   - "stable"
 notifications:
   email: false
-  slack: "%{SLACK_TOKEN}"
+  slack: true
