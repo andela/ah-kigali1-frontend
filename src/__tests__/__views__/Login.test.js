@@ -98,7 +98,7 @@ describe("Login component", () => {
       warper.setProps({
         loginSuccess: true
       });
-      expect(instance.handleNavigation.mock.calls.length).toBe(1);
+      expect(instance.handleNavigation).toBeCalledWith("");
       expect(handleSignIn).toHaveBeenCalledWith({
         email: formData.email.value,
         password: formData.password.value

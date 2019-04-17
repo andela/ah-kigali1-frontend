@@ -113,7 +113,7 @@ describe("Update Password", () => {
         token: warper.state().token,
         password: dataFromForm.password.value
       });
-      expect(instance.handleNavigation.mock.calls.length).toBe(1);
+      expect(instance.handleNavigation).toBeCalledWith("sign_in");
     });
     it("should return validation errors", () => {
       mockFormData.mockReturnValue({});

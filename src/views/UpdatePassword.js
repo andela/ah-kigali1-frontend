@@ -73,7 +73,7 @@ export class UpdatePassword extends Component {
     } = this.props;
     const { errors } = this.state;
     if (passwordUpdateSuccess) {
-      return this.handleNavigation("login");
+      return this.handleNavigation("sign_in");
     }
     return (
       <div className="reset-password__container">
