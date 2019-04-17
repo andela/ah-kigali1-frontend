@@ -14,7 +14,6 @@ const [
   callback
 ] = new Array(5).fill(jest.fn());
 const token = "1234567qwertyu";
-const callback = jest.fn();
 const props = {
   isSubmitting: false,
   password: "password",
