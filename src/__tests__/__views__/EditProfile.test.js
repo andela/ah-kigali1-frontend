@@ -22,13 +22,17 @@ const props = {
     address: "Kigali",
     image: "https://res.cloudinary.com/kdhlls/dkjfd"
   },
-  fetchCurrentUser: jest.fn(),
+  match: {
+    params: "username"
+  },
+  onFetchCurrentUser: jest.fn(),
   onInputChange: jest.fn(),
-  uploadImage: jest.fn().mockImplementation(() => Promise.resolve()),
-  saveUpdatedUser: jest.fn()
+  onUploadImage: jest.fn().mockImplementation(() => Promise.resolve()),
+  onSaveUpdatedUser: jest.fn()
 };
 
 describe("Edit Profile", () => {
+  localStorage.setItem("token", "kkdjfd");
   describe("mapStateToProps()", () => {
     test("should call onInputChange action", () => {
       const state = mapStateToProps(initialState);
@@ -48,7 +52,7 @@ describe("Edit Profile", () => {
         .find("Confirm")
         .first()
         .simulate("click");
-      expect(props.saveUpdatedUser).toHaveBeenCalled();
+      expect(props.onSaveUpdatedUser).toHaveBeenCalled();
     });
   });
 
@@ -65,19 +69,19 @@ describe("Edit Profile", () => {
     });
     test("should call saveUpdatedUser action", () => {
       const dispatch = jest.fn();
-      mapDispatchToProps(dispatch).saveUpdatedUser(
+      mapDispatchToProps(dispatch).onSaveUpdatedUser(
         fieldRemover(props.loggedInUser)
       );
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
     test("should call uploadImage action", () => {
       const dispatch = jest.fn();
-      mapDispatchToProps(dispatch).uploadImage(imagePath);
+      mapDispatchToProps(dispatch).onUploadImage(imagePath);
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
     test("should call saveUpdatedUser action", () => {
       const dispatch = jest.fn();
-      mapDispatchToProps(dispatch).fetchCurrentUser();
+      mapDispatchToProps(dispatch).onFetchCurrentUser();
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
     test("uploadImage()", () => {
@@ -90,7 +94,8 @@ describe("Edit Profile", () => {
       wrapper
         .find(".profile_picture")
         .simulate("change", { target: { files: [file] } });
-      expect(props.uploadImage).toHaveBeenCalled();
+      expect(props.onUploadImage).toHaveBeenCalled();
     });
   });
+  localStorage.setItem("token", "");
 });

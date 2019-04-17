@@ -176,7 +176,7 @@ describe("profile actions", () => {
             message: "Profile updated successfully"
           }
         });
-        return store.dispatch(saveUpdatedUser(payload, "username")).then(() => {
+        return store.dispatch(saveUpdatedUser(payload)).then(() => {
           const actions = store.getActions();
           expect(actions).toEqual(expectedResults);
           expect(Array.isArray(actions)).toBe(true);
@@ -197,20 +197,18 @@ describe("profile actions", () => {
           phone: "0786993847",
           username: "username"
         };
-        moxios.stubRequest(`${API_URL}/profiles/usernamee`, {
+        moxios.stubRequest(`${API_URL}/profiles/username`, {
           status: 403,
           response: {
             error: "Not authorized"
           }
         });
-        return store
-          .dispatch(saveUpdatedUser(payload, "usernamee"))
-          .then(() => {
-            const actions = store.getActions();
-            expect(actions).toEqual(expectedResults);
-            expect(Array.isArray(actions)).toBe(true);
-            expect(actions[0].payload).toEqual("Not authorized");
-          });
+        return store.dispatch(saveUpdatedUser(payload)).then(() => {
+          const actions = store.getActions();
+          expect(actions).toEqual(expectedResults);
+          expect(Array.isArray(actions)).toBe(true);
+          expect(actions[0].payload).toEqual("Not authorized");
+        });
       });
     });
     describe("uploadImage()", () => {

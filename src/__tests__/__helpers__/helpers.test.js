@@ -1,4 +1,4 @@
-import { fieldRemover, nullRemover } from "../../helpers/helpers.js";
+import { fieldRemover, nullRemover } from "../../helpers/helpers";
 import { initialState } from "../testData";
 
 describe("helpers", () => {

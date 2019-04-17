@@ -14,7 +14,7 @@ import {
   LOGIN_INPUT_CHANGE
 } from "../../redux/actionTypes";
 
-const DEV_BASE_URL = "http://localhost:3000/api/v1";
+const DEV_BASE_URL = process.env.API_URL;
 let data;
 const mockStore = configureMockStore([thunk]);
 let store;

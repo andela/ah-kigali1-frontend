@@ -24,8 +24,8 @@ class MainRoute extends Component {
               <Redirect to="/home" />
             </Route>
             <Route path="/login" component={Login} />
-            <Route path="/profiles" component={Profile} />
-            <Route path="/profiles-edit" component={EditProfile} />
+            <Route exact path="/profiles/:username" component={Profile} />
+            <Route path="/profiles/:username/edit" component={EditProfile} />
             <Route component={NotFound} />
           </Switch>
         </div>

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 class Navbar extends Component {
   constructor(props) {
     super(props);
+    console.log();
     this.state = {
       toggle: "none"
     };
@@ -17,6 +18,10 @@ class Navbar extends Component {
 
   render() {
     const { toggle } = this.state;
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return <React.Fragment />;
+    }
     return (
       <div>
         <section

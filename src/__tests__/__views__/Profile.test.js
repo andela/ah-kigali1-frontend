@@ -15,6 +15,9 @@ let props = {
     lastName: "NIYOMWUNGERI",
     bio: "software dev"
   },
+  match: {
+    params: "username"
+  },
   currentUser: jest.fn()
 };
 describe("Profile", () => {

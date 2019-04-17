@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fieldRemover } from "../helpers/helpers";
 import Input from "../components/common/Inputs/input";
@@ -12,45 +13,50 @@ import {
 import ErrorMessage from "../components/common/Message/error";
 import SuccessMessage from "../components/common/Message/success";
 
-const usernameFromLocalStorage = "Iraguha1";
-
 export class EditProfile extends Component {
   componentDidMount() {
-    this.props.fetchCurrentUser(usernameFromLocalStorage);
+    const { username } = this.props.match.params;
+    const { onFetchCurrentUser } = this.props;
+    onFetchCurrentUser(username);
   }
 
   handleChange = e => {
-    this.props.onInputChange({ field: e.target.name, value: e.target.value });
+    const { onInputChange } = this.props;
+    onInputChange({ field: e.target.name, value: e.target.value });
   };
+
   handleImageChange = e => {
-    this.props.uploadImage(e.target.files[0]).then(() => {
-      const { loggedInUser } = this.props;
-      this.props.saveUpdatedUser(
-        fieldRemover(loggedInUser),
-        usernameFromLocalStorage
-      );
+    const { loggedInUser, onUploadImage, onSaveUpdatedUser } = this.props;
+    onUploadImage(e.target.files[0]).then(r => {
+      console.log(r.target, "as event");
+      onSaveUpdatedUser(fieldRemover(loggedInUser));
     });
   };
-  handleSubmit = e => {
-    const { loggedInUser } = this.props;
-    this.props.saveUpdatedUser(
-      fieldRemover(loggedInUser),
-      usernameFromLocalStorage
-    );
+
+  handleSubmit = () => {
+    const { loggedInUser, onSaveUpdatedUser } = this.props;
+    onSaveUpdatedUser(fieldRemover(loggedInUser));
   };
 
   render() {
-    const { error, message } = this.props;
     const {
-      username,
-      email,
-      firstName,
-      lastName,
-      bio,
-      phone,
-      address,
-      image
-    } = this.props.loggedInUser;
+      loggedInUser: {
+        username,
+        email,
+        firstName,
+        lastName,
+        bio,
+        phone,
+        address,
+        image
+      },
+      error,
+      message
+    } = this.props;
+    // const token = localStorage.getItem("token");
+    // if (!token) {
+    //   return <h1 style={{ marginTop: "100px" }}>Not Authorized</h1>;
+    // }
     return (
       <div className="main update-profile-container">
         <div className="update">
@@ -138,6 +144,7 @@ export class EditProfile extends Component {
                 placeholder="Username"
                 onChange={this.handleChange}
                 value={username}
+                disabled
               />
               <Confirm onClick={this.handleSubmit} title="Save" />
             </div>
@@ -147,6 +154,22 @@ export class EditProfile extends Component {
     );
   }
 }
+EditProfile.propTypes = {
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  loggedInUser: PropTypes.object,
+  message: PropTypes.string,
+  onFetchCurrentUser: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveUpdatedUser: PropTypes.func.isRequired,
+  onUploadImage: PropTypes.func.isRequired
+};
+EditProfile.defaultProps = {
+  error: "",
+  loading: false,
+  message: "",
+  loggedInUser: {}
+};
 export const mapStateToProps = state => ({
   loggedInUser: state.user.profile,
   loading: state.user.loading,
@@ -154,15 +177,12 @@ export const mapStateToProps = state => ({
   message: state.user.message
 });
 
-export const mapDispatchToProps = dispatch => {
-  return {
-    fetchCurrentUser: username => dispatch(fetchCurrentUser(username)),
-    onInputChange: payload => dispatch(handleFormInput(payload)),
-    saveUpdatedUser: (data, username) =>
-      dispatch(saveUpdatedUser(data, username)),
-    uploadImage: file => dispatch(uploadImage(file))
-  };
-};
+export const mapDispatchToProps = dispatch => ({
+  onFetchCurrentUser: username => dispatch(fetchCurrentUser(username)),
+  onInputChange: payload => dispatch(handleFormInput(payload)),
+  onSaveUpdatedUser: data => dispatch(saveUpdatedUser(data)),
+  onUploadImage: file => dispatch(uploadImage(file))
+});
 
 export default connect(
   mapStateToProps,

@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import axios from "axios";
 import { nullRemover } from "../../helpers/helpers";
 import {
@@ -36,7 +37,7 @@ export const setImage = file => ({
   type: SET_IMAGE,
   payload: file
 });
-const token = process.env.TOKEN;
+const token = localStorage.getItem("token");
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -63,10 +64,10 @@ export const fetchCurrentUser = username => dispatch => {
     });
 };
 
-export const saveUpdatedUser = (updatedProfile, username) => dispatch =>
+export const saveUpdatedUser = updatedProfile => dispatch =>
   axios
     .put(
-      `${process.env.API_URL}/profiles/${username}`,
+      `${process.env.API_URL}/profiles/${updatedProfile.username}`,
       { profile: updatedProfile },
       config
     )

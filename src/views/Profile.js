@@ -6,25 +6,26 @@ import { fetchCurrentUser as getCurrentUser } from "../redux/actions";
 import { Loading } from "../components/common/Spinner/Loading";
 import Confirm from "../components/common/Buttons/confirm";
 
-const usernameFromLocalStorage = "Iraguha1";
 export class Profile extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { currentUser } = this.props;
-    currentUser(usernameFromLocalStorage);
+    const { username } = this.props.match.params;
+    currentUser(username);
   }
 
   render() {
     const {
-      profile: { bio, lastName, firstName, image },
+      profile: { bio, lastName, firstName, image, username },
       loading,
       error,
       history
     } = this.props;
+    const token = localStorage.getItem("token");
     if (loading) {
       return <Loading />;
     }
     if (error) {
-      return <div>{error}</div>;
+      return <h1 style={{ marginTop: "200px" }}>{error}</h1>;
     }
     return (
       <div className="profile">
@@ -36,9 +37,11 @@ export class Profile extends Component {
             </h1>
             <h2>UI/UX designer</h2>
             <p>{bio}</p>
+
             <Confirm
               title="Edit"
-              onClick={() => history.push("/profiles-edit")}
+              disabled={!token}
+              onClick={() => history.push(`/profiles/${username}/edit`)}
             />
             <div className="socials">
               <div className="icon">
