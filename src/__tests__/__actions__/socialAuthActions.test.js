@@ -37,7 +37,7 @@ describe("Social Auth action", () => {
     moaxios.stubRequest(`${process.env.DEV_BASE_URL}/users/current`, {
       status: 200,
       response: {
-        ...data
+        user: { ...data }
       }
     });
     return store

@@ -18,7 +18,7 @@ export const handleUserLogin = token => async dispatch => {
         Authorization: `Bearer ${token}`
       }
     });
-    if (response.data) {
+    if (response.data.user) {
       await localStorage.setItem("token", token);
       return dispatch({
         type: SOCIAL_AUTH_SUCCESS
