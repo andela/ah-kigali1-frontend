@@ -14,7 +14,8 @@ import {
   LOGIN_INPUT_CHANGE
 } from "../../redux/actionTypes";
 
-const DEV_BASE_URL = "http://localhost:3000/api/v1";
+const { API_URL, CLOUDINARY_URL, CLOUD_NAME } = process.env;
+
 let data;
 const mockStore = configureMockStore([thunk]);
 let store;
@@ -56,7 +57,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${API_URL}/users/login`, {
         status: 201,
         response: {
           ...payload
@@ -79,7 +80,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${API_URL}/users/login`, {
         status: 400,
         response: {
           ...payload

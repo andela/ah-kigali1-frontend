@@ -262,7 +262,6 @@ describe("profile actions", () => {
           });
         return store.dispatch(uploadImage(file)).then(() => {
           const actions = store.getActions();
-          console.log(actions);
           expect(actions[0].type).toEqual("SET_ERROR");
         });
       });

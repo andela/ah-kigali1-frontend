@@ -15,11 +15,11 @@ import Settings from "./Settings";
 
 class MainRoute extends Component {
   render() {
+    console.log("ROUTER:",this.props)
     return (
       <Router>
         <div>
           <Navbar />
-
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path="/">

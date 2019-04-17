@@ -14,12 +14,13 @@ class Navbar extends Component {
       toggle: state.toggle === "none" ? "block" : "none"
     }));
   }
-
   render() {
+console.log(this.props);
     const { toggle } = this.state;
+
     return (
-      <div>
-        <section
+       <div>
+       { true ? <section
           style={{ margin: 0, boxSizing: "border-box", padding: 0 }}
           className="nav-bar"
         >
@@ -103,7 +104,7 @@ class Navbar extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </section>:null}
       </div>
     );
   }

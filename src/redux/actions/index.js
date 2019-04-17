@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
 import { nullRemover } from "../../helpers/helpers";
 import {
   SET_PROFILE,
@@ -36,14 +37,8 @@ export const setImage = file => ({
   type: SET_IMAGE,
   payload: file
 });
-const token = process.env.TOKEN;
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`
-  }
-};
-export const fetchCurrentUser = username => dispatch => {
+
+export const fetchCurrentUser =  username => dispatch => {
   dispatch(setLoading(true));
   return axios
     .get(`${process.env.API_URL}/profiles/${username}`, {
@@ -62,7 +57,13 @@ export const fetchCurrentUser = username => dispatch => {
       dispatch(setLoading(false));
     });
 };
-
+const token = process.env.TOKEN;
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`
+  }
+};
 export const saveUpdatedUser = (updatedProfile, username) => dispatch =>
   axios
     .put(
