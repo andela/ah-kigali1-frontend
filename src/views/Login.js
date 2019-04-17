@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
 import { isEmpty } from "../utils/helperFunctions";
 import Validator from "../utils/validator";
@@ -39,11 +39,14 @@ export class Login extends Component {
     signIn({ email, password });
   };
 
-  handleNavigation = () => null;
+  handleNavigation = path => <Redirect to={`/${path}`} />;
 
   render() {
-    const { email, password, message, isSubmitting } = this.props;
+    const { email, password, message, isSubmitting, loginSuccess } = this.props;
     const { errors } = this.state;
+    if (loginSuccess) {
+      return this.handleNavigation("");
+    }
     return (
       <div className="auth" data-test="login">
         <div className="row">
@@ -127,7 +130,8 @@ Login.propTypes = {
   handleSignIn: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   handleTextInput: PropTypes.func.isRequired,
-  message: PropTypes.string
+  message: PropTypes.string,
+  loginSuccess: PropTypes.bool.isRequired
 };
 Login.defaultProps = {
   message: ""

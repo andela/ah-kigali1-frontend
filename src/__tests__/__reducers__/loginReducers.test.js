@@ -71,7 +71,7 @@ describe("Login reducers", () => {
       })
     ).toEqual({
       ...INITIAL_STATE,
-      successMessage: successPayload.message,
+      loginSuccess: true,
       token: successPayload.token
     });
   });

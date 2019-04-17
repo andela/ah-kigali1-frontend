@@ -9,7 +9,8 @@ export const INITIAL_STATE = {
   isSubmitting: false,
   password: "",
   confirmPassword: "",
-  errors: {}
+  errors: {},
+  passwordUpdateSuccess: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,6 +33,7 @@ export default (state = INITIAL_STATE, action) => {
         isSubmitting: false,
         password: "",
         confirmPassword: "",
+        passwordUpdateSuccess: true,
         message: payload.message
       };
     case PASSWORD_UPDATE_FAILED:

@@ -58,7 +58,8 @@ describe("Update password reducers", () => {
       })
     ).toEqual({
       ...INITIAL_STATE,
-      message: payload.message
+      message: payload.message,
+      passwordUpdateSuccess: true
     });
   });
   it("updates state on  PASSWORD_UPDATE_FAILED", () => {

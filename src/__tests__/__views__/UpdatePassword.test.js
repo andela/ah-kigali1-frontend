@@ -18,6 +18,7 @@ const props = {
   isSubmitting: false,
   password: "password",
   confirmPassword: "password",
+  passwordUpdateSuccess: false,
   handleInputChange,
   handleUpdatePassword,
   errors: {},
@@ -104,11 +105,15 @@ describe("Update Password", () => {
       Validator.formData = mockFormData.bind(Validator);
       Validator.isMatch = mockIsMatch.bind(Validator);
       findElement(FormButton, 0).simulate("click");
+      warper.setProps({
+        passwordUpdateSuccess: true
+      });
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(handleUpdatePassword).not.toBeCalledWith({
         token: warper.state().token,
         password: dataFromForm.password.value
       });
+      expect(instance.handleNavigation.mock.calls.length).toBe(1);
     });
     it("should return validation errors", () => {
       mockFormData.mockReturnValue({});

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
 import {
   handleInputChange,
   handleUpdatePassword
 } from "../redux/actions/updatePasswordActions";
+
 import Validator from "../utils/validator";
 import { isEmpty, parseURL } from "../utils/helperFunctions";
 
@@ -61,14 +62,19 @@ export class UpdatePassword extends Component {
     });
   };
 
-  handleNavigation = path => {
-    const { history } = this.props;
-    history.push(`/${path}`);
-  };
+  handleNavigation = path => <Redirect to={`/${path}`} />;
 
   render() {
-    const { password, confirmPassword, isSubmitting } = this.props;
+    const {
+      password,
+      confirmPassword,
+      isSubmitting,
+      passwordUpdateSuccess
+    } = this.props;
     const { errors } = this.state;
+    if (passwordUpdateSuccess) {
+      return this.handleNavigation("login");
+    }
     return (
       <div className="reset-password__container">
         <div className="reset-password">
@@ -140,7 +146,7 @@ UpdatePassword.propTypes = {
   handleUpdatePassword: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  passwordUpdateSuccess: PropTypes.bool.isRequired
 };
 export default connect(
   mapStateToProps,
