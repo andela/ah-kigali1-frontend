@@ -75,7 +75,7 @@ describe("Edit Profile", () => {
       mapDispatchToProps(dispatch).uploadImage(imagePath);
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
-    test("should call saveUpdatedUser action", () => {
+    test("should call fetchCurrentUser action", () => {
       const dispatch = jest.fn();
       mapDispatchToProps(dispatch).fetchCurrentUser();
       expect(dispatch.mock.calls[0][0]).toBeDefined();

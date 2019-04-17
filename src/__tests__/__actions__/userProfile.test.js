@@ -238,9 +238,32 @@ describe("profile actions", () => {
             secure_url:
               "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
           });
-        return store.dispatch(uploadImage(file)).then(r => {
+        return store.dispatch(uploadImage(file)).then(() => {
           const actions = store.getActions();
           expect(actions).toEqual(expectedResults);
+        });
+      });
+      test("should fail to upload image ", () => {
+        const file = {
+          File: {
+            lastModified: 1547533967696,
+            name: "Photo-Passport3-black.jpg",
+            size: 89373,
+            type: "image/jpeg",
+            webkitRelativePath: ""
+          }
+        };
+        nock(CLOUDINARY_URL)
+          .post(`/${CLOUD_NAME}/uploa`)
+          .reply(200, {
+            status: 200,
+            secure_url:
+              "https://res.cloudinary.com/dtzujn9pi/image/upload/v1555320676/wo3uptyi8ewtstk7tvne.jpg"
+          });
+        return store.dispatch(uploadImage(file)).then(() => {
+          const actions = store.getActions();
+          console.log(actions);
+          expect(actions[0].type).toEqual("SET_ERROR");
         });
       });
     });

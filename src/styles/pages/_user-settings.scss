@@ -116,9 +116,15 @@
       section {
         display: none;
       }
-      #password-settings:target,
-      #email-settings:target,
-      #account-settings:target {
+      // #password-settings:target,
+      // #email-settings:target,
+      // #account-settings:target {
+      //   display: block;
+      // }
+
+      #password-settings,
+      #email-settings,
+      #account-settings {
         display: block;
       }
 
