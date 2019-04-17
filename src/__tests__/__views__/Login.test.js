@@ -22,7 +22,8 @@ const props = {
   loginSuccess: false,
   token: null,
   handleSignIn,
-  handleTextInput
+  handleTextInput,
+  socialAuth
 };
 const warper = shallow(<Login {...props} />);
 
@@ -52,11 +53,13 @@ describe("Login component", () => {
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
       jest.spyOn(instance, "handleNavigation");
+      jest.spyOn(instance, "handleSocialAuth");
     });
     afterEach(() => {
       instance.handleOnChange.mockClear();
       instance.handleSubmit.mockClear();
       instance.handleNavigation.mockClear();
+      instance.handleSocialAuth.mockClear();
       mockedFormData.mockClear();
       handleSignIn.mockClear();
       handleTextInput.mockClear();
@@ -123,6 +126,24 @@ describe("Login component", () => {
       });
       expect(instance.handleNavigation).not.toBeCalled();
     });
+    it("calls login with facebook", () => {
+      findElement(SocialButton, 0).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("facebook");
+    });
+    it("calls login with twitter ", () => {
+      findElement(SocialButton, 1).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("twitter");
+    });
+    it("calls login with Google ", () => {
+      findElement(SocialButton, 2).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("google");
+    });
   });
   describe("rendered component", () => {
     let instance;
@@ -165,24 +186,6 @@ describe("Login component", () => {
       expect(mapStateToProps({ login: { ...INITIAL_STATE } })).toEqual({
         ...INITIAL_STATE
       });
-    });
-    it("calls login with facebook", () => {
-      findElement(SocialButton, 0).simulate("click");
-      global.open = jest.fn();
-      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
-      expect(socialAuth).toBeCalledWith("facebook");
-    });
-    it("calls login with twitter ", () => {
-      findElement(SocialButton, 1).simulate("click");
-      global.open = jest.fn();
-      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
-      expect(socialAuth).toBeCalledWith("twitter");
-    });
-    it("calls login with Google ", () => {
-      findElement(SocialButton, 2).simulate("click");
-      global.open = jest.fn();
-      expect(Login.prototype.handleSocialAuth.calledOnce).toBe(true);
-      expect(socialAuth).toBeCalledWith("google");
     });
   });
 });

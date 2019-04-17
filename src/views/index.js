@@ -4,12 +4,14 @@ import Login from "./Login";
 import ResetPassword from "./ResetPassword";
 import Home from "./Home";
 import UpdatePassword from "./UpdatePassword";
+import SocialAuth from "./SocialAuth";
 
 const Routers = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/sign_in" component={Login} />
+      <Route exact path="/social_auth" component={SocialAuth} />
       <Route exact path="/reset_password" component={ResetPassword} />
       <Route exact path="/update_password" component={UpdatePassword} />
     </Switch>
