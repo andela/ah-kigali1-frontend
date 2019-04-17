@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import TextInput from "../components/common/Inputs/TextInput";
 import FormButton from "../components/common/Buttons/FormButton";
 import {
@@ -21,9 +22,7 @@ export class UpdatePassword extends Component {
       location: { search }
     } = this.props;
     const token = parseURL("?token=", search);
-    this.setState({
-      token
-    });
+    this.setToken(token);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,6 +31,10 @@ export class UpdatePassword extends Component {
       errors
     });
   }
+
+  setToken = token => {
+    this.setState({ token });
+  };
 
   handleOnChange = e => {
     const { value, name } = e.target;
@@ -115,7 +118,7 @@ export class UpdatePassword extends Component {
           <div className="reset-password__footer">
             <p>
               Don &apos;t have an account?
-              <a href="/">sign up now!</a>
+              <Link to="/sign_up">sign up now!</Link>
             </p>
           </div>
         </div>

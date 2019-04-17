@@ -10,10 +10,10 @@ const [
   handleInputChange,
   handleUpdatePassword,
   mockFormData,
-  mockIsMatch
-] = new Array(4).fill(jest.fn());
+  mockIsMatch,
+  callback
+] = new Array(5).fill(jest.fn());
 const token = "1234567qwertyu";
-const callback = jest.fn();
 const props = {
   isSubmitting: false,
   password: "password",
@@ -60,6 +60,7 @@ describe("Update Password", () => {
       instance = warper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
+      jest.spyOn(instance, "handleNavigation");
     });
     afterEach(() => {
       instance.handleOnChange.mockClear();
@@ -68,6 +69,7 @@ describe("Update Password", () => {
       handleUpdatePassword.mockClear();
       mockFormData.mockClear();
       mockIsMatch.mockClear();
+      callback.mockClear();
       warper.setProps({
         ...props
       });
