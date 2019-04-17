@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { handleUserLogin } from "../redux/actions/socialAuthCations";
+import { handleUserLogin } from "../redux/actions/socialAuthActions";
 import { parseURL } from "../utils/helperFunctions";
 
-class SocialAuth extends Component {
+export class SocialAuth extends Component {
   componentWillMount() {
     const {
       location: { search },
@@ -15,8 +15,13 @@ class SocialAuth extends Component {
     loginUser(token);
   }
 
+  handleSuccess = () => <Redirect to="/" />;
+
+  handleFailure = () => <Redirect to="/sign_in" />;
+
   render() {
     const { isSubmitting, socialAuthFailed, socialAuthSuccess } = this.props;
+
     if (isSubmitting) {
       return (
         <div>
@@ -24,11 +29,12 @@ class SocialAuth extends Component {
         </div>
       );
     }
+
     if (socialAuthFailed) {
-      return <Redirect to="/sign_In" />;
+      return this.handleFailure();
     }
     if (socialAuthSuccess) {
-      return <Redirect to="/" />;
+      return this.handleSuccess();
     }
   }
 }
