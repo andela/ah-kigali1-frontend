@@ -27,8 +27,7 @@ export class EditProfile extends Component {
 
   handleImageChange = e => {
     const { loggedInUser, onUploadImage, onSaveUpdatedUser } = this.props;
-    onUploadImage(e.target.files[0]).then(r => {
-      console.log(r.target, "as event");
+    onUploadImage(e.target.files[0]).then(() => {
       onSaveUpdatedUser(fieldRemover(loggedInUser));
     });
   };
