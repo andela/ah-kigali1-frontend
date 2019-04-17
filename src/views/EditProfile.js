@@ -13,7 +13,7 @@ import ErrorMessage from "../components/common/Message/error";
 import SuccessMessage from "../components/common/Message/success";
 
 
-const usernameFromLocalStorage = "username";
+const usernameFromLocalStorage = "Iraguha1";
 
 export class EditProfile extends Component {
   componentDidMount() {

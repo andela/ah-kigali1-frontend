@@ -6,7 +6,7 @@ import { fetchCurrentUser as getCurrentUser } from "../redux/actions";
 import { Loading } from "../components/common/Spinner/Loading";
 import Confirm from "../components/common/Buttons/confirm";
 
-const usernameFromLocalStorage = "username";
+const usernameFromLocalStorage = "Iraguha1";
 export class Profile extends Component {
   componentDidMount() {
     const { currentUser } = this.props;

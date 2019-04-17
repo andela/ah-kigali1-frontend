@@ -5,7 +5,7 @@ import {
   fetchCurrentUser as getCurrentUser,
   saveUpdatedUser
 } from "../redux/actions";
-const usernameFromLocalStorage = "username";
+const usernameFromLocalStorage = "Iraguha1";
 
 export class Settings extends Component {
   state = {
