@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_INPUT_CHANGE:
       return {
         ...state,
+        errors: {},
         [payload.name]: payload.value
       };
     case SUBMITTING_LOGIN_CREDENTIALS:
