@@ -30,6 +30,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSubmitting: false,
+        password: "",
+        confirmPassword: "",
         message: payload.message
       };
     case PASSWORD_UPDATE_FAILED:

@@ -15,4 +15,4 @@ after_success:
   - "stable"
 notifications:
   email: false
-  slack: andela:LX8VPRMaSP4tskr94puPVmFf
+  slack: "%{SLACK_TOKEN}"
