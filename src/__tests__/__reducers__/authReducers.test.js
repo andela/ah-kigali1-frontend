@@ -1,6 +1,6 @@
 import loginReducers, {
   INITIAL_STATE
-} from "../../redux/reducers/loginReducers";
+} from "../../redux/reducers/authReducers";
 import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,

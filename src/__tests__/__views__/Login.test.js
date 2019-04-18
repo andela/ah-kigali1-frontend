@@ -2,7 +2,7 @@ import React from "react";
 import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
 import { Login, mapStateToProps } from "../../views/Login";
-import { INITIAL_STATE } from "../../redux/reducers/loginReducers";
+import { INITIAL_STATE } from "../../redux/reducers/authReducers";
 import Validator from "../../utils/validator";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
@@ -183,7 +183,7 @@ describe("Login component", () => {
       });
     });
     it("returns all mapped props from redux", () => {
-      expect(mapStateToProps({ login: { ...INITIAL_STATE } })).toEqual({
+      expect(mapStateToProps({ auth: { ...INITIAL_STATE } })).toEqual({
         ...INITIAL_STATE
       });
     });

@@ -6,7 +6,7 @@ import {
   handleTextInput,
   handleSignIn,
   socialAuth
-} from "../redux/actions/loginActions";
+} from "../redux/actions/authActions";
 import { isEmpty } from "../utils/helperFunctions";
 import Validator from "../utils/validator";
 import TextInput from "../components/common/Inputs/TextInput";
@@ -161,10 +161,10 @@ Login.defaultProps = {
   message: ""
 };
 export const mapStateToProps = state => {
-  const { login } = state;
+  const { auth } = state;
   return {
-    ...login,
-    message: login.errors.message
+    ...auth,
+    message: auth.errors.message
   };
 };
 

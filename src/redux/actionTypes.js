@@ -1,10 +1,12 @@
 export const ADD_ARTICLE = "ADD_ARTICLE";
-
+/**
+ * @description authentication actions
+ */
 export const LOGIN_INPUT_CHANGE = "HANDLE_LOGIN_TEXT_INPUT";
 export const SUBMITTING_LOGIN_CREDENTIALS = "IS_SUBMITTING_LOGIN_CREDENTIALS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESSFULLY";
 export const LOGIN_FAILED = "LOGIN_FAILED";
-
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 /**
  * @description reset password action creator
  */

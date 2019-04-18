@@ -7,14 +7,15 @@ import {
   handleSignIn,
   handleTextInput,
   socialAuth
-} from "../../redux/actions/loginActions";
+} from "../../redux/actions/authActions";
 import {
   SUBMITTING_LOGIN_CREDENTIALS,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGIN_INPUT_CHANGE,
   IS_OPENING_SOCIAL_AUTH_PROVIDER,
-  CANCEL_SOCIAL_AUTH
+  CANCEL_SOCIAL_AUTH,
+  SET_CURRENT_USER
 } from "../../redux/actionTypes";
 
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
@@ -49,7 +50,6 @@ describe("Login action creators", () => {
         message: "Sign in failed",
         token: "qwertyuiop123456789"
       };
-      const mockedCallback = jest.fn();
       const expectedActions = [
         {
           type: SUBMITTING_LOGIN_CREDENTIALS
@@ -57,6 +57,10 @@ describe("Login action creators", () => {
         {
           type: LOGIN_SUCCESS,
           payload: { ...payload }
+        },
+        {
+          type: SET_CURRENT_USER,
+          payload: null
         }
       ];
 
@@ -66,17 +70,13 @@ describe("Login action creators", () => {
           ...payload
         }
       });
-      return store
-        .dispatch(handleSignIn({ ...data }, mockedCallback))
-        .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
-          expect(mockedCallback.mock.calls.length).toBe(1);
-        });
+      return store.dispatch(handleSignIn({ ...data })).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
     });
     it("dispatches LOGIN_FAILED after providing invalid credentials", () => {
       store = mockStore({ login: reduxStore.login });
       const payload = { message: "Sign in failed", errors: {} };
-      const mockedCallback = jest.fn();
       const expectedActions = [
         {
           type: SUBMITTING_LOGIN_CREDENTIALS
@@ -94,12 +94,9 @@ describe("Login action creators", () => {
         }
       });
 
-      return store
-        .dispatch(handleSignIn({ ...data }, mockedCallback))
-        .then(() => {
-          expect(store.getActions()).toEqual(expectedActions);
-          expect(mockedCallback.mock.calls.length).toBe(0);
-        });
+      return store.dispatch(handleSignIn({ ...data })).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
     });
     it("dispatches IS_OPENING_SOCIAL_AUTH_PROVIDER action creator", () => {
       global.open = jest.fn();

@@ -6,7 +6,8 @@ import * as actions from "../../redux/actions/socialAuthActions";
 import {
   SOCIAL_AUTH_FAILED,
   SOCIAL_AUTH_SUCCESS,
-  SUBMITTING_SOCIAL_AUTH
+  SUBMITTING_SOCIAL_AUTH,
+  SET_CURRENT_USER
 } from "../../redux/actionTypes";
 import axios from "../../utils/axios";
 
@@ -32,6 +33,10 @@ describe("Social Auth action", () => {
       },
       {
         type: SOCIAL_AUTH_SUCCESS
+      },
+      {
+        type: SET_CURRENT_USER,
+        payload: null
       }
     ];
     moaxios.stubRequest(`${process.env.DEV_BASE_URL}/users/current`, {

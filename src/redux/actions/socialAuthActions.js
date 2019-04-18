@@ -1,6 +1,8 @@
 import "@babel/polyfill";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import axios from "../../utils/axios";
+import { setCurrentUser } from "./authActions";
 import {
   SUBMITTING_SOCIAL_AUTH,
   SOCIAL_AUTH_SUCCESS,
@@ -20,9 +22,10 @@ export const handleUserLogin = token => async dispatch => {
     });
     if (response.data.user) {
       await localStorage.setItem("token", token);
-      return dispatch({
+      dispatch({
         type: SOCIAL_AUTH_SUCCESS
       });
+      return dispatch(setCurrentUser(jwt.decode(token)));
     }
     // eslint-disable-next-line no-throw-literal
     throw "Invalid token";

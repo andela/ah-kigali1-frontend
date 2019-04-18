@@ -1,5 +1,5 @@
 import "@babel/polyfill";
-
+import jwt from "jsonwebtoken";
 import axios, { baseURL } from "../../utils/axios";
 import {
   LOGIN_INPUT_CHANGE,
@@ -7,7 +7,8 @@ import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   IS_OPENING_SOCIAL_AUTH_PROVIDER,
-  CANCEL_SOCIAL_AUTH
+  CANCEL_SOCIAL_AUTH,
+  SET_CURRENT_USER
 } from "../actionTypes";
 
 export const handleTextInput = (name, value) => ({
@@ -35,10 +36,12 @@ const loginFailed = payload => {
   };
 };
 
-export const handleSignIn = (
-  { email, password },
-  callback
-) => async dispatch => {
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  payload: user
+});
+
+export const handleSignIn = ({ email, password }) => async dispatch => {
   try {
     dispatch(updateIsSubmitting());
     const response = await axios.post("/users/login", {
@@ -48,7 +51,7 @@ export const handleSignIn = (
     const { token, message } = response.data;
     dispatch(loginSuccess({ token, message }));
     await localStorage.setItem("token", token);
-    callback();
+    dispatch(setCurrentUser(jwt.decode(token)));
   } catch (error) {
     const { message, errors = {} } = error.response.data;
     dispatch(loginFailed({ message, errors }));
