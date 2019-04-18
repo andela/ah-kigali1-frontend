@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const SocialButton = props => {
   const { className, iconName, alt, onClick } = props;
   return (
-    <div className={`icon ${className}`} onClick={onClick}>
+    <div className={`icon ${className}`} onClick={onClick} onKeyPress={onClick}>
       <img
         src={require(`../../../assets/icons/${iconName}-icon.svg`)}
         alt={alt}

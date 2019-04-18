@@ -144,8 +144,12 @@ UpdatePassword.propTypes = {
   confirmPassword: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   handleUpdatePassword: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
+  errors: PropTypes.shape({
+    message: PropTypes.string
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired
+  }).isRequired,
   passwordUpdateSuccess: PropTypes.bool.isRequired
 };
 export default connect(

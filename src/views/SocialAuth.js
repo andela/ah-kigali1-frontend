@@ -39,7 +39,9 @@ export class SocialAuth extends Component {
   }
 }
 SocialAuth.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired
+  }).isRequired,
   handleUserLogin: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   socialAuthSuccess: PropTypes.bool.isRequired,
