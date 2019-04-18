@@ -84,7 +84,7 @@ export class ResetPassword extends Component {
                     ""
                   )}
                   <FormButton
-                    value="Sign In"
+                    value="Submit"
                     disabled={isSubmitting}
                     onClick={this.handleSubmit}
                   />

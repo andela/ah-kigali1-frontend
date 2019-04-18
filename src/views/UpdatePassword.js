@@ -114,7 +114,7 @@ export class UpdatePassword extends Component {
                   </p>
                 </div>
                 <FormButton
-                  value="Sign In"
+                  value="Submit"
                   disabled={isSubmitting}
                   onClick={() => this.handleSubmit()}
                 />
