@@ -78,6 +78,7 @@ export const saveUpdatedUser = updatedProfile => dispatch =>
     })
     .catch(errorResponse => {
       const { error } = errorResponse.response.data;
+      console.log(error);
       dispatch(setError(error));
     });
 

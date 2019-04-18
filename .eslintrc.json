@@ -19,7 +19,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "error",
     "newlines-between": "always",

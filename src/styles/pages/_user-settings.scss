@@ -116,9 +116,9 @@
       section {
         display: none;
       }
-      #password-settings:target,
-      #email-settings:target,
-      #account-settings:target {
+      #password-settings,
+      #email-settings,
+      #account-settings {
         display: block;
       }
 

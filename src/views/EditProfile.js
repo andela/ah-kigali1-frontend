@@ -155,7 +155,6 @@ export class EditProfile extends Component {
 }
 EditProfile.propTypes = {
   error: PropTypes.string,
-  loading: PropTypes.bool,
   loggedInUser: PropTypes.object,
   message: PropTypes.string,
   onFetchCurrentUser: PropTypes.func.isRequired,
@@ -165,7 +164,6 @@ EditProfile.propTypes = {
 };
 EditProfile.defaultProps = {
   error: "",
-  loading: false,
   message: "",
   loggedInUser: {}
 };
