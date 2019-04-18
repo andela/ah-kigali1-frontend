@@ -1,7 +1,7 @@
-import "./styles/main.scss";
 import React from "react";
 import { Provider } from "react-redux";
 import jwt from "jsonwebtoken";
+import "./styles/main.scss";
 import store from "./redux/store";
 import Routers from "./views";
 import { setCurrentUser } from "./redux/actions/authActions";
