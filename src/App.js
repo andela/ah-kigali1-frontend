@@ -1,6 +1,6 @@
+import "./styles/main.scss";
 import React from "react";
 import { Provider } from "react-redux";
-import "./styles/main.scss";
 import jwt from "jsonwebtoken";
 import store from "./redux/store";
 import Routers from "./views";
