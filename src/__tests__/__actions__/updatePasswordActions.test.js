@@ -11,7 +11,7 @@ import {
   PASSWORD_UPDATE_SUCCESS
 } from "../../redux/actionTypes";
 
-const API_BASE_URL = "http://localhost:3000/api/v1";
+dotenv.config();
 const mockStore = configureMockStore([thunk]);
 let store;
 describe("update password actions ceators", () => {
