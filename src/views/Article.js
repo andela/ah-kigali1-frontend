@@ -11,7 +11,6 @@ export class Article extends Component {
     const { like, dislike, likeCount } = this.props;
     return (
       <div>
-        {" "}
         <LikeComponent onClick={like} icon={likeIcon} />
         <LikeComponent onClick={dislike} icon={dislikeIcon} />
         <p>{likeCount}</p>
@@ -23,7 +22,10 @@ export class Article extends Component {
 const mapStateToProps = state => state.like;
 
 const mapDispatchToProps = dispatch => ({
-  like: () => dispatch(handleLike()),
+  like: () =>
+    dispatch(
+      handleLike("it-was-a-good-experience-to-have-the-chick-here-c3nws245b99")
+    ),
   dislike: () => dispatch(handleDislike())
 });
 

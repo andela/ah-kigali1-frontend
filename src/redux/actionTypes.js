@@ -1,3 +1,10 @@
+/**
+ * @description global action creators
+ */
+
+export const REQUEST_SUBMITTED = "REQUEST_SUBMITTED";
+export const REQUEST_FAILED = "REQUEST_FAILED";
+
 export const ADD_ARTICLE = "ADD_ARTICLE";
 
 export const LOGIN_INPUT_CHANGE = "HANDLE_LOGIN_TEXT_INPUT";
