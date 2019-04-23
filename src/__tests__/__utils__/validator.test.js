@@ -3,7 +3,7 @@ import Validator from "../../utils/validator";
 describe("Validator Class", () => {
   it("should validator formData", () => {
     const validFormData = {
-      email: "luc.bayo@gmail.com",
+      email: "me@example.com",
       password: "password"
     };
     const invalidFormData = {
@@ -15,5 +15,11 @@ describe("Validator Class", () => {
       email: "Email is required",
       password: "Password is required"
     });
+  });
+  it("should validate matching of two values", () => {
+    expect(Validator.isMatch("password", "1234", "1234ad")).toEqual({
+      message: "Your passwords  do not match!"
+    });
+    expect(Validator.isMatch("password", "1234", "1234")).toEqual({});
   });
 });

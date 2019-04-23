@@ -18,4 +18,12 @@ export default class Validator {
     });
     return errors;
   }
+
+  static isMatch(field, password, confirmPassword) {
+    const errors = {};
+    if (password !== confirmPassword) {
+      errors.message = `Your ${field}s  do not match!`;
+    }
+    return errors;
+  }
 }

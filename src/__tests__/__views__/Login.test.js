@@ -19,7 +19,7 @@ const props = {
   email: "",
   password: "",
   errors: {},
-  successMessage: null,
+  loginSuccess: false,
   token: null,
   handleSignIn,
   handleTextInput
@@ -51,13 +51,18 @@ describe("Login component", () => {
       instance = warper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
+      jest.spyOn(instance, "handleNavigation");
     });
     afterEach(() => {
       instance.handleOnChange.mockClear();
       instance.handleSubmit.mockClear();
+      instance.handleNavigation.mockClear();
       mockedFormData.mockClear();
       handleSignIn.mockClear();
       handleTextInput.mockClear();
+      warper.setProps({
+        ...props
+      });
     });
     it("handles input change for email field", () => {
       findElement(TextInput, 0).simulate("change", {
@@ -90,6 +95,10 @@ describe("Login component", () => {
       });
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
+      warper.setProps({
+        loginSuccess: true
+      });
+      expect(instance.handleNavigation).toBeCalledWith("");
       expect(handleSignIn).toHaveBeenCalledWith({
         email: formData.email.value,
         password: formData.password.value
@@ -99,6 +108,10 @@ describe("Login component", () => {
       const errors = { email: "Email is required" };
       mockedFormData.mockReturnValue({ ...errors });
       Validator.formData = mockedFormData.bind(Validator);
+      warper.setProps({
+        email: "",
+        password: "password"
+      });
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(handleSignIn).not.toHaveBeenCalledWith({
@@ -108,6 +121,7 @@ describe("Login component", () => {
       expect(warper.state().errors).toEqual({
         ...errors
       });
+      expect(instance.handleNavigation).not.toBeCalled();
     });
   });
   describe("rendered component", () => {

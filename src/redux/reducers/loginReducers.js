@@ -10,7 +10,7 @@ export const INITIAL_STATE = {
   email: "",
   password: "",
   errors: {},
-  successMessage: null,
+  loginSuccess: null,
   token: null
 };
 
@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_INPUT_CHANGE:
       return {
         ...state,
+        errors: {},
         [payload.name]: payload.value
       };
     case SUBMITTING_LOGIN_CREDENTIALS:
@@ -42,7 +43,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...INITIAL_STATE,
         token: payload.token,
-        successMessage: payload.message
+        loginSuccess: true
       };
     default:
       return state;

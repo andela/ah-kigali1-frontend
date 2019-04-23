@@ -4,14 +4,14 @@ import configureMockStore from "redux-mock-store";
 import axios from "../../utils/axios";
 import reduxStore from "../../redux/store";
 import {
-  handleSignIn,
-  handleTextInput
-} from "../../redux/actions/loginActions";
+  handleInputChange,
+  sendResetLink
+} from "../../redux/actions/resetPasswordActions";
 import {
-  SUBMITTING_LOGIN_CREDENTIALS,
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  LOGIN_INPUT_CHANGE
+  SENDING_RESET_PASSWORD_LINK,
+  RESET_PASSWORD_INPUT_CHANGE,
+  RESET_PASSWORD_LINK_SUCCESS,
+  RESET_PASSWORD_LINK_FAILED
 } from "../../redux/actionTypes";
 
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
@@ -19,15 +19,15 @@ let data;
 const mockStore = configureMockStore([thunk]);
 let store;
 
-describe("Login action creators", () => {
+describe("ResetPassword action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
     it("should create an action to update text input value", () => {
       const expectedAction = {
-        type: LOGIN_INPUT_CHANGE,
+        type: RESET_PASSWORD_INPUT_CHANGE,
         payload: data
       };
-      expect(handleTextInput(data.name, data.value)).toEqual(expectedAction);
+      expect(handleInputChange(data.name, data.value)).toEqual(expectedAction);
     });
   });
 
@@ -39,54 +39,54 @@ describe("Login action creators", () => {
     afterEach(() => {
       moxios.uninstall(axios);
     });
-    it("dispatches LOGIN_SUCCESS after successfully signing in", () => {
-      store = mockStore({ login: reduxStore.login });
+    it("dispatches RESET_PASSWORD_LINK_SUCCESS after successfully sending link", () => {
+      store = mockStore({ login: reduxStore.resetPassword });
       data = { name: "email", value: "me@example.com" };
       const payload = {
-        message: "Sign in failed",
-        token: "qwertyuiop123456789"
+        message:
+          "Password reset instructions have been sent to your account's primary email address."
       };
       const expectedActions = [
         {
-          type: SUBMITTING_LOGIN_CREDENTIALS
+          type: SENDING_RESET_PASSWORD_LINK
         },
         {
-          type: LOGIN_SUCCESS,
+          type: RESET_PASSWORD_LINK_SUCCESS,
           payload: { ...payload }
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/login`, {
-        status: 201,
+      moxios.stubRequest(`${DEV_BASE_URL}/users/reset_password`, {
+        status: 200,
         response: {
           ...payload
         }
       });
-      return store.dispatch(handleSignIn(data)).then(() => {
+      return store.dispatch(sendResetLink(data)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-    it("dispatches LOGIN_FAILED after providing invalid credentials", () => {
+    it("dispatches RESET_PASSWORD_LINK_FAILED sending reset password link failed", () => {
       store = mockStore({ login: reduxStore.login });
-      const payload = { message: "Sign in failed", errors: {} };
+      const payload = { message: "User not found" };
       const expectedActions = [
         {
-          type: SUBMITTING_LOGIN_CREDENTIALS
+          type: SENDING_RESET_PASSWORD_LINK
         },
         {
-          type: LOGIN_FAILED,
+          type: RESET_PASSWORD_LINK_FAILED,
           payload: { ...payload }
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/login`, {
-        status: 400,
+      moxios.stubRequest(`${DEV_BASE_URL}/users/reset_password`, {
+        status: 404,
         response: {
           ...payload
         }
       });
 
-      return store.dispatch(handleSignIn({ ...data })).then(() => {
+      return store.dispatch(sendResetLink({ ...data })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });

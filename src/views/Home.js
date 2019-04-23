@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import Confirm from "../components/common/Buttons/confirm";
+import BasicButton from "../components/common/Buttons/BasicButton";
 import Input from "../components/common/Inputs/TextInput";
 import Navbar from "../components/common/AppBars/navBar";
 import MainCard from "../components/common/Cards/main";
@@ -28,7 +28,7 @@ class Home extends Component {
         <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
         <div style={{ margin: 3, marginTop: 120 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
-          <Confirm style={{ width: "40%" }} title="Save" />
+          <BasicButton style={{ width: "40%" }} title="Save" />
           <Input
             style={{ width: "40%" }}
             type="email"

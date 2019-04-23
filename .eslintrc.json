@@ -50,6 +50,7 @@
     "no-named-as-default": "off",
     "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
+    "react/forbid-prop-types": "off",
     "no-shadow": [
       "error",
       {
@@ -81,6 +82,14 @@
           "MethodDefinition": false,
           "ClassDeclaration": false
         }
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
       }
     ]
   }

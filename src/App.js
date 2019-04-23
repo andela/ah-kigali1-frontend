@@ -2,10 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import "./styles/main.scss";
 import store from "./redux/store";
-import Login from "./views/Login";
+import Routers from "./views";
 
 export default () => (
   <Provider store={store}>
-    <Login />
+    <Routers />
   </Provider>
 );
