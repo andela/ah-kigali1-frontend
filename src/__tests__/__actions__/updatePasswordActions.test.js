@@ -1,6 +1,7 @@
 import moxios from "moxios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
+import dotenv from "dotenv";
 import axios from "../../utils/axios";
 import * as actions from "../../redux/actions/updatePasswordActions";
 import {
@@ -38,12 +39,15 @@ describe("update password actions ceators", () => {
       password: "password"
     };
 
-    moxios.stubRequest(`${API_BASE_URL}/users/${params.token}/password`, {
-      status: 404,
-      response: {
-        ...payload
+    moxios.stubRequest(
+      `${process.env.API_BASE_URL}/users/${params.token}/password`,
+      {
+        status: 404,
+        response: {
+          ...payload
+        }
       }
-    });
+    );
     const expectedActions = [
       {
         type: UPDATING_PASSWORD
@@ -65,12 +69,15 @@ describe("update password actions ceators", () => {
       token: "1234567qwertyui",
       password: "password"
     };
-    moxios.stubRequest(`${API_BASE_URL}/users/${params.token}/password`, {
-      status: 200,
-      response: {
-        ...payload
+    moxios.stubRequest(
+      `${process.env.API_BASE_URL}/users/${params.token}/password`,
+      {
+        status: 200,
+        response: {
+          ...payload
+        }
       }
-    });
+    );
     const expectedActions = [
       {
         type: UPDATING_PASSWORD

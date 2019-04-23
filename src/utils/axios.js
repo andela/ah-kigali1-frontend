@@ -1,9 +1,8 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-const DEV_BASE_USER = "http://localhost:3000/api/v1";
-const PROD_BASE_USER = "https://titan-devs-staging.herokuapp.com/api/v1";
-export const baseURL =
-  process.env.NODE_ENV === "production" ? PROD_BASE_USER : DEV_BASE_USER;
+dotenv.config();
+
 export default axios.create({
-  baseURL
+  baseURL: process.env.API_BASE_URL
 });
