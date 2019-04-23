@@ -16,3 +16,9 @@ export const UPDATE_PASSWORD_INPUT_CHANGE = "UPDATE_PASSWORD_INPUT_CHANGE";
 export const UPDATING_PASSWORD = "UPDATING_PASSWORD";
 export const PASSWORD_UPDATE_SUCCESS = "password_update_success";
 export const PASSWORD_UPDATE_FAILED = "password_update_failed";
+
+/**
+ * @description like article action creators
+ */
+export const LIKE_ARTICLE = "LIKE_ARTICLE";
+export const DISLIKE_ARTICLE = "DISLIKE_ARTICLE";
