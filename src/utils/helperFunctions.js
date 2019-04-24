@@ -1,5 +1,9 @@
 import ReactHtmlParser from "react-html-parser";
 import { flatten } from "lodash";
+import React from "react";
+import { Redirect } from "react-router-dom";
+import ErrorMessage from "../components/common/Message/error";
+import SuccessMessage from "../components/common/Message/success";
 /**
  * @description check if value is empty
  * @param {*} value - input to validate
@@ -112,4 +116,29 @@ export const isBottom = () =>
 export const containsSpecialChar = value => {
   const alphanumericRegex = /[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/g;
   return alphanumericRegex.test(value);
+};
+
+export const displayReportResponse = (reportError, reportSuccess) => {
+  if (reportError) {
+    return (
+      <div>
+        <ErrorMessage title={reportError} />
+      </div>
+    );
+  }
+  if (reportSuccess) {
+    return (
+      <div>
+        <SuccessMessage title={reportSuccess} />
+      </div>
+    );
+  }
+};
+
+export const isLoggedIn = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Redirect to="/sign_in" />;
+  }
+  return true;
 };

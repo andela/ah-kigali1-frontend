@@ -1,5 +1,5 @@
 module.exports = {
-  setupFiles: ["<rootDir>/enzyme.config.js"],
+  setupFiles: ["<rootDir>/enzyme.config.js", "jest-localstorage-mock"],
   moduleFileExtensions: ["js", "json", "jsx"],
   coverageDirectory: "coverage",
   testMatch: ["**/?(*.)+(spec|test).js?(x)"],

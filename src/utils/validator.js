@@ -43,4 +43,14 @@ export default class Validator {
       return error;
     }
   }
+
+  static reportDescription(description) {
+    if (
+      (description && (description.length < 10 || description.length > 254)) ||
+      !description
+    ) {
+      return "Report should be more than 10 and less 255 characters long";
+    }
+    return false;
+  }
 }

@@ -12,6 +12,7 @@ import {
   fetchArticle,
   deleteArticle
 } from "../redux/actions/readArticleActionCreator";
+import { reportedArticle } from "../redux/actions/reportArticleActions";
 
 import {
   isCurrentUserAuthor,
@@ -42,7 +43,9 @@ export const mapStateToProps = ({ auth, fetchedArticle, following }) => ({
 export const mapDispatchToProps = dispatch => ({
   deleteOneArticle: slug => dispatch(deleteArticle(slug)),
   fetchOneArticle: slug => dispatch(fetchArticle(slug)),
-  followUser: username => dispatch(followUser(username))
+  followUser: username => dispatch(followUser(username)),
+  reportArticle: (description, slug) =>
+    dispatch(reportedArticle(description, slug))
 });
 
 export class Article extends Component {
@@ -71,6 +74,7 @@ export class Article extends Component {
       fetchOneArticle
     } = this.props;
     if (article && nextProps.match.params.slug !== article.slug) {
+      this.setState({ slug: nextProps.match.params.slug });
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
@@ -205,8 +209,14 @@ export class Article extends Component {
   };
 
   render() {
-    const { response, displayModal, reportingForm } = this.state;
-    const { article, asideArticles, currentUser, history } = this.props;
+    const { response, displayModal, reportingForm, slug } = this.state;
+    const {
+      article,
+      asideArticles,
+      currentUser,
+      history,
+      reportArticle
+    } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
 
@@ -385,8 +395,8 @@ export class Article extends Component {
             </aside>
             {reportingForm ? (
               <ReportingForm
-                onInputChange={this.onInputChange}
-                submitReport={this.submitReport}
+                reportArticle={reportArticle}
+                slug={slug}
                 cancelReport={this.toggleReportingModal}
               />
             ) : (
@@ -417,6 +427,7 @@ export class Article extends Component {
 
 Article.propTypes = {
   fetchOneArticle: PropTypes.func.isRequired,
+  reportArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
