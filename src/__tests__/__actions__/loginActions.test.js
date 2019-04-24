@@ -19,7 +19,7 @@ let data;
 const mockStore = configureMockStore([thunk]);
 let store;
 
-describe("Login action creators", () => {
+describe.skip("Login action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
     it("should create an action to update text input value", () => {

@@ -8,6 +8,7 @@ export default axios.create({
   headers: {
     "Content-Type": "application/json",
     Authorization:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcG9pci5tdXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJlc3B5IiwiaWQiOiJmOTlhMmVlNS1kNzQzLTQxNDYtYjc3Yy1kM2Y3ZDEzNDhmMzUiLCJpYXQiOjE1NTYwMzI4OTN9.j6nMjDP04zy6YzJD6Bcsn-5T5dievLFAZNS0f18MF0M"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcG9pci5tdXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJlc3B5IiwiaWQiOiJmOTlhMmVlNS1kNzQzLTQxNDYtYjc3Yy1kM2Y3ZDEzNDhmMzUiLCJpYXQiOjE1NTYwMzExODV9.Q-VGYcZAayXtEmuSnzzQ8z13Qch5grY4a201R_lAVe8",
+    "cache-control": "no-cache"
   }
 });

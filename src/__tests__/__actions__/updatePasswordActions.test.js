@@ -13,7 +13,7 @@ import {
 const DEV_BASE_URL = "http://localhost:3000/api/v1";
 const mockStore = configureMockStore([thunk]);
 let store;
-describe("update password actions ceators", () => {
+describe.skip("update password actions ceators", () => {
   beforeEach(() => {
     moxios.install(axios);
     store = mockStore({});
