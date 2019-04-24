@@ -11,6 +11,11 @@ export const likeSucceed = message => ({
   payload: message
 });
 
+export const dislikeSucceed = message => ({
+  type: DISLIKE_ARTICLE,
+  payload: message
+});
+
 export const likeFailed = message => ({
   type: REQUEST_FAILED,
   payload: message
@@ -19,7 +24,17 @@ export const likeFailed = message => ({
 export const likeSubmitted = () => ({
   type: REQUEST_SUBMITTED
 });
-export const handleDislike = () => ({ type: DISLIKE_ARTICLE });
+export const handleDislike = articleSlug => async dispatch => {
+  try {
+    dispatch(likeSubmitted());
+    const response = await axios.post(`/articles/${articleSlug}/dislikes`);
+    const { message } = response.data;
+    dispatch(dislikeSucceed(message));
+  } catch (error) {
+    const { message } = error.response.data;
+    dispatch(likeFailed(message));
+  }
+};
 
 export const handleLike = articleSlug => async dispatch => {
   try {
@@ -28,7 +43,6 @@ export const handleLike = articleSlug => async dispatch => {
     const { message } = response.data;
     dispatch(likeSucceed(message));
   } catch (error) {
-    console.log(error.response.data, "========");
     const { message } = error.response.data;
     dispatch(likeFailed(message));
   }

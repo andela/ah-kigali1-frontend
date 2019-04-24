@@ -8,15 +8,26 @@ import {
 export const initialState = {
   likeCount: 0,
   isSubmitting: false,
-  message: ""
+  message: "",
+  isLiked: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LIKE_ARTICLE:
-      return { ...state, isSubmitting: false, likeCount: state.likeCount + 1 };
+      return {
+        ...state,
+        isSubmitting: false,
+        likeCount: state.likeCount + 1,
+        isLiked: true
+      };
     case DISLIKE_ARTICLE:
-      return { ...state, isSubmitting: false, likeCount: state.likeCount - 1 };
+      return {
+        ...state,
+        isSubmitting: false,
+        likeCount: state.likeCount - 1,
+        isLiked: false
+      };
     case REQUEST_SUBMITTED:
       return { ...state, isSubmitting: true };
     case REQUEST_FAILED:

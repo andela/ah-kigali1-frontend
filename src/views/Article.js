@@ -8,11 +8,20 @@ import { handleDislike, handleLike } from "../redux/actions/likeActions";
 
 export class Article extends Component {
   render() {
-    const { like, dislike, likeCount } = this.props;
+    const { like, dislike, likeCount, isLiked } = this.props;
+    let likeEvent, dislikeEvent;
+
+    if (!isLiked) {
+      likeEvent = like;
+      dislikeEvent = () => {};
+    } else {
+      likeEvent = () => {};
+      dislikeEvent = dislike;
+    }
     return (
       <div>
-        <LikeComponent onClick={like} icon={likeIcon} />
-        <LikeComponent onClick={dislike} icon={dislikeIcon} />
+        <LikeComponent onClick={likeEvent} icon={likeIcon} />
+        <LikeComponent onClick={dislikeEvent} icon={dislikeIcon} />
         <p>{likeCount}</p>
       </div>
     );
@@ -26,13 +35,23 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       handleLike("it-was-a-good-experience-to-have-the-chick-here-c3nws245b99")
     ),
-  dislike: () => dispatch(handleDislike())
+  dislike: () =>
+    dispatch(
+      handleDislike(
+        "it-was-a-good-experience-to-have-the-chick-here-c3nws245b99"
+      )
+    )
 });
 
 Article.propTypes = {
-  like: PropTypes.func.isRequired,
+  like: PropTypes.func,
   dislike: PropTypes.func.isRequired,
-  likeCount: PropTypes.number.isRequired
+  likeCount: PropTypes.number.isRequired,
+  isLiked: PropTypes.bool.isRequired
+};
+
+Article.defaultProps = {
+  like: () => {}
 };
 
 export default connect(
