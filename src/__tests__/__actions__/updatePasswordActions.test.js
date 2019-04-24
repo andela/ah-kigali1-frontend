@@ -10,7 +10,7 @@ import {
   PASSWORD_UPDATE_SUCCESS
 } from "../../redux/actionTypes";
 
-const DEV_BASE_URL = "http://localhost:3000/api/v1";
+const API_BASE_URL = "http://localhost:3000/api/v1";
 const mockStore = configureMockStore([thunk]);
 let store;
 describe("update password actions ceators", () => {
@@ -38,7 +38,7 @@ describe("update password actions ceators", () => {
       password: "password"
     };
 
-    moxios.stubRequest(`${DEV_BASE_URL}/users/${params.token}/password`, {
+    moxios.stubRequest(`${API_BASE_URL}/users/${params.token}/password`, {
       status: 404,
       response: {
         ...payload
@@ -65,7 +65,7 @@ describe("update password actions ceators", () => {
       token: "1234567qwertyui",
       password: "password"
     };
-    moxios.stubRequest(`${DEV_BASE_URL}/users/${params.token}/password`, {
+    moxios.stubRequest(`${API_BASE_URL}/users/${params.token}/password`, {
       status: 200,
       response: {
         ...payload

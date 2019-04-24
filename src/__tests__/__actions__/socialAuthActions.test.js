@@ -39,7 +39,7 @@ describe("Social Auth action", () => {
         payload: null
       }
     ];
-    moaxios.stubRequest(`${process.env.DEV_BASE_URL}/users/current`, {
+    moaxios.stubRequest(`${process.env.API_BASE_URL}/users/current`, {
       status: 200,
       response: {
         user: { ...data }
@@ -62,7 +62,7 @@ describe("Social Auth action", () => {
         payload: { message: "Login failed please try again!" }
       }
     ];
-    moaxios.stubRequest(`${process.env.DEV_BASE_URL}/users/current`, {
+    moaxios.stubRequest(`${process.env.API_BASE_URL}/users/current`, {
       status: 401,
       response: {
         ...data
