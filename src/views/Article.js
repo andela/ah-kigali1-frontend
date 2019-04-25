@@ -50,14 +50,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Article.propTypes = {
-  like: PropTypes.func,
+  like: PropTypes.func.isRequired,
   dislike: PropTypes.func.isRequired,
   likeCount: PropTypes.number.isRequired,
   isLiked: PropTypes.bool.isRequired
-};
-
-Article.defaultProps = {
-  like: () => {}
 };
 
 export default connect(

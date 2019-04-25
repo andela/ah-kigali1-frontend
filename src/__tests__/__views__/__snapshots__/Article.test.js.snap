@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the like component snapshot testing for the component 1`] = `
+<Article
+  dislike={[MockFunction]}
+  isLiked={false}
+  like={[MockFunction]}
+  likeCount={0}
+>
+  <div>
+    <LikeComponent
+      icon="test-file-stub"
+      onClick={[MockFunction]}
+    >
+      <div>
+        <img
+          alt="logo"
+          className="share-icon"
+          onClick={[MockFunction]}
+          onKeyUp={[Function]}
+          src="test-file-stub"
+        />
+         
+      </div>
+    </LikeComponent>
+    <LikeComponent
+      icon="test-file-stub"
+      onClick={[Function]}
+    >
+      <div>
+        <img
+          alt="logo"
+          className="share-icon"
+          onClick={[Function]}
+          onKeyUp={[Function]}
+          src="test-file-stub"
+        />
+         
+      </div>
+    </LikeComponent>
+    <p>
+      0
+    </p>
+  </div>
+</Article>
+`;
