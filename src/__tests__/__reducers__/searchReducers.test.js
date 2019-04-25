@@ -57,7 +57,6 @@ describe("Search Action Reducers", () => {
       authors: { ...INITIAL_STATE.authors, ...authors }
     });
   });
-
   test("should update error and error message", () => {
     const payload = { message: "Unauthorized", errors: {} };
     expect(

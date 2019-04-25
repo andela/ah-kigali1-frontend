@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import BasicButton from "../components/common/Buttons/BasicButton";
-import Navbar from "../components/common/AppBars/navBar";
-
+import Input from "../components/common/Inputs/TextInput";
+import MainCard from "../components/common/Cards/main";
+import CategoryBar from "../components/common/AppBars/CategoryBar";
 import Latest from "../components/common/Cards/latest";
-import CategoryBar from "../components/common/AppBars/categoryBar";
-import Demo from "../components/common/Dialog/Dialog";
 
 const cats = [
   "TECH",
@@ -24,19 +23,25 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-
         <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
         <div style={{ margin: 3, marginTop: 120 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
-          <BasicButton
+          <BasicButton style={{ width: "40%" }} title="Save" />
+          <Input
             style={{ width: "40%" }}
-            title="Save"
-            onClick={() => <p>Clicked</p>}
+            type="email"
+            name="email"
+            placeholder="Your email"
+          />
+          <Input
+            style={{ width: "60%" }}
+            type="password"
+            name="email"
+            placeholder="Enter your password"
           />
         </div>
-        <Demo />
         <div className="featured_article">
+          <MainCard />
           <Latest />
         </div>
         <Latest />
