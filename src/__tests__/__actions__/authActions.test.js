@@ -1,6 +1,7 @@
 import moxios from "moxios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
+import dotenv from "dotenv";
 import axios from "../../utils/axios";
 import reduxStore from "../../redux/store";
 import {
@@ -18,7 +19,7 @@ import {
   SET_CURRENT_USER
 } from "../../redux/actionTypes";
 
-const API_BASE_URL = "http://localhost:3000/api/v1";
+dotenv.config();
 let data;
 const mockStore = configureMockStore([thunk]);
 let store;
@@ -64,7 +65,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${API_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${process.env.API_BASE_URL}/users/login`, {
         status: 201,
         response: {
           ...payload
@@ -87,7 +88,7 @@ describe("Login action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${API_BASE_URL}/users/login`, {
+      moxios.stubRequest(`${process.env.API_BASE_URL}/users/login`, {
         status: 400,
         response: {
           ...payload

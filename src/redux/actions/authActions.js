@@ -1,6 +1,7 @@
 import "@babel/polyfill";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import axios, { baseURL } from "../../utils/axios";
+import axios from "../../utils/axios";
 import {
   LOGIN_INPUT_CHANGE,
   SUBMITTING_LOGIN_CREDENTIALS,
@@ -11,6 +12,7 @@ import {
   SET_CURRENT_USER
 } from "../actionTypes";
 
+dotenv.config();
 export const handleTextInput = (name, value) => ({
   type: LOGIN_INPUT_CHANGE,
   payload: { name, value }
@@ -63,7 +65,7 @@ export const socialAuth = provider => async dispatch => {
     dispatch({
       type: IS_OPENING_SOCIAL_AUTH_PROVIDER
     });
-    await window.open(`${baseURL}/auth/${provider}`, "_top");
+    await window.open(`${process.env.API_BASE_URL}/auth/${provider}`, "_top");
   } catch (error) {
     dispatch({
       type: CANCEL_SOCIAL_AUTH
