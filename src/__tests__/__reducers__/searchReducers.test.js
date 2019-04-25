@@ -2,12 +2,19 @@ import {
   SEARCHING_ARTICLES,
   SEARCH_QUERY_CHANGE,
   ARTICLE_SEARCH_FAILED,
+<<<<<<< HEAD
   ARTICLE_SEARCH_SUCCESS,
   SET_SUGGESTED_ARTICLES,
   CLEAR_SEARCH_RESULTS
 } from "../../redux/actionTypes";
 import searchReducers from "../../redux/reducers/searchReducers";
 import { articles, authors } from "../__mocks__/testData";
+=======
+  ARTICLE_SEARCH_SUCCESS
+} from "../../redux/actionTypes";
+import searchReducers from "../../redux/reducers/searchReducers";
+import { articles, authors } from "../testData";
+>>>>>>> [Feature #163518658] article search & filter
 import { arrayToObject } from "../../utils/helperFunctions";
 
 const INITIAL_STATE = {
@@ -15,15 +22,22 @@ const INITIAL_STATE = {
   articles: {},
   authors: {},
   errors: {},
+<<<<<<< HEAD
   isLoading: true,
   suggestedArticles: {}
+=======
+  isLoading: true
+>>>>>>> [Feature #163518658] article search & filter
 };
 
 describe("Search Action Reducers", () => {
   test("should should match the initial state", () => {
     expect(searchReducers(undefined, {})).toEqual({ ...INITIAL_STATE });
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> [Feature #163518658] article search & filter
   test("should update the searchQuery", () => {
     const value = "hello_world";
     expect(
@@ -33,7 +47,10 @@ describe("Search Action Reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, searchQuery: value });
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> [Feature #163518658] article search & filter
   test("should update isLoading", () => {
     expect(
       searchReducers(INITIAL_STATE, {
@@ -41,24 +58,38 @@ describe("Search Action Reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, isLoading: true });
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> [Feature #163518658] article search & filter
   test("should update article and authors", () => {
     expect(
       searchReducers(INITIAL_STATE, {
         type: ARTICLE_SEARCH_SUCCESS,
         payload: {
+<<<<<<< HEAD
           articles: arrayToObject(articles, "id"),
+=======
+          articles: { ...arrayToObject(articles) },
+>>>>>>> [Feature #163518658] article search & filter
           authors: { ...authors }
         }
       })
     ).toEqual({
       ...INITIAL_STATE,
       isLoading: false,
+<<<<<<< HEAD
       articles: { ...INITIAL_STATE.articles, ...arrayToObject(articles, "id") },
       authors: { ...INITIAL_STATE.authors, ...authors }
     });
   });
 
+=======
+      articles: { ...INITIAL_STATE.articles, ...arrayToObject(articles) },
+      authors: { ...INITIAL_STATE.authors, ...authors }
+    });
+  });
+>>>>>>> [Feature #163518658] article search & filter
   test("should update error and error message", () => {
     const payload = { message: "Unauthorized", errors: {} };
     expect(
@@ -72,6 +103,7 @@ describe("Search Action Reducers", () => {
       errors: { message: payload.message, ...payload.errors }
     });
   });
+<<<<<<< HEAD
 
   test("should set suggested articles", () => {
     const payload = { articles: arrayToObject(articles, "id") };
@@ -90,4 +122,6 @@ describe("Search Action Reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, isLoading: false });
   });
+=======
+>>>>>>> [Feature #163518658] article search & filter
 });
