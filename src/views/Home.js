@@ -5,7 +5,6 @@ import BasicButton from "../components/common/Buttons/BasicButton";
 import Navbar from "../components/common/AppBars/navBar";
 
 import Latest from "../components/common/Cards/latest";
-import CategoryBar from "../components/common/AppBars/categoryBar";
 
 const cats = [
   "TECH",
