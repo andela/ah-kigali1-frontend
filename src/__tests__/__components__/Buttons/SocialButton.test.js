@@ -6,7 +6,8 @@ import SocialButton from "../../../components/common/Buttons/SocialButton";
 const setUp = props => shallow(<SocialButton {...props} />);
 const props = {
   iconName: "fb",
-  alt: "fb"
+  alt: "fb",
+  onClick: jest.fn()
 };
 describe("SocialButton", () => {
   let component;

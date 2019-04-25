@@ -2,16 +2,16 @@ import React from "react";
 import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
 import { Login, mapStateToProps } from "../../views/Login";
-import { INITIAL_STATE } from "../../redux/reducers/loginReducers";
+import { INITIAL_STATE } from "../../redux/reducers/authReducers";
 import Validator from "../../utils/validator";
 import TextInput from "../../components/common/Inputs/TextInput";
 import FormButton from "../../components/common/Buttons/FormButton";
 import BasicButton from "../../components/common/Buttons/BasicButton";
 import SocialButton from "../../components/common/Buttons/SocialButton";
 
-const [handleTextInput, handleSignIn, mockedFormData] = new Array(3).fill(
-  jest.fn()
-);
+const [handleTextInput, handleSignIn, mockedFormData, socialAuth] = new Array(
+  4
+).fill(jest.fn());
 jest.mock("../../utils/validator");
 
 const props = {
@@ -22,7 +22,8 @@ const props = {
   loginSuccess: false,
   token: null,
   handleSignIn,
-  handleTextInput
+  handleTextInput,
+  socialAuth
 };
 const warper = shallow(<Login {...props} />);
 
@@ -52,11 +53,13 @@ describe("Login component", () => {
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
       jest.spyOn(instance, "handleNavigation");
+      jest.spyOn(instance, "handleSocialAuth");
     });
     afterEach(() => {
       instance.handleOnChange.mockClear();
       instance.handleSubmit.mockClear();
       instance.handleNavigation.mockClear();
+      instance.handleSocialAuth.mockClear();
       mockedFormData.mockClear();
       handleSignIn.mockClear();
       handleTextInput.mockClear();
@@ -123,6 +126,24 @@ describe("Login component", () => {
       });
       expect(instance.handleNavigation).not.toBeCalled();
     });
+    it("calls login with facebook", () => {
+      findElement(SocialButton, 0).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("facebook");
+    });
+    it("calls login with twitter ", () => {
+      findElement(SocialButton, 1).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("twitter");
+    });
+    it("calls login with Google ", () => {
+      findElement(SocialButton, 2).simulate("click");
+      global.open = jest.fn();
+      expect(instance.handleSocialAuth.mock.calls.length).toBe(1);
+      expect(socialAuth).toBeCalledWith("google");
+    });
   });
   describe("rendered component", () => {
     let instance;
@@ -162,7 +183,7 @@ describe("Login component", () => {
       });
     });
     it("returns all mapped props from redux", () => {
-      expect(mapStateToProps({ login: { ...INITIAL_STATE } })).toEqual({
+      expect(mapStateToProps({ auth: { ...INITIAL_STATE } })).toEqual({
         ...INITIAL_STATE
       });
     });

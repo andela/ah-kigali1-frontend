@@ -14,7 +14,7 @@ import {
   RESET_PASSWORD_LINK_FAILED
 } from "../../redux/actionTypes";
 
-const DEV_BASE_URL = "http://localhost:3000/api/v1";
+const API_BASE_URL = "http://localhost:3000/api/v1";
 let data;
 const mockStore = configureMockStore([thunk]);
 let store;
@@ -56,7 +56,7 @@ describe("ResetPassword action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/reset_password`, {
+      moxios.stubRequest(`${API_BASE_URL}/users/reset_password`, {
         status: 200,
         response: {
           ...payload
@@ -79,7 +79,7 @@ describe("ResetPassword action creators", () => {
         }
       ];
 
-      moxios.stubRequest(`${DEV_BASE_URL}/users/reset_password`, {
+      moxios.stubRequest(`${API_BASE_URL}/users/reset_password`, {
         status: 404,
         response: {
           ...payload

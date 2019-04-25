@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { handleTextInput, handleSignIn } from "../redux/actions/loginActions";
+import {
+  handleTextInput,
+  handleSignIn,
+  socialAuth
+} from "../redux/actions/authActions";
 import { isEmpty } from "../utils/helperFunctions";
 import Validator from "../utils/validator";
 import TextInput from "../components/common/Inputs/TextInput";
@@ -41,6 +45,13 @@ export class Login extends Component {
 
   handleNavigation = path => <Redirect to={`/${path}`} />;
 
+  handleSocialAuth(provider) {
+    const { isSubmitting, socialAuth: socialLogin } = this.props;
+    if (!isSubmitting) {
+      socialLogin(provider);
+    }
+  }
+
   render() {
     const { email, password, message, isSubmitting, loginSuccess } = this.props;
     const { errors } = this.state;
@@ -72,9 +83,21 @@ export class Login extends Component {
                 </div>
                 <p className="pg-title">Sign in with</p>
                 <div className="socials" data-test="socials">
-                  <SocialButton iconName="fb" alt="fb" />
-                  <SocialButton iconName="twitter" alt="twitter" />
-                  <SocialButton iconName="google-plus" alt="G" />
+                  <SocialButton
+                    iconName="fb"
+                    alt="fb"
+                    onClick={() => this.handleSocialAuth("facebook")}
+                  />
+                  <SocialButton
+                    iconName="twitter"
+                    alt="twitter"
+                    onClick={() => this.handleSocialAuth("twitter")}
+                  />
+                  <SocialButton
+                    iconName="google-plus"
+                    alt="G"
+                    onClick={() => this.handleSocialAuth("google")}
+                  />
                 </div>
                 <p className="pg-title">Or</p>
                 <form data-test="login-form">
@@ -131,20 +154,21 @@ Login.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
   handleTextInput: PropTypes.func.isRequired,
   message: PropTypes.string,
-  loginSuccess: PropTypes.bool.isRequired
+  loginSuccess: PropTypes.bool.isRequired,
+  socialAuth: PropTypes.func.isRequired
 };
 Login.defaultProps = {
   message: ""
 };
 export const mapStateToProps = state => {
-  const { login } = state;
+  const { auth } = state;
   return {
-    ...login,
-    message: login.errors.message
+    ...auth,
+    message: auth.errors.message
   };
 };
 
 export default connect(
   mapStateToProps,
-  { handleTextInput, handleSignIn }
+  { handleTextInput, handleSignIn, socialAuth }
 )(Login);

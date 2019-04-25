@@ -13,3 +13,4 @@ yarn.*
 yarn-*
 .DS_Store 
 .env
+.coveralls.yml

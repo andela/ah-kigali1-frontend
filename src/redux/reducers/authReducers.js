@@ -2,7 +2,10 @@ import {
   LOGIN_INPUT_CHANGE,
   SUBMITTING_LOGIN_CREDENTIALS,
   LOGIN_FAILED,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  IS_OPENING_SOCIAL_AUTH_PROVIDER,
+  CANCEL_SOCIAL_AUTH,
+  SET_CURRENT_USER
 } from "../actionTypes";
 
 export const INITIAL_STATE = {
@@ -11,7 +14,8 @@ export const INITIAL_STATE = {
   password: "",
   errors: {},
   loginSuccess: null,
-  token: null
+  token: null,
+  currentUser: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,6 +48,21 @@ export default (state = INITIAL_STATE, action) => {
         ...INITIAL_STATE,
         token: payload.token,
         loginSuccess: true
+      };
+    case IS_OPENING_SOCIAL_AUTH_PROVIDER:
+      return {
+        ...INITIAL_STATE,
+        isSubmitting: true
+      };
+    case CANCEL_SOCIAL_AUTH:
+      return {
+        ...INITIAL_STATE,
+        isSubmitting: false
+      };
+    case SET_CURRENT_USER:
+      return {
+        ...INITIAL_STATE,
+        currentUser: payload
       };
     default:
       return state;
