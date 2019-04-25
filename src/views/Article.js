@@ -34,9 +34,9 @@ export class Article extends Component {
   }
 }
 
-const mapStateToProps = state => state.like;
+export const mapStateToProps = state => state.like;
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   like: () =>
     dispatch(
       handleLike("it-was-a-good-experience-to-have-the-chick-here-c3nws245b99")

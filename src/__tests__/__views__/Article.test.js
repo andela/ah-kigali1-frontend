@@ -2,7 +2,12 @@ import React from "react";
 import Enzyme, { mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import Adapter from "enzyme-adapter-react-16";
-import { Article } from "../../views/Article";
+import {
+  Article,
+  mapStateToProps,
+  mapDispatchToProps
+} from "../../views/Article";
+import { initialState } from "../../redux/reducers/likeReducers";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -21,7 +26,7 @@ const setup = () => {
   };
 };
 
-describe("should render the like component", () => {
+describe("tes like component", () => {
   const { props } = setup();
   const likeComponent = mount(<Article {...props} />);
   let instance;
@@ -68,6 +73,27 @@ describe("should render the like component", () => {
         .find("img");
       dislikeButton.simulate("click", {});
       expect(instance.props.dislike).toHaveBeenCalled();
+    });
+  });
+  describe("test map state to props and map dispatch to props", () => {
+    it("should test map state to props", () => {
+      expect(mapStateToProps({ like: initialState })).toEqual({
+        likeCount: 0,
+        isSubmitting: false,
+        message: "",
+        isLiked: false
+      });
+    });
+    it("should test map dispatch to props for like", () => {
+      const dispatch = jest.fn();
+      mapDispatchToProps(dispatch).like();
+      expect(dispatch.mock.calls[0][0]).toBeInstanceOf(Function);
+    });
+
+    it("should test map dispatch to props for dislike", () => {
+      const dispatch = jest.fn();
+      mapDispatchToProps(dispatch).dislike();
+      expect(dispatch.mock.calls[0][0]).toBeInstanceOf(Function);
     });
   });
 });

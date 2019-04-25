@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render the like component snapshot testing for the component 1`] = `
+exports[`tes like component snapshot testing for the component 1`] = `
 <Article
   dislike={[MockFunction]}
   isLiked={false}
