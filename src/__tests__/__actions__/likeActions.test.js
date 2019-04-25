@@ -3,7 +3,6 @@ import moxios from "moxios";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import axios from "../../utils/axios";
-import reduxStore from "../../redux/store";
 import {
   handleLike,
   handleDislike,
@@ -18,6 +17,7 @@ import {
   REQUEST_SUBMITTED,
   REQUEST_FAILED
 } from "../../redux/actionTypes";
+import reduxStore from "../../redux/store";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -83,7 +83,7 @@ describe.only("should called like actions creators", () => {
         message: payload
       }
     });
-    const store = mockStore({ like: {} });
+    const store = mockStore({ like: reduxStore.like });
     const expectedActions = [
       { type: REQUEST_SUBMITTED },
       { type: LIKE_ARTICLE, payload }
@@ -101,7 +101,7 @@ describe.only("should called like actions creators", () => {
         message: payload
       }
     });
-    const store = mockStore({ like: {} });
+    const store = mockStore({ like: reduxStore.like });
     const expectedActions = [
       { type: REQUEST_SUBMITTED },
       { type: REQUEST_FAILED, payload }
@@ -120,7 +120,7 @@ describe.only("should called like actions creators", () => {
         message: payload
       }
     });
-    const store = mockStore({ like: {} });
+    const store = mockStore({ like: reduxStore.like });
     const expectedActions = [
       { type: REQUEST_SUBMITTED },
       { type: DISLIKE_ARTICLE, payload }
@@ -138,7 +138,7 @@ describe.only("should called like actions creators", () => {
         message: payload
       }
     });
-    const store = mockStore({ like: {} });
+    const store = mockStore({ like: reduxStore.like });
     const expectedActions = [
       { type: REQUEST_SUBMITTED },
       { type: REQUEST_FAILED, payload }
