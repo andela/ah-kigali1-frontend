@@ -21,6 +21,10 @@ export const handleTextInput = (name, value) => ({
 const updateIsSubmitting = () => ({
   type: SUBMITTING_LOGIN_CREDENTIALS
 });
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  payload: user
+});
 
 const loginSuccess = payload => {
   const { token, message } = payload;
