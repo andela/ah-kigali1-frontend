@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 /* eslint global-require: "off" */
+import { Link } from "react-router-dom";
 
 class Navbar extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Navbar extends Component {
           className="nav-bar"
         >
           <div className="nav-container">
-            <div className="col-md-6 col-sm-3 brand-name">
+            <Link className="col-md-6 col-sm-3 brand-name" to="/">
               <div className="brand">
                 <img
                   src={require("../../../assets/img/quill-drawing-a-line.svg")}
@@ -33,7 +34,7 @@ class Navbar extends Component {
                 />
               </div>
               <h3>AH</h3>
-            </div>
+            </Link>
             <div className="col-md-6 col-sm-9 user-actions">
               <div className="search-filed">
                 <input type="search" name="search" placeholder="Search....." />
@@ -79,9 +80,9 @@ class Navbar extends Component {
                   <div className="drop-down-content">
                     <ul className="links">
                       <li className="nav-link">
-                        <a href="./new-article.html" className="main">
+                        <Link to="/articles/new" className="main">
                           New Story
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <a href="./profile.html">Profile</a>
@@ -90,12 +91,10 @@ class Navbar extends Component {
                         <a href="./authors-performance.html">Stats</a>
                       </li>
                       <li>
-                        <a href="./user-settings.html#password-settings">
-                          Settings
-                        </a>
+                        <Link to="/settings">Settings</Link>
                       </li>
                       <li>
-                        <a href="./sign-in.html">Sign out</a>
+                        <Link to="/sign_in">Sign out</Link>
                       </li>
                     </ul>
                   </div>

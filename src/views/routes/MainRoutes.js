@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../Home";
 import Navbar from "../../components/common/AppBars/navBar";
+import NewArticle from "../NewArticle";
+import EditArticle from "../EditArticle";
+import NotFound from "../NotFound";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     component: Home
+  },
+  {
+    path: "/articles/new",
+    component: NewArticle
+  },
+  {
+    path: "/articles/:slug/edit",
+    component: EditArticle
   }
 ];
 export default class MainRoutes extends Component {
@@ -23,6 +34,7 @@ export default class MainRoutes extends Component {
               key={Number(index)}
             />
           ))}
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
