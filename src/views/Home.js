@@ -20,6 +20,7 @@ const cats = [
   "LEISURE",
   "FOOD"
 ];
+
 class Home extends Component {
   render() {
     return (
@@ -32,15 +33,16 @@ class Home extends Component {
           <Input
             style={{ width: "40%" }}
             type="email"
+            name="email"
             placeholder="Your email"
           />
           <Input
             style={{ width: "60%" }}
             type="password"
+            name="email"
             placeholder="Enter your password"
           />
         </div>
-
         <div className="featured_article">
           <MainCard />
           <Latest />

@@ -5,6 +5,9 @@ import ResetPassword from "./ResetPassword";
 import Home from "./Home";
 import UpdatePassword from "./UpdatePassword";
 import SocialAuth from "./SocialAuth";
+import NewArticle from "./NewArticle";
+import EditArticle from "./EditArticle";
+import NotFound from "./NotFound";
 
 const Routers = () => (
   <Router>
@@ -14,6 +17,10 @@ const Routers = () => (
       <Route exact path="/social_auth" component={SocialAuth} />
       <Route exact path="/reset_password" component={ResetPassword} />
       <Route exact path="/update_password" component={UpdatePassword} />
+      <Route exact path="/update_password" component={UpdatePassword} />
+      <Route exact path="/articles/:slug/edit" component={EditArticle} />
+      <Route exact path="/articles/new_article" component={NewArticle} />
+      <Route exact path="/not_found" component={NotFound} />
     </Switch>
   </Router>
 );

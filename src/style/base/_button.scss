@@ -1,0 +1,10 @@
+input[type="button"],
+.btn,
+a[type="button"] {
+  @include btn;
+}
+
+.btn:hover {
+  background-color: $color-primary;
+  color: $white-primary;
+}

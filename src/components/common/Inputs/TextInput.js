@@ -27,10 +27,9 @@ TextInput.propTypes = {
   id: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string
+  value: PropTypes.string.isRequired
 };
 TextInput.defaultProps = {
-  value: "",
   id: ""
 };
 

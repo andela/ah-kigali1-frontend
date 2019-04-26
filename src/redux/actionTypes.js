@@ -28,3 +28,18 @@ export const SUBMITTING_SOCIAL_AUTH = "SUBMITTING_SOCIAL_AUTH";
 export const SETTING_TOKEN_SOCIAL_AUTH = "SETTING_TOKEN_SOCIAL_AUTH";
 export const SOCIAL_AUTH_SUCCESS = "SOCIAL_AUTH_SUCCESS";
 export const SOCIAL_AUTH_FAILED = "SOCIAL_AUTH_FAILED";
+/**
+ * @description Creating article action types
+ */
+export const NEW_ARTICLE = "NEW_ARTICLE";
+export const ARTICLE_ERROR = "ARTICLE_ERROR";
+export const INPUT_CHANGE = "INPUT_CHANGE";
+export const SUBMITTING_ARTICLE = "SUBMITTING_ARTICLE";
+export const NEW_TAG = "NEW_TAG";
+export const REMOVE_TAG = "REMOVE_TAG";
+
+/**
+ * @description edit article
+ */
+export const FETCH_ARTICLE_TO_EDIT = "FETCH_ARTICLE_TO_EDIT";
+export const ARTICLE_UPDATED = "ARTICLE_UPDATED";
