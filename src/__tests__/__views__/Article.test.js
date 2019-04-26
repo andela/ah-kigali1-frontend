@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import React from "react";
 import Enzyme, { mount } from "enzyme";
 import toJson from "enzyme-to-json";
