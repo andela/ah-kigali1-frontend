@@ -1,4 +1,5 @@
 import axios from "../../utils/axios";
+import "@babel/polyfill";
 import {
   ARTICLE_FETCHED,
   FETCHING_ARTICLE,

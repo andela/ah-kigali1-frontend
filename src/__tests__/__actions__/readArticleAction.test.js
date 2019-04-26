@@ -1,9 +1,8 @@
 import moxios from "moxios";
-import "@babel/polyfill";
+import dotenv from "dotenv";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import axios from "../../utils/axios";
-
 import {
   fetchingArticle,
   fetchArticle,
@@ -17,10 +16,12 @@ import {
   DELETE_ARTICLE
 } from "../../redux/actionTypes";
 
+dotenv.config();
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = process.env.API_BASE_URL;
 describe("fetching article", () => {
   test("should return fetching article action", () => {
     expect(fetchingArticle()).toEqual({ type: FETCHING_ARTICLE });
