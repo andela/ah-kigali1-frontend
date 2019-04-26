@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+<<<<<<< HEAD
 import Login from "./Login";
 import ResetPassword from "./ResetPassword";
 import Home from "./Home";
@@ -26,3 +27,22 @@ const Routers = () => (
   </Router>
 );
 export default Routers;
+=======
+import MainRoutes from "./routes/MainRoutes";
+import AuthRoutes from "./routes/AuthRoutes";
+
+export default class Routers extends Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          {AuthRoutes.map(route => (
+            <Route exact path={route.path} component={route.component} />
+          ))}
+          <Route exact path="/*" component={MainRoutes} />
+        </Switch>
+      </Router>
+    );
+  }
+}
+>>>>>>> [Chore #163518639] restructure app routers
