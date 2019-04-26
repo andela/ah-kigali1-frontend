@@ -44,18 +44,9 @@ module.exports = {
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"]
   },
-  devServer: {
-    historyApiFallback: true
-  },
   plugins: [
-<<<<<<< HEAD
     new dotenv(),
     new HtmlPackPlugin({ template: "./public/index.html" }),
-=======
-    new HtmlPackPlugin({
-      template: path.join(__dirname, "./public/index.html")
-    }),
->>>>>>> feature(create): create react page
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"

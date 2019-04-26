@@ -43,8 +43,6 @@ export const REMOVE_TAG = "REMOVE_TAG";
  */
 export const FETCH_ARTICLE_TO_EDIT = "FETCH_ARTICLE_TO_EDIT";
 export const ARTICLE_UPDATED = "ARTICLE_UPDATED";
-export const PASSWORD_UPDATE_SUCCESS = "password_update_success";
-export const PASSWORD_UPDATE_FAILED = "password_update_failed";
 
 /**
  * @description fetch article action types
@@ -52,7 +50,6 @@ export const PASSWORD_UPDATE_FAILED = "password_update_failed";
 export const ARTICLE_FETCHED = "FETCH_ARTICLE";
 export const FETCHING_ARTICLE = "FETCHING_ARTICLE";
 export const FETCHING_ASIDE_ARTICLES = "FETCHING_ASIDE_ARTICLES";
-export const ARTICLE_ERROR = "ARTICLE_ERROR";
 
 /**
  * @description delete article action types

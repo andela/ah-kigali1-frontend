@@ -5,7 +5,7 @@ import {
   DELETE_ARTICLE,
   FETCHING_ARTICLE
 } from "../../redux/actionTypes";
-import { articleReducer } from "../../redux/reducers/articleReducers";
+import articleReducer from "../../redux/reducers/readArticleReducer";
 
 describe("fetching one article reducer ", () => {
   test("should return the initial state with wrong action", () => {

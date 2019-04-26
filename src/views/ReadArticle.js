@@ -9,7 +9,7 @@ import Input from "../components/common/Inputs/TextInput";
 import {
   fetchArticle,
   deleteArticle
-} from "../redux/actions/articleActionCreator";
+} from "../redux/actions/readArticleActionCreator";
 import Button from "../components/common/Buttons/BasicButton";
 import calculateTimeStamp from "../utils/helpers/calculateTimeStamp";
 import MainArticle from "../components/common/Cards/main";

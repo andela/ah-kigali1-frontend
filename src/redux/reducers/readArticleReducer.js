@@ -8,7 +8,7 @@ import {
 
 const initialState = { isFetching: true, asideArticles: { articles: [] } };
 
-export const articleReducer = (state = initialState, action) => {
+const readArticleReducer = (state = initialState, action) => {
   switch (action.type) {
     case ARTICLE_FETCHED:
       return {
@@ -43,3 +43,5 @@ export const articleReducer = (state = initialState, action) => {
       };
   }
 };
+
+export default readArticleReducer;

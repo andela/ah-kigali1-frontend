@@ -8,7 +8,7 @@ import {
   fetchingArticle,
   fetchArticle,
   deleteArticle
-} from "../../redux/actions/articleActionCreator";
+} from "../../redux/actions/readArticleActionCreator";
 import {
   FETCHING_ARTICLE,
   FETCHING_ASIDE_ARTICLES,
