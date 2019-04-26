@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import "@babel/polyfill";
 import React, { Component } from "react";
 import BasicButton from "../components/common/Buttons/BasicButton";
-import Input from "../components/common/Inputs/TextInput";
 import Navbar from "../components/common/AppBars/navBar";
 
 import Latest from "../components/common/Cards/latest";

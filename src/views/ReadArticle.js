@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { stringToHtmlElement } from "../utils/helpers/bodyParser";
-
+import Navbar from "../components/common/AppBars/navBar";
 import Input from "../components/common/Inputs/TextInput";
 import {
   fetchArticle,
@@ -39,6 +39,12 @@ export class Article extends Component {
 
     this.setState({ slug });
     fetchOneArticle(slug);
+  };
+
+  redirectToEdit = () => {
+    const { slug } = this.state;
+    console.log("Here there, here is the slug", slug);
+    this.props.history.push(`/articles/${slug}/edit`);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -103,8 +109,11 @@ export class Article extends Component {
 
     return (
       <div>
+        <Navbar />
         {message && message !== "Article found successfully" ? (
-          <p className="success-message">{message}</p>
+          <p className="success-message">
+            {this.props.history.push("/not_found")}
+          </p>
         ) : (
           <p>{response}</p>
         )}
@@ -143,6 +152,11 @@ export class Article extends Component {
                   className="btn delete_article"
                   onClick={() => this.handleDeleteArticle()}
                   title="Delete"
+                />
+                <Button
+                  className="btn delete_article"
+                  onClick={() => this.redirectToEdit()}
+                  title="Edit"
                 />
                 <div className="tags">
                   {!isFetching && tagsList.length
