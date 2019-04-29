@@ -25,10 +25,10 @@ export class SearchResults extends Component {
   };
 
   componentWillMount() {
-    const { location } = this.props;
+    const { location, fetchResults: getAllArticles } = this.props;
     const { keyword } = queryString.parse(location.search);
     this.handleOnChange(keyword);
-    this.searchArticle(keyword);
+    getAllArticles(keyword, 1);
   }
 
   componentDidMount() {
@@ -71,6 +71,7 @@ export class SearchResults extends Component {
   };
 
   handleScroll = () => {
+    console.log("*********", "weeeeeeeeeeeeescrol");
     if (
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
@@ -153,6 +154,7 @@ export class SearchResults extends Component {
                   title={title}
                   key={`${index + 1}`}
                   onClick={() => this.handleTagFilter(title, index)}
+                  data-test="single-tag"
                 />
               ))}
             </div>

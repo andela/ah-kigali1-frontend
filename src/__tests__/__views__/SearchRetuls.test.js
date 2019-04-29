@@ -15,11 +15,11 @@ const props = {
   handleInputChange,
   fetchResults,
   clearSearchResults,
-  searchQuery: "hello_world",
+  searchQuery: "helloWorld",
   articles: {},
   authors: {},
   location: {
-    search: "/?keyword=helloWorld"
+    search: "?keyword=helloWorld"
   },
   isLoading: true,
   errors: {}
@@ -57,13 +57,16 @@ describe("Search Results Component", () => {
       instance = wrapper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleEnterPress");
+      jest.spyOn(instance, "searchArticle");
+      jest.spyOn(instance, "handleTagFilter");
     });
     afterEach(() => {
       instance.handleOnChange.mockClear();
       instance.handleEnterPress.mockClear();
+      instance.searchArticle.mockClear();
     });
     test("should respond on change input text", () => {
-      const value = "hello_world";
+      const value = props.searchQuery;
       findElements(TextInput)
         .at(0)
         .simulate("change", {
@@ -75,7 +78,11 @@ describe("Search Results Component", () => {
       expect(handleInputChange).toHaveBeenCalledWith(value);
     });
     test("should response on ENTER key press", () => {
-      const searchQuery = "hello_world";
+      const { searchQuery } = props;
+      wrapper.setState({
+        pageNumber: 1
+      });
+      wrapper.update();
       findElements(TextInput)
         .at(0)
         .simulate("keydown", { keyCode: 13, shiftKey: false });
@@ -84,16 +91,60 @@ describe("Search Results Component", () => {
         shiftKey: false
       });
       expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
+      expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
     });
+    test("should filter article by tags", () => {
+      wrapper.setProps({
+        articles: _.keyBy(articles, "id")
+      });
+      wrapper
+        .find(`[data-test="single-tag"]`)
+        .at(0)
+        .simulate("click");
+      expect(wrapper.state().activeTag).toEqual(0);
+      expect(instance.handleTagFilter).toHaveBeenCalledWith(
+        wrapper.state().tagsList[0],
+        0
+      );
+    });
+    test("should clear article filtering", () => {
+      wrapper.setState({
+        activeTag: 0
+      });
+      wrapper
+        .find(`[data-test="single-tag"]`)
+        .at(0)
+        .simulate("click");
+      expect(instance.handleTagFilter).toHaveBeenCalledWith(
+        wrapper.state().tagsList[0],
+        0
+      );
+      expect(wrapper.state().articles).toEqual(_.values(articles));
+      expect(wrapper.state().activeTag).toEqual(null);
+    });
+
     describe("Component life cycle metho", () => {
-      const component = mount(<SearchResults {...props} />);
       test("should fetch article and set search query", () => {
+        mount(<SearchResults {...props} />);
         expect(fetchResults).toHaveBeenCalled();
-        expect(handleInputChange).toBeCalled();
+        expect(fetchResults).toHaveBeenCalledWith(props.searchQuery, 1);
+        expect(handleInputChange).toHaveBeenCalledWith(props.searchQuery);
       });
       test("should clear test result on component unmount", () => {
+        const component = mount(<SearchResults {...props} />);
         component.unmount();
         expect(clearSearchResults).toBeCalled();
+      });
+      test("should set articles in state", () => {
+        const component = mount(<SearchResults {...props} />);
+        const transformedArticles = _.keyBy(articles, "id");
+        component.setProps({
+          articles: transformedArticles,
+          authors
+        });
+        expect(component.state().articles).toEqual(
+          _.values(transformedArticles)
+        );
       });
     });
   });
