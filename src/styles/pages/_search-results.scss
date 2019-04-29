@@ -32,6 +32,10 @@
       margin-bottom: 3em;
       button.tags {
         @include tag-or-follow-btn;
+        &.active {
+          background-color: $color-primary;
+          color: #fff;
+        }
       }
     }
     .authors-section {
