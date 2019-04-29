@@ -10,7 +10,6 @@ import {
 } from "../../views/Article";
 import { initialState } from "../../redux/reducers/likeReducers";
 
-Enzyme.configure({ adapter: new Adapter() });
 
 const setup = () => {
   const props = {
