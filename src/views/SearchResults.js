@@ -53,6 +53,7 @@ export class SearchResults extends Component {
     clear();
   }
 
+<<<<<<< HEAD
   setUpComponent = () => {
     const {
       history: { location },
@@ -63,6 +64,12 @@ export class SearchResults extends Component {
     this.handleOnChange(keyword);
     if (isEmpty(articles)) getAllArticles(keyword, 1);
   };
+=======
+  componentWillUnmount() {
+    const { clearSearchResults: clear } = this.props;
+    clear();
+  }
+>>>>>>> [Feature #163518658] clear search results on component will unmount
 
   handleOnChange = value => {
     const { handleInputChange: setSearchQuery } = this.props;
