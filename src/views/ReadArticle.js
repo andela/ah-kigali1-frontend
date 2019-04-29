@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { stringToHtmlElement } from "../utils/helpers/bodyParser";
 import Navbar from "../components/common/AppBars/navBar";
 import Input from "../components/common/Inputs/TextInput";
 import {
@@ -11,8 +10,12 @@ import {
   deleteArticle
 } from "../redux/actions/readArticleActionCreator";
 import Button from "../components/common/Buttons/BasicButton";
-import calculateTimeStamp from "../utils/helpers/calculateTimeStamp";
-import { isCurrentUserAuthor } from "../utils/helperFunctions";
+
+import {
+  isCurrentUserAuthor,
+  stringToHtmlElement,
+  calculateTimeStamp
+} from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 
 export const mapStateToProps = (state, ownProps) => ({

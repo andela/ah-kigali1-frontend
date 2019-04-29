@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { stringToHtmlElement } from "../../../utils/helpers/bodyParser";
-import calculateTimeStamp from "../../../utils/helpers/calculateTimeStamp";
+import {
+  stringToHtmlElement,
+  calculateTimeStamp
+} from "../../../utils/helperFunctions";
 
 /* eslint global-require: "off" */
 export class MainCard extends Component {

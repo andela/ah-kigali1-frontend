@@ -33,6 +33,11 @@ describe(" Read article", () => {
   });
   test("should map states to props", () => {
     const state = {
+      login: {
+        currentUser: {
+          username: "yves"
+        }
+      },
       fetchedArticle: {
         asideArticles: {
           articles: [{ body: "hello world" }, { body: "hello world" }]
@@ -41,7 +46,12 @@ describe(" Read article", () => {
     };
     expect(mapStateToProps(state, { message: "articles retrieved" })).toEqual({
       message: "articles retrieved",
-      asideArticles: [{ body: "hello world" }, { body: "hello world" }],
+      currentUser: {
+        username: "yves"
+      },
+      asideArticles: {
+        articles: [{ body: "hello world" }, { body: "hello world" }]
+      },
       article: state.fetchedArticle
     });
   });

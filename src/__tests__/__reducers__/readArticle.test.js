@@ -11,7 +11,7 @@ describe("fetching one article reducer ", () => {
   test("should return the initial state with wrong action", () => {
     expect(articleReducer(undefined, {})).toEqual({
       isFetching: true,
-      asideArticles: { articles: [] }
+      asideArticles: {}
     });
   });
   test("should return the error message on article_error action", () => {
@@ -23,7 +23,7 @@ describe("fetching one article reducer ", () => {
     ).toEqual({
       isFetching: false,
       message: "Error happened",
-      asideArticles: { articles: [] }
+      asideArticles: {}
     });
   });
   test("should return the fetched article", () => {
