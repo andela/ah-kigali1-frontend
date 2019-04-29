@@ -71,7 +71,6 @@ export class SearchResults extends Component {
   };
 
   handleScroll = () => {
-    console.log("*********", "weeeeeeeeeeeeescrol");
     if (
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
