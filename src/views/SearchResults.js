@@ -59,6 +59,11 @@ export class SearchResults extends Component {
     clear();
   }
 
+  componentWillUnmount() {
+    const { clearSearchResults: clear } = this.props;
+    clear();
+  }
+
   handleOnChange = value => {
     const { handleInputChange: setSearchQuery } = this.props;
     setSearchQuery(value);
