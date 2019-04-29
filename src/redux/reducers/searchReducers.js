@@ -2,7 +2,8 @@ import {
   SEARCH_QUERY_CHANGE,
   ARTICLE_SEARCH_SUCCESS,
   SEARCHING_ARTICLES,
-  ARTICLE_SEARCH_FAILED
+  ARTICLE_SEARCH_FAILED,
+  CLEAR_SEARCH_RESULTS
 } from "../actionTypes";
 
 const INITIAL_STATE = {
@@ -42,6 +43,14 @@ export default (state = INITIAL_STATE, action) => {
           message: payload.message,
           ...payload.errors
         }
+      };
+    case CLEAR_SEARCH_RESULTS:
+      return {
+        ...state,
+        articles: {},
+        authors: {},
+        errors: "",
+        isLoading: false
       };
     default:
       return state;
