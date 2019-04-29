@@ -66,3 +66,11 @@ export const calculateTimeStamp = time => {
   const date = new Date(time);
   return date.toDateString();
 };
+export const arrayToObject = (items, key) => _.keyBy(items, item => item[key]);
+
+export const filterByTag = (items, tag) =>
+  _.filter(items, item => item.tagsList.includes(tag));
+
+export const getTags = items => [
+  ...new Set(_.flatten([...items.map(item => item.tagsList)]))
+];
