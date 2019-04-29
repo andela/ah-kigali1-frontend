@@ -20,3 +20,10 @@ export const capitalize = string =>
     : `${string[0].toUpperCase()}${string.slice(1)}`;
 
 export const parseURL = (parmName, parm) => parm.split(parmName)[1];
+
+export const isCurrentUserAuthor = (authorName, currentUser) => {
+  if (currentUser && authorName === currentUser.username) {
+    return true;
+  }
+  return false;
+};

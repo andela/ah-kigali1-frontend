@@ -19,10 +19,16 @@ export const fetchArticle = slug => async dispatch => {
     dispatch({ type: ARTICLE_FETCHED, payload: response.data });
 
     const response2 = await axios.get(`/articles?limit=3`);
-
+    const newArticles = response2.data.articles.reduce(
+      (accumulator, currentValue) => {
+        accumulator[currentValue.id] = currentValue;
+        return accumulator;
+      },
+      {}
+    );
     dispatch({
       type: FETCHING_ASIDE_ARTICLES,
-      payload: response2.data
+      payload: newArticles
     });
   } catch (error) {
     const message = error.response.data;

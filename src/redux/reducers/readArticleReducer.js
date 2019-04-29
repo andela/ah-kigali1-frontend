@@ -6,7 +6,7 @@ import {
   DELETE_ARTICLE
 } from "../actionTypes";
 
-const initialState = { isFetching: true, asideArticles: { articles: [] } };
+const initialState = { isFetching: true, asideArticles: {} };
 
 const readArticleReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +19,7 @@ const readArticleReducer = (state = initialState, action) => {
     case FETCHING_ASIDE_ARTICLES:
       return {
         ...state,
-        asideArticles: action.payload
+        asideArticles: { ...state.asideArticles, ...action.payload }
       };
     case ARTICLE_ERROR:
       return {

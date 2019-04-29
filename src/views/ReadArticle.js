@@ -12,11 +12,13 @@ import {
 } from "../redux/actions/readArticleActionCreator";
 import Button from "../components/common/Buttons/BasicButton";
 import calculateTimeStamp from "../utils/helpers/calculateTimeStamp";
+import { isCurrentUserAuthor } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 
 export const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  asideArticles: state.fetchedArticle.asideArticles.articles,
+  currentUser: state.login.currentUser,
+  asideArticles: state.fetchedArticle.asideArticles,
   article: state.fetchedArticle
 });
 export const mapDispatchToProps = dispatch => ({
@@ -34,8 +36,12 @@ export class Article extends Component {
   }
 
   componentDidMount = () => {
-    const { fetchOneArticle, match } = this.props;
-    const { slug } = match.params;
+    const {
+      fetchOneArticle,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
 
     this.setState({ slug });
     fetchOneArticle(slug);
@@ -43,8 +49,10 @@ export class Article extends Component {
 
   redirectToEdit = () => {
     const { slug } = this.state;
-    console.log("Here there, here is the slug", slug);
-    this.props.history.push(`/articles/${slug}/edit`);
+    const {
+      history: { push }
+    } = this.props;
+    push(`/articles/${slug}/edit`);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -67,19 +75,14 @@ export class Article extends Component {
         setTimeout(() => {
           history.push("/");
         }, 3000);
-      } else if (response.status === 404) {
-        this.setState({ response: "Article not found" });
-      } else if (response.status === 401) {
-        this.setState({
-          response: "We are unable to authenticate you. Consider logging in"
-        });
       }
     });
   };
 
   render() {
     const { response } = this.state;
-    const { article, asideArticles } = this.props;
+    const { article, asideArticles, currentUser, history } = this.props;
+
     const { isFetching, message, article: retrievedArticle } = article;
 
     let author,
@@ -106,14 +109,13 @@ export class Article extends Component {
       } = retrievedArticle);
       ({ username, firstName, lastName, image } = author);
     }
+    const isAuthor = isCurrentUserAuthor(username, currentUser);
 
     return (
       <div>
         <Navbar />
         {message && message !== "Article found successfully" ? (
-          <p className="success-message">
-            {this.props.history.push("/not_found")}
-          </p>
+          <p className="success-message">{history.push("/not_found")}</p>
         ) : (
           <p>{response}</p>
         )}
@@ -139,25 +141,36 @@ export class Article extends Component {
                     </span>
                   </div>
                 </div>
-                <button className="author-follow" type="button">
-                  Follow
-                </button>
+                {isAuthor ? (
+                  false
+                ) : (
+                  <button className="author-follow" type="button">
+                    Follow
+                  </button>
+                )}
               </div>
               <div className="article-content">
                 <div className="article-title">{title}</div>
                 <div className="article-text">
                   {stringToHtmlElement(body).body}
                 </div>
-                <Button
-                  className="btn delete_article"
-                  onClick={() => this.handleDeleteArticle()}
-                  title="Delete"
-                />
-                <Button
-                  className="btn delete_article"
-                  onClick={() => this.redirectToEdit()}
-                  title="Edit"
-                />
+                {isAuthor ? (
+                  <div>
+                    <Button
+                      className="btn delete_article"
+                      onClick={() => this.handleDeleteArticle()}
+                      title="Delete"
+                    />
+                    <Button
+                      className="btn delete_article"
+                      onClick={() => this.redirectToEdit()}
+                      title="Edit"
+                    />{" "}
+                  </div>
+                ) : (
+                  false
+                )}
+
                 <div className="tags">
                   {!isFetching && tagsList.length
                     ? tagsList.map(tag => (
@@ -334,8 +347,8 @@ export class Article extends Component {
             </aside>
             <div className="right article-others">
               <div className="right">
-                {asideArticles.length
-                  ? asideArticles.map(asideArticle => (
+                {Object.values(asideArticles).length
+                  ? Object.values(asideArticles).map(asideArticle => (
                       <div className="article-card article-other">
                         <MainArticle
                           article={asideArticle}
@@ -359,6 +372,12 @@ Article.propTypes = {
   deleteOneArticle: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
+  }).isRequired,
+  currentUser: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    image: PropTypes.string,
+    username: PropTypes.string
   }).isRequired,
   article: PropTypes.shape({
     article: PropTypes.shape({
