@@ -1,8 +1,7 @@
 import "@babel/polyfill";
 import React from "react";
-import Enzyme, { mount } from "enzyme";
+import { mount } from "enzyme";
 import toJson from "enzyme-to-json";
-import Adapter from "enzyme-adapter-react-16";
 import {
   Article,
   mapStateToProps,
