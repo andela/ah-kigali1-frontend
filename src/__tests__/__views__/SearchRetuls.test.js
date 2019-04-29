@@ -1,5 +1,6 @@
 import React from "react";
 import toJson from "enzyme-to-json";
+<<<<<<< HEAD
 import { shallow, mount } from "enzyme";
 import { SearchResults } from "../../views/SearchResults";
 import { AnimatedCard } from "../../components/common/Cards/AnimatedCard";
@@ -14,10 +15,24 @@ const [handleInputChange, fetchResults, clearSearchResults, push] = new Array(
   4
 ).fill(jest.fn());
 
+=======
+import _ from "lodash";
+import { shallow, mount } from "enzyme";
+import { SearchResults } from "../../views/SearchResults";
+import AnimatedCard from "../../components/common/Cards/AnimatedCard";
+import TextInput from "../../components/common/Inputs/TextInput";
+import { articles, authors } from "../testData";
+import AuthorCard from "../../components/common/Cards/AuthorCard";
+
+const [handleInputChange, fetchResults, clearSearchResults] = new Array(3).fill(
+  jest.fn()
+);
+>>>>>>> [Feature #163518658] clear search results on component will unmount
 const props = {
   handleInputChange,
   fetchResults,
   clearSearchResults,
+<<<<<<< HEAD
   searchQuery: "helloWorld",
   articles: {},
   authors: {},
@@ -26,10 +41,18 @@ const props = {
       search: "?keyword=helloWorld"
     },
     push
+=======
+  searchQuery: "hello_world",
+  articles: {},
+  authors: {},
+  location: {
+    search: "/?keyword=helloWorld"
+>>>>>>> [Feature #163518658] clear search results on component will unmount
   },
   isLoading: true,
   errors: {}
 };
+<<<<<<< HEAD
 
 const wrapper = shallow(<SearchResults {...props} />);
 const findElements = element => wrapper.find(element);
@@ -43,6 +66,15 @@ describe("Search Results Component", () => {
     fetchResults.mockClear();
   });
 
+=======
+const wrapper = shallow(<SearchResults {...props} />);
+const findElements = element => wrapper.find(element);
+describe("Search Results Component", () => {
+  afterEach(() => {
+    handleInputChange.mockClear();
+    fetchResults.mockClear();
+  });
+>>>>>>> [Feature #163518658] clear search results on component will unmount
   describe("rendered component", () => {
     test("should match the snapshot", () => {
       expect(toJson(wrapper)).toMatchSnapshot();
@@ -55,18 +87,28 @@ describe("Search Results Component", () => {
     });
     test("should render the right number of article card", () => {
       wrapper.setProps({
+<<<<<<< HEAD
         articles: { ...articlesObj },
         authors: { ...authorObj }
+=======
+        articles: _.keyBy(articles, article => article.id),
+        isLoading: false,
+        authors: _.keyBy(authors, author => author.id)
+>>>>>>> [Feature #163518658] clear search results on component will unmount
       });
       expect(findElements(AnimatedCard).length).toBe(3);
       expect(findElements(AuthorCard).length).toBe(1);
     });
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> [Feature #163518658] clear search results on component will unmount
   describe("component methods & functions", () => {
     let instance;
     beforeEach(() => {
       instance = wrapper.instance();
+<<<<<<< HEAD
       [
         "handleOnChange",
         "handleEnterPress",
@@ -92,6 +134,17 @@ describe("Search Results Component", () => {
 
     test("should respond on change input text", () => {
       const value = props.searchQuery;
+=======
+      jest.spyOn(instance, "handleOnChange");
+      jest.spyOn(instance, "handleEnterPress");
+    });
+    afterEach(() => {
+      instance.handleOnChange.mockClear();
+      instance.handleEnterPress.mockClear();
+    });
+    test("should respond on change input text", () => {
+      const value = "hello_world";
+>>>>>>> [Feature #163518658] clear search results on component will unmount
       findElements(TextInput)
         .at(0)
         .simulate("change", {
@@ -102,6 +155,7 @@ describe("Search Results Component", () => {
       expect(instance.handleOnChange).toHaveBeenCalledWith(value);
       expect(handleInputChange).toHaveBeenCalledWith(value);
     });
+<<<<<<< HEAD
 
     test("should response on ENTER key press", () => {
       const { searchQuery } = props;
@@ -145,6 +199,10 @@ describe("Search Results Component", () => {
       wrapper.setProps({
         isLoading: true
       });
+=======
+    test("should response on ENTER key press", () => {
+      const searchQuery = "hello_world";
+>>>>>>> [Feature #163518658] clear search results on component will unmount
       findElements(TextInput)
         .at(0)
         .simulate("keydown", { keyCode: 13, shiftKey: false });
@@ -152,6 +210,7 @@ describe("Search Results Component", () => {
         keyCode: 13,
         shiftKey: false
       });
+<<<<<<< HEAD
       expect(fetchResults).not.toBeCalled();
       expect(instance.searchArticle).not.toHaveBeenCalledWith(
         props.searchQuery
@@ -269,6 +328,20 @@ describe("Search Results Component", () => {
         pageNumber + 1,
         props.history
       );
+=======
+      expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
+    });
+    describe("Component life cycle metho", () => {
+      const component = mount(<SearchResults {...props} />);
+      test("should fetch article and set search query", () => {
+        expect(fetchResults).toHaveBeenCalled();
+        expect(handleInputChange).toBeCalled();
+      });
+      test("should clear test result on component unmount", () => {
+        component.unmount();
+        expect(clearSearchResults).toBeCalled();
+      });
+>>>>>>> [Feature #163518658] clear search results on component will unmount
     });
   });
 });
