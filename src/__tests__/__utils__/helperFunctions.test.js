@@ -1,4 +1,3 @@
-import { is } from "immutable";
 import {
   isEmpty,
   capitalize,

@@ -50,14 +50,6 @@ export class Article extends Component {
     fetchOneArticle(slug);
   };
 
-  redirectToEdit = () => {
-    const { slug } = this.state;
-    const {
-      history: { push }
-    } = this.props;
-    push(`/articles/${slug}/edit`);
-  };
-
   componentWillReceiveProps = nextProps => {
     const {
       article: { article },
@@ -67,6 +59,14 @@ export class Article extends Component {
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
+  };
+
+  redirectToEdit = () => {
+    const { slug } = this.state;
+    const {
+      history: { push }
+    } = this.props;
+    push(`/articles/${slug}/edit`);
   };
 
   handleDeleteArticle = () => {
