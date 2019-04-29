@@ -1,20 +1,18 @@
 import "@babel/polyfill";
+
 import axios from "../../utils/axios";
 import {
   NEW_ARTICLE,
-  INPUT_CHANGE,
   FETCH_ARTICLE_TO_EDIT,
   ARTICLE_ERROR,
   SUBMITTING_ARTICLE,
-  NEW_TAG,
   ARTICLE_UPDATED,
-  REMOVE_TAG
+  CLEAR_RESPONSE
 } from "../actionTypes";
 
 export const submittingArticle = () => ({
   type: SUBMITTING_ARTICLE
 });
-
 export const articleCreated = response => ({
   type: NEW_ARTICLE,
   payload: response.data
@@ -24,20 +22,11 @@ export const articleUpdated = response => ({
   type: ARTICLE_UPDATED,
   payload: response.data
 });
-export const handleInputField = value => ({
-  type: INPUT_CHANGE,
-  payload: { field: value.name, value: value.value }
-});
-export const handleCreateTag = value => ({
-  type: NEW_TAG,
-  payload: value.tag
-});
-export const removeTag = value => ({
-  type: REMOVE_TAG,
-  payload: value
-});
 
-export const newArticle = article => async dispatch => {
+export const clearResponse = () => ({
+  type: CLEAR_RESPONSE
+});
+export const newArticle = (article, history) => async dispatch => {
   try {
     const { title, body, description, tagsList } = article;
     dispatch(submittingArticle());
@@ -48,13 +37,15 @@ export const newArticle = article => async dispatch => {
       tagsList
     });
     dispatch(articleCreated(response));
+    return history.push(`/articles/${response.data.article.slug}`);
   } catch (error) {
     const { message } = error.response.data;
     dispatch({ type: ARTICLE_ERROR, payload: message });
+    setTimeout(() => dispatch(clearResponse()), 3000);
   }
 };
 
-export const editArticle = (article, slug) => async dispatch => {
+export const editArticle = (article, slug, history) => async dispatch => {
   try {
     const { title, body, description, tagsList } = article;
     dispatch(submittingArticle());
@@ -65,9 +56,11 @@ export const editArticle = (article, slug) => async dispatch => {
       tagsList
     });
     dispatch(articleUpdated(response));
+    return history.push(`/articles/${response.data.article.slug}`);
   } catch (error) {
     const { message } = error.response.data;
     dispatch({ type: ARTICLE_ERROR, payload: message });
+    setTimeout(() => dispatch(clearResponse()), 3000);
   }
 };
 export const fetchOneArticle = slug => async dispatch => {

@@ -1,9 +1,10 @@
 import ReactHtmlParser from "react-html-parser";
-import { flatten } from "lodash";
+import { flatten, isEqual } from "lodash";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import ErrorMessage from "../components/common/Message/error";
 import SuccessMessage from "../components/common/Message/success";
+
 /**
  * @description check if value is empty
  * @param {*} value - input to validate
@@ -139,6 +140,16 @@ export const isLoggedIn = () => {
   const token = localStorage.getItem("token");
   if (!token) {
     return <Redirect to="/sign_in" />;
+  }
+};
+/**
+ * @param {object} nextProps next props of an article to edit
+ * @param {object} currentProps this.props of the article component
+ */
+
+export const checkNextProps = (nextProps, currentProps) => {
+  if (isEqual(nextProps, currentProps)) {
+    return false;
   }
   return true;
 };

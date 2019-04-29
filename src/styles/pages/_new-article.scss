@@ -99,6 +99,14 @@ body {
   }
 }
 
+.error__message,
+.success__message {
+  text-align: center;
+  margin-top: 7%;
+  width: 50%;
+  position: fixed;
+  margin-left: 25%;
+}
 .add_tag {
   max-width: 150px;
   min-width: 100px;

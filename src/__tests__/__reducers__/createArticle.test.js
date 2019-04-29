@@ -1,22 +1,21 @@
 import reducer from "../../redux/reducers/createArticleReducer";
 import {
   NEW_ARTICLE,
-  INPUT_CHANGE,
   SUBMITTING_ARTICLE,
   FETCH_ARTICLE_TO_EDIT,
   ARTICLE_UPDATED,
-  ARTICLE_ERROR,
-  REMOVE_TAG,
-  NEW_TAG
+  ARTICLE_ERROR
 } from "../../redux/actionTypes";
 
 describe("article reducer", () => {
   test("should return the initial state on no action", () => {
     expect(reducer(undefined, {})).toEqual({
-      title: "",
-      description: "",
-      tagsList: [],
-      body: ""
+      article: {
+        title: "",
+        description: "",
+        tagsList: [],
+        body: ""
+      }
     });
   });
 
@@ -24,65 +23,51 @@ describe("article reducer", () => {
     expect(
       reducer(undefined, { type: "ADD TITLE", payload: "hello world" })
     ).toEqual({
-      title: "",
-      description: "",
-      body: "",
-      tagsList: []
+      article: {
+        title: "",
+        description: "",
+        body: "",
+        tagsList: []
+      }
     });
   });
 
-  test("should handle on input change", () => {
+  test("should handle new article action", () => {
     expect(
       reducer(
         {},
         {
-          type: INPUT_CHANGE,
+          type: NEW_ARTICLE,
           payload: {
-            field: "title",
-            value: "Hello world"
+            message: "article created",
+            article: { title: "hello world" }
           }
         }
       )
-    ).toEqual({ title: "Hello world" });
-  });
-
-  test("should handle new article action", () => {
-    expect(reducer({}, { type: NEW_ARTICLE, payload: "hello world" })).toEqual({
-      response: "hello world"
+    ).toEqual({
+      article: { title: "hello world" },
+      isSubmitting: false,
+      message: "article created",
+      response: {
+        title: "hello world"
+      }
     });
   });
 
   test("should handle article error ", () => {
     expect(
-      reducer({}, { type: ARTICLE_ERROR, payload: "hello world" })
+      reducer({}, { type: ARTICLE_ERROR, payload: { message: "hello world" } })
     ).toEqual({
       isSubmitting: false,
-      article_error: "hello world"
+      articleError: {
+        message: "hello world"
+      }
     });
   });
 
   test("should handle submitting action ", () => {
     expect(reducer({}, { type: SUBMITTING_ARTICLE })).toEqual({
       isSubmitting: true
-    });
-  });
-
-  test("should handle adding tag ", () => {
-    expect(
-      reducer({ tagsList: [] }, { type: NEW_TAG, payload: "hello world" })
-    ).toEqual({
-      tagsList: ["hello world"]
-    });
-  });
-
-  test("should handle removing a tag ", () => {
-    expect(
-      reducer(
-        { tagsList: ["hello world"] },
-        { type: REMOVE_TAG, payload: "hello world" }
-      )
-    ).toEqual({
-      tagsList: []
     });
   });
 
@@ -100,7 +85,7 @@ describe("article reducer", () => {
         }
       )
     ).toEqual({
-      title: "hello world"
+      article: { title: "hello world" }
     });
   });
 
@@ -110,11 +95,23 @@ describe("article reducer", () => {
         {},
         {
           type: ARTICLE_UPDATED,
-          payload: "Article updated successfully"
+          payload: {
+            message: "Article updated successfully",
+            article: {
+              title: "hello world"
+            }
+          }
         }
       )
     ).toEqual({
-      response: "Article updated successfully"
+      response: {
+        title: "hello world"
+      },
+      article: {
+        title: "hello world"
+      },
+      isSubmitting: false,
+      message: "Article updated successfully"
     });
   });
 });

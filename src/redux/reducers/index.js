@@ -15,6 +15,7 @@ import registration from "./registrationReducers";
 export default combineReducers({
   auth: loginReducers,
   article: createArticleReducer,
+  newArticle: createArticleReducer,
   resetPassword: resetPasswordReducers,
   updatePassword: updatePasswordReducers,
   socialAuth: socialAuthReducers,

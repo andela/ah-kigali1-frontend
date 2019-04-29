@@ -2,76 +2,74 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RichTextEditor from "react-rte";
-import Navbar from "../components/common/AppBars/Navbar";
 import Validator from "../utils/validator";
+import { checkNextProps } from "../utils/helperFunctions";
 import Input from "../components/common/Inputs/TextInput";
 import Button from "../components/common/Buttons/BasicButton";
-import Success from "../components/common/Message/success";
 import Error from "../components/common/Message/error";
 import Tag from "../components/common/Tags/NewTag";
 import { toolbarConfig } from "../utils/editor/editorConfig";
 import {
-  handleInputField,
   editArticle,
-  handleCreateTag,
-  fetchOneArticle,
-  removeTag
+  newArticle,
+  fetchOneArticle
 } from "../redux/actions/newArticle";
 
 export const mapDispatchToProps = dispatch => ({
-  onInputChange: field => dispatch(handleInputField(field)),
   fetchArticleToEdit: slug => dispatch(fetchOneArticle(slug)),
-  newTag: tag => dispatch(handleCreateTag(tag)),
-  editOneArticle: (article, slug) => dispatch(editArticle(article, slug)),
-  handleRemoveTag: tag => dispatch(removeTag(tag))
+  createArticle: (article, history) => dispatch(newArticle(article, history)),
+  editOneArticle: (article, slug, history) =>
+    dispatch(editArticle(article, slug, history))
 });
 
-export const mapStateToProps = (state, ownProps) => ({
-  response: state.article.response,
-  article: state.article,
-  ...ownProps
+export const mapStateToProps = state => ({
+  ...state.newArticle,
+  ...state.auth
 });
 
-export class EditArticle extends Component {
+export class Article extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
+      edit: false,
       tag: "",
-      title: props.article.title,
+      title: "",
       isFetching: false,
-      description: props.article.description,
-      tagsList: props.article.tagsList,
+      description: "",
+      tagsList: [],
       error: "",
-      value: RichTextEditor.createValueFromString(props.article.body, "html")
+      value: RichTextEditor.createEmptyValue()
     };
   }
 
   componentDidMount = () => {
-    const { match, fetchArticleToEdit } = this.props;
-    const { slug } = match.params;
-    fetchArticleToEdit(slug);
+    const {
+      match: {
+        params: { slug }
+      },
+      fetchArticleToEdit,
+      history: {
+        location: { pathname }
+      }
+    } = this.props;
+    if (pathname !== "/articles/new") {
+      this.setState({ edit: true, isFetching: true });
+      fetchArticleToEdit(slug);
+    }
   };
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.article.article_error) {
-      const { history } = this.props;
-      this.setState({ error: nextProps.article.article_error });
-      return history.push("/not_found");
+    const { articleError } = nextProps;
+    if (articleError) {
+      this.setState({ error: articleError });
+      return setTimeout(() => this.setState({ error: "" }), 3000);
     }
     const { article } = this.props;
-    const { title, description, tagsList, body } = article;
-    if (
-      nextProps.article.title !== title ||
-      nextProps.article.description !== description ||
-      nextProps.article.tagsList !== tagsList ||
-      nextProps.article.body !== body
-    ) {
+
+    if (checkNextProps(nextProps.article, article)) {
       this.setState({
-        title: nextProps.article.title,
-        tagsList: nextProps.article.tagsList,
+        ...nextProps.article,
         isFetching: false,
-        description: nextProps.article.description,
         value: RichTextEditor.createValueFromString(
           nextProps.article.body,
           "html"
@@ -82,19 +80,13 @@ export class EditArticle extends Component {
 
   onEditorChange = value => {
     this.setState({ value });
-    const { onInputChange } = this.props;
-    onInputChange({ name: "body", value: value.toString("html") });
-  };
-
-  onTagInputChange = event => {
-    this.setState({
-      tag: event.target.value
-    });
   };
 
   onRemoveTag = value => {
-    const { handleRemoveTag } = this.props;
-    handleRemoveTag(value);
+    const { tagsList } = this.state;
+    const index = tagsList.indexOf(value);
+    tagsList.splice(index, 1);
+    this.setState({ tagsList });
   };
 
   cancelEdit = () => {
@@ -104,38 +96,79 @@ export class EditArticle extends Component {
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    const { onInputChange } = this.props;
     this.setState({ [name]: value });
-    onInputChange({ name, value });
   };
 
   submitArticle = () => {
-    const { article, editOneArticle, match } = this.props;
-    const { title, body, description, tagsList } = article;
-    const { slug } = match.params;
-    const error = Validator.newArticleValidation(article);
-    if (error && error.length) {
-      return this.setState({ error });
+    const {
+      editOneArticle,
+      createArticle,
+      history,
+      history: {
+        location: { pathname }
+      },
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    const { title, value, description } = this.state;
+
+    const error = Validator.newArticleValidation({
+      title,
+      body: value.toString("html"),
+      description
+    });
+    if (error) {
+      this.setState({ error });
+      return this.clearErrorMessage();
     }
     this.setState({
       error: ""
     });
-    editOneArticle({ title, body, description, tagsList }, slug);
+    if (pathname !== "/articles/new") {
+      return editOneArticle(
+        {
+          title,
+          body: value.toString("html"),
+          description
+        },
+        slug,
+        history
+      );
+    }
+    return createArticle(
+      {
+        title,
+        body: value.toString("html"),
+        description
+      },
+      history
+    );
   };
 
   handleNewTag = event => {
-    const { tag } = this.state;
+    const { tag, tagsList } = this.state;
     if (event.keyCode === 13 && tag.length) {
-      const { newTag } = this.props;
-      newTag({ tag });
-      this.setState({ tag: "" });
+      this.setState({ tag: "", tagsList: [...tagsList, tag] });
     }
+  };
+
+  clearErrorMessage = () =>
+    setTimeout(() => this.setState({ error: "" }), 3000);
+
+  displayErrorMessage = () => {
+    const { error } = this.state;
+    return (
+      <div className="error error__message">
+        {error.length ? <Error title={error} /> : ""}
+      </div>
+    );
   };
 
   render() {
     const {
-      error,
       value,
+      edit,
       tag,
       title,
       body,
@@ -143,33 +176,31 @@ export class EditArticle extends Component {
       tagsList,
       isFetching
     } = this.state;
-    const { isSubmitting, response } = this.props;
+
+    const { isSubmitting } = this.props;
     return isFetching ? (
-      false
+      ""
     ) : (
       <div>
-        <Navbar />
-
+        {this.displayErrorMessage()}
         <div className="new-article-container container">
           <div className="buttons">
-            <Button
-              className="button--dark cancel"
-              title="Cancel"
-              disabled={isSubmitting}
-              onClick={() => this.cancelEdit()}
-            />
+            {edit ? (
+              <Button
+                className="button--dark cancel"
+                title="Cancel"
+                disabled={isSubmitting}
+                onClick={this.cancelEdit}
+              />
+            ) : (
+              ""
+            )}
             <Button
               className="button--dark publish"
-              title="Save"
+              title={edit ? "Save" : "Publish"}
               disabled={isSubmitting}
-              onClick={e => this.submitArticle(e)}
+              onClick={this.submitArticle}
             />
-          </div>
-          <div className="error">
-            {error.length ? <Error title={error} /> : false}
-          </div>
-          <div className="success message">
-            {response ? <Success title={response.message} /> : false}
           </div>
           <div className="main-article">
             <div className="title">
@@ -209,8 +240,8 @@ export class EditArticle extends Component {
                 name="tag"
                 className="tag"
                 value={tag}
-                onKeyUp={e => this.handleNewTag(e)}
-                onChange={e => this.onTagInputChange(e)}
+                onKeyDown={e => this.handleNewTag(e)}
+                onChange={e => this.handleInputChange(e)}
               />
             </div>
             <RichTextEditor
@@ -227,18 +258,17 @@ export class EditArticle extends Component {
   }
 }
 
-EditArticle.propTypes = {
-  onInputChange: PropTypes.func.isRequired,
+Article.propTypes = {
   editOneArticle: PropTypes.func.isRequired,
-  newTag: PropTypes.func.isRequired,
-  handleRemoveTag: PropTypes.func.isRequired,
+  createArticle: PropTypes.func.isRequired,
   fetchArticleToEdit: PropTypes.func.isRequired,
+  articleError: PropTypes.shape({}).isRequired,
   isSubmitting: PropTypes.bool,
-  response: PropTypes.string,
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    article_error: PropTypes.string,
+    message: PropTypes.string,
+    response: PropTypes.object,
     description: PropTypes.string,
     tagsList: PropTypes.arrayOf(PropTypes.string)
   }).isRequired,
@@ -252,12 +282,11 @@ EditArticle.propTypes = {
   }).isRequired
 };
 
-EditArticle.defaultProps = {
-  isSubmitting: false,
-  response: false
+Article.defaultProps = {
+  isSubmitting: false
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditArticle);
+)(Article);

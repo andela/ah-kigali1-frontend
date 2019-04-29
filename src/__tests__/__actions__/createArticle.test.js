@@ -5,21 +5,15 @@ import dotenv from "dotenv";
 import axios from "../../utils/axios";
 import { article } from "../__mocks__/testData";
 import {
-  INPUT_CHANGE,
   NEW_ARTICLE,
   ARTICLE_ERROR,
   SUBMITTING_ARTICLE,
   FETCH_ARTICLE_TO_EDIT,
-  ARTICLE_UPDATED,
-  REMOVE_TAG,
-  NEW_TAG
+  ARTICLE_UPDATED
 } from "../../redux/actionTypes";
 
 import {
-  handleInputField,
   newArticle,
-  removeTag,
-  handleCreateTag,
   editArticle,
   articleUpdated,
   fetchOneArticle
@@ -30,38 +24,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 const { API_URL } = process.env;
-describe("article action creators", () => {
-  test("should return the on input change action", () => {
-    const data = {
-      name: "body",
-      value: "Hello world"
-    };
-    expect(handleInputField(data)).toEqual({
-      type: INPUT_CHANGE,
-      payload: { field: "body", value: "Hello world" }
-    });
-  });
-
-  test("should return the remove tag action", () => {
-    const tag = "Hello world";
-
-    expect(removeTag(tag)).toEqual({
-      type: REMOVE_TAG,
-      payload: tag
-    });
-  });
-
-  test("should return the add tag tag action", () => {
-    const data = {
-      tag: "Hello world"
-    };
-    expect(handleCreateTag(data)).toEqual({
-      type: NEW_TAG,
-      payload: "Hello world"
-    });
-  });
-});
-
 describe("async action creator ", () => {
   beforeEach(() => {
     moxios.install(axios);
@@ -77,17 +39,23 @@ describe("async action creator ", () => {
       {
         type: NEW_ARTICLE,
         payload: {
-          message: "Article Created"
+          message: "Article Created",
+          article: {
+            slug: "helloWorld"
+          }
         }
       }
     ];
     await moxios.stubRequest(`${API_URL}/articles`, {
       status: 201,
       response: {
-        message: "Article Created"
+        message: "Article Created",
+        article: {
+          slug: "helloWorld"
+        }
       }
     });
-    store.dispatch(newArticle(article)).then(() => {
+    store.dispatch(newArticle(article, { push: jest.fn() })).then(() => {
       expect(store.getActions()).toEqual(actions);
     });
   });
@@ -135,22 +103,29 @@ describe("Edit article", () => {
       {
         type: ARTICLE_UPDATED,
         payload: {
-          message: "Article updated"
+          message: "Article updated",
+          article: {
+            slug: "helloWorld"
+          }
         }
       }
     ];
     await moxios.stubRequest(`${API_URL}/articles/hello-world`, {
       status: 201,
       response: {
-        message: "Article updated"
+        message: "Article updated",
+        article: {
+          slug: "helloWorld"
+        }
       }
     });
-    store.dispatch(editArticle(article, "hello-world")).then(() => {
-      expect(store.getActions()).toEqual(actions);
-    });
+    store
+      .dispatch(editArticle(article, "hello-world", { push: jest.fn() }))
+      .then(() => {
+        expect(store.getActions()).toEqual(actions);
+      });
   });
-
-  test("should dispatch article, in edit article", async () => {
+  test("should dispatch article error, in edit article", async () => {
     const store = mockStore({});
     const actions = [
       { type: SUBMITTING_ARTICLE },
