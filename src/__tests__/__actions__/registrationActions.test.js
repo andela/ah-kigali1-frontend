@@ -31,7 +31,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("test actions ", () => {
-  it("should create an action to request authentication", () => {
+  test("should create an action to request authentication", () => {
     const expectedAction = {
       type: actionTypes.REGISTER_REQUESTED,
       user: dummyUser
@@ -39,14 +39,14 @@ describe("test actions ", () => {
     expect(actions.requested(dummyUser)).toEqual(expectedAction);
   });
 
-  it("should create an action for loading", () => {
+  test("should create an action for loading", () => {
     const expectedAction = {
       type: actionTypes.REGISTER_REQUEST_LOADING
     };
     expect(actions.loading()).toEqual(expectedAction);
   });
 
-  it("should create an action for a successful", () => {
+  test("should create an action for a successful", () => {
     const expectedAction = {
       type: actionTypes.REGISTER_REQUEST_SUCCEEDED,
       payload: dummyUser
@@ -54,7 +54,7 @@ describe("test actions ", () => {
     expect(actions.success(dummyUser)).toEqual(expectedAction);
   });
 
-  it("should create an action for failure ", () => {
+  test("should create an action for failure ", () => {
     const message = "Invalid email";
     const expectedAction = {
       type: actionTypes.REGISTER_REQUEST_FAILED,
@@ -63,7 +63,7 @@ describe("test actions ", () => {
     expect(actions.failure(message)).toEqual(expectedAction);
   });
 
-  it("should return an action on input change", () => {
+  test("should return an action on input change", () => {
     const field = "email";
     const value = "esp.com";
     const expectedAction = {
@@ -73,7 +73,7 @@ describe("test actions ", () => {
     expect(actions.InputChange(field, value)).toEqual(expectedAction);
   });
 
-  it("should return an action on blur", () => {
+  test("should return an action on blur", () => {
     Array.of("email", "password", "usermane").forEach(field => {
       let message;
       if (field === "password") {
@@ -100,7 +100,7 @@ describe("test action creators", () => {
     moxios.uninstall(axios);
   });
 
-  it("fetch successful post to user api call", () => {
+  test("fetch successful post to user api call", () => {
     moxios.stubRequest(`${process.env.API_URL}/users`, {
       status: 200,
       response: {
@@ -127,7 +127,7 @@ describe("test action creators", () => {
     });
   });
 
-  it("test a when registration fails", () => {
+  test("test a when registration fails", () => {
     const message = "Invalid email";
     const expectedActions = [
       {
@@ -153,7 +153,7 @@ describe("test action creators", () => {
   });
 
   describe("test events", () => {
-    it("mock handle input change", () => {
+    test("mock handle input change", () => {
       const field = "email";
       const value = "esp.com";
       const expectedAction = [
@@ -167,7 +167,7 @@ describe("test action creators", () => {
       expect(store.getActions()).toEqual(expectedAction);
     });
 
-    it("mock handle blur", () => {
+    test("mock handle blur", () => {
       Array.of("email", "password", "username").forEach(field => {
         let message;
         if (field === "password") {

@@ -44,96 +44,140 @@ body {
               }
             }
           }
+          .share-icon[disabled] {
+            pointer-events: none;
+            opacity: 0.7;
+          }
+        }
+        .popup__report {
+          p {
+            margin-top: 10px;
+            cursor: pointer;
+          }
+          border: 1px solid black;
+          border-radius: 5px;
+          padding: 10px;
+          top: 500px;
+          position: fixed;
         }
       }
-      .popup__report {
-        p {
-          margin-top: 10px;
-          cursor: pointer;
-        }
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 10px;
-        top: 500px;
+      .reporting__form__container {
+        margin-top: -4%;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.5);
         position: fixed;
-      }
-    }
-    .reporting__form__container {
-      margin-top: -4%;
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.5);
-      position: fixed;
-      @include column {
-        align-items: center;
-        justify-content: center;
-      }
-      .report_error {
-        height: 40px;
-      }
-      .report_article {
-        height: 30%;
-        width: 40%;
-        border-radius: 5px;
-        padding: 2%;
-        background: white;
-        h3 {
-          margin: auto;
+        @include column {
+          align-items: center;
+          justify-content: center;
         }
-        .report_input {
+        .report_error {
+          height: 40px;
+        }
+        .report_article {
+          height: 30%;
+          width: 40%;
           border-radius: 5px;
-          margin-top: 10px;
-          height: 45%;
-          width: 100%;
-          border: 1px solid #000000;
-          box-sizing: border-box;
-          border-radius: 5px;
-          textarea {
+          padding: 2%;
+          background: white;
+          h3 {
+            margin: auto;
+          }
+          .report_input {
+            border-radius: 5px;
+            margin-top: 10px;
+            height: 45%;
             width: 100%;
-            border: none;
-            height: 90%;
-            font-size: 16px;
-            &::placeholder {
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 5px;
+            textarea {
+              width: 100%;
+              border: none;
+              height: 90%;
               font-size: 16px;
+              &::placeholder {
+                font-size: 16px;
+              }
+              &:focus {
+                outline: none;
+              }
             }
-            &:focus {
-              outline: none;
+          }
+          .submit_report {
+            width: 100%;
+            @include row {
+              justify-content: flex-start;
+            }
+            .report {
+              height: 30px;
+              border-radius: 5px;
+              margin-right: 5px;
+              width: 20%;
+              min-width: 100px;
+              max-width: 150px;
+              &:hover {
+                background: $color-primary;
+                color: $white-primary;
+              }
+              &:disabled {
+                background: gray;
+              }
+            }
+          }
+          .ratings {
+            margin-top: 20px;
+            width: 100%;
+            @include row {
+              justify-content: space-evenly;
+            }
+            img {
+              height: 18px;
+              width: 18px;
             }
           }
         }
-        .submit_report {
-          width: 100%;
-          @include row {
+      }
+      .article {
+        margin-left: 1%;
+        @include column;
+        width: 70%;
+        @include border-left-right;
+        @include border-bottom-line;
+        padding: 2.5em 3em 0.5em 3em;
+        order: 2;
+        border-radius: 5px;
+        .loading-comment {
+          align-self: center;
+          margin-top: 10px;
+        }
+        .article-author {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 2em;
+          .author-profile {
             justify-content: flex-start;
           }
-          .report {
-            height: 30px;
-            border-radius: 5px;
-            margin-right: 5px;
-            width: 20%;
-            min-width: 100px;
-            max-width: 150px;
-            &:hover {
-              background: $color-primary;
-              color: $white-primary;
+          .author-follow {
+            justify-content: center;
+            @include btn {
+              width: 7em;
+              height: 2em;
             }
-            &:disabled {
-              background: gray;
+            @include action-btn__mobile {
+              background-color: transparent;
             }
           }
         }
-        .ratings {
-          margin-top: 20px;
-          width: 100%;
-          @include row {
-            justify-content: space-evenly;
-          }
-          img {
-            height: 18px;
-            width: 18px;
-          }
-        }
+<<<<<<< HEAD
+        .article-title {
+          align-content: center;
+          text-align: center;
+          font-size: $font-size-large;
+          margin-bottom: 1em;
+          font-weight: bold;
+=======
       }
     }
     .article {
@@ -145,7 +189,7 @@ body {
       padding: 2.5em 3em 0.5em 3em;
       order: 2;
       border-radius: 5px;
-      .loading-comment{
+      .loading-comment {
         align-self: center;
         margin-top: 10px;
       }
@@ -155,56 +199,71 @@ body {
         margin-bottom: 2em;
         .author-profile {
           justify-content: flex-start;
+>>>>>>> 31895d2... [ft #[163518661]] fix css issue on coment
         }
-
-        .author-follow {
-          justify-content: center;
-          @include btn {
-            width: 7em;
-            height: 2em;
+        .tags {
+          .tag {
+            margin-left: 1.2em;
           }
-
-          @include action-btn__mobile {
-            background-color: transparent;
+          margin-bottom: 1em;
+          margin-top: 1em;
+          @include display-tags;
+          margin-left: inherit;
+          margin-right: 16px;
+        }
+      }
+      @media (max-width: #{$break-point-tablet - 1}px) {
+        .article {
+          width: 90%;
+          padding: 1.5em 2.5em 0.5em 1em;
+          border-right: none;
+          border-left: none;
+        }
+        .article-text {
+          p {
+            margin-top: 20px;
           }
         }
       }
-      .article-title {
-        align-content: center;
-        text-align: center;
-        font-size: $font-size-large;
-        margin-bottom: 1em;
-        font-weight: bold;
-      }
-
-      .tags {
-        .tag {
-          margin-left: 1.2em;
+      .article-others {
+        @include column;
+        width: 25%;
+        order: 3;
+        padding-bottom: 2em;
+        margin-left: 2em;
+        margin-right: 2em;
+        .article-other {
+          margin-bottom: 2em;
+          @include card {
+            display: flex;
+            flex: auto;
+            line-height: inherit;
+          }
+          @include border-left-right;
+          @include border-bottom-line;
         }
-        margin-bottom: 1em;
-        margin-top: 1em;
-        @include display-tags;
-        margin-left: inherit;
-        margin-right: 16px;
       }
-    }
-    @media (max-width: #{$break-point-tablet - 1}px) {
-      .article {
-        width: 90%;
-        padding: 1.5em 2.5em 0.5em 1em;
-        border-right: none;
-        border-left: none;
+      @media (max-width: #{$break-point-tablet - 1}px) {
+        .article-others, .right {
+          display: none;
+        }
       }
       .article-text {
+        overflow: scroll;
         p {
           margin-top: 20px;
+          a {
+            color: #3498db;
+            text-decoration: underline;
+          }
         }
       }
     }
-
+<<<<<<< HEAD
+=======
     .article-others {
       @include column;
-      width: 25%;
+      width: 22%;
       order: 3;
       padding-bottom: 2em;
       margin-left: 2em;
@@ -220,62 +279,42 @@ body {
         @include border-bottom-line;
       }
     }
-
+>>>>>>> 31895d2... [ft #[163518661]] fix css issue on coment
     @media (max-width: #{$break-point-tablet - 1}px) {
-      .article-others,
-      .right {
-        display: none;
-      }
-    }
-    .article-text {
-      overflow: scroll;
-      p {
-        margin-top: 20px;
-        a {
-          color: #3498db;
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-  @media (max-width: #{$break-point-tablet - 1}px) {
-    .article-container {
-      margin-left: 0em;
-      margin-right: 0em;
-      .article {
-        .article-text {
-          height: 100vh;
-          overflow: scroll;
-          p {
-            margin-top: 20px;
+      .article-container {
+        margin-left: 0em;
+        margin-right: 0em;
+        .article {
+          .article-text {
+            height: 100vh;
+            overflow: scroll;
+            p {
+              margin-top: 20px;
+            }
+          }
+          .article-title {
+            text-align: left;
+            font-size: $font-size-medium;
+            margin-bottom: 0.7em;
+            font-weight: bold;
+          }
+          .article-comments--more {
+            content: "Check if applied";
           }
         }
-        .article-title {
-          text-align: left;
-          font-size: $font-size-medium;
-          margin-bottom: 0.7em;
-          font-weight: bold;
+        .article-share {
+          margin-left: 1em;
+          width: 10%;
+          height: 100vh;
+          flex-direction: row;
+          align-items: center;
         }
-
-        .article-comments--more {
-          content: "Check if applied";
-        }
-      }
-      .article-share {
-        margin-left: 1em;
-        width: 10%;
-        height: 100vh;
-        flex-direction: row;
-        align-items: center;
       }
     }
   }
-}
-
-.delete_article,
-.edit_article {
-  width: 20%;
-  height: 20px;
-  min-width: 60px;
-  max-width: 100px;
-}
+  .delete_article, .edit_article {
+    width: 20%;
+    height: 20px;
+    min-width: 60px;
+    max-width: 100px;
+  }

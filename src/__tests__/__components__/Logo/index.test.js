@@ -5,7 +5,7 @@ import Logo from "../../../components/common/Logo";
 
 const wrapper = shallow(<Logo className="logo" />);
 describe("Logo component", () => {
-  it("matches the snapshot", () => {
+  test("matches the snapshot", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

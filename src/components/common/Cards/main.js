@@ -6,7 +6,7 @@ import authorDefaultImage from "../../../assets/img/author.svg";
 import thumbsUp from "../../../assets/img/thumb-up-outline.svg";
 import thumbsDown from "../../../assets/img/thumb-down-outline.svg";
 import commentIcon from "../../../assets/img/comment-multiple-outline.svg";
-import bookmarkIcon from "../../../assets/img/bookmark.svg";
+import BookmarkComponent from "../../../views/Bookmark";
 import {
   stringToHtmlElement,
   calculateTimeStamp
@@ -27,7 +27,9 @@ export class MainCard extends Component {
       createdAt,
       author,
       comments,
-      likesCount
+      likesCount,
+      slug,
+      bookmarked: isBookmarked
     } = article;
     const { firstName, lastName, image, username } = author;
 
@@ -76,7 +78,7 @@ export class MainCard extends Component {
                 <div className="numbers">{comments.length}</div>
               </div>
               <div className="right-icons">
-                <img src={bookmarkIcon} alt="bookmark" className="bookmark" />
+                <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
               </div>
             </div>
           </div>

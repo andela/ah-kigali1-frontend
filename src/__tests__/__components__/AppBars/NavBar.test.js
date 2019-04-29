@@ -158,7 +158,7 @@ describe("NavBar component", () => {
     });
 
     describe("map state and dispatch to props", () => {
-      it("should show previously rolled value", () => {
+      test("should show previously rolled value", () => {
         const initialState = {
           notifier: {
             isFetching: false,

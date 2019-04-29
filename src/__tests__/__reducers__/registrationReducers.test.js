@@ -20,11 +20,11 @@ const dummyUser = {
 };
 
 describe("registration reducer", () => {
-  it("should return the initial state", () => {
+  test("should return the initial state", () => {
     expect(registrationReducer(undefined, {})).toEqual(initialState);
   });
 
-  it("should return the requested state", () => {
+  test("should return the requested state", () => {
     expect(
       registrationReducer(initialState, {
         type: actionTypes.REGISTER_REQUESTED,
@@ -37,7 +37,7 @@ describe("registration reducer", () => {
     });
   });
 
-  it("should return the failure state", () => {
+  test("should return the failure state", () => {
     expect(
       registrationReducer(initialState, {
         type: actionTypes.REGISTER_REQUEST_FAILED,
@@ -50,7 +50,7 @@ describe("registration reducer", () => {
     });
   });
 
-  it("should return the success state", () => {
+  test("should return the success state", () => {
     expect(
       registrationReducer(initialState, {
         type: actionTypes.REGISTER_REQUEST_SUCCEEDED,
@@ -65,7 +65,7 @@ describe("registration reducer", () => {
     });
   });
 
-  it("should return the input change state", () => {
+  test("should return the input change state", () => {
     expect(
       registrationReducer(initialState, {
         type: actionTypes.REGISTER_INPUT_CHANGE,
