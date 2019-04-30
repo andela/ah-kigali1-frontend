@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-/* eslint global-require: "off" */
 import { Link } from "react-router-dom";
+import Logo from "../../../assets/img/quill-drawing-a-line.svg";
+import UserIcon from "../../../assets/img/user.jpg";
 
 class Navbar extends Component {
   constructor(props) {
@@ -27,11 +28,7 @@ class Navbar extends Component {
           <div className="nav-container">
             <Link className="col-md-6 col-sm-3 brand-name" to="/">
               <div className="brand">
-                <img
-                  src={require("../../../assets/img/quill-drawing-a-line.svg")}
-                  alt="logo"
-                  className="brand"
-                />
+                <img src={Logo} alt="logo" className="brand" />
               </div>
               <h3>AH</h3>
             </Link>
@@ -40,37 +37,14 @@ class Navbar extends Component {
                 <input type="search" name="search" placeholder="Search....." />
               </div>
               <div className="other-actions">
-                {/* don't delete please, these are the code if user is not logged in   */}
-                {/* <div className="auth-actions">
-                  <div className="sign-up hide-sm">
-                    <a href="./sign-up.html">Sign up today!</a>
-                  </div>
-                  <div className="sign-in hide-sm">
-                    <a href="./sign-in.html" className="btn">
-                      Sign in
-                    </a>
-                  </div>
-                </div> */}
-                <div className="menu-container hide-md">
-                  {/* <button className="menu-btn" id="menu-dropdown">
-                    <img
-                      src={require("../../../assets/img/menu-button.svg")}
-                      alt="menu"
-                      className="menu"
-                    />
-                  </button> */}
-                </div>
+                <div className="menu-container hide-md" />
                 <button
                   type="button"
                   className="current-user hide-sm"
                   onClick={() => this.toggleOptions()}
                   id="user-dropdown"
                 >
-                  <img
-                    src={require("../../../assets/img/user.jpg")}
-                    alt="user"
-                    className="user-avatar"
-                  />
+                  <img src={UserIcon} alt="user" className="user-avatar" />
                   <div className="user-name">
                     <p>John Doe</p>
                   </div>
