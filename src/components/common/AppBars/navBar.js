@@ -17,8 +17,7 @@ import SearchPopOver from "../../PopOvers/SearchPopOver";
 class Navbar extends Component {
   state = {
     toggle: "none",
-    popOverOpen: false,
-    searchQuery: ""
+    popOverOpen: false
   };
 
   componentWillMount() {
@@ -35,25 +34,18 @@ class Navbar extends Component {
     }
   };
 
-  closeSearchPopOver = e => {
-    if (this.searchPopOverRef && !this.searchPopOverRef.contains(e.target)) {
-      this.setState({
-        popOverOpen: false
-      });
-    }
+  closeSearchPopOver = () => {
+    this.setState({
+      popOverOpen: false
+    });
   };
 
   handleOnChange = value => {
     const { authSuggestArticles: getSuggestions } = this.props;
     this.setState({
-      popOverOpen: true,
-      searchQuery: value
+      popOverOpen: true
     });
     getSuggestions(value);
-  };
-
-  setSearchPopOverRef = node => {
-    this.searchPopOverRef = node;
   };
 
   toggleOptions() {
@@ -63,7 +55,6 @@ class Navbar extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     const { toggle } = this.state;
     const token = localStorage.getItem("token");
 
@@ -72,10 +63,6 @@ class Navbar extends Component {
     }
     const { toggle, popOverOpen } = this.state;
     const { searchQuery, history, suggestedArticles } = this.props;
-=======
-    const { toggle, popOverOpen, searchQuery } = this.state;
-    const { history, suggestedArticles } = this.props;
->>>>>>> [Feature #163518658] fixing autosuggested articles on search input change
     return (
       <div>
         <section
@@ -148,16 +135,12 @@ class Navbar extends Component {
             </div>
           </div>
         </section>
-        {history.location.pathname !== "/search" &&
-          popOverOpen &&
-          !isEmpty(suggestedArticles) && (
-            <div ref={this.setSearchPopOverRef}>
-              <SearchPopOver
-                searchQuery={searchQuery}
-                articles={suggestedArticles}
-              />
-            </div>
-          )}
+        {popOverOpen && !isEmpty(suggestedArticles) && (
+          <SearchPopOver
+            searchQuery={searchQuery}
+            articles={suggestedArticles}
+          />
+        )}
       </div>
     );
   }
@@ -174,6 +157,7 @@ const mapStateToProps = state => {
     ...search
   };
 };
+
 Navbar.propTypes = {
   authSuggestArticles: PropTypes.func.isRequired,
   fetchResults: PropTypes.func.isRequired,
@@ -186,6 +170,7 @@ Navbar.propTypes = {
 Navbar.defaultProps = {
   searchQuery: ""
 };
+
 export default withRouter(
   connect(
     mapStateToProps,
