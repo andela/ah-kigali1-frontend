@@ -164,7 +164,8 @@ Navbar.propTypes = {
   searchQuery: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func
-  }).isRequired
+  }).isRequired,
+  suggestedArticles: PropTypes.shape({}).isRequired
 };
 Navbar.defaultProps = {
   searchQuery: ""
