@@ -13,7 +13,10 @@
   .popover-inner {
     position: relative;
     max-width: 360px;
+<<<<<<< HEAD
     height: 260px;
+=======
+>>>>>>> [Feature #163518658] add popover card for suggested articles
     padding: 14px;
     background: #fff;
     box-shadow: 0 1px 2px rgba(27, 18, 66, 0.25), 0 0 1px rgba(27, 18, 66, 0.35);
@@ -38,19 +41,25 @@
         text-transform: uppercase;
       }
     }
+<<<<<<< HEAD
     .popover-content {
       max-height: "250px";
     }
+=======
+>>>>>>> [Feature #163518658] add popover card for suggested articles
     ul {
       margin-top: 5px;
       margin-bottom: 0;
       list-style: none;
       padding: 0px;
+<<<<<<< HEAD
       li:not(:last-child) {
         .link {
           border-bottom: 0.25px solid $color-primary;
         }
       }
+=======
+>>>>>>> [Feature #163518658] add popover card for suggested articles
       .list-item {
         list-style: none;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -59,8 +68,16 @@
         text-align: start;
         list-style: none;
         .link {
+<<<<<<< HEAD
           display: flex;
           padding: 5px 0px;
+=======
+          display: block;
+          padding: 5px 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+>>>>>>> [Feature #163518658] add popover card for suggested articles
           .avatar {
             width: 32px;
             height: 32px;
@@ -68,6 +85,7 @@
             display: inline-block;
             vertical-align: middle;
           }
+<<<<<<< HEAD
 
           .article-author {
             display: block;
@@ -95,6 +113,8 @@
               }
             }
           }
+=======
+>>>>>>> [Feature #163518658] add popover card for suggested articles
         }
       }
     }
