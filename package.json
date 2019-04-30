@@ -8,6 +8,7 @@
     "build": "yarn run clean && webpack --mode production",
     "start": "webpack-dev-server --open --hot",
     "test": "jest --coverage",
+    "test:u": "jest --coverage -u",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
