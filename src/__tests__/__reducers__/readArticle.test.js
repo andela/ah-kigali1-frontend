@@ -14,6 +14,7 @@ describe("fetching one article reducer ", () => {
       asideArticles: {}
     });
   });
+
   test("should return the error message on article_error action", () => {
     expect(
       articleReducer(undefined, {
@@ -26,6 +27,7 @@ describe("fetching one article reducer ", () => {
       asideArticles: {}
     });
   });
+
   test("should return the fetched article", () => {
     expect(
       articleReducer(
@@ -34,11 +36,13 @@ describe("fetching one article reducer ", () => {
       )
     ).toEqual({ isFetching: false, message: "Article found" });
   });
+
   test("should return the fetching article", () => {
     expect(articleReducer({}, { type: FETCHING_ARTICLE })).toEqual({
       isFetching: true
     });
   });
+
   test("should return the fetching aside articles", () => {
     expect(
       articleReducer(
@@ -52,6 +56,7 @@ describe("fetching one article reducer ", () => {
       asideArticles: { articles: ["hello world", "hello world"] }
     });
   });
+
   test("should return deleting an article", () => {
     expect(
       articleReducer(

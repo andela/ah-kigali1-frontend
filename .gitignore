@@ -13,3 +13,5 @@ yarn-*
 .DS_Store 
 .env
 .coveralls.yml
+
+yarn.lock

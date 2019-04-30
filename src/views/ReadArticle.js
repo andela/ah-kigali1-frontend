@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import Navbar from "../components/common/AppBars/navBar";
 import Input from "../components/common/Inputs/TextInput";
 import {
   fetchArticle,
@@ -25,8 +24,7 @@ import dislikeIcon from "../assets/img/dislike-icon.svg";
 import heartIcon from "../assets/img/heart.svg";
 import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 
-export const mapStateToProps = (state, ownProps) => ({
-  ...ownProps,
+export const mapStateToProps = state => ({
   currentUser: state.login.currentUser,
   asideArticles: state.fetchedArticle.asideArticles,
   article: state.fetchedArticle
@@ -37,13 +35,10 @@ export const mapDispatchToProps = dispatch => ({
 });
 
 export class Article extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      slug: "",
-      response: ""
-    };
-  }
+  state = {
+    slug: "",
+    response: ""
+  };
 
   componentDidMount = () => {
     const {
@@ -67,6 +62,94 @@ export class Article extends Component {
     }
     return false;
   };
+
+  displayCommentsOnDesktop = comments =>
+    comments.length
+      ? comments.map(comment => {
+          const { author, body, like, id } = comment;
+          const { username, image, firstName, lastName } = author;
+          return (
+            <div className="article-comments--existing__desktop" key={id}>
+              <div className="avatar-wrapper comment-avatar-wrapper">
+                <img
+                  src={image || authorImage}
+                  alt="Avatar"
+                  className="avatar"
+                />
+                <span className="comment-author_name ">
+                  {username && firstName && lastName
+                    ? `${firstName} ${lastName}`
+                    : username}
+                </span>
+              </div>
+              <div className="article-comments--existing-text">
+                {body}
+                <div className="article-comments--actions">
+                  <span className="comment-like">
+                    <div className="icons">
+                      <img src={heartIcon} alt="likes" className="likes" />
+                      <div>{like}</div>
+                    </div>
+                  </span>
+                  <div className="comment-edit-delete">
+                    <span className="comment-edit"> Edit </span>
+                    <span className="comment-delete"> Delete </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      : false;
+
+  displayCommentsOnMobileDevices = comments =>
+    comments.length
+      ? comments.map(comment => {
+          const { author, body, like, id } = comment;
+          const { username, image, firstName, lastName } = author;
+          return (
+            <div
+              className="article-comments--existing__mobile col-md-6 col-av-12 col-sm-12"
+              key={id}
+            >
+              <div className="blog-card">
+                <div className="avatar-wrapper comment-avatar-wrapper">
+                  <img
+                    src={image || authorImage}
+                    alt="Avatar"
+                    className="avatar"
+                  />
+                  <span className="username">
+                    {username && firstName && lastName
+                      ? `${firstName} ${lastName}`
+                      : username}
+                  </span>
+                </div>
+                <div className="col-md-9  col-sm-12">
+                  <div className="card-content">
+                    <div className="info">
+                      <div className="col-md-3 col-sm-4" />
+                    </div>
+                    <p className="card-text">{body}</p>
+                    <div className="article-comments--actions">
+                      <span className="comment-like">
+                        <div className="icons">
+                          <img src={heartIcon} alt="likes" className="likes" />
+                          <div>{like}</div>
+                        </div>
+                      </span>
+                      <div className="comment-edit-delete">
+                        <span className="comment-edit"> Edit </span>
+                        <span className="comment-delete"> Delete </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      : false;
 
   redirectToEdit = () => {
     const { slug } = this.state;
@@ -123,7 +206,6 @@ export class Article extends Component {
 
     return (
       <div>
-        <Navbar />
         {message && message !== "Article found successfully" ? (
           <p className="success-message">{history.push("/not_found")}</p>
         ) : (
@@ -209,112 +291,8 @@ export class Article extends Component {
                       name="new-comment"
                     />
                   </div>
-
-                  {comments.length
-                    ? comments.map(comment => {
-                        const { author, body, like, id } = comment;
-                        const { username, image, firstName, lastName } = author;
-                        return (
-                          <div
-                            className="article-comments--existing__desktop"
-                            key={id}
-                          >
-                            <div className="avatar-wrapper comment-avatar-wrapper">
-                              <img
-                                src={image || authorImage}
-                                alt="Avatar"
-                                className="avatar"
-                              />
-                              <span className="comment-author_name ">
-                                {username && firstName && lastName
-                                  ? `${firstName} ${lastName}`
-                                  : username}
-                              </span>
-                            </div>
-                            <div className="article-comments--existing-text">
-                              {body}
-                              <div className="article-comments--actions">
-                                <span className="comment-like">
-                                  <div className="icons">
-                                    <img
-                                      src={heartIcon}
-                                      alt="likes"
-                                      className="likes"
-                                    />
-                                    <div>{like}</div>
-                                  </div>
-                                </span>
-                                <div className="comment-edit-delete">
-                                  <span className="comment-edit"> Edit </span>
-                                  <span className="comment-delete">
-                                    {" "}
-                                    Delete{" "}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : false}
-                  {comments.length
-                    ? comments.map(comment => {
-                        const { author, body, like, id } = comment;
-                        const { username, image, firstName, lastName } = author;
-                        return (
-                          <div
-                            className="article-comments--existing__mobile col-md-6 col-av-12 col-sm-12"
-                            key={id}
-                          >
-                            <div className="blog-card">
-                              <div className="avatar-wrapper comment-avatar-wrapper">
-                                <img
-                                  src={image || authorImage}
-                                  alt="Avatar"
-                                  className="avatar"
-                                />
-                                <span className="username">
-                                  {username && firstName && lastName
-                                    ? `${firstName} ${lastName}`
-                                    : username}
-                                </span>
-                              </div>
-                              <div className="col-md-9  col-sm-12">
-                                <div className="card-content">
-                                  <div className="info">
-                                    <div className="col-md-3 col-sm-4" />
-                                  </div>
-                                  <p className="card-text">{body}</p>
-                                  <div className="article-comments--actions">
-                                    <span className="comment-like">
-                                      <div className="icons">
-                                        <img
-                                          src={heartIcon}
-                                          alt="likes"
-                                          className="likes"
-                                        />
-                                        <div>{like}</div>
-                                      </div>
-                                    </span>
-                                    <div className="comment-edit-delete">
-                                      <span className="comment-edit">
-                                        {" "}
-                                        Edit{" "}
-                                      </span>
-                                      <span className="comment-delete">
-                                        {" "}
-                                        Delete{" "}
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : false}
-
+                  {this.displayCommentsOnDesktop(comments)}
+                  {this.displayCommentsOnMobileDevices(comments)}
                   <div className="article-comments--more">
                     load-more comments.....
                   </div>

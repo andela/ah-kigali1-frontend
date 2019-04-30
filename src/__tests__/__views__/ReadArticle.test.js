@@ -10,27 +10,30 @@ import { props1, props2, props3, props4, props5 } from "../__mocks__/testData";
 describe(" Read article", () => {
   test("render the full component with aside articles", () => {
     const wrapper = shallow(<Article {...props1} />);
-
     expect(wrapper.find(".article-container")).toHaveLength(1);
     expect(wrapper.find(".article-other")).toHaveLength(1);
   });
+
   test("render the component without aside articles, firstName, and lastName", () => {
     const wrapper = shallow(<Article {...props2} />);
-
     expect(wrapper.find(".article-container")).toHaveLength(1);
   });
+
   test("render the component while it is still fetching", () => {
     const wrapper = shallow(<Article {...props3} />);
     expect(wrapper.find(".article-container")).not.toHaveLength(1);
   });
+
   test("render the component without article", () => {
     const wrapper = shallow(<Article {...props4} />);
     expect(wrapper.find(".success-message")).toHaveLength(1);
   });
+
   test("render the component without comments and tags", () => {
     const wrapper = shallow(<Article {...props5} />);
     expect(wrapper.find(".article-container")).toHaveLength(1);
   });
+
   test("should map states to props", () => {
     const state = {
       login: {
@@ -44,8 +47,7 @@ describe(" Read article", () => {
         }
       }
     };
-    expect(mapStateToProps(state, { message: "articles retrieved" })).toEqual({
-      message: "articles retrieved",
+    expect(mapStateToProps(state)).toEqual({
       currentUser: {
         username: "yves"
       },
@@ -55,6 +57,7 @@ describe(" Read article", () => {
       article: state.fetchedArticle
     });
   });
+
   test("should map delete article  to props", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).deleteOneArticle("hello world");
