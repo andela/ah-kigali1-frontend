@@ -17,6 +17,13 @@
         display: block;
       }
     }
+    .loading-anim {
+      justify-self: center;
+      text-align: center;
+      .loading {
+        margin-left: 20%;
+      }
+    }
   }
   .right-side {
     width: 18%;

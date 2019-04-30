@@ -20,18 +20,20 @@ export default (state = INITIAL_STATE, action) => {
     case SEARCH_QUERY_CHANGE:
       return {
         ...state,
+        errors: {},
         searchQuery: payload
       };
     case SEARCHING_ARTICLES:
       return {
         ...state,
+        errors: {},
         isLoading: true
       };
     case ARTICLE_SEARCH_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        message: payload.message,
+        errors: {},
         articles: { ...state.articles, ...payload.articles },
         authors: { ...state.authors, ...payload.authors }
       };
