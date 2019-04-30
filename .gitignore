@@ -12,5 +12,5 @@ yarn-*
 .DS_Store 
 .env
 .coveralls.yml
-**/__snapshots__
 package-lock.json
+**/__snapshots__
