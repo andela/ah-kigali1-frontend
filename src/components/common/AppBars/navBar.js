@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-/* eslint global-require: "off" */
+import { Link } from "react-router-dom";
+import Logo from "../../../assets/img/quill-drawing-a-line.svg";
+import UserIcon from "../../../assets/img/user.jpg";
 
 class Navbar extends Component {
   constructor(props) {
@@ -24,52 +26,25 @@ class Navbar extends Component {
           className="nav-bar"
         >
           <div className="nav-container">
-            <div className="col-md-6 col-sm-3 brand-name">
+            <Link className="col-md-6 col-sm-3 brand-name" to="/">
               <div className="brand">
-                <img
-                  src={require("../../../assets/img/quill-drawing-a-line.svg")}
-                  alt="logo"
-                  className="brand"
-                />
+                <img src={Logo} alt="logo" className="brand" />
               </div>
               <h3>AH</h3>
-            </div>
+            </Link>
             <div className="col-md-6 col-sm-9 user-actions">
               <div className="search-filed">
                 <input type="search" name="search" placeholder="Search....." />
               </div>
               <div className="other-actions">
-                {/* don't delete please, these are the code if user is not logged in   */}
-                {/* <div className="auth-actions">
-                  <div className="sign-up hide-sm">
-                    <a href="./sign-up.html">Sign up today!</a>
-                  </div>
-                  <div className="sign-in hide-sm">
-                    <a href="./sign-in.html" className="btn">
-                      Sign in
-                    </a>
-                  </div>
-                </div> */}
-                <div className="menu-container hide-md">
-                  {/* <button className="menu-btn" id="menu-dropdown">
-                    <img
-                      src={require("../../../assets/img/menu-button.svg")}
-                      alt="menu"
-                      className="menu"
-                    />
-                  </button> */}
-                </div>
+                <div className="menu-container hide-md" />
                 <button
                   type="button"
                   className="current-user hide-sm"
                   onClick={() => this.toggleOptions()}
                   id="user-dropdown"
                 >
-                  <img
-                    src={require("../../../assets/img/user.jpg")}
-                    alt="user"
-                    className="user-avatar"
-                  />
+                  <img src={UserIcon} alt="user" className="user-avatar" />
                   <div className="user-name">
                     <p>John Doe</p>
                   </div>
@@ -79,9 +54,9 @@ class Navbar extends Component {
                   <div className="drop-down-content">
                     <ul className="links">
                       <li className="nav-link">
-                        <a href="./new-article.html" className="main">
+                        <Link to="/articles/new" className="main">
                           New Story
-                        </a>
+                        </Link>
                       </li>
                       <li>
                         <a href="./profile.html">Profile</a>
@@ -90,12 +65,10 @@ class Navbar extends Component {
                         <a href="./authors-performance.html">Stats</a>
                       </li>
                       <li>
-                        <a href="./user-settings.html#password-settings">
-                          Settings
-                        </a>
+                        <Link to="/settings">Settings</Link>
                       </li>
                       <li>
-                        <a href="./sign-in.html">Sign out</a>
+                        <Link to="/sign_in">Sign out</Link>
                       </li>
                     </ul>
                   </div>

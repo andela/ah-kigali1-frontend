@@ -38,3 +38,11 @@
 .danger {
   color: red;
 }
+
+.grid-container {
+  height: 100vh;
+  display: grid;
+  div.center {
+    margin: auto;
+  }
+}
