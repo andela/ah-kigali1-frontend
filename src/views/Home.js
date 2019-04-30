@@ -23,28 +23,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
-        <div style={{ margin: 3, marginTop: 120 }}>
-          <h2 className="home-container">Hello world, from Titan-Devs</h2>
-          <BasicButton style={{ width: "40%" }} title="Save" />
-          <Input
-            style={{ width: "40%" }}
-            type="email"
-            name="email"
-            placeholder="Your email"
-          />
-          <Input
-            style={{ width: "60%" }}
-            type="password"
-            name="email"
-            placeholder="Enter your password"
-          />
-        </div>
-        <div className="featured_article">
-          <MainCard />
-          <Latest />
-        </div>
-        <Latest />
+        <h2>Hello home</h2>
       </div>
     );
   }
