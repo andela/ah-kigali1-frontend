@@ -74,3 +74,7 @@ export const filterByTag = (items, tag) =>
 export const getTags = items => [
   ...new Set(_.flatten([..._.values(items).map(item => item.tagsList)]))
 ];
+
+export const isBottom = () =>
+  window.innerHeight + document.documentElement.scrollTop ===
+  document.documentElement.offsetHeight;
