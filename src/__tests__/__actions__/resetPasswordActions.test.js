@@ -82,7 +82,11 @@ describe("ResetPassword action creators", () => {
         }
       ];
 
+<<<<<<< HEAD
       moxios.stubRequest(`${API_URL}/users/reset_password`, {
+=======
+      moxios.stubRequest(`${process.env.API_URL}/users/reset_password`, {
+>>>>>>> chore(fix):  reporting form
         status: 404,
         response: {
           ...payload

@@ -1,14 +1,17 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-shadow */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import Input from "../components/common/Inputs/TextInput";
+import Button from "../components/common/Buttons/BasicButton";
+import { ReportingForm } from "../components/reportingForm/ReportingForm";
+import { MoreReactions } from "../components/reportingForm/MoreReactionsModal";
 import {
   fetchArticle,
   deleteArticle
 } from "../redux/actions/readArticleActionCreator";
-import Button from "../components/common/Buttons/BasicButton";
 
 import {
   isCurrentUserAuthor,
@@ -23,6 +26,8 @@ import authorImage from "../assets/img/user.jpg";
 import dislikeIcon from "../assets/img/dislike-icon.svg";
 import heartIcon from "../assets/img/heart.svg";
 import bookmarkIcon from "../assets/img/bookmark-icons.svg";
+import moreIcon from "../assets/icons/more.svg";
+import ratingIcon from "../assets/icons/star.svg";
 
 export const mapStateToProps = state => ({
   currentUser: state.login.currentUser,
@@ -37,7 +42,9 @@ export const mapDispatchToProps = dispatch => ({
 export class Article extends Component {
   state = {
     slug: "",
-    response: ""
+    response: "",
+    displayModal: false,
+    reportingForm: false
   };
 
   componentDidMount = () => {
@@ -61,6 +68,22 @@ export class Article extends Component {
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
+  };
+
+  toggleReactionsModal = () => {
+    const { displayModal } = this.state;
+    if (displayModal === true) {
+      return this.setState({ displayModal: false });
+    }
+    return this.setState({ displayModal: true });
+  };
+
+  toggleReportingModal = () => {
+    const { reportingForm } = this.state;
+    if (reportingForm === true) {
+      return this.setState({ reportingForm: false });
+    }
+    return this.setState({ reportingForm: true, displayModal: false });
   };
 
   displayCommentsOnDesktop = comments =>
@@ -165,15 +188,13 @@ export class Article extends Component {
     deleteOneArticle(slug).then(response => {
       if (response.status === 200) {
         this.setState({ response: "Article deleted successfully" });
-        setTimeout(() => {
-          history.push("/");
-        }, 3000);
+        setTimeout(() => history.push("/"), 3000);
       }
     });
   };
 
   render() {
-    const { response } = this.state;
+    const { response, displayModal, reportingForm } = this.state;
     const { article, asideArticles, currentUser, history } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -254,7 +275,7 @@ export class Article extends Component {
                       title="Delete"
                     />
                     <Button
-                      className="btn delete_article"
+                      className="btn edit_article"
                       onClick={() => this.redirectToEdit()}
                       title="Edit"
                     />{" "}
@@ -299,7 +320,6 @@ export class Article extends Component {
                 </div>
               </div>
             </article>
-
             <aside className="article-share">
               <div className="share-icons">
                 <img className="share-icon" src={thumbsUp} alt="logo" />
@@ -307,17 +327,40 @@ export class Article extends Component {
                 <img className="share-icon" src={bookmarkIcon} alt="logo" />
                 <img className="share-icon" src={facebookIcon} alt="logo" />
                 <img className="share-icon" src={twitterIcon} alt="logo" />
+                <img className="share-icon" src={ratingIcon} alt="logo" />
+                <img
+                  className="share-icon"
+                  src={moreIcon}
+                  alt="logo"
+                  onClick={this.toggleReactionsModal}
+                />
               </div>
+              {displayModal ? (
+                <MoreReactions
+                  displayReportArticleForm={() => this.toggleReportingModal()}
+                />
+              ) : (
+                false
+              )}
             </aside>
+            {reportingForm ? (
+              <ReportingForm
+                onInputChange={() => this.onInputChange()}
+                submitReport={() => this.submitReport()}
+                cancelReport={() => this.toggleReportingModal()}
+              />
+            ) : (
+              false
+            )}
             <div className="right article-others">
               <div className="right">
                 {Object.values(asideArticles).length
                   ? Object.values(asideArticles).map(asideArticle => (
-                      <div className="article-card article-other">
-                        <MainArticle
-                          article={asideArticle}
-                          key={asideArticle.slug}
-                        />
+                      <div
+                        className="article-card article-other"
+                        key={asideArticle.slug}
+                      >
+                        <MainArticle article={asideArticle} />
                       </div>
                     ))
                   : false}

@@ -18,7 +18,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const BASE_URL = process.env.API_BASE_URL;
+const BASE_URL = process.env.API_URL;
 describe("fetching article", () => {
   test("should return fetching article action", () => {
     expect(fetchingArticle()).toEqual({ type: FETCHING_ARTICLE });

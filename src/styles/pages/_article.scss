@@ -5,19 +5,98 @@ body {
     padding-top: 5em;
     border-radius: 5px;
     .article-share {
-      @include column;
+      @include column {
+        align-items: center;
+      }
       width: 10%;
       order: 1;
       padding-top: 2.5em;
       .share-icons {
         display: flex;
+        position: fixed;
         flex-direction: column;
         .share-icon {
-          margin-top: 1em;
+          margin-top: 1.5em;
+          widows: 30px;
+          height: 30px;
+        }
+      }
+      .popup__report {
+        p {
+          margin-top: 10px;
+        }
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        top: 500px;
+        position: fixed;
+      }
+    }
+    .reporting__form__container {
+      margin-top: -4%;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      @include column {
+        align-items: center;
+        justify-content: center;
+      }
+      div {
+        height: 30%;
+        width: 40%;
+        border-radius: 5px;
+        padding: 2%;
+        background: white;
+        h3 {
+          margin: auto;
+        }
+        .report_input {
+          border-radius: 5px;
+          margin-top: 10px;
+          height: 45%;
+          width: 100%;
+          border: 1px solid #000000;
+          box-sizing: border-box;
+          border-radius: 5px;
+          input {
+            width: 100%;
+            border: none;
+            height: auto;
+            text-indent: 20px;
+            text-overflow: true;
+            &::placeholder {
+              font-size: 16px;
+            }
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        .submit_report {
+          width: 100%;
+          @include row {
+            justify-content: flex-start;
+          }
+          .report {
+            height: 30px;
+            border-radius: 5px;
+            margin-right: 5px;
+            width: 20%;
+            min-width: 100px;
+            max-width: 150px;
+            &:hover {
+              background: $color-primary;
+              color: white;
+            }
+            &:disabled {
+              background: gray;
+            }
+          }
         }
       }
     }
-
     .article {
       @include column;
       width: 70%;
@@ -149,7 +228,8 @@ body {
   }
 }
 
-.delete_article {
+.delete_article,
+.edit_article {
   width: 20%;
   height: 20px;
   min-width: 60px;

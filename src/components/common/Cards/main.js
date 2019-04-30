@@ -100,7 +100,19 @@ MainCard.propTypes = {
       image: PropTypes.string,
       username: PropTypes.string
     }),
-    comments: PropTypes.string,
+    comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        author: PropTypes.shape({
+          firstName: PropTypes.string,
+          lastName: PropTypes.string,
+          image: PropTypes.string,
+          username: PropTypes.string
+        }),
+        body: PropTypes.string,
+        like: PropTypes.number,
+        id: PropTypes.string
+      })
+    ),
     likesCount: PropTypes.number
   }).isRequired
 };
