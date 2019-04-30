@@ -23,6 +23,14 @@ export const routes = [
   {
     path: "/articles/:slug/edit",
     component: EditArticle
+  },
+  {
+    path: "/search",
+    component: SearchResults
+  },
+  {
+    path: "/",
+    component: Home
   }
 ];
 export default class MainRoutes extends Component {
