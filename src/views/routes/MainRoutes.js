@@ -38,6 +38,14 @@ export const routes = [
   {
     path: "/settings",
     component: Settings
+  },
+  {
+    path: "/search",
+    component: SearchResults
+  },
+  {
+    path: "/",
+    component: Home
   }
 ];
 

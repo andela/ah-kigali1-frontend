@@ -6,7 +6,8 @@ import {
   SEARCH_QUERY_CHANGE,
   ARTICLE_SEARCH_FAILED,
   ARTICLE_SEARCH_SUCCESS,
-  CLEAR_SEARCH_RESULTS
+  CLEAR_SEARCH_RESULTS,
+  SET_SUGGESTED_ARTICLES
 } from "../actionTypes";
 import { arrayToObject } from "../../utils/helperFunctions";
 
@@ -55,6 +56,26 @@ export const fetchResults = (
     dispatch({
       type: ARTICLE_SEARCH_FAILED,
       payload: { ...errors, message }
+    });
+  }
+};
+
+export const authSuggestArticles = keyword => async dispatch => {
+  dispatch(handleInputChange(keyword));
+  try {
+    const response = await axios.get(`/articles?keyword=${keyword}&limit=${5}`);
+    const { articles } = response.data;
+    dispatch({
+      type: SET_SUGGESTED_ARTICLES,
+      payload: { articles: { ...arrayToObject(articles, "id") } }
+    });
+  } catch (error) {
+    const {
+      data: { message }
+    } = error.response;
+    dispatch({
+      type: ARTICLE_SEARCH_FAILED,
+      payload: { message }
     });
   }
 };

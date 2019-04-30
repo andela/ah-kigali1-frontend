@@ -3,7 +3,8 @@ import {
   ARTICLE_SEARCH_SUCCESS,
   SEARCHING_ARTICLES,
   ARTICLE_SEARCH_FAILED,
-  CLEAR_SEARCH_RESULTS
+  CLEAR_SEARCH_RESULTS,
+  SET_SUGGESTED_ARTICLES
 } from "../actionTypes";
 
 const INITIAL_STATE = {
@@ -11,7 +12,8 @@ const INITIAL_STATE = {
   articles: {},
   authors: {},
   isLoading: true,
-  errors: {}
+  errors: {},
+  suggestedArticles: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,6 +24,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         errors: {},
         searchQuery: payload
+      };
+    case SET_SUGGESTED_ARTICLES:
+      return {
+        ...state,
+        suggestedArticles: { ...state.suggestedArticles, ...payload.articles }
       };
     case SEARCHING_ARTICLES:
       return {
