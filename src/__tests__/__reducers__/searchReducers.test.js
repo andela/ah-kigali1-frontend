@@ -13,7 +13,8 @@ const INITIAL_STATE = {
   articles: {},
   authors: {},
   errors: {},
-  isLoading: true
+  isLoading: true,
+  suggestedArticles: {}
 };
 
 describe("Search Action Reducers", () => {

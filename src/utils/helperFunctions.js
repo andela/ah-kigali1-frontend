@@ -78,3 +78,4 @@ export const getTags = items => [
 export const isBottom = () =>
   window.innerHeight + document.documentElement.scrollTop ===
   document.documentElement.offsetHeight;
+export const hasFocus = () => document.getElementById("nav-search-input");
