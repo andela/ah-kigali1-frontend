@@ -9,10 +9,12 @@ describe("main card ", () => {
     const wrapper = shallow(<MainCard {...mainCardProps1} />);
     expect(wrapper.find(".article-card")).toHaveLength(1);
   });
+
   test("should render one main card without firstName, and lastNamve", () => {
     const wrapper = shallow(<MainCard {...mainCardProps2} />);
     expect(wrapper.find(".article-card")).toHaveLength(1);
   });
+
   test("should render one main card without firstName, and lastNamve", () => {
     const wrapper = shallow(<MainCard {...mainCardProps1} />);
     wrapper.find(".left").simulate("click");
