@@ -62,6 +62,7 @@ describe("Search Results Component", () => {
       instance.handleOnChange.mockClear();
       instance.handleEnterPress.mockClear();
     });
+
     test("should respond on change input text", () => {
       const value = "hello_world";
       findElements(TextInput)
