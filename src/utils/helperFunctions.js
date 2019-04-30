@@ -72,5 +72,5 @@ export const filterByTag = (items, tag) =>
   _.filter(items, item => item.tagsList.includes(tag));
 
 export const getTags = items => [
-  ...new Set(_.flatten([...items.map(item => item.tagsList)]))
+  ...new Set(_.flatten([..._.values(items).map(item => item.tagsList)]))
 ];
