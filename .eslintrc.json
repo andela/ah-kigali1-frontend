@@ -34,6 +34,7 @@
       "sourceType": "module"
     },
     "eol-last": ["error", "always"],
+    " global-require": "off",
     "import/prefer-default-export": "on",
     "import/resolver": {
       "node": {

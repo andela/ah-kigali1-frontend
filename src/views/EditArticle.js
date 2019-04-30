@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RichTextEditor from "react-rte";
+import Navbar from "../components/common/AppBars/navBar";
 import Validator from "../utils/validator";
 import Input from "../components/common/Inputs/TextInput";
 import Button from "../components/common/Buttons/BasicButton";
@@ -146,76 +147,80 @@ export class EditArticle extends Component {
     return isFetching ? (
       false
     ) : (
-      <div className="new-article-container container">
-        <div className="buttons">
-          <Button
-            className="button--dark cancel"
-            title="Cancel"
-            disabled={isSubmitting}
-            onClick={() => this.cancelEdit()}
-          />
-          <Button
-            className="button--dark publish"
-            title="Save"
-            disabled={isSubmitting}
-            onClick={e => this.submitArticle(e)}
-          />
-        </div>
-        <div className="error">
-          {error.length ? <Error title={error} /> : false}
-        </div>
-        <div className="success message">
-          {response ? <Success title={response.message} /> : false}
-        </div>
-        <div className="main-article">
-          <div className="title">
-            <Input
-              className="title__input"
-              type="text"
-              value={title}
-              placeholder="The title should come here"
-              name="title"
-              onChange={e => this.handleInputChange(e)}
+      <div>
+        <Navbar />
+
+        <div className="new-article-container container">
+          <div className="buttons">
+            <Button
+              className="button--dark cancel"
+              title="Cancel"
+              disabled={isSubmitting}
+              onClick={() => this.cancelEdit()}
+            />
+            <Button
+              className="button--dark publish"
+              title="Save"
+              disabled={isSubmitting}
+              onClick={e => this.submitArticle(e)}
             />
           </div>
-          <hr className="line__title" />
-          <div className="description">
-            <Input
-              className="description__input"
-              type="text"
-              value={description}
-              placeholder="Description should be here"
-              name="description"
-              onChange={e => this.handleInputChange(e)}
-            />
+          <div className="error">
+            {error.length ? <Error title={error} /> : false}
           </div>
-          <hr className="line__title" />
-          <div className="tags">
-            {tagsList.map(newTag => (
-              <Tag
-                title={newTag}
-                key={newTag}
-                onClick={() => this.onRemoveTag(newTag)}
+          <div className="success message">
+            {response ? <Success title={response.message} /> : false}
+          </div>
+          <div className="main-article">
+            <div className="title">
+              <Input
+                className="title__input"
+                type="text"
+                value={title}
+                placeholder="The title should come here"
+                name="title"
+                onChange={e => this.handleInputChange(e)}
               />
-            ))}
-            <Input
-              type="text"
-              id="new-tag"
-              placeholder="new tag"
-              name="tag"
-              className="tag"
-              value={tag}
-              onKeyUp={e => this.handleNewTag(e)}
-              onChange={e => this.onTagInputChange(e)}
+            </div>
+            <hr className="line__title" />
+            <div className="description">
+              <Input
+                className="description__input"
+                type="text"
+                value={description}
+                placeholder="Description should be here"
+                name="description"
+                onChange={e => this.handleInputChange(e)}
+              />
+            </div>
+            <hr className="line__title" />
+            <div className="tags">
+              {tagsList.map(newTag => (
+                <Tag
+                  title={newTag}
+                  key={newTag}
+                  onClick={() => this.onRemoveTag(newTag)}
+                />
+              ))}
+              <Input
+                type="text"
+                id="new-tag"
+                placeholder="new tag"
+                name="tag"
+                className="tag"
+                value={tag}
+                onKeyUp={e => this.handleNewTag(e)}
+                onChange={e => this.onTagInputChange(e)}
+              />
+            </div>
+            <RichTextEditor
+              editorClassName="demo_editor"
+              placeholder={body}
+              value={value}
+              onChange={e => this.onEditorChange(e)}
+              toolbarConfig={toolbarConfig}
             />
           </div>
-          <RichTextEditor
-            editorClassName="demo_editor"
-            placeholder={body}
-            value={value}
-            onChange={e => this.onEditorChange(e)}
-            toolbarConfig={toolbarConfig}
-          />
         </div>
       </div>
     );

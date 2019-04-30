@@ -13,3 +13,5 @@ yarn-*
 .DS_Store 
 .env
 .coveralls.yml
+src/__tests__/**/__snapshots__
+yarn.lock

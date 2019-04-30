@@ -41,6 +41,9 @@ module.exports = {
     ]
   },
   mode: "development",
+  resolve: {
+    modules: [path.resolve(__dirname, "src"), "node_modules"]
+  },
   plugins: [
     new dotenv(),
     new HtmlPackPlugin({ template: "./public/index.html" }),

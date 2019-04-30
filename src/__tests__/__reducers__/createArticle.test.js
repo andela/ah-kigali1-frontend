@@ -1,4 +1,4 @@
-import reducer from "../../redux/reducers/articleReducer";
+import reducer from "../../redux/reducers/createArticleReducer";
 import {
   NEW_ARTICLE,
   INPUT_CHANGE,

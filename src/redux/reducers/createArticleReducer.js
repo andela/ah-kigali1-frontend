@@ -16,7 +16,7 @@ const initialState = {
   tagsList: []
 };
 
-const articleReducer = (state = initialState, action) => {
+const createArticleReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_ARTICLE:
       return {
@@ -60,4 +60,4 @@ const articleReducer = (state = initialState, action) => {
   }
 };
 
-export default articleReducer;
+export default createArticleReducer;

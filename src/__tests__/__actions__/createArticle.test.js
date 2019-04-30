@@ -1,6 +1,7 @@
 import moxios from "moxios";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import dotenv from "dotenv";
 import axios from "../../utils/axios";
 import { article } from "../__mocks__/testData";
 import {
@@ -24,10 +25,11 @@ import {
   fetchOneArticle
 } from "../../redux/actions/newArticle";
 
+dotenv.config();
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = process.env.API_BASE_URL;
 describe("article action creators", () => {
   test("should return the on input change action", () => {
     const data = {
