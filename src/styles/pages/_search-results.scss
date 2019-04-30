@@ -32,6 +32,13 @@
       justify-content: center;
       margin: 15px 0px;
     }
+    .loading-anim {
+      justify-self: center;
+      text-align: center;
+      .loading {
+        margin-left: 20%;
+      }
+    }
   }
   .right-side {
     width: 18%;
