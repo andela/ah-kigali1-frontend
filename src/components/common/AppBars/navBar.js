@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Logo from "../../../assets/img/quill-drawing-a-line.svg";
 import UserIcon from "../../../assets/img/user.jpg";
+
+import TextInput from "../Inputs/TextInput";
+import {
+  handleInputChange,
+  fetchResults
+} from "../../../redux/actions/searchActions";
+import { isEmpty } from "../../../utils/helperFunctions";
 
 class Navbar extends Component {
   constructor(props) {
@@ -10,6 +19,16 @@ class Navbar extends Component {
       toggle: "none"
     };
   }
+
+  handleEnterPress = e => {
+    const { searchQuery, fetchResults: searchArticles, history } = this.props;
+    if (isEmpty(searchQuery)) {
+      return;
+    }
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      searchArticles(searchQuery, 1, history);
+    }
+  };
 
   toggleOptions() {
     this.setState(state => ({

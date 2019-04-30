@@ -11,10 +11,15 @@ import {
   fetchResults,
   clearSearchResults
 } from "../redux/actions/searchActions";
-import { toReadableDate, filterByTag, getTags } from "../utils/helperFunctions";
+import {
+  toReadableDate,
+  filterByTag,
+  getTags,
+  isEmpty
+} from "../utils/helperFunctions";
 import Card from "../components/common/Cards/AnimatedCard";
 import AuthorCard from "../components/common/Cards/AuthorCard";
-import Loading from "../components/Animations/Loading";
+import Loading from "../components/Animations/LoadingDots";
 
 export class SearchResults extends Component {
   state = {
@@ -26,10 +31,10 @@ export class SearchResults extends Component {
   };
 
   componentWillMount() {
-    const { location, fetchResults: getAllArticles } = this.props;
+    const { location, fetchResults: getAllArticles, articles } = this.props;
     const { keyword } = queryString.parse(location.search);
     this.handleOnChange(keyword);
-    getAllArticles(keyword, 1);
+    if (isEmpty(articles)) getAllArticles(keyword, 1);
   }
 
   componentDidMount() {
@@ -37,12 +42,10 @@ export class SearchResults extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { articles: articleFromSate, authors: authorsFromSate } = nextProps;
-    const articles = _.values(articleFromSate);
-    const authors = _.values(authorsFromSate);
+    const { articles, authors } = nextProps;
     this.setState({
-      articles,
-      authors,
+      articles: _.values(articles),
+      authors: _.values(authors),
       tagsList: getTags(articles)
     });
   }
@@ -58,14 +61,13 @@ export class SearchResults extends Component {
   };
 
   handleEnterPress = e => {
-    const { isLoading } = this.props;
-    if (isLoading) {
+    const { isLoading, searchQuery } = this.props;
+    if (isLoading || isEmpty(searchQuery)) {
       return;
     }
     this.setState({
       pageNumber: 1
     });
-    const { searchQuery } = this.props;
     if (e.keyCode === 13 && e.shiftKey === false) {
       this.searchArticle(searchQuery);
     }
