@@ -4,6 +4,7 @@ import Home from "../Home";
 import Navbar from "../../components/common/AppBars/navBar";
 import NewArticle from "../NewArticle";
 import EditArticle from "../EditArticle";
+import ReadArticle from "../ReadArticle";
 import NotFound from "../NotFound";
 
 export const routes = [
@@ -14,6 +15,10 @@ export const routes = [
   {
     path: "/articles/new",
     component: NewArticle
+  },
+  {
+    path: "/articles/:slug",
+    component: ReadArticle
   },
   {
     path: "/articles/:slug/edit",
