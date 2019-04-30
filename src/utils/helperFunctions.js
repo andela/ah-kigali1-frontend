@@ -93,11 +93,7 @@ export const filterByTag = (items, tag) =>
  * @returns {array} - an array of unique tags
  */
 export const getTags = items => [
-<<<<<<< HEAD
   ...new Set(flatten([...values(items).map(item => item.tagsList)]))
-=======
-  ...new Set(_.flatten([..._.values(items).map(item => item.tagsList)]))
->>>>>>> [Feature #163518658] updates the search retuls page snapshot
 ];
 
 /**

@@ -39,6 +39,17 @@ exports[`Search Results Component rendered component should match the snapshot 1
   </div>
   <div
     className="right-side hide-sm"
+<<<<<<< HEAD
   />
+=======
+  >
+    <div
+      className="tags-section"
+    />
+    <div
+      className="authors-section"
+    />
+  </div>
+>>>>>>> [Feature #163518658] code refactor
 </div>
 `;
