@@ -15,7 +15,8 @@ import {
   toReadableDate,
   filterByTag,
   getTags,
-  isEmpty
+  isEmpty,
+  isBottom
 } from "../utils/helperFunctions";
 import Card from "../components/common/Cards/AnimatedCard";
 import AuthorCard from "../components/common/Cards/AuthorCard";
@@ -74,15 +75,13 @@ export class SearchResults extends Component {
   };
 
   handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
+    console.log("***************", "scrolling");
+    const { searchQuery, isLoading } = this.props;
+    if (isBottom() && !isLoading) {
       this.setState(state => ({
         pageNumber: state.pageNumber + 1
       }));
-      const { searchQuery } = this.props;
-      this.searchArticle(searchQuery);
+      setTimeout(this.searchArticle(searchQuery), 3000);
     }
   };
 
@@ -140,14 +139,19 @@ export class SearchResults extends Component {
                 </div>
               ))}
               <div className="loading-anim">
-                {isLoading ? <Loading /> : <small>{errors.message}</small>}
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  !isEmpty(errors.message) &&
+                  !activeTag && <small>{errors.message}</small>
+                )}
               </div>
             </section>
           </div>
         </div>
 
         <div className="right-side hide-sm">
-          <h2>#Tags</h2>
+          {tagsList.length !== 0 && <h2>#Tags</h2>}
           <div className="tags-section">
             {tagsList.map((title, index) => (
               <BasicButton
@@ -159,7 +163,7 @@ export class SearchResults extends Component {
               />
             ))}
           </div>
-          <h2>Authors</h2>
+          {authors.length !== 0 && <h2>Authors</h2>}
           <div className="authors-section">
             {authors.map(author => (
               <AuthorCard {...author} key={author.id} />
