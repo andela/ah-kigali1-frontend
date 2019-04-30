@@ -109,8 +109,7 @@
       margin-right: 15px;
       cursor: pointer;
     }
-    input[type="search"]:focus,
-    input[type="search"]:not(:placeholder-shown) {
+    input[type="search"]:focus {
       width: 100%;
       border-color: $white-secondary;
       color: $white-secondary;

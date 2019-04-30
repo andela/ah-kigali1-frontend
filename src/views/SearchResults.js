@@ -14,6 +14,7 @@ import {
 import { toReadableDate, filterByTag, getTags } from "../utils/helperFunctions";
 import Card from "../components/common/Cards/AnimatedCard";
 import AuthorCard from "../components/common/Cards/AuthorCard";
+import Loading from "../components/Animations/Loading";
 
 export class SearchResults extends Component {
   state = {
@@ -105,7 +106,7 @@ export class SearchResults extends Component {
   };
 
   render() {
-    const { searchQuery, isLoading } = this.props;
+    const { searchQuery, isLoading, errors } = this.props;
     const { articles, authors, activeTag, tagsList } = this.state;
     return (
       <div className="search-results">
@@ -121,49 +122,48 @@ export class SearchResults extends Component {
               onKeyDown={e => this.handleEnterPress(e)}
             />
           </div>
-          {isLoading && articles.length === 0 ? (
-            <h2>Loading....</h2>
-          ) : (
-            <div className="results" id="results-container">
-              <section id="articles" className="active">
-                {articles.map(article => (
-                  <div className="col-md-12" key={article.id}>
-                    <Card
-                      title={article.title}
-                      description={article.description}
-                      comments={article.comments.length}
-                      likes={article.likes.length}
-                      author={article.author}
-                      readTime={article.readTime}
-                      createdAt={toReadableDate(article.createdAt)}
-                    />
-                  </div>
-                ))}
-              </section>
-            </div>
-          )}
-        </div>
-        {isLoading && articles.length === 0 ? null : (
-          <div className="right-side hide-sm">
-            <h2>#Tags</h2>
-            <div className="tags-section">
-              {tagsList.map((title, index) => (
-                <BasicButton
-                  className={`tags ${activeTag === index ? "active" : ""}`}
-                  title={title}
-                  key={`${index + 1}`}
-                  onClick={() => this.handleTagFilter(title, index)}
-                />
+          <div className="results" id="results-container">
+            <section id="articles" className="active">
+              {articles.map(article => (
+                <div className="col-md-12" key={article.id}>
+                  <Card
+                    title={article.title}
+                    description={article.description}
+                    comments={article.comments.length}
+                    likes={article.likes.length}
+                    author={article.author}
+                    readTime={article.readTime}
+                    createdAt={toReadableDate(article.createdAt)}
+                  />
+                </div>
               ))}
-            </div>
-            <h2>Authors</h2>
-            <div className="authors-section">
-              {authors.map(author => (
-                <AuthorCard {...author} key={author.id} />
-              ))}
-            </div>
+              <div className="loading-anim">
+                {isLoading ? <Loading /> : <small>{errors.message}</small>}
+              </div>
+            </section>
           </div>
-        )}
+        </div>
+
+        <div className="right-side hide-sm">
+          <h2>#Tags</h2>
+          <div className="tags-section">
+            {tagsList.map((title, index) => (
+              <BasicButton
+                className={`tags ${activeTag === index ? "active" : ""}`}
+                title={title}
+                key={`${index + 1}`}
+                onClick={() => this.handleTagFilter(title, index)}
+                data-test="single-tag"
+              />
+            ))}
+          </div>
+          <h2>Authors</h2>
+          <div className="authors-section">
+            {authors.map(author => (
+              <AuthorCard {...author} key={author.id} />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
