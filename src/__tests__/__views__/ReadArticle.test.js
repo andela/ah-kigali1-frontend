@@ -60,11 +60,13 @@ describe(" Read article", () => {
     mapDispatchToProps(dispatch).deleteOneArticle("hello world");
     expect(dispatch.mock.calls[0][0]).toBeDefined();
   });
+
   test("should map fetch article to props", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).fetchOneArticle("hello world");
     expect(dispatch.mock.calls[0][0]).toBeDefined();
   });
+
   test("should redirect to another article", () => {
     const wrapper = shallow(<Article {...props1} />);
     wrapper.instance().componentWillReceiveProps({

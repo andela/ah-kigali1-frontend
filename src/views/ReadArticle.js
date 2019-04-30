@@ -17,6 +17,13 @@ import {
   calculateTimeStamp
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
+import twitterIcon from "../assets/icons/twitter-icon.svg";
+import facebookIcon from "../assets/icons/fb-icon.svg";
+import thumbsUp from "../assets/img/like-icon.svg";
+import authorImage from "../assets/img/user.jpg";
+import dislikeIcon from "../assets/img/dislike-icon.svg";
+import heartIcon from "../assets/img/heart.svg";
+import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 
 export const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
@@ -128,7 +135,7 @@ export class Article extends Component {
               <div className="article-author">
                 <div className="avatar-wrapper">
                   <img
-                    src={image || require("../assets/img/author.svg")}
+                    src={image || authorImage}
                     alt="Avatar"
                     className="avatar"
                   />
@@ -188,7 +195,7 @@ export class Article extends Component {
                   <div className="article-comments--new">
                     <div className="avatar-wrapper comment-avatar-wrapper">
                       <img
-                        src={image || require("../assets/img/author.svg")}
+                        src={image || authorImage}
                         alt="Avatar"
                         className="avatar"
                       />
@@ -214,9 +221,7 @@ export class Article extends Component {
                           >
                             <div className="avatar-wrapper comment-avatar-wrapper">
                               <img
-                                src={
-                                  image || require("../assets/img/author.svg")
-                                }
+                                src={image || authorImage}
                                 alt="Avatar"
                                 className="avatar"
                               />
@@ -232,7 +237,7 @@ export class Article extends Component {
                                 <span className="comment-like">
                                   <div className="icons">
                                     <img
-                                      src={require("../assets/img/heart.svg")}
+                                      src={heartIcon}
                                       alt="likes"
                                       className="likes"
                                     />
@@ -264,9 +269,7 @@ export class Article extends Component {
                             <div className="blog-card">
                               <div className="avatar-wrapper comment-avatar-wrapper">
                                 <img
-                                  src={
-                                    image || require("../assets/img/author.svg")
-                                  }
+                                  src={image || authorImage}
                                   alt="Avatar"
                                   className="avatar"
                                 />
@@ -286,7 +289,7 @@ export class Article extends Component {
                                     <span className="comment-like">
                                       <div className="icons">
                                         <img
-                                          src={require("../assets/img/heart.svg")}
+                                          src={heartIcon}
                                           alt="likes"
                                           className="likes"
                                         />
@@ -321,31 +324,11 @@ export class Article extends Component {
 
             <aside className="article-share">
               <div className="share-icons">
-                <img
-                  className="share-icon"
-                  src={require("../assets/img/like-icon.svg")}
-                  alt="logo"
-                />
-                <img
-                  className="share-icon"
-                  src={require("../assets/img/dislike-icon.svg")}
-                  alt="logo"
-                />
-                <img
-                  className="share-icon"
-                  src={require("../assets/img/bookmark-icons.svg")}
-                  alt="logo"
-                />
-                <img
-                  className="share-icon"
-                  src={require("../assets/img/fb-icon.svg")}
-                  alt="logo"
-                />
-                <img
-                  className="share-icon"
-                  src={require("../assets/img/twitter-icon.svg")}
-                  alt="logo"
-                />
+                <img className="share-icon" src={thumbsUp} alt="logo" />
+                <img className="share-icon" src={dislikeIcon} alt="logo" />
+                <img className="share-icon" src={bookmarkIcon} alt="logo" />
+                <img className="share-icon" src={facebookIcon} alt="logo" />
+                <img className="share-icon" src={twitterIcon} alt="logo" />
               </div>
             </aside>
             <div className="right article-others">

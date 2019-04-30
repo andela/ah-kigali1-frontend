@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import authorDefaultImage from "../../../assets/img/author.svg";
+import thumbsUp from "../../../assets/img/thumb-up-outline.svg";
+import thumbsDown from "../../../assets/img/thumb-down-outline.svg";
+import commentIcon from "../../../assets/img/comment-multiple-outline.svg";
+import bookmarkIcon from "../../../assets/img/bookmark.svg";
 import {
   stringToHtmlElement,
   calculateTimeStamp
 } from "../../../utils/helperFunctions";
 
-/* eslint global-require: "off" */
 export class MainCard extends Component {
   redirectToArticle = () => {
     const { article, history } = this.props;
@@ -32,7 +36,7 @@ export class MainCard extends Component {
         <div className="article-card">
           <div className="avatar-wrapper">
             <img
-              src={image || require("../../../assets/img/author.svg")}
+              src={image || authorDefaultImage}
               alt="Avatar"
               className="avatar"
             />
@@ -63,31 +67,15 @@ export class MainCard extends Component {
             </div>
             <div className="icons">
               <div className="left-icons">
-                <img
-                  src={require("../../../assets/img/thumb-up-outline.svg")}
-                  alt="likes"
-                  className="likes"
-                />
+                <img src={thumbsUp} alt="likes" className="likes" />
                 <div className="numbers">{likesCount}</div>
-                <img
-                  src={require("../../../assets/img/thumb-down-outline.svg")}
-                  alt="dislikes"
-                  className="dislikes"
-                />
+                <img src={thumbsDown} alt="dislikes" className="dislikes" />
                 <div className="numbers">3,844</div>
-                <img
-                  src={require("../../../assets/img/comment-multiple-outline.svg")}
-                  alt="comments"
-                  className="comments"
-                />
+                <img src={commentIcon} alt="comments" className="comments" />
                 <div className="numbers">{comments.length}</div>
               </div>
               <div className="right-icons">
-                <img
-                  src={require("../../../assets/img/bookmark.svg")}
-                  alt="bookmark"
-                  className="bookmark"
-                />
+                <img src={bookmarkIcon} alt="bookmark" className="bookmark" />
               </div>
             </div>
           </div>

@@ -1,5 +1,4 @@
 import moxios from "moxios";
-import dotenv from "dotenv";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import axios from "../../utils/axios";
@@ -15,8 +14,6 @@ import {
   ARTICLE_ERROR,
   DELETE_ARTICLE
 } from "../../redux/actionTypes";
-
-dotenv.config();
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -35,6 +32,7 @@ describe("Fetching and deleting an article ", () => {
   afterEach(() => {
     moxios.uninstall(axios);
   });
+
   test("should dispatch the create article action", async () => {
     const store = mockStore({});
     const actions = [
@@ -67,6 +65,7 @@ describe("Fetching and deleting an article ", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch the fetch article error", async () => {
     const store = mockStore({});
     const actions = [
@@ -87,6 +86,7 @@ describe("Fetching and deleting an article ", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch the delete article method", async () => {
     const store = mockStore({});
     const actions = [
@@ -107,6 +107,7 @@ describe("Fetching and deleting an article ", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch the delete article error", async () => {
     const store = mockStore({});
     const actions = [
