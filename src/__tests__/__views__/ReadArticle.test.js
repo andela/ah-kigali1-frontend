@@ -9,6 +9,15 @@ import { props1, props2, props3, props4, props5 } from "../__mocks__/testData";
 
 jest.useFakeTimers();
 describe(" Read article", () => {
+let inst;
+const wrp = shallow(<Article {...props1} />);
+beforeAll(() => {
+  inst = wrp.instance();
+  jest.spyOn(inst, "followAuthor");
+  jest.spyOn(inst, "handleDeleteArticle");
+});
+
+describe("Read article", () => {
   test("render the full component with aside articles", () => {
     const wrapper = shallow(<Article {...props1} />);
     expect(wrapper.find(".article-container")).toHaveLength(1);
@@ -46,7 +55,8 @@ describe(" Read article", () => {
         asideArticles: {
           articles: [{ body: "hello world" }, { body: "hello world" }]
         }
-      }
+      },
+      following: { isFetching: true, status: true }
     };
     expect(mapStateToProps(state)).toEqual({
       currentUser: {
@@ -55,7 +65,8 @@ describe(" Read article", () => {
       asideArticles: {
         articles: [{ body: "hello world" }, { body: "hello world" }]
       },
-      article: state.fetchedArticle
+      article: state.fetchedArticle,
+      following: { isFetching: true, status: true }
     });
   });
 
@@ -130,5 +141,18 @@ describe(" Read article", () => {
     await props2.deleteOneArticle.mockResolvedValue({ status: 400 });
     wrapper.find(".delete_article").simulate("click");
     expect(props2.history.push).not.toHaveBeenCalled();
+  describe("Follow an author", () => {
+    test("should map followUser article to props", () => {
+      const dispatch = jest.fn();
+      mapDispatchToProps(dispatch).followUser("claude");
+      expect(dispatch.mock.calls[0][0]).toBeDefined();
+    });
+
+    test("should call followAuthor when the follow button is clicked", () => {
+      wrp.find(`[data-test="follow_author"]`).simulate("click");
+      expect(inst.followAuthor).toHaveBeenCalledWith(
+        props1.article.article.author.username
+      );
+    });
   });
 });

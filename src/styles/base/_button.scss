@@ -16,3 +16,19 @@ input[type="button"] {
     font-weight: bold;
   }
 }
+
+.btn:hover {
+  background-color: $color-primary;
+  color: $white-primary;
+}
+
+.focus {
+  justify-content: center;
+  @include btn {
+    width: 7em;
+    height: 2em;
+    color: $white-primary;
+    background-color: $color-primary;
+  }
+  @include action-btn__mobile;
+}

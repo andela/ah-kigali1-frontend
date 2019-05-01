@@ -6,7 +6,11 @@ import socialAuthReducers from "./socialAuthReducers";
 import createArticleReducer from "./createArticleReducer";
 import readArticleReducer from "./readArticleReducer";
 import userReducer from "./userReducer";
+<<<<<<< HEAD
 import searchReducers from "./searchReducers";
+=======
+import following from "./followingReducer";
+>>>>>>> [Feature #163518655] add following functionality
 
 export default combineReducers({
   auth: loginReducers,
@@ -16,5 +20,9 @@ export default combineReducers({
   socialAuth: socialAuthReducers,
   fetchedArticle: readArticleReducer,
   user: userReducer,
+<<<<<<< HEAD
   search: searchReducers
+=======
+  following
+>>>>>>> [Feature #163518655] add following functionality
 });
