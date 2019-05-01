@@ -50,7 +50,7 @@ export const isCurrentUserAuthor = (authorName, currentUser) => {
 
 export const stringToHtmlElement = text => {
   const body = ReactHtmlParser(text);
-  let firstImage = "https://picsum.photos/200/300/?random";
+  let firstImage = "https://picsum.photos/id/0/5616/3744";
   const imageRegEx = /<img .*?>/g;
 
   const images = text.match(imageRegEx);
