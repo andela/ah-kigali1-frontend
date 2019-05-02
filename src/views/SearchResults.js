@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import _ from "lodash";
+import lodash from "lodash";
 import BasicButton from "../components/common/Buttons/BasicButton";
 import Input from "../components/common/Inputs/TextInput";
 import {
@@ -129,7 +129,7 @@ export class SearchResults extends Component {
     <div>
       <h2>Authors</h2>
       <div className="authors-section">
-        {_.values(authors).map(author => (
+        {lodash.values(authors).map(author => (
           <AuthorCard {...author} key={author.id} />
         ))}
       </div>
@@ -138,7 +138,7 @@ export class SearchResults extends Component {
 
   renderArticles = (articles, isLoading, errors, activeTag) => (
     <section id="articles" className="active">
-      {_.values(articles).map(article => (
+      {lodash.values(articles).map(article => (
         <div className="col-md-12" key={article.id}>
           <Card
             title={article.title}
