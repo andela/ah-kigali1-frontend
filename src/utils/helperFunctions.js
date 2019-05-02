@@ -81,3 +81,8 @@ export const isBottom = () =>
   window.innerHeight + document.documentElement.scrollTop ===
   document.documentElement.offsetHeight;
 export const hasFocus = () => document.getElementById("nav-search-input");
+
+export const toReadableDate = date => {
+  const time = new Date(date);
+  return time.toDateString();
+};

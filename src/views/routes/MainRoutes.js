@@ -6,6 +6,7 @@ import NewArticle from "../NewArticle";
 import EditArticle from "../EditArticle";
 import ReadArticle from "../ReadArticle";
 import NotFound from "../NotFound";
+import Search from "../SearchResults";
 
 export const routes = [
   {
@@ -26,7 +27,7 @@ export const routes = [
   },
   {
     path: "/search",
-    component: SearchResults
+    component: Search
   },
   {
     path: "/",

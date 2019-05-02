@@ -58,9 +58,8 @@ class Navbar extends Component {
   }
 
   render() {
-    const { toggle } = this.state;
     const { toggle, popOverOpen } = this.state;
-    const { searchQuery, history, suggestedArticles } = this.props;
+    const { searchQuery, history } = this.props;
     return (
       <div>
         <section
@@ -74,10 +73,7 @@ class Navbar extends Component {
               </div>
               <h3>AH</h3>
             </Link>
-            <div className="col-md-6 col-sm-9 user-actions">
-              <div className="search-filed">
-                <input type="search" name="search" placeholder="Search....." />
-            </div>
+
             <div className="col-md-6 col-sm-12 user-actions">
               <div className="search-filed">
                 {history.location.pathname !== "/search" ? (
@@ -133,16 +129,17 @@ class Navbar extends Component {
             </div>
           </div>
         </section>
-        {popOverOpen && !isEmpty(suggestedArticles) && (
+        {popOverOpen && !isEmpty(authSuggestArticles) && (
           <SearchPopOver
             searchQuery={searchQuery}
-            articles={suggestedArticles}
+            articles={authSuggestArticles}
           />
         )}
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   const { search } = state;
   return {
@@ -156,8 +153,7 @@ Navbar.propTypes = {
   searchQuery: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func
-  }).isRequired,
-  suggestedArticles: PropTypes.shape({}).isRequired
+  }).isRequired
 };
 Navbar.defaultProps = {
   searchQuery: ""

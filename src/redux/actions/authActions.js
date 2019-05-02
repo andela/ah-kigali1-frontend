@@ -42,11 +42,6 @@ const loginFailed = payload => {
   };
 };
 
-export const setCurrentUser = user => ({
-  type: SET_CURRENT_USER,
-  payload: user
-});
-
 export const handleSignIn = ({ email, password }) => async dispatch => {
   try {
     dispatch(updateIsSubmitting());
