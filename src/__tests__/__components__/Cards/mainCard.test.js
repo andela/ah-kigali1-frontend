@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { MainCard } from "../../../components/common/Cards/main";
+import { MainCard } from "../../../components/common/Cards/Main";
 
 import { mainCardProps1, mainCardProps2 } from "../../__mocks__/testData";
 
