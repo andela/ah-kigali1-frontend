@@ -132,10 +132,10 @@ export class Navbar extends Component {
             </div>
           </div>
         </section>
-        {popOverOpen && !isEmpty(suggestedArticles) && (
+        {popOverOpen && !isEmpty(authSuggestArticles) && (
           <SearchPopOver
             searchQuery={searchQuery}
-            articles={suggestedArticles}
+            articles={authSuggestArticles}
           />
         )}
       </div>
