@@ -11,7 +11,7 @@ import {
 } from "../actionTypes";
 import { arrayToObject } from "../../utils/helperFunctions";
 
-const searchURL = (searchQuery, pageNumber = 1) =>
+export const searchURL = (searchQuery, pageNumber = 1) =>
   `/articles?keyword=${searchQuery}&page=${pageNumber}`;
 
 export const handleInputChange = value => ({
@@ -82,26 +82,6 @@ export const authSuggestArticles = searchQuery => async dispatch => {
     const {
       data: { message, errors }
     } = error.response;
-    dispatch(message, errors);
-  }
-};
-
-export const authSuggestArticles = keyword => async dispatch => {
-  dispatch(handleInputChange(keyword));
-  try {
-    const response = await axios.get(`/articles?keyword=${keyword}&limit=${5}`);
-    const { articles } = response.data;
-    dispatch({
-      type: SET_SUGGESTED_ARTICLES,
-      payload: { articles: { ...arrayToObject(articles, "id") } }
-    });
-  } catch (error) {
-    const {
-      data: { message }
-    } = error.response;
-    dispatch({
-      type: ARTICLE_SEARCH_FAILED,
-      payload: { message }
-    });
+    dispatch(searchFailed(message, errors));
   }
 };
