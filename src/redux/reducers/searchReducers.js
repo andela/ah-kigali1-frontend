@@ -28,11 +28,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_SUGGESTED_ARTICLES:
       return {
         ...state,
-<<<<<<< HEAD
         suggestedArticles: { ...payload.articles }
-=======
-        suggestedArticles: { ...state.suggestedArticles, ...payload.articles }
->>>>>>> [Feature #163518658] add popover card for suggested articles
       };
     case SEARCHING_ARTICLES:
       return {

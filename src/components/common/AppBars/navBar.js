@@ -64,7 +64,6 @@ export class Navbar extends Component {
   render() {
     const { toggle, popOverOpen, searchQuery } = this.state;
     const { history, suggestedArticles, currentUser } = this.props;
-
     return (
       <div>
         <section

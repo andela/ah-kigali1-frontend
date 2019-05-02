@@ -42,6 +42,7 @@ export const fetchResults = (
     if (pageNumber === 1) {
       dispatch(clearSearchResults());
     }
+
     const { articles, message } = response.data;
     // const authorsObject = mapValues(
     //   arrayToObject(articles, "userId"),
@@ -50,6 +51,7 @@ export const fetchResults = (
     const authors = Object.values(arrayToObject(articles, "userId")).map(
       article => ({ ...article.author, id: article.userId })
     );
+
     dispatch({
       type: ARTICLE_SEARCH_SUCCESS,
       payload: {
@@ -83,25 +85,5 @@ export const authSuggestArticles = searchQuery => async dispatch => {
       data: { message, errors }
     } = error.response;
     dispatch(searchFailed(message, errors));
-  }
-};
-
-export const authSuggestArticles = keyword => async dispatch => {
-  dispatch(handleInputChange(keyword));
-  try {
-    const response = await axios.get(`/articles?keyword=${keyword}&limit=${5}`);
-    const { articles } = response.data;
-    dispatch({
-      type: SET_SUGGESTED_ARTICLES,
-      payload: { articles: { ...arrayToObject(articles, "id") } }
-    });
-  } catch (error) {
-    const {
-      data: { message }
-    } = error.response;
-    dispatch({
-      type: ARTICLE_SEARCH_FAILED,
-      payload: { message }
-    });
   }
 };
