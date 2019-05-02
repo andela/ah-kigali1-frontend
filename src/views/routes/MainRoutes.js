@@ -9,6 +9,7 @@ import NotFound from "../NotFound";
 import EditProfile from "../EditProfile";
 import Profile from "../Profile";
 import Settings from "../Settings";
+import Search from "../SearchResults";
 
 export const routes = [
   {
@@ -41,7 +42,7 @@ export const routes = [
   },
   {
     path: "/search",
-    component: SearchResults
+    component: Search
   },
   {
     path: "/",
