@@ -8,9 +8,9 @@ import TextInput from "../../components/common/Inputs/TextInput";
 import { articles, authors } from "../testData";
 import AuthorCard from "../../components/common/Cards/AuthorCard";
 
-const [handleInputChange, fetchResults, clearSearchResults] = new Array(3).fill(
-  jest.fn()
-);
+const [handleInputChange, fetchResults, clearSearchResults, push] = new Array(
+  4
+).fill(jest.fn());
 const props = {
   handleInputChange,
   fetchResults,
@@ -18,8 +18,11 @@ const props = {
   searchQuery: "hello_world",
   articles: {},
   authors: {},
-  location: {
-    search: "/?keyword=helloWorld"
+  history: {
+    location: {
+      search: "?keyword=helloWorld"
+    },
+    push
   },
   isLoading: true,
   errors: {}
@@ -84,7 +87,22 @@ describe("Search Results Component", () => {
         keyCode: 13,
         shiftKey: false
       });
-      expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
+      expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1, props.history);
+      expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
+    });
+    test("should filter article by tags", () => {
+      wrapper.setProps({
+        articles: _.keyBy(articles, "id")
+      });
+      wrapper
+        .find(`[data-test="single-tag"]`)
+        .at(0)
+        .simulate("click");
+      expect(wrapper.state().activeTag).toEqual(0);
+      expect(instance.handleTagFilter).toHaveBeenCalledWith(
+        wrapper.state().tagsList[0],
+        0
+      );
     });
     describe("Component life cycle metho", () => {
       const component = mount(<SearchResults {...props} />);

@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 const SearchPopOver = ({ searchQuery, articles }) => (
-  <div id="popover">
+  <div id="search-popover">
     <div className="popover-inner" style={{ height: "260px" }}>
       <div className="header">
-        <Link to="/search?keyword=hello world">
+        <Link to={`/search?keyword=${searchQuery}`}>
           <span className="button">
             <span className="search-icon" />
           </span>
@@ -19,7 +19,7 @@ const SearchPopOver = ({ searchQuery, articles }) => (
           <h2>Articles</h2>
         </div>
         <div className="header-right">
-          <Link to="/search?keyword=hello world">
+          <Link to={`/search?keyword=${searchQuery}`}>
             <h2>More</h2>
           </Link>
         </div>
@@ -31,7 +31,7 @@ const SearchPopOver = ({ searchQuery, articles }) => (
               <img
                 src="https://cdn-images-1.medium.com/fit/c/64/64/1*0VWnJCXj9U5XkwRp85Mfwg.png"
                 className="avatar"
-                alt="Hello World"
+                alt="img"
               />
               <span className="avatar-text">{item.title}</span>
             </Link>
