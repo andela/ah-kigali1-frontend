@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import _ from "lodash";
+import { values } from "lodash";
 
 const SearchPopOver = ({ searchQuery, articles }) => (
   <div id="search-popover">
@@ -25,7 +25,7 @@ const SearchPopOver = ({ searchQuery, articles }) => (
         </div>
       </header>
       <ul className="popover-content" style={{ maxHeight: "250px" }}>
-        {[..._.values(articles)].map(item => (
+        {[...values(articles)].map(item => (
           <li className="list-item" key={item.id}>
             <Link to={`/articles/${item.slug}`} className="link">
               <img

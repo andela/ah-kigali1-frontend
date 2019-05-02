@@ -1,5 +1,5 @@
 import "@babel/polyfill";
-import _ from "lodash";
+import { mapValues } from "lodash";
 import axios from "../../utils/axios";
 import {
   SEARCHING_ARTICLES,
@@ -44,7 +44,7 @@ export const fetchResults = (
     }
 
     const { articles, message } = response.data;
-    const authorsObject = _.mapValues(
+    const authorsObject = mapValues(
       arrayToObject(articles, "userId"),
       article => ({ ...article.author, id: article.userId })
     );
