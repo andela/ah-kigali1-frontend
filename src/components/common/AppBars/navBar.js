@@ -15,7 +15,8 @@ import SearchPopOver from "../../PopOvers/SearchPopOver";
 export class Navbar extends Component {
   state = {
     toggle: "none",
-    popOverOpen: false
+    popOverOpen: false,
+    searchQuery: ""
   };
 
   componentDidMount() {
@@ -36,17 +37,20 @@ export class Navbar extends Component {
     }
   };
 
-  closeSearchPopOver = () => {
-    this.setState({
-      popOverOpen: false
-    });
+  closeSearchPopOver = e => {
+    if (this.searchPopOverRef && !this.searchPopOverRef.contains(e.target)) {
+      this.setState({
+        popOverOpen: false
+      });
+    }
   };
 
   handleOnChange = value => {
     clearTimeout(this.timeOut);
     const { authSuggestArticles: getSuggestions } = this.props;
     this.setState({
-      popOverOpen: true
+      popOverOpen: true,
+      searchQuery: value
     });
     this.timeOut = setTimeout(() => getSuggestions(value), 1000);
   };
