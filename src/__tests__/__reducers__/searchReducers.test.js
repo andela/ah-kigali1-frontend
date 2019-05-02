@@ -2,7 +2,9 @@ import {
   SEARCHING_ARTICLES,
   SEARCH_QUERY_CHANGE,
   ARTICLE_SEARCH_FAILED,
-  ARTICLE_SEARCH_SUCCESS
+  ARTICLE_SEARCH_SUCCESS,
+  SET_SUGGESTED_ARTICLES,
+  CLEAR_SEARCH_RESULTS
 } from "../../redux/actionTypes";
 import searchReducers from "../../redux/reducers/searchReducers";
 import { articles, authors } from "../testData";
@@ -30,6 +32,7 @@ describe("Search Action Reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, searchQuery: value });
   });
+
   test("should update isLoading", () => {
     expect(
       searchReducers(INITIAL_STATE, {
@@ -37,6 +40,7 @@ describe("Search Action Reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, isLoading: true });
   });
+
   test("should update article and authors", () => {
     expect(
       searchReducers(INITIAL_STATE, {
@@ -53,6 +57,7 @@ describe("Search Action Reducers", () => {
       authors: { ...INITIAL_STATE.authors, ...authors }
     });
   });
+
   test("should update error and error message", () => {
     const payload = { message: "Unauthorized", errors: {} };
     expect(
@@ -65,5 +70,23 @@ describe("Search Action Reducers", () => {
       isLoading: false,
       errors: { message: payload.message, ...payload.errors }
     });
+  });
+
+  test("should set suggested articles", () => {
+    const payload = { articles: { ...arrayToObject(articles) } };
+    expect(
+      searchReducers(INITIAL_STATE, {
+        type: SET_SUGGESTED_ARTICLES,
+        payload: { ...payload }
+      })
+    ).toEqual({ ...INITIAL_STATE, suggestedArticles: { ...payload.articles } });
+  });
+
+  test("should clear all search related data", () => {
+    expect(
+      searchReducers(INITIAL_STATE, {
+        type: CLEAR_SEARCH_RESULTS
+      })
+    ).toEqual({ ...INITIAL_STATE, isLoading: false });
   });
 });
