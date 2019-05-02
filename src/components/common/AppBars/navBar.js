@@ -17,7 +17,8 @@ import SearchPopOver from "../../PopOvers/SearchPopOver";
 class Navbar extends Component {
   state = {
     toggle: "none",
-    popOverOpen: false
+    popOverOpen: false,
+    searchQuery: ""
   };
 
   componentWillMount() {
@@ -38,18 +39,25 @@ class Navbar extends Component {
     }
   };
 
-  closeSearchPopOver = () => {
-    this.setState({
-      popOverOpen: false
-    });
+  closeSearchPopOver = e => {
+    if (this.searchPopOverRef && !this.searchPopOverRef.contains(e.target)) {
+      this.setState({
+        popOverOpen: false
+      });
+    }
   };
 
   handleOnChange = value => {
     const { authSuggestArticles: getSuggestions } = this.props;
     this.setState({
-      popOverOpen: true
+      popOverOpen: true,
+      searchQuery: value
     });
     getSuggestions(value);
+  };
+
+  setSearchPopOverRef = node => {
+    this.searchPopOverRef = node;
   };
 
   toggleOptions() {
