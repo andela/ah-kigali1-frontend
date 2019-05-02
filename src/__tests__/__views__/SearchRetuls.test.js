@@ -43,11 +43,16 @@ describe("Search Results Component", () => {
   });
 const wrapper = shallow(<SearchResults {...props} />);
 const findElements = element => wrapper.find(element);
+
 describe("Search Results Component", () => {
   afterEach(() => {
+    wrapper.setProps({
+      ...props
+    });
     handleInputChange.mockClear();
     fetchResults.mockClear();
   });
+
   describe("rendered component", () => {
     test("should match the snapshot", () => {
       expect(toJson(wrapper)).toMatchSnapshot();
@@ -282,10 +287,24 @@ describe("Search Results Component", () => {
       expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
       expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
     });
-    test("should filter article by tags", () => {
+    test("should not respond  on ENTER key press", () => {
       wrapper.setProps({
-        articles: _.keyBy(articles, "id")
+        isLoading: true
       });
+      findElements(TextInput)
+        .at(0)
+        .simulate("keydown", { keyCode: 13, shiftKey: false });
+      expect(instance.handleEnterPress).toHaveBeenCalledWith({
+        keyCode: 13,
+        shiftKey: false
+      });
+      expect(fetchResults).not.toBeCalled();
+      expect(instance.searchArticle).not.toHaveBeenCalledWith(
+        props.searchQuery
+      );
+    });
+
+    test("should filter article by tags", () => {
       wrapper
         .find(`[data-test="single-tag"]`)
         .at(0)
@@ -296,6 +315,7 @@ describe("Search Results Component", () => {
         0
       );
     });
+
     test("should clear article filtering", () => {
       wrapper.setState({
         activeTag: 0
@@ -308,33 +328,79 @@ describe("Search Results Component", () => {
         wrapper.state().tagsList[0],
         0
       );
-      expect(wrapper.state().articles).toEqual(_.values(articles));
+      expect(wrapper.state().articles).toEqual(articlesObj);
       expect(wrapper.state().activeTag).toEqual(null);
     });
+  });
 
-    describe("Component life cycle metho", () => {
-      test("should fetch article and set search query", () => {
-        mount(<SearchResults {...props} />);
-        expect(fetchResults).toHaveBeenCalled();
-        expect(fetchResults).toHaveBeenCalledWith(props.searchQuery, 1);
-        expect(handleInputChange).toHaveBeenCalledWith(props.searchQuery);
+  describe("Component life cycle metho", () => {
+    test("should fetch article and set search query", () => {
+      mount(<SearchResults {...props} />);
+      expect(fetchResults).toHaveBeenCalled();
+      expect(fetchResults).toHaveBeenCalledWith(props.searchQuery, 1);
+      expect(handleInputChange).toHaveBeenCalledWith(props.searchQuery);
+    });
+
+    test("should clear test result on component unmount", () => {
+      const component = mount(<SearchResults {...props} />);
+      component.unmount();
+      expect(clearSearchResults).toBeCalled();
+    });
+
+    test("should set articles in state", () => {
+      const component = mount(<SearchResults {...props} />);
+      component.setProps({
+        articles: articlesObj,
+        authors
       });
-      test("should clear test result on component unmount", () => {
-        const component = mount(<SearchResults {...props} />);
-        component.unmount();
-        expect(clearSearchResults).toBeCalled();
+      expect(component.state().articles).toEqual(articlesObj);
+      expect(component.state().authors).toEqual(authorObj);
+    });
+  });
+
+  describe("Component window event", () => {
+    const map = {};
+    let component;
+    let instance;
+    beforeEach(() => {
+      document.addEventListener = jest.fn((event, cb) => {
+        map[event] = cb;
       });
-      test("should set articles in state", () => {
-        const component = mount(<SearchResults {...props} />);
-        const transformedArticles = _.keyBy(articles, "id");
-        component.setProps({
-          articles: transformedArticles,
-          authors
-        });
-        expect(component.state().articles).toEqual(
-          _.values(transformedArticles)
-        );
+      component = shallow(<SearchResults {...props} />);
+      instance = component.instance();
+      jest.spyOn(instance, "handleScroll");
+      jest.spyOn(instance, "searchArticle");
+    });
+
+    afterEach(() => {
+      instance.handleScroll.mockClear();
+      instance.searchArticle.mockClear();
+    });
+
+    test("should respond on window scroll, but not fetch articles", () => {
+      const { pageNumber } = component.state();
+      map.scroll();
+      expect(instance.handleScroll).toBeCalled();
+      expect(component.state().pageNumber).toEqual(pageNumber);
+      expect(instance.searchArticle).not.toBeCalled();
+    });
+
+    test("should fetch more article on scroll bottom", () => {
+      const { pageNumber } = component.state();
+      component.setProps({
+        isLoading: false
       });
+      window.innerHeight = 0;
+      map.scroll();
+      expect(instance.handleScroll).toBeCalled();
+      expect(component.state().pageNumber).toEqual(pageNumber + 1);
+      expect(instance.searchArticle.mock.calls.length).toBe(1);
+      expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
+      expect(fetchResults).toHaveBeenCalledWith(
+        props.searchQuery,
+        pageNumber + 1,
+        props.history
+      );
     });
   });
 });
