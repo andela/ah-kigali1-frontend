@@ -1,5 +1,6 @@
 import ReactHtmlParser from "react-html-parser";
 
+import { filter, flatten, values, keyBy } from "lodash";
 /**
  * @description check if value is empty
  * @param {*} value - input to validate
@@ -66,13 +67,14 @@ export const calculateTimeStamp = time => {
   const date = new Date(time);
   return date.toDateString();
 };
-export const arrayToObject = (items, key) => _.keyBy(items, item => item[key]);
+
+export const arrayToObject = (items, key) => keyBy(items, item => item[key]);
 
 export const filterByTag = (items, tag) =>
-  _.filter(items, item => item.tagsList.includes(tag));
+  filter(items, item => item.tagsList.includes(tag));
 
 export const getTags = items => [
-  ...new Set(_.flatten([..._.values(items).map(item => item.tagsList)]))
+  ...new Set(flatten([...values(items).map(item => item.tagsList)]))
 ];
 
 export const isBottom = () =>

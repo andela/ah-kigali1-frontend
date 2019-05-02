@@ -1,6 +1,5 @@
 import React from "react";
 import toJson from "enzyme-to-json";
-import _ from "lodash";
 import { shallow, mount } from "enzyme";
 import { SearchResults } from "../../views/SearchResults";
 import AnimatedCard from "../../components/common/Cards/AnimatedCard";
