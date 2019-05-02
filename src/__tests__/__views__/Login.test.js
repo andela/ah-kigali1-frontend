@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from "react";
 import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
@@ -23,7 +24,9 @@ const props = {
   token: null,
   handleSignIn,
   handleTextInput,
-  socialAuth
+  socialAuth,
+  location: {},
+  history: []
 };
 const wrapper = shallow(<Login {...props} />);
 
@@ -106,14 +109,29 @@ describe("Login component", () => {
       wrapper.setProps({
         loginSuccess: true
       });
-      expect(instance.handleNavigation).toBeCalledWith("");
+      expect(instance.props.history).toContain("/");
       expect(handleSignIn).toHaveBeenCalledWith({
         email: formData.email.value,
         password: formData.password.value
       });
     });
+    it("should redirect the user to the next url on log in", () => {
+      localStorage.__STORE__.setItem("token", "helloWorld");
+      mockedFormData.mockReturnValue({});
+      Validator.formData = mockedFormData.bind(Validator);
+      wrapper.setProps({
+        password: formData.password.value,
+        email: formData.email.value,
+        loginSuccess: true,
+        location: { search: "?next=/articles/new" }
+      });
+      findElement(FormButton, 0).simulate("click");
 
-    test("should not signIn user if email and password are not provided", () => {
+      expect(instance.props.history).toContain("/articles/new");
+      localStorage.__STORE__.clear();
+    });
+
+    it("should not signIn user if email and password are not provided", () => {
       const errors = { email: "Email is required" };
       mockedFormData.mockReturnValue({ ...errors });
       Validator.formData = mockedFormData.bind(Validator);

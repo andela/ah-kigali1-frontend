@@ -5,6 +5,7 @@ import {
   FOLLOWING_SUCCESS,
   WAITING_RESPONSE
 } from "../actionTypes";
+import { checkAuth } from "../../utils/checkAuthUtils";
 
 export const followed = () => ({
   type: FOLLOWING_SUCCESS,
@@ -18,7 +19,11 @@ export const unfollowed = () => ({
 
 export const failed = () => ({ type: FOLLOWING_FAILED, payload: false });
 
-export const followUser = username => async dispatch => {
+export const followUser = (
+  username,
+  { location, history }
+) => async dispatch => {
+  checkAuth({ location, history });
   try {
     dispatch({ type: WAITING_RESPONSE });
     const { status } = await axios.post(`/profiles/${username}/follow`);
