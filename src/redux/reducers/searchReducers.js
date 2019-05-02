@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_SUGGESTED_ARTICLES:
       return {
         ...state,
-        suggestedArticles: { ...state.suggestedArticles, ...payload.articles }
+        suggestedArticles: { ...payload.articles }
       };
     case SEARCHING_ARTICLES:
       return {
@@ -41,6 +41,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isLoading: false,
         errors: {},
+        suggestedArticles: {},
         articles: { ...state.articles, ...payload.articles },
         authors: { ...state.authors, ...payload.authors }
       };
@@ -58,7 +59,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         articles: {},
         authors: {},
-        errors: "",
+        suggestedArticles: {},
+        errors: {},
         isLoading: false
       };
     default:

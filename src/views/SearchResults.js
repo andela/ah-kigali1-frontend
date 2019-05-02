@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -24,15 +23,19 @@ import Loading from "../components/Animations/LoadingDots";
 
 export class SearchResults extends Component {
   state = {
-    articles: [],
-    authors: [],
+    articles: {},
+    authors: {},
     pageNumber: 1,
     activeTag: null,
     tagsList: []
   };
 
   componentWillMount() {
-    const { location, fetchResults: getAllArticles, articles } = this.props;
+    const {
+      history: { location },
+      fetchResults: getAllArticles,
+      articles
+    } = this.props;
     const { keyword } = queryString.parse(location.search);
     this.handleOnChange(keyword);
     if (isEmpty(articles)) getAllArticles(keyword, 1);
@@ -44,11 +47,11 @@ export class SearchResults extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { articles, authors } = nextProps;
-    this.setState({
-      articles: _.values(articles),
-      authors: _.values(authors),
+    this.setState(state => ({
+      articles: { ...state.article, ...articles },
+      authors: { ...state.author, ...authors },
       tagsList: getTags(articles)
-    });
+    }));
   }
 
   componentWillUnmount() {
@@ -75,20 +78,19 @@ export class SearchResults extends Component {
   };
 
   handleScroll = () => {
-    console.log("***************", "scrolling");
     const { searchQuery, isLoading } = this.props;
     if (isBottom() && !isLoading) {
       this.setState(state => ({
         pageNumber: state.pageNumber + 1
       }));
-      setTimeout(this.searchArticle(searchQuery), 3000);
+      this.searchArticle(searchQuery);
     }
   };
 
   searchArticle = searchQuery => {
-    const { fetchResults: getResults } = this.props;
+    const { fetchResults: getResults, history } = this.props;
     const { pageNumber } = this.state;
-    getResults(searchQuery, pageNumber);
+    getResults(searchQuery, pageNumber, history);
   };
 
   handleTagFilter = (tag, index) => {
@@ -97,14 +99,68 @@ export class SearchResults extends Component {
     if (index === activeTag) {
       return this.setState({
         activeTag: null,
-        articles: _.values(articles)
+        articles
       });
     }
     this.setState({
-      articles: filterByTag(_.values(articles), tag),
+      articles: filterByTag(articles, tag),
       activeTag: index
     });
   };
+
+  renderTags = (tagsList, activeTag) => (
+    <div>
+      <h2>#Tags</h2>
+      <div className="tags-section">
+        {tagsList.map((title, index) => (
+          <BasicButton
+            className={`tags ${activeTag === index ? "active" : ""}`}
+            title={title}
+            key={`${index + 1}`}
+            onClick={() => this.handleTagFilter(title, index)}
+            data-test="single-tag"
+          />
+        ))}
+      </div>
+    </div>
+  );
+
+  renderAuthors = authors => (
+    <div>
+      <h2>Authors</h2>
+      <div className="authors-section">
+        {_.values(authors).map(author => (
+          <AuthorCard {...author} key={author.id} />
+        ))}
+      </div>
+    </div>
+  );
+
+  renderArticles = (articles, isLoading, errors, activeTag) => (
+    <section id="articles" className="active">
+      {_.values(articles).map(article => (
+        <div className="col-md-12" key={article.id}>
+          <Card
+            title={article.title}
+            description={article.description}
+            comments={article.comments.length}
+            likes={article.likes.length}
+            author={article.author}
+            readTime={article.readTime}
+            createdAt={toReadableDate(article.createdAt)}
+          />
+        </div>
+      ))}
+      <div className="loading-anim">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          !isEmpty(errors.message) &&
+          !activeTag && <small>{errors.message}</small>
+        )}
+      </div>
+    </section>
+  );
 
   render() {
     const { searchQuery, isLoading, errors } = this.props;
@@ -124,51 +180,17 @@ export class SearchResults extends Component {
             />
           </div>
           <div className="results" id="results-container">
-            <section id="articles" className="active">
-              {articles.map(article => (
-                <div className="col-md-12" key={article.id}>
-                  <Card
-                    title={article.title}
-                    description={article.description}
-                    comments={article.comments.length}
-                    likes={article.likes.length}
-                    author={article.author}
-                    readTime={article.readTime}
-                    createdAt={toReadableDate(article.createdAt)}
-                  />
-                </div>
-              ))}
-              <div className="loading-anim">
-                {isLoading ? (
-                  <Loading />
-                ) : (
-                  !isEmpty(errors.message) &&
-                  !activeTag && <small>{errors.message}</small>
-                )}
-              </div>
-            </section>
+            {isEmpty(articles) && !isLoading ? (
+              <p>We couldn’t find any posts.</p>
+            ) : (
+              this.renderArticles(articles, isLoading, errors, activeTag)
+            )}
           </div>
         </div>
 
         <div className="right-side hide-sm">
-          {tagsList.length !== 0 && <h2>#Tags</h2>}
-          <div className="tags-section">
-            {tagsList.map((title, index) => (
-              <BasicButton
-                className={`tags ${activeTag === index ? "active" : ""}`}
-                title={title}
-                key={`${index + 1}`}
-                onClick={() => this.handleTagFilter(title, index)}
-                data-test="single-tag"
-              />
-            ))}
-          </div>
-          {authors.length !== 0 && <h2>Authors</h2>}
-          <div className="authors-section">
-            {authors.map(author => (
-              <AuthorCard {...author} key={author.id} />
-            ))}
-          </div>
+          {!isEmpty(tagsList) && this.renderTags(tagsList, activeTag)}
+          {!isEmpty(authors) && this.renderAuthors(authors)}
         </div>
       </div>
     );
@@ -184,16 +206,19 @@ SearchResults.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   fetchResults: PropTypes.func.isRequired,
-  articles: PropTypes.object.isRequired,
-  authors: PropTypes.object.isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string
-  }).isRequired,
+  articles: PropTypes.shape({}).isRequired,
+  authors: PropTypes.shape({}).isRequired,
   errors: PropTypes.shape({
     message: PropTypes.string
   }).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  clearSearchResults: PropTypes.func.isRequired
+  clearSearchResults: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    location: PropTypes.shape({
+      search: PropTypes.string
+    })
+  }).isRequired
 };
 
 export default connect(

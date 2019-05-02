@@ -8,9 +8,9 @@ import TextInput from "../../components/common/Inputs/TextInput";
 import { articles, authors } from "../testData";
 import AuthorCard from "../../components/common/Cards/AuthorCard";
 
-const [handleInputChange, fetchResults, clearSearchResults] = new Array(3).fill(
-  jest.fn()
-);
+const [handleInputChange, fetchResults, clearSearchResults, push] = new Array(
+  4
+).fill(jest.fn());
 const props = {
   handleInputChange,
   fetchResults,
@@ -18,8 +18,11 @@ const props = {
   searchQuery: "helloWorld",
   articles: {},
   authors: {},
-  location: {
-    search: "?keyword=helloWorld"
+  history: {
+    location: {
+      search: "?keyword=helloWorld"
+    },
+    push
   },
   isLoading: true,
   errors: {}
@@ -91,7 +94,7 @@ describe("Search Results Component", () => {
         keyCode: 13,
         shiftKey: false
       });
-      expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
+      expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1, props.history);
       expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
     });
     test("should filter article by tags", () => {
