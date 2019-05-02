@@ -17,7 +17,8 @@ import SearchPopOver from "../../PopOvers/SearchPopOver";
 class Navbar extends Component {
   state = {
     toggle: "none",
-    popOverOpen: false
+    popOverOpen: false,
+    searchQuery: ""
   };
 
   componentWillMount() {
@@ -34,18 +35,25 @@ class Navbar extends Component {
     }
   };
 
-  closeSearchPopOver = () => {
-    this.setState({
-      popOverOpen: false
-    });
+  closeSearchPopOver = e => {
+    if (this.searchPopOverRef && !this.searchPopOverRef.contains(e.target)) {
+      this.setState({
+        popOverOpen: false
+      });
+    }
   };
 
   handleOnChange = value => {
     const { authSuggestArticles: getSuggestions } = this.props;
     this.setState({
-      popOverOpen: true
+      popOverOpen: true,
+      searchQuery: value
     });
     getSuggestions(value);
+  };
+
+  setSearchPopOverRef = node => {
+    this.searchPopOverRef = node;
   };
 
   toggleOptions() {
@@ -55,6 +63,7 @@ class Navbar extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     const { toggle } = this.state;
     const token = localStorage.getItem("token");
 
@@ -63,6 +72,10 @@ class Navbar extends Component {
     }
     const { toggle, popOverOpen } = this.state;
     const { searchQuery, history, suggestedArticles } = this.props;
+=======
+    const { toggle, popOverOpen, searchQuery } = this.state;
+    const { history, suggestedArticles } = this.props;
+>>>>>>> [Feature #163518658] fixing autosuggested articles on search input change
     return (
       <div>
         <section
@@ -135,12 +148,16 @@ class Navbar extends Component {
             </div>
           </div>
         </section>
-        {popOverOpen && !isEmpty(suggestedArticles) && (
-          <SearchPopOver
-            searchQuery={searchQuery}
-            articles={suggestedArticles}
-          />
-        )}
+        {history.location.pathname !== "/search" &&
+          popOverOpen &&
+          !isEmpty(suggestedArticles) && (
+            <div ref={this.setSearchPopOverRef}>
+              <SearchPopOver
+                searchQuery={searchQuery}
+                articles={suggestedArticles}
+              />
+            </div>
+          )}
       </div>
     );
   }
