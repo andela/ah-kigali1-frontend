@@ -1,5 +1,3 @@
-import { connect } from "react-redux";
-import "@babel/polyfill";
 import React, { Component } from "react";
 import BasicButton from "../components/common/Buttons/BasicButton";
 import Navbar from "../components/common/AppBars/navBar";
@@ -46,6 +44,5 @@ class Home extends Component {
     );
   }
 }
-const mapStateToProps = state => ({ ...state });
 
-export default connect(mapStateToProps)(Home);
+export default Home;
