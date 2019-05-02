@@ -56,10 +56,6 @@ class Navbar extends Component {
     getSuggestions(value);
   };
 
-  setSearchPopOverRef = node => {
-    this.searchPopOverRef = node;
-  };
-
   toggleOptions() {
     this.setState(state => ({
       toggle: state.toggle === "none" ? "block" : "none"
