@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import queryString from "query-string";
+<<<<<<< HEAD
+=======
+import { values } from "lodash";
+>>>>>>> [Feature #163518658] fixes eslint errors
 import BasicButton from "../components/common/Buttons/BasicButton";
 import Input from "../components/common/Inputs/TextInput";
 import {

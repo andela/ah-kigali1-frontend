@@ -1,4 +1,8 @@
 import "@babel/polyfill";
+<<<<<<< HEAD
+=======
+import { mapValues } from "lodash";
+>>>>>>> [Feature #163518658] fixes eslint errors
 import axios from "../../utils/axios";
 import {
   SEARCHING_ARTICLES,
@@ -44,11 +48,16 @@ export const fetchResults = (
     }
 
     const { articles, message } = response.data;
+<<<<<<< HEAD
     // const authorsObject = mapValues(
     //   arrayToObject(articles, "userId"),
     //   article => ({ ...article.author, id: article.userId })
     // );
     const authors = Object.values(arrayToObject(articles, "userId")).map(
+=======
+    const authorsObject = mapValues(
+      arrayToObject(articles, "userId"),
+>>>>>>> [Feature #163518658] fixes eslint errors
       article => ({ ...article.author, id: article.userId })
     );
 
