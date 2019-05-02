@@ -24,6 +24,10 @@ class Navbar extends Component {
     document.addEventListener("mousedown", this.closeSearchPopOver);
   }
 
+  setSearchPopOverRef = node => {
+    this.searchPopOverRef = node;
+  };
+
   handleEnterPress = e => {
     const { searchQuery, fetchResults: searchArticles, history } = this.props;
     if (isEmpty(searchQuery)) {
