@@ -42,6 +42,11 @@
       margin-bottom: 0;
       list-style: none;
       padding: 0px;
+      li:not(:last-child) {
+        .link {
+          border-bottom: 0.25px solid $color-primary;
+        }
+      }
       .list-item {
         list-style: none;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -50,17 +55,41 @@
         text-align: start;
         list-style: none;
         .link {
-          display: block;
-          padding: 5px 14px;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
+          display: flex;
+          padding: 5px 0px;
           .avatar {
             width: 32px;
             height: 32px;
             border-radius: 3px;
             display: inline-block;
             vertical-align: middle;
+          }
+
+          .article-author {
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            .article-title {
+              padding-left: 10px;
+              white-space: nowrap;
+              &:hover {
+                color: $color-primary;
+                text-decoration: underline;
+                font-style: italic;
+              }
+            }
+            .add-info {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              width: 100%;
+              p {
+                font-size: 12px;
+                padding-top: 5px;
+                padding-left: 10px;
+              }
+            }
           }
         }
       }
