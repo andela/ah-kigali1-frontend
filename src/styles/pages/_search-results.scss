@@ -16,13 +16,21 @@
       #authors:target {
         display: block;
       }
+      p.no-results {
+        text-align: center;
+        display: grid;
+        margin: auto;
+        margin-top: auto;
+        margin-top: 100px;
+        font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
     }
     .loading-anim {
-      justify-self: center;
-      text-align: center;
-      .loading {
-        margin-left: 20%;
-      }
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 15px 0px;
     }
   }
   .right-side {

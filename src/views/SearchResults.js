@@ -11,7 +11,7 @@ import {
   clearSearchResults
 } from "../redux/actions/searchActions";
 import {
-  toReadableDate,
+  calculateTimeStamp,
   filterByTag,
   getTags,
   isEmpty,
@@ -88,8 +88,10 @@ export class SearchResults extends Component {
   };
 
   searchArticle = searchQuery => {
-    const { fetchResults: getResults, history } = this.props;
-    const { pageNumber } = this.state;
+    const { fetchResults: getResults, history, pageNumber } = {
+      ...this.props,
+      ...this.state
+    };
     getResults(searchQuery, pageNumber, history);
   };
 
@@ -168,8 +170,16 @@ export class SearchResults extends Component {
   );
 
   render() {
-    const { searchQuery, isLoading, errors } = this.props;
-    const { articles, authors, activeTag, tagsList } = this.state;
+    const {
+      searchQuery,
+      isLoading,
+      errors,
+      articles,
+      authors,
+      activeTag,
+      tagsList
+    } = { ...this.props, ...this.state };
+
     return (
       <div className="search-results">
         <div className="left-side">
@@ -186,7 +196,7 @@ export class SearchResults extends Component {
           </div>
           <div className="results" id="results-container">
             {isEmpty(articles) && !isLoading ? (
-              <p>We couldn’t find any posts.</p>
+              <p className="no-results">We couldn’t find any articles.</p>
             ) : (
               this.renderArticles(articles, isLoading, errors, activeTag)
             )}

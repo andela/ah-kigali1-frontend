@@ -33,7 +33,13 @@ const SearchPopOver = ({ searchQuery, articles }) => (
                 className="avatar"
                 alt="img"
               />
-              <span className="avatar-text">{item.title}</span>
+              <div className="article-author">
+                <span className="article-title">{item.title}</span>
+                <div className="add-info">
+                  <p>@{item.author.username}</p>
+                  <p>{item.readTime} min read</p>
+                </div>
+              </div>
             </Link>
           </li>
         ))}

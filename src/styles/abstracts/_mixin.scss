@@ -71,7 +71,7 @@
 @mixin card {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 3px 7px -1px rgba(#000, 0.1);
+  box-shadow: 3px 3px 7px -1px rgba(#000, 0.1);
   background: $white-primary;
   line-height: 1.4;
   border-radius: 5px;
