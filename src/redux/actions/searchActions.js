@@ -9,10 +9,7 @@ import {
   CLEAR_SEARCH_RESULTS,
   SET_SUGGESTED_ARTICLES
 } from "../actionTypes";
-import {
-  arrayToObject,
-  containsSpecialChar
-} from "../../utils/helperFunctions";
+import { arrayToObject } from "../../utils/helperFunctions";
 
 export const searchURL = (searchQuery, pageNumber = 1) =>
   `/articles?keyword=${searchQuery}&page=${pageNumber}`;
@@ -45,15 +42,7 @@ export const fetchResults = (
     if (pageNumber === 1) {
       dispatch(clearSearchResults());
     }
-    let articles;
-    let message;
-    if (!containsSpecialChar(searchQuery)) {
-      ({ articles, message } = response.data);
-    } else {
-      articles = [];
-      message = "We couldn’t find any articles";
-    }
-
+    const { articles, message } = response.data;
     const authorsObject = mapValues(
       arrayToObject(articles, "userId"),
       article => ({ ...article.author, id: article.userId })
