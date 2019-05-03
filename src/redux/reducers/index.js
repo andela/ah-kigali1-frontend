@@ -11,6 +11,7 @@ import following from "./followingReducer";
 import notifier from "./notificationReducer";
 import { reportArticle } from "./reportReducer";
 import registration from "./registrationReducers";
+import commentReducer from "./CommentReducer";
 
 export default combineReducers({
   auth: loginReducers,
@@ -24,5 +25,6 @@ export default combineReducers({
   following,
   notifier,
   report: reportArticle,
-  registration
+  registration,
+  fetchedComments: commentReducer
 });

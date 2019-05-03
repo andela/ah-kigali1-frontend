@@ -55,17 +55,68 @@ describe(" Read article", () => {
             articles: [{ body: "hello world" }, { body: "hello world" }]
           }
         },
-        following: { isFetching: true, status: true }
+        article: {
+          asideArticles: {
+            articles: [{ body: "hello world" }, { body: "hello world" }]
+          }
+        },
+        following: { isFetching: true, status: true },
+        fetchedComments: {
+          body: "dkfjkdf",
+          success: "success",
+          error: "error message",
+          comments: "comment body",
+          bodyEdit: "updated then",
+          isLoading: false
+        },
+        user: {
+          profile: {
+            email: "",
+            username: "",
+            address: "",
+            allowNotifications: true,
+            bio: "",
+            firstName: "",
+            gender: "",
+            image: "",
+            lastName: "",
+            password: "",
+            phone: "",
+            socialId: ""
+          }
+        }
       };
       expect(mapStateToProps(state)).toEqual({
-        currentUser: {
-          username: "yves"
-        },
+        currentUser: { username: "yves" },
         asideArticles: {
           articles: [{ body: "hello world" }, { body: "hello world" }]
         },
-        article: state.fetchedArticle,
-        following: { isFetching: true, status: true }
+        article: {
+          asideArticles: {
+            articles: [{ body: "hello world" }, { body: "hello world" }]
+          }
+        },
+        following: { isFetching: true, status: true },
+        commentBody: "dkfjkdf",
+        updatedBody: "updated then",
+        success: "success",
+        error: "error message",
+        comments: "comment body",
+        loading: false,
+        profile: {
+          email: "",
+          username: "",
+          address: "",
+          allowNotifications: true,
+          bio: "",
+          firstName: "",
+          gender: "",
+          image: "",
+          lastName: "",
+          password: "",
+          phone: "",
+          socialId: ""
+        }
       });
     });
 
@@ -121,7 +172,7 @@ describe(" Read article", () => {
 
     test("should test the presence of edit and deleting buttons", () => {
       const wrapper = shallow(<Article {...props2} />);
-      expect(wrapper.find(".delete_article")).toHaveLength(1);
+      expect(wrapper.find(".delete_article")).toHaveLength(2);
     });
 
     test("should test deleting an article", async () => {
@@ -138,7 +189,7 @@ describe(" Read article", () => {
       const wrapper = shallow(<Article {...props2} />);
       props2.deleteOneArticle.mockClear();
       await props2.deleteOneArticle.mockResolvedValue({ status: 400 });
-      wrapper.find(".delete_article").simulate("click");
+      wrapper.find("#delete-btn").simulate("click");
       expect(props2.history.push).not.toHaveBeenCalled();
     });
   });

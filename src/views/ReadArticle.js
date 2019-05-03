@@ -2,10 +2,11 @@
 /* eslint-disable no-shadow */
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Textarea from "react-textarea-autosize";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import Input from "../components/common/Inputs/TextInput";
 import Button from "../components/common/Buttons/BasicButton";
+import { Comments } from "./Comments";
 import { ReportingForm } from "../components/reportingForm/ReportingForm";
 import {
   fetchArticle,
@@ -14,9 +15,20 @@ import {
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
 import {
+  inputHandleAsync,
+  handleCommentsInputEdit,
+  createComment,
+  deleteComment,
+  updateComment,
+  fetchComments,
+  setBodyEdit
+} from "../redux/actions/commentActions";
+import { fetchCurrentUser } from "../redux/actions/profileActions";
+import {
   isCurrentUserAuthor,
   stringToHtmlElement,
-  calculateTimeStamp
+  calculateTimeStamp,
+  isBottom
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -25,18 +37,31 @@ import facebookIcon from "../assets/icons/fb-icon.svg";
 import thumbsUp from "../assets/img/like-icon.svg";
 import authorImage from "../assets/img/user.jpg";
 import dislikeIcon from "../assets/img/dislike-icon.svg";
-import heartIcon from "../assets/img/heart.svg";
 import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 import moreIcon from "../assets/icons/more.svg";
 import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
+import Loading from "../components/Animations/LoadingDots";
 
-export const mapStateToProps = ({ auth, fetchedArticle, following }) => ({
+export const mapStateToProps = ({
+  auth,
+  fetchedArticle,
+  following,
+  fetchedComments,
+  user
+}) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
   article: fetchedArticle,
-  following
+  following,
+  commentBody: fetchedComments.body,
+  updatedBody: fetchedComments.bodyEdit,
+  success: fetchedComments.success,
+  error: fetchedComments.error,
+  comments: fetchedComments.comments,
+  loading: fetchedComments.isLoading,
+  profile: user.profile
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -44,7 +69,18 @@ export const mapDispatchToProps = dispatch => ({
   fetchOneArticle: slug => dispatch(fetchArticle(slug)),
   followUser: username => dispatch(followUser(username)),
   reportArticle: (description, slug) =>
-    dispatch(reportedArticle(description, slug))
+    dispatch(reportedArticle(description, slug)),
+  onHandleCommentsInput: payload => dispatch(inputHandleAsync(payload)),
+  onHandleCommentsInputEdit: payload =>
+    dispatch(handleCommentsInputEdit(payload)),
+  onCreateComments: (comment, slug) => dispatch(createComment(comment, slug)),
+  onDeleteComment: (commentId, slug) =>
+    dispatch(deleteComment(commentId, slug)),
+  onUpdateComment: (body, slug) => dispatch(updateComment(body, slug)),
+  onFetchComments: (commentId, slug) =>
+    dispatch(fetchComments(commentId, slug)),
+  onSetBodyEdit: payload => dispatch(setBodyEdit(payload)),
+  onFetchProfile: username => dispatch(fetchCurrentUser(username))
 });
 
 export class Article extends Component {
@@ -52,12 +88,17 @@ export class Article extends Component {
     slug: "",
     response: "",
     displayModal: false,
-    reportingForm: false
+    reportingForm: false,
+    page: 1,
+    isCommentEmpty: true
   };
 
   componentDidMount = () => {
     const {
       fetchOneArticle,
+      onFetchComments,
+      currentUser,
+      onFetchProfile,
       match: {
         params: { slug }
       }
@@ -66,6 +107,13 @@ export class Article extends Component {
     this.setState({ slug });
     fetchOneArticle(slug);
     document.addEventListener("mousedown", this.handleClickOutside);
+    onFetchComments(slug, 1);
+    onFetchProfile(currentUser.username);
+  };
+
+  componentWillMount = () => {
+    this.getMoreArticles();
+    document.addEventListener("scroll", () => this.handleScroll(), true);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -74,7 +122,6 @@ export class Article extends Component {
       fetchOneArticle
     } = this.props;
     if (article && nextProps.match.params.slug !== article.slug) {
-      this.setState({ slug: nextProps.match.params.slug });
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
@@ -106,93 +153,79 @@ export class Article extends Component {
     return this.setState({ reportingForm: true, displayModal: false });
   };
 
-  displayCommentsOnDesktop = comments =>
-    comments.length
-      ? comments.map(comment => {
-          const { author, body, like, id } = comment;
-          const { username, image, firstName, lastName } = author;
-          return (
-            <div className="article-comments--existing__desktop" key={id}>
-              <div className="avatar-wrapper comment-avatar-wrapper">
-                <img
-                  src={image || authorImage}
-                  alt="Avatar"
-                  className="avatar"
-                />
-                <span className="comment-author_name ">
-                  {username && firstName && lastName
-                    ? `${firstName} ${lastName}`
-                    : username}
-                </span>
-              </div>
-              <div className="article-comments--existing-text">
-                {body}
-                <div className="article-comments--actions">
-                  <span className="comment-like">
-                    <div className="icons">
-                      <img src={heartIcon} alt="likes" className="likes" />
-                      <div>{like}</div>
-                    </div>
-                  </span>
-                  <div className="comment-edit-delete">
-                    <span className="comment-edit"> Edit </span>
-                    <span className="comment-delete"> Delete </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })
-      : "";
+  onEnterPress = e => {
+    const { onCreateComments, commentBody } = this.props;
+    if (e.keyCode === 13 && e.shiftKey === false && commentBody) {
+      e.preventDefault();
+      const { slug } = this.state;
+      onCreateComments(commentBody, slug);
+    }
+  };
 
-  displayCommentsOnMobileDevices = comments =>
-    comments.length
-      ? comments.map(comment => {
-          const { author, body, like, id } = comment;
-          const { username, image, firstName, lastName } = author;
-          return (
-            <div
-              className="article-comments--existing__mobile col-md-6 col-av-12 col-sm-12"
-              key={id}
-            >
-              <div className="blog-card">
-                <div className="avatar-wrapper comment-avatar-wrapper">
-                  <img
-                    src={image || authorImage}
-                    alt="Avatar"
-                    className="avatar"
-                  />
-                  <span className="username">
-                    {username && firstName && lastName
-                      ? `${firstName} ${lastName}`
-                      : username}
-                  </span>
-                </div>
-                <div className="col-md-9  col-sm-12">
-                  <div className="card-content">
-                    <div className="info">
-                      <div className="col-md-3 col-sm-4" />
-                    </div>
-                    <p className="card-text">{body}</p>
-                    <div className="article-comments--actions">
-                      <span className="comment-like">
-                        <div className="icons">
-                          <img src={heartIcon} alt="likes" className="likes" />
-                          <div>{like}</div>
-                        </div>
-                      </span>
-                      <div className="comment-edit-delete">
-                        <span className="comment-edit"> Edit </span>
-                        <span className="comment-delete"> Delete </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })
-      : "";
+  getMoreArticles = () => {
+    const { page } = this.state;
+    const {
+      onFetchComments,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onFetchComments(slug, page);
+  };
+
+  handleScroll = () => {
+    const { loading } = this.props;
+    if (isBottom() && !loading) {
+      const { page } = this.state;
+      this.setState({ page: page + 1 });
+      this.getMoreArticles();
+    }
+  };
+
+  editComment = id => {
+    const {
+      onUpdateComment,
+      updatedBody,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onUpdateComment({ comments: updatedBody, commentId: id }, slug);
+  };
+
+  deleteComment = id => {
+    const {
+      onDeleteComment,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onDeleteComment(id, slug);
+  };
+
+  handleCommentsInputEdit = ({ target: { name, value } }) => {
+    const { onHandleCommentsInputEdit } = this.props;
+    onHandleCommentsInputEdit({ field: name, value });
+  };
+
+  handleCommentsInput = ({ target: { name, value } }) => {
+    const { onHandleCommentsInput } = this.props;
+    onHandleCommentsInput({ field: name, value }).then(() => {
+      const { commentBody } = this.props;
+      if (commentBody) {
+        this.setState({ isCommentEmpty: false });
+      } else {
+        this.setState({ isCommentEmpty: true });
+      }
+    });
+  };
+
+  handleSubmitComment = e => {
+    e.preventDefault();
+    const { onCreateComments, commentBody } = this.props;
+    const { slug } = this.state;
+    onCreateComments(commentBody, slug);
+  };
 
   redirectToEdit = () => {
     const { slug } = this.state;
@@ -219,13 +252,25 @@ export class Article extends Component {
   };
 
   render() {
-    const { response, displayModal, reportingForm, slug } = this.state;
+    const {
+      response,
+      displayModal,
+      reportingForm,
+      slug,
+      isCommentEmpty
+    } = this.state;
     const {
       article,
       asideArticles,
       currentUser,
       history,
-      reportArticle
+      reportArticle,
+      commentBody,
+      comments,
+      updatedBody,
+      onSetBodyEdit,
+      loading,
+      profile
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -234,7 +279,6 @@ export class Article extends Component {
       body,
       title,
       tagsList,
-      comments,
       username,
       createdAt,
       readTime,
@@ -248,10 +292,8 @@ export class Article extends Component {
         body,
         title,
         tagsList,
-        comments,
         createdAt,
-        readTime,
-        comments
+        readTime
       } = retrievedArticle);
       ({ username, firstName, following, lastName, image } = author);
     }
@@ -318,6 +360,7 @@ export class Article extends Component {
                 {isAuthor ? (
                   <div>
                     <Button
+                      id="delete-btn"
                       className="btn delete_article"
                       onClick={this.handleDeleteArticle}
                       title="Delete"
@@ -347,26 +390,39 @@ export class Article extends Component {
                   <div className="article-comments--new">
                     <div className="avatar-wrapper comment-avatar-wrapper">
                       <img
-                        src={image || authorImage}
+                        src={profile.image || authorImage}
                         alt="Avatar"
                         className="avatar"
                       />
                     </div>
-                    <Input
-                      className="article-comments--new-text"
-                      type="text"
-                      value="Add new comment here"
-                      placeholder="Add new comment here"
-                      name="new-comment"
-                      data-test="new-comment"
+                    <Textarea
+                      className="comment-textarea"
+                      type="textarea"
+                      placeholder="Add a comment"
+                      onChange={this.handleCommentsInput}
+                      onKeyDown={e => this.onEnterPress(e)}
+                      name="body"
+                      value={commentBody}
+                    />
+                    <Button
+                      className="btn delete_article"
+                      onClick={this.handleSubmitComment}
+                      title="Post"
+                      disabled={isCommentEmpty}
                     />
                   </div>
-                  {this.displayCommentsOnDesktop(comments)}
-                  {this.displayCommentsOnMobileDevices(comments)}
-                  <div className="article-comments--more">
-                    load-more comments.....
-                  </div>
+                  <Comments
+                    comments={comments}
+                    updatedBody={updatedBody}
+                    onSetBodyEdit={onSetBodyEdit}
+                    deleteComment={this.deleteComment}
+                    editComment={this.editComment}
+                    handleCommentsInputEdit={this.handleCommentsInputEdit}
+                  />
                 </div>
+              </div>
+              <div className="loading-comment">
+                {loading ? <Loading /> : ""}
               </div>
             </article>
             <aside className="article-share">
@@ -441,6 +497,19 @@ export class Article extends Component {
 }
 
 Article.propTypes = {
+  profile: PropTypes.shape({}).isRequired,
+  onFetchProfile: PropTypes.func.isRequired,
+  loading: PropTypes.func.isRequired,
+  onSetBodyEdit: PropTypes.func.isRequired,
+  comments: PropTypes.shape({}).isRequired,
+  onFetchComments: PropTypes.func.isRequired,
+  updatedBody: PropTypes.string.isRequired,
+  onUpdateComment: PropTypes.func.isRequired,
+  onHandleCommentsInputEdit: PropTypes.func.isRequired,
+  onDeleteComment: PropTypes.func.isRequired,
+  commentBody: PropTypes.string.isRequired,
+  onHandleCommentsInput: PropTypes.func.isRequired,
+  onCreateComments: PropTypes.func.isRequired,
   fetchOneArticle: PropTypes.func.isRequired,
   reportArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
