@@ -8,10 +8,7 @@ import {
   CLEAR_SEARCH_RESULTS,
   SET_SUGGESTED_ARTICLES
 } from "../actionTypes";
-import {
-  arrayToObject,
-  containsSpecialChar
-} from "../../utils/helperFunctions";
+import { arrayToObject } from "../../utils/helperFunctions";
 
 export const searchURL = (searchQuery, pageNumber = 1) =>
   `/articles?keyword=${searchQuery}&page=${pageNumber}`;
