@@ -82,7 +82,7 @@ export const isBottom = () =>
   document.documentElement.offsetHeight;
 export const hasFocus = () => document.getElementById("nav-search-input");
 
-export const toReadableDate = date => {
-  const time = new Date(date);
-  return time.toDateString();
+export const containsSpecialChar = value => {
+  const alphanumericRegex = /[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/g;
+  return alphanumericRegex.test(value);
 };
