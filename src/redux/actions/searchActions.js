@@ -56,15 +56,14 @@ export const fetchResults = (
         authors: { ...authorsObject }
       }
     });
-
-    if (history) {
-      history.push(`/search?keyword=${searchQuery}`);
-    }
   } catch (error) {
     const {
       data: { message, errors }
     } = error.response;
     dispatch(searchFailed(message, errors));
+  }
+  if (history) {
+    history.push(`/search?keyword=${searchQuery}`);
   }
 };
 
