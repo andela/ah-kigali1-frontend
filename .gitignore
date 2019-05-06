@@ -3,7 +3,6 @@ node_modules
 dist
 .coveralls.yml
 coverage
-
 .vscode
 html-css/main.*
 html-css/*.css
@@ -14,3 +13,4 @@ yarn-*
 .env
 .coveralls.yml
 **/__snapshots__
+package-lock.json

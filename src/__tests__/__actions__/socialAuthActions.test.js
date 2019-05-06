@@ -17,6 +17,8 @@ const data = {
   id: "werty27egy",
   email: "luc.bayo@gmail.com"
 };
+const { API_URL } = process.env;
+
 const mockStore = configureMockStore([thunk]);
 describe("Social Auth action", () => {
   beforeEach(() => {
@@ -39,7 +41,7 @@ describe("Social Auth action", () => {
         payload: null
       }
     ];
-    moaxios.stubRequest(`${process.env.API_BASE_URL}/users/current`, {
+    moaxios.stubRequest(`${API_URL}/users/current`, {
       status: 200,
       response: {
         user: { ...data }
@@ -51,6 +53,7 @@ describe("Social Auth action", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
   it("should not set token", () => {
     const store = mockStore({});
     const expectedActions = [
@@ -62,7 +65,7 @@ describe("Social Auth action", () => {
         payload: { message: "Login failed please try again!" }
       }
     ];
-    moaxios.stubRequest(`${process.env.API_BASE_URL}/users/current`, {
+    moaxios.stubRequest(`${API_URL}/users/current`, {
       status: 401,
       response: {
         ...data

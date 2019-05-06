@@ -55,3 +55,14 @@ export const FETCHING_ASIDE_ARTICLES = "FETCHING_ASIDE_ARTICLES";
  * @description delete article action types
  */
 export const DELETE_ARTICLE = " DELETE_ARTICLE";
+/**
+ * @description profile actions
+ */
+export const SET_INPUT = "SET_INPUT";
+export const SET_PROFILE = "SET_PROFILE";
+export const SET_LOADING = "SET_LOADING";
+export const SET_ERROR = "SET_ERROR";
+export const SET_FORM_INPUT = "SET_FORM_INPUT";
+export const SET_SUCCESS = "SET_SUCCESS";
+export const SET_IMAGE = "SET_IMAGE";
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE";

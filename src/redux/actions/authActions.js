@@ -65,7 +65,7 @@ export const socialAuth = provider => async dispatch => {
     dispatch({
       type: IS_OPENING_SOCIAL_AUTH_PROVIDER
     });
-    await window.open(`${process.env.API_BASE_URL}/auth/${provider}`, "_top");
+    await window.open(`${process.env.API_URL}/auth/${provider}`, "_top");
   } catch (error) {
     dispatch({
       type: CANCEL_SOCIAL_AUTH

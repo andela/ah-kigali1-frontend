@@ -6,6 +6,7 @@ import Navbar from "../components/common/AppBars/navBar";
 
 import Latest from "../components/common/Cards/latest";
 import CategoryBar from "../components/common/AppBars/categoryBar";
+import Demo from "../components/common/Dialog/Dialog";
 
 const cats = [
   "TECH",
@@ -26,6 +27,7 @@ class Home extends Component {
     return (
       <div>
         <Navbar />
+
         <CategoryBar catList={cats} onMoreClick={() => {}} onClick={() => {}} />
         <div style={{ margin: 3, marginTop: 120 }}>
           <h2 className="home-container">Hello world, from Titan-Devs</h2>
@@ -35,6 +37,7 @@ class Home extends Component {
             onClick={() => <p>Clicked</p>}
           />
         </div>
+        <Demo />
         <div className="featured_article">
           <Latest />
         </div>

@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../../../assets/img/quill-drawing-a-line.svg";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 import UserIcon from "../../../assets/img/user.jpg";
+import Logo from "../../../assets/img/quill-drawing-a-line.svg";
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggle: "none"
-    };
-  }
+  state = {
+    toggle: "none"
+  };
 
   toggleOptions() {
     this.setState(state => ({
@@ -19,6 +17,11 @@ class Navbar extends Component {
 
   render() {
     const { toggle } = this.state;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return <React.Fragment />;
+    }
     return (
       <div>
         <section
@@ -59,7 +62,7 @@ class Navbar extends Component {
                         </Link>
                       </li>
                       <li>
-                        <a href="./profile.html">Profile</a>
+                        <Link to="/profile">Profile</Link>
                       </li>
                       <li>
                         <a href="./authors-performance.html">Stats</a>
@@ -82,4 +85,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = ({ auth: { currentUser } }) => ({
+  currentUser
+});
+
+export default connect(mapStateToProps)(withRouter(Navbar));

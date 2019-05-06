@@ -7,6 +7,7 @@ const SuccessMessage = ({ title }) => (
     {title}
   </div>
 );
+
 SuccessMessage.propTypes = {
   title: PropTypes.string.isRequired
 };
