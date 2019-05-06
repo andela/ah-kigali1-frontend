@@ -2,6 +2,9 @@ import React from "react";
 import { mount } from "enzyme";
 import App from "../../App";
 
+const props = {
+  suggestedArticles: {}
+};
 describe("Home component", () => {
   test("should return the home component with appropriate header", () => {
     const warper = mount(<App />);

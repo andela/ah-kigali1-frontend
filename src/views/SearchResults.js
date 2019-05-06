@@ -154,7 +154,8 @@ export class SearchResults extends Component {
             likes={article.likes.length}
             author={article.author}
             readTime={article.readTime}
-            createdAt={toReadableDate(article.createdAt)}
+            createdAt={calculateTimeStamp(article.createdAt)}
+            slug={article.slug}
           />
         </div>
       ))}
@@ -211,12 +212,7 @@ export class SearchResults extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  const { search } = state;
-  return {
-    ...search
-  };
-};
+const mapStateToProps = state => ({ ...state.search });
 SearchResults.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,

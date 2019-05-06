@@ -275,3 +275,103 @@ export const mainCardProps2 = {
     tagsList: ["manchester", "united"]
   }
 };
+
+export const articles = [
+  {
+    id: "76ee9152-eee0-47a7-8a80-3652fe3bf353",
+    title: "How to think like a programmer-lessons in problem solving",
+    description:
+      "“Everyone in this country should learn to program a computer, because it teaches you to think.”-Steve Jobs",
+    body:
+      "Problem-solving skills are almost unanimously the most important qualification that employers look for….more than programming languages proficiency, debugging, and system desig",
+    readTime: 1,
+    slug:
+      "how-to-think-like-a-programmer-lessons-in-problem-solving-gshblcqj6q8",
+    createdAt: "2019-04-23T17:00:52.259Z",
+    updatedAt: "2019-04-23T17:00:52.259Z",
+    userId: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa",
+    author: {
+      following: false,
+      username: "luc123",
+      image: null,
+      firstName: null,
+      lastName: null
+    },
+    comments: [],
+    likes: [],
+    bookmarked: false,
+    liked: false,
+    likesCount: 0,
+    tagsList: ["tech", "mind"]
+  },
+  {
+    id: "2cfaecce-f7c2-4fda-8452-ba183bda662e",
+    title: "How to think like a programmer-lessons in problem solving",
+    description:
+      "“Everyone in this country should learn to program a computer, because it teaches you to think.”-Steve Jobs",
+    body:
+      "Problem-solving skills are almost unanimously the most important qualification that employers look for….more than programming languages proficiency, debugging, and system desig",
+    readTime: 1,
+    slug:
+      "how-to-think-like-a-programmer-lessons-in-problem-solving-35lnqvrxx61",
+    createdAt: "2019-04-23T16:56:07.800Z",
+    updatedAt: "2019-04-23T16:56:07.800Z",
+    userId: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa",
+    author: {
+      following: false,
+      username: "luc123",
+      image: null,
+      firstName: null,
+      lastName: null
+    },
+    comments: [],
+    likes: [],
+    bookmarked: false,
+    liked: false,
+    likesCount: 0,
+    tagsList: ["mind", "tech"]
+  },
+  {
+    id: "a1f2f867-45e7-480c-917d-21fc62f9aecb",
+    title: "Come on life",
+    description: "Come on jim",
+    body:
+      "<p>It is a long established fact that a reader will be distracted by the &nbsp;readable content of a page when looking at its layout. The point of &nbsp;using Lorem Ipsum is that it has a more-or-less normal distribution of &nbsp;letters, as opposed to using <u><em><strong>'Content here, content here', making it &nbsp;look like readable English. Many desktop publishing packages and web &nbsp;page editors now use Lorem Ipsum as their default model text, and a &nbsp;search for 'lorem ipsum'</strong></em></u> will uncover many web sites still in their &nbsp;infancy. Various versions have evolved over the years, sometimes by &nbsp;accident, sometimes on purpose (injected humour and the like).</p>",
+    readTime: 1,
+    slug: "come-on-life-bkj0f5sy35v",
+    createdAt: "2019-04-18T09:25:56.681Z",
+    updatedAt: "2019-04-18T09:25:56.681Z",
+    userId: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa",
+    author: {
+      following: false,
+      username: "luc123",
+      image: null,
+      firstName: null,
+      lastName: null
+    },
+    comments: [],
+    likes: [
+      {
+        username: "luc123",
+        image: null,
+        firstName: null,
+        lastName: null
+      }
+    ],
+    bookmarked: false,
+    liked: true,
+    likesCount: 1,
+    tagsList: ["hello world"]
+  }
+];
+
+export const authors = {
+  "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa": {
+    following: false,
+    username: "luc123",
+    image: null,
+    firstName: null,
+    lastName: null,
+    id: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa"
+  }
+};

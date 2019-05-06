@@ -5,15 +5,15 @@
   flex-wrap: wrap;
   padding-top: 4.6%;
   .left-side {
-    .tabs {
-      padding: 1em 0em;
-    }
+    width: 70%;
+    margin-top: 10px;
     .results {
       section {
         display: none;
       }
       #articles:target,
-      #authors:target {
+      #authors:target,
+      section.active {
         display: block;
       }
       p.no-results {
@@ -74,7 +74,7 @@
         margin: 15px 0px;
       }
       span:after {
-        content: '';
+        content: "";
         border-top: 1px solid $color-primary;
         display: inline-block;
         width: 100%;
@@ -91,6 +91,12 @@
     width: 100%;
     padding: 0.5em 0.5em;
     font-size: ($font-size);
+  }
+  @media (max-width: #{$break-point-tablet - 1}px) {
+    .left-side {
+      width: 95%;
+      margin-top: 50px;
+    }
   }
 }
 
