@@ -28,6 +28,7 @@ const { API_URL } = process.env;
 describe("Search Action Creators", () => {
   beforeEach(() => {
     moxios.install(axios);
+    history.push = push;
   });
   afterEach(() => {
     moxios.uninstall(axios);

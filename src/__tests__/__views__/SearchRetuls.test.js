@@ -287,6 +287,28 @@ describe("Search Results Component", () => {
       expect(fetchResults).toHaveBeenCalledWith(searchQuery, 1);
       expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
     });
+    test("should response on ENTER key press", () => {
+      const { searchQuery } = props;
+      wrapper.setState({
+        pageNumber: 1
+      });
+      findElements(TextInput)
+        .at(0)
+        .simulate("keydown", { keyCode: 45, shiftKey: true });
+      expect(instance.handleEnterPress).not.toHaveBeenCalledWith({
+        keyCode: 13,
+        shiftKey: false
+      });
+      expect(fetchResults).not.toHaveBeenCalledWith(
+        searchQuery,
+        1,
+        props.history
+      );
+      expect(wrapper.state().pageNumber).toBe(1);
+      expect(instance.searchArticle).not.toHaveBeenCalledWith(
+        props.searchQuery
+      );
+    });
     test("should not respond  on ENTER key press", () => {
       wrapper.setProps({
         isLoading: true
@@ -330,6 +352,16 @@ describe("Search Results Component", () => {
       );
       expect(wrapper.state().articles).toEqual(articlesObj);
       expect(wrapper.state().activeTag).toEqual(null);
+    });
+    test("should render fetch error message", () => {
+      wrapper.setProps({
+        errors: {
+          message: "No more article found"
+        }
+      });
+      expect(wrapper.find(`[data-test="error-message"]`).text()).toEqual(
+        "No more article found"
+      );
     });
   });
 
