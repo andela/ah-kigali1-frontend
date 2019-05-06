@@ -6,9 +6,9 @@ const props = {
   suggestedArticles: {}
 };
 describe("Home component", () => {
-  test("should return the home component with appropriate header", () => {
-    const warper = mount(<App />);
-    expect(warper.find("h2").text()).toEqual("Hello world, from Titan-Devs");
+  test("matches the snapshot", () => {
+    const warper = mount(<App {...props} />);
+    expect(warper.find("h2").text()).toEqual("Hello home");
     expect(true).toBe(true);
   });
 });

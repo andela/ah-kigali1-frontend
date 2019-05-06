@@ -348,7 +348,7 @@ describe("Search Results Component", () => {
     });
 
     test("should set articles in state", () => {
-      const component = mount(<SearchResults {...props} />);
+      const component = shallow(<SearchResults {...props} />);
       component.setProps({
         articles: articlesObj,
         authors
