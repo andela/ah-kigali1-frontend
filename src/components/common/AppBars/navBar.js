@@ -125,7 +125,7 @@ class Navbar extends Component {
                         <Link to="/profile">Profile</Link>
                       </li>
                       <li>
-                        <a href="./authors-performance.html">Stats</a>
+                        <Link to="/stats">Stats</Link>
                       </li>
                       <li>
                         <Link to="/settings">Settings</Link>
