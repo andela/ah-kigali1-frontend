@@ -18,7 +18,7 @@ import {
   stringToHtmlElement,
   calculateTimeStamp
 } from "../utils/helperFunctions";
-import MainArticle from "../components/common/Cards/Main";
+import MainArticle from "../components/common/Cards/main";
 import twitterIcon from "../assets/icons/twitter-icon.svg";
 import facebookIcon from "../assets/icons/fb-icon.svg";
 import thumbsUp from "../assets/img/like-icon.svg";

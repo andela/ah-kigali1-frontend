@@ -21,7 +21,7 @@ class Navbar extends Component {
     searchQuery: ""
   };
 
-  componentWillMount() {
+  componentDidMount() {
     document.addEventListener("mousedown", this.closeSearchPopOver);
   }
 
@@ -87,7 +87,7 @@ class Navbar extends Component {
 
             <div className="col-md-6 col-sm-12 user-actions">
               <div className="search-filed">
-                {history.location.pathname !== "/search" ? (
+                {history.location.pathname !== "/search" && (
                   <TextInput
                     type="search"
                     name="search"
@@ -97,7 +97,7 @@ class Navbar extends Component {
                     onKeyDown={e => this.handleEnterPress(e)}
                     id="nav-search-input"
                   />
-                ) : null}
+                )}
               </div>
               <div className="other-actions">
                 <div className="menu-container hide-md" />

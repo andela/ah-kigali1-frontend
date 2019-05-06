@@ -21,7 +21,7 @@ const AuthorCard = props => {
       <BasicButton
         className={`following-btn ${following ? "btn-fill" : ""}`}
         title="Follow"
-        onClick={() => null}
+        onClick={() => "Action not implemented yet!!"}
       />
     </div>
   );

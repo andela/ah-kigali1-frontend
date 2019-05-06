@@ -43,10 +43,6 @@ export const routes = [
   {
     path: "/search",
     component: Search
-  },
-  {
-    path: "/",
-    component: Home
   }
 ];
 

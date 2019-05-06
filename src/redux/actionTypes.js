@@ -67,6 +67,9 @@ export const SET_SUCCESS = "SET_SUCCESS";
 export const SET_IMAGE = "SET_IMAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
+/**
+ * @description search and filter action types
+ */
 export const SEARCHING_ARTICLES = "FETCHING_ARTICLE";
 export const ARTICLE_SEARCH_SUCCESS = "ARTICLE_SEARCH_SUCCESSFULLY";
 export const ARTICLE_SEARCH_FAILED = "ARTICLE_SEARCH_FAILED";
