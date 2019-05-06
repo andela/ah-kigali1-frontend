@@ -56,11 +56,11 @@ class Navbar extends Component {
     getSuggestions(value);
   };
 
-  toggleOptions() {
+  toggleOptions = () => {
     this.setState(state => ({
       toggle: state.toggle === "none" ? "block" : "none"
     }));
-  }
+  };
 
   render() {
     const { toggle } = this.state;
