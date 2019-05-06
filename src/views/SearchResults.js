@@ -69,10 +69,10 @@ export class SearchResults extends Component {
     if (isLoading || isEmpty(searchQuery)) {
       return;
     }
-    this.setState({
-      pageNumber: 1
-    });
     if (e.keyCode === 13 && e.shiftKey === false) {
+      this.setState({
+        pageNumber: 1
+      });
       this.searchArticle(searchQuery);
     }
   };
@@ -164,7 +164,9 @@ export class SearchResults extends Component {
           <Loading />
         ) : (
           !isEmpty(errors.message) &&
-          !activeTag && <small>{errors.message}</small>
+          !activeTag && (
+            <small data-test="error-message">{errors.message}</small>
+          )
         )}
       </div>
     </section>

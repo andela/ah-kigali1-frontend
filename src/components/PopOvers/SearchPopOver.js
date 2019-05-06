@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { values } from "lodash";
 import NoImg from "../../assets/img/no-thumbnail.png";
 
-const SearchPopOver = ({ searchQuery, articles }) => (
+export const SearchPopOver = ({ searchQuery, articles }) => (
   <div id="search-popover">
     <div className="popover-inner">
       <div className="header">

@@ -19,14 +19,13 @@ const keyword = "hello_world";
 dotenv.config();
 const mockStore = storeConfig([thunk]);
 let store;
-
-const history = {
-  push: jest.fn()
-};
+const push = jest.fn();
+const history = {};
 
 describe("Search Action Creators", () => {
   beforeEach(() => {
     moxios.install(axios);
+    history.push = push;
   });
 
   afterEach(() => {
@@ -43,7 +42,7 @@ describe("Search Action Creators", () => {
     expect(actions.handleInputChange(value)).toEqual(expectedActions);
   });
 
-  test("should dispatch ARTICLE_SEARCH_SUCCESS", () => {
+  test("should dispatch ARTICLE_SEARCH_SUCCESS and clear existing one", () => {
     const expectedActions = [
       {
         type: SEARCHING_ARTICLES
@@ -70,15 +69,46 @@ describe("Search Action Creators", () => {
     );
     store = mockStore({});
     return store
-      .dispatch(actions.fetchResults(keyword, 1, history))
+      .dispatch(actions.fetchResults(keyword, undefined, history))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         expect(history.push).toHaveBeenCalledWith(`/search?keyword=${keyword}`);
       });
   });
 
+  test("should dispatch ARTICLE_SEARCH_SUCCESS to fetch more articles", () => {
+    const expectedActions = [
+      {
+        type: SEARCHING_ARTICLES
+      },
+      {
+        type: ARTICLE_SEARCH_SUCCESS,
+        payload: {
+          articles: { ...arrayToObject(articles, "id") },
+          authors: { ...authors }
+        }
+      }
+    ];
+    moxios.stubRequest(
+      `${process.env.API_BASE_URL}/articles?keyword=${keyword}&page=${2}`,
+      {
+        status: 200,
+        response: {
+          articles
+        }
+      }
+    );
+    store = mockStore({});
+    return store.dispatch(actions.fetchResults(keyword, 2)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+      expect(history.push).not.toHaveBeenCalledWith(
+        `/search?keyword=${keyword}`
+      );
+    });
+  });
+
   test("should dispatch ARTICLE_SEARCH_FAILED action creator", () => {
-    const pageNumber = 2;
+    const pageNumber = 1;
     const expectedActions = [
       {
         type: SEARCHING_ARTICLES
