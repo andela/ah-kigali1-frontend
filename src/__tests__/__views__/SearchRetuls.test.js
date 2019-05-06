@@ -2,9 +2,9 @@ import React from "react";
 import toJson from "enzyme-to-json";
 import { shallow, mount } from "enzyme";
 import { SearchResults } from "../../views/SearchResults";
-import AnimatedCard from "../../components/common/Cards/AnimatedCard";
+import { AnimatedCard } from "../../components/common/Cards/AnimatedCard";
 import TextInput from "../../components/common/Inputs/TextInput";
-import { articles, authors } from "../testData";
+import { articles, authors } from "../__mocks__/testData";
 import AuthorCard from "../../components/common/Cards/AuthorCard";
 import { arrayToObject } from "../../utils/helperFunctions";
 
@@ -179,7 +179,7 @@ describe("Search Results Component", () => {
     });
 
     test("should set articles in state", () => {
-      const component = mount(<SearchResults {...props} />);
+      const component = shallow(<SearchResults {...props} />);
       component.setProps({
         articles: articlesObj,
         authors

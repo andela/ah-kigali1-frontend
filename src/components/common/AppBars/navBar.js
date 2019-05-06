@@ -62,8 +62,8 @@ class Navbar extends Component {
   };
 
   render() {
-    const { toggle, popOverOpen } = this.state;
-    const { searchQuery, history } = this.props;
+    const { toggle, popOverOpen, searchQuery } = this.state;
+    const { history, suggestedArticles } = this.props;
     return (
       <div>
         <section
@@ -133,12 +133,16 @@ class Navbar extends Component {
             </div>
           </div>
         </section>
-        {popOverOpen && !isEmpty(authSuggestArticles) && (
-          <SearchPopOver
-            searchQuery={searchQuery}
-            articles={authSuggestArticles}
-          />
-        )}
+        {history.location.pathname !== "/search" &&
+          popOverOpen &&
+          !isEmpty(suggestedArticles) && (
+            <div ref={this.setSearchPopOverRef}>
+              <SearchPopOver
+                searchQuery={searchQuery}
+                articles={suggestedArticles}
+              />
+            </div>
+          )}
       </div>
     );
   }
@@ -151,10 +155,11 @@ Navbar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }).isRequired,
-  suggestedArticles: PropTypes.shape({}).isRequired
+  suggestedArticles: PropTypes.shape({})
 };
 Navbar.defaultProps = {
-  searchQuery: ""
+  searchQuery: "",
+  suggestedArticles: {}
 };
 
 export default withRouter(

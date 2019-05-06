@@ -4,7 +4,7 @@ import moxios from "moxios";
 import dotenv from "dotenv";
 import axios from "../../utils/axios";
 import * as actions from "../../redux/actions/searchActions";
-import { articles, authors } from "../testData";
+import { articles, authors } from "../__mocks__/testData";
 import {
   SEARCHING_ARTICLES,
   SEARCH_QUERY_CHANGE,
