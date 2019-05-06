@@ -13,6 +13,7 @@
   .popover-inner {
     position: relative;
     max-width: 360px;
+    height: "260px";
     padding: 14px;
     background: #fff;
     box-shadow: 0 1px 2px rgba(27, 18, 66, 0.25), 0 0 1px rgba(27, 18, 66, 0.35);
@@ -36,6 +37,9 @@
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
+    }
+    .popover-content {
+      max-height: "250px";
     }
     ul {
       margin-top: 5px;

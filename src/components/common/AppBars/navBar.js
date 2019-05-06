@@ -55,11 +55,11 @@ class Navbar extends Component {
     getSuggestions(value);
   };
 
-  toggleOptions() {
+  toggleOptions = () => {
     this.setState(state => ({
       toggle: state.toggle === "none" ? "block" : "none"
     }));
-  }
+  };
 
   render() {
     const { toggle, popOverOpen } = this.state;
@@ -143,14 +143,7 @@ class Navbar extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  const { search } = state;
-  return {
-    ...search
-  };
-};
-
+const mapStateToProps = state => ({ ...state.search });
 Navbar.propTypes = {
   authSuggestArticles: PropTypes.func.isRequired,
   fetchResults: PropTypes.func.isRequired,
