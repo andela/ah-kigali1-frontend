@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import BasicButton from "../Buttons/BasicButton";
+import defaultAvatar from "../../../assets/img/user.png";
 
 const AuthorCard = props => {
   const { following, username, image } = props;
@@ -8,10 +9,7 @@ const AuthorCard = props => {
     <div className="author">
       <div className="inline-author">
         <div className="user-profile-img">
-          <img
-            src={image || require("../../../assets/img/user.png")}
-            alt="author"
-          />
+          <img src={image || defaultAvatar} alt="author" />
         </div>
         <p className="username">@{username}</p>
       </div>

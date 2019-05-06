@@ -5,7 +5,7 @@ import { values } from "lodash";
 
 const SearchPopOver = ({ searchQuery, articles }) => (
   <div id="search-popover">
-    <div className="popover-inner" style={{ height: "260px" }}>
+    <div className="popover-inner">
       <div className="header">
         <Link to={`/search?keyword=${searchQuery}`}>
           <span className="button">
@@ -24,7 +24,7 @@ const SearchPopOver = ({ searchQuery, articles }) => (
           </Link>
         </div>
       </header>
-      <ul className="popover-content" style={{ maxHeight: "250px" }}>
+      <ul className="popover-content">
         {[...values(articles)].map(item => (
           <li className="list-item" key={item.id}>
             <Link to={`/articles/${item.slug}`} className="link">
