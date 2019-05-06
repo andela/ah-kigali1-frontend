@@ -119,6 +119,7 @@ export class Navbar extends Component {
                         <Link to={`/profiles/${currentUser.username}`}>
                           Profile
                         </Link>
+                        <Link to="/profiles/username">Profile</Link>
                       </li>
                       <li>
                         <Link to="/stats">Stats</Link>
