@@ -30,18 +30,8 @@ export class SearchResults extends Component {
     tagsList: []
   };
 
-  componentWillMount() {
-    const {
-      history: { location },
-      fetchResults: getAllArticles,
-      articles
-    } = this.props;
-    const { keyword } = queryString.parse(location.search);
-    this.handleOnChange(keyword);
-    if (isEmpty(articles)) getAllArticles(keyword, 1);
-  }
-
   componentDidMount() {
+    this.setUpComponent();
     document.addEventListener("scroll", () => this.handleScroll(), true);
   }
 
@@ -58,6 +48,17 @@ export class SearchResults extends Component {
     const { clearSearchResults: clear } = this.props;
     clear();
   }
+
+  setUpComponent = () => {
+    const {
+      history: { location },
+      fetchResults: getAllArticles,
+      articles
+    } = this.props;
+    const { keyword } = queryString.parse(location.search);
+    this.handleOnChange(keyword);
+    if (isEmpty(articles)) getAllArticles(keyword, 1);
+  };
 
   handleOnChange = value => {
     const { handleInputChange: setSearchQuery } = this.props;

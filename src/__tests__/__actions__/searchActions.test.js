@@ -134,7 +134,7 @@ describe("Search Action Creators", () => {
       .dispatch(actions.fetchResults(keyword, pageNumber, history))
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
-        expect(history.push.mock.calls.length).toBe(0);
+        expect(history.push.mock.calls.length).toBe(1);
       });
   });
 
