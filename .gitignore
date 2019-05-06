@@ -13,8 +13,4 @@ yarn-*
 .DS_Store 
 .env
 .coveralls.yml
-<<<<<<< HEAD
 **/__snapshots__
-=======
-**/__snapshots__
->>>>>>> [Chore #163518658] remove snapshots from git
