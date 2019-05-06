@@ -14,7 +14,7 @@ import {
 import { isEmpty } from "../../../utils/helperFunctions";
 import SearchPopOver from "../../PopOvers/SearchPopOver";
 
-class Navbar extends Component {
+export class Navbar extends Component {
   state = {
     toggle: "none",
     popOverOpen: false,
@@ -78,7 +78,7 @@ class Navbar extends Component {
           style={{ margin: 0, boxSizing: "border-box", padding: 0 }}
           className="nav-bar"
         >
-          <div className="nav-container">
+          <div className="nav-container" data-test="nav-container">
             <Link className="col-md-6 col-sm-3 brand-name" to="/">
               <div className="brand">
                 <img src={Logo} alt="logo" className="brand" />
