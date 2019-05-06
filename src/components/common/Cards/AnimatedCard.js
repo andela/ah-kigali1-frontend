@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NoImg from "../../../assets/img/no-thumbnail.png";
 import NoAvatar from "../../../assets/img/user.png";
 import LikeIcon from "../../../assets/img/like-icon.svg";
@@ -8,7 +8,7 @@ import DisLikeIcon from "../../../assets/img/dislike-icon.svg";
 import CommentIcon from "../../../assets/img/comment-icon.svg";
 import BookmarkIcon from "../../../assets/img/bookmark-icons.svg";
 
-const AnimatedCard = ({
+export const AnimatedCard = ({
   title,
   likes,
   comments,
@@ -86,6 +86,10 @@ AnimatedCard.propTypes = {
     image: PropTypes.string
   }).isRequired,
   readTime: PropTypes.number.isRequired,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
+  slug: PropTypes.string
+};
+AnimatedCard.defaultProps = {
+  slug: ""
 };
 export default AnimatedCard;

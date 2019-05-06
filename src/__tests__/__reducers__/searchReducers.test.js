@@ -7,7 +7,7 @@ import {
   CLEAR_SEARCH_RESULTS
 } from "../../redux/actionTypes";
 import searchReducers from "../../redux/reducers/searchReducers";
-import { articles, authors } from "../testData";
+import { articles, authors } from "../__mocks__/testData";
 import { arrayToObject } from "../../utils/helperFunctions";
 
 const INITIAL_STATE = {
