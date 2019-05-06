@@ -28,10 +28,6 @@ export const routes = [
   {
     path: "/search",
     component: Search
-  },
-  {
-    path: "/",
-    component: Home
   }
 ];
 export default class MainRoutes extends Component {

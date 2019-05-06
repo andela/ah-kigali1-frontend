@@ -55,6 +55,10 @@ export const FETCHING_ASIDE_ARTICLES = "FETCHING_ASIDE_ARTICLES";
  * @description delete article action types
  */
 export const DELETE_ARTICLE = " DELETE_ARTICLE";
+
+/**
+ * @description search and filter action types
+ */
 export const SEARCHING_ARTICLES = "FETCHING_ARTICLE";
 export const ARTICLE_SEARCH_SUCCESS = "ARTICLE_SEARCH_SUCCESSFULLY";
 export const ARTICLE_SEARCH_FAILED = "ARTICLE_SEARCH_FAILED";

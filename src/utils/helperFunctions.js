@@ -68,20 +68,45 @@ export const calculateTimeStamp = time => {
   return date.toDateString();
 };
 
+/**
+ * @description transforming Array into an Object with Key
+ * @param {array} items - Array to be transformed into Object
+ * @param {string} key - Attribute that should be object key
+ * @returns {object} - an object with key value pair
+ */
 export const arrayToObject = (items, key) => keyBy(items, item => item[key]);
 
+/**
+ *
+ * @param {array} items - array of items to be sorted
+ * @param {string} tag - value for array to be filtered by
+ * @returns {array} - an array with filtered articles
+ */
 export const filterByTag = (items, tag) =>
   filter(items, item => item.tagsList.includes(tag));
 
+/**
+ *
+ * @param {object} items - Object containing articles with tags.
+ * @returns {array} - an array of unique tags
+ */
 export const getTags = items => [
   ...new Set(flatten([...values(items).map(item => item.tagsList)]))
 ];
 
+/**
+ * @description detect if user scrolled to the bottom
+ * @returns {boolean} - true or false
+ */
 export const isBottom = () =>
   window.innerHeight + document.documentElement.scrollTop >=
   document.documentElement.offsetHeight;
-export const hasFocus = () => document.getElementById("nav-search-input");
 
+/**
+ * @description check if string contains a special character
+ * @param {string} value - string
+ * @returns {boolean} - true or false
+ */
 export const containsSpecialChar = value => {
   const alphanumericRegex = /[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/g;
   return alphanumericRegex.test(value);
