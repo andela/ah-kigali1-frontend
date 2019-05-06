@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { values } from "lodash";
+import NoImg from "../../assets/img/no-thumbnail.png";
 
 const SearchPopOver = ({ searchQuery, articles }) => (
   <div id="search-popover">
@@ -28,11 +29,7 @@ const SearchPopOver = ({ searchQuery, articles }) => (
         {[...values(articles)].map(item => (
           <li className="list-item" key={item.id}>
             <Link to={`/articles/${item.slug}`} className="link">
-              <img
-                src="https://cdn-images-1.medium.com/fit/c/64/64/1*0VWnJCXj9U5XkwRp85Mfwg.png"
-                className="avatar"
-                alt="img"
-              />
+              <img src={item.img || NoImg} alt="img" className="avatar" />
               <div className="article-author">
                 <span className="article-title">{item.title}</span>
                 <div className="add-info">

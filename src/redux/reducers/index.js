@@ -11,7 +11,6 @@ import searchReducers from "./searchReducers";
 export default combineReducers({
   auth: loginReducers,
   article: createArticleReducer,
-  login: loginReducers,
   resetPassword: resetPasswordReducers,
   updatePassword: updatePasswordReducers,
   socialAuth: socialAuthReducers,
