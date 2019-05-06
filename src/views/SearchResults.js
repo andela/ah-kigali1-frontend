@@ -78,8 +78,8 @@ export class SearchResults extends Component {
   };
 
   handleScroll = () => {
-    const { searchQuery, isLoading } = this.props;
-    if (isBottom() && !isLoading) {
+    const { searchQuery, isLoading, errors } = this.props;
+    if (isBottom() && !isLoading && isEmpty(errors)) {
       this.setState(state => ({
         pageNumber: state.pageNumber + 1
       }));

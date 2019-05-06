@@ -48,12 +48,13 @@ class Navbar extends Component {
   };
 
   handleOnChange = value => {
+    clearTimeout(this.timeOut);
     const { authSuggestArticles: getSuggestions } = this.props;
     this.setState({
       popOverOpen: true,
       searchQuery: value
     });
-    getSuggestions(value);
+    this.timeOut = setTimeout(() => getSuggestions(value), 1000);
   };
 
   toggleOptions = () => {
@@ -96,6 +97,7 @@ class Navbar extends Component {
                     value={searchQuery}
                     onKeyDown={e => this.handleEnterPress(e)}
                     id="nav-search-input"
+                    className={popOverOpen ? "active" : ""}
                   />
                 )}
               </div>
