@@ -23,6 +23,7 @@ describe("Search Action Reducers", () => {
   test("should should match the initial state", () => {
     expect(searchReducers(undefined, {})).toEqual({ ...INITIAL_STATE });
   });
+
   test("should update the searchQuery", () => {
     const value = "hello_world";
     expect(
