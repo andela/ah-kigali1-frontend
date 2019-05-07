@@ -80,7 +80,7 @@ export class Article extends Component {
 
   toggleReportingModal = () => {
     const { reportingForm } = this.state;
-    if (reportingForm === true) {
+    if (reportingForm) {
       return this.setState({ reportingForm: false });
     }
     return this.setState({ reportingForm: true, displayModal: false });
@@ -123,7 +123,7 @@ export class Article extends Component {
             </div>
           );
         })
-      : false;
+      : "";
 
   displayCommentsOnMobileDevices = comments =>
     comments.length
@@ -172,7 +172,7 @@ export class Article extends Component {
             </div>
           );
         })
-      : false;
+      : "";
 
   redirectToEdit = () => {
     const { slug } = this.state;
@@ -271,17 +271,17 @@ export class Article extends Component {
                   <div>
                     <Button
                       className="btn delete_article"
-                      onClick={() => this.handleDeleteArticle()}
+                      onClick={this.handleDeleteArticle}
                       title="Delete"
                     />
                     <Button
                       className="btn edit_article"
-                      onClick={() => this.redirectToEdit()}
+                      onClick={this.redirectToEdit}
                       title="Edit"
                     />{" "}
                   </div>
                 ) : (
-                  false
+                  ""
                 )}
 
                 <div className="tags">
@@ -291,7 +291,7 @@ export class Article extends Component {
                           {tag}
                         </span>
                       ))
-                    : false}
+                    : ""}
                 </div>
                 <hr className="line__title" />
                 <div className="article-comments">
@@ -337,7 +337,7 @@ export class Article extends Component {
               </div>
               {displayModal ? (
                 <MoreReactions
-                  displayReportArticleForm={() => this.toggleReportingModal()}
+                  displayReportArticleForm={this.toggleReportingModal}
                 />
               ) : (
                 false
@@ -345,9 +345,9 @@ export class Article extends Component {
             </aside>
             {reportingForm ? (
               <ReportingForm
-                onInputChange={() => this.onInputChange()}
-                submitReport={() => this.submitReport()}
-                cancelReport={() => this.toggleReportingModal()}
+                onInputChange={this.onInputChange}
+                submitReport={this.submitReport}
+                cancelReport={this.toggleReportingModal}
               />
             ) : (
               false
