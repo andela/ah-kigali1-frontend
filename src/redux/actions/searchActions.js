@@ -59,7 +59,6 @@ export const fetchResults = (
     const authors = Object.values(arrayToObject(articles, "userId")).map(
       article => ({ ...article.author, id: article.userId })
     );
-
     dispatch({
       type: ARTICLE_SEARCH_SUCCESS,
       payload: {

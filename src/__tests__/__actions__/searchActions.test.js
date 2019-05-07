@@ -189,7 +189,7 @@ describe("Search Action Creators", () => {
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
+      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
       {
         status: 200,
         response: {

@@ -327,6 +327,10 @@ describe("Search Results Component", () => {
     });
 
     test("should filter article by tags", () => {
+      wrapper.setProps({
+        articles: arrayToObject(articles, "id"),
+        isLoading: false
+      });
       wrapper
         .find(`[data-test="single-tag"]`)
         .at(0)
@@ -383,7 +387,7 @@ describe("Search Results Component", () => {
       const component = shallow(<SearchResults {...props} />);
       component.setProps({
         articles: articlesObj,
-        authors
+        authors: authorObj
       });
       expect(component.state().articles).toEqual(articlesObj);
       expect(component.state().authors).toEqual(authorObj);
