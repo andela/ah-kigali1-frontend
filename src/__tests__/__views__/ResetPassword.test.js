@@ -73,7 +73,9 @@ describe("Login component", () => {
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(sendResetLink.mock.calls.length).toBe(0);
-      expect(sendResetLink).not.toBeCalledWith({ email: wrapper.props().email });
+      expect(sendResetLink).not.toBeCalledWith({
+        email: wrapper.props().email
+      });
     });
   });
 });
