@@ -21,6 +21,7 @@ const props = {
 };
 const wrapper = shallow(<Navbar {...props} />);
 jest.useFakeTimers();
+
 describe("NavBar component", () => {
   describe("rendered component", () => {
     test("should match the snapshot", () => {
