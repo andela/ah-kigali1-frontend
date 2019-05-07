@@ -7,8 +7,8 @@ const props = {
 };
 describe("Home component", () => {
   test("matches the snapshot", () => {
-    const warper = mount(<App {...props} />);
-    expect(warper.find("h2").text()).toEqual("Hello home");
+    const wrapper = mount(<App {...props} />);
+    expect(wrapper.find("h2").text()).toEqual("Hello home");
     expect(true).toBe(true);
   });
 });

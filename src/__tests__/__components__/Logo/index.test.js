@@ -3,9 +3,9 @@ import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import Logo from "../../../components/common/Logo";
 
-const warper = shallow(<Logo className="logo" />);
+const wrapper = shallow(<Logo className="logo" />);
 describe("Logo component", () => {
   it("matches the snapshot", () => {
-    expect(toJson(warper)).toMatchSnapshot();
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
