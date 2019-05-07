@@ -115,12 +115,13 @@ export class Navbar extends Component {
                           New Story
                         </Link>
                       </li>
-                      <li>
-                        <Link to={`/profiles/${currentUser.username}`}>
-                          Profile
-                        </Link>
-                        <Link to="/profiles/username">Profile</Link>
-                      </li>
+                      {!isEmpty(currentUser) && (
+                        <li>
+                          <Link to={`/profiles/${currentUser.username}`}>
+                            Profile
+                          </Link>
+                        </li>
+                      )}
                       <li>
                         <Link to="/stats">Stats</Link>
                       </li>

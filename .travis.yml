@@ -6,12 +6,10 @@ cache:
     - node_modules
 install:
   - npm install
-before_script:
-  - yarn
 script:
-  - yarn test -u
+  - npm test -u
 after_success:
-  - yarn run coveralls
+  - npm run coveralls
   - "stable"
 notifications:
   email: false

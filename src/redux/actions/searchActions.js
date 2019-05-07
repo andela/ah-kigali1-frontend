@@ -42,20 +42,8 @@ export const fetchResults = (
     if (pageNumber === 1) {
       dispatch(clearSearchResults());
     }
-    let articles;
-    let message;
-    if (!containsSpecialChar(searchQuery)) {
-      ({ articles, message } = response.data);
-    } else {
-      articles = [];
-      message = "We couldn’t find any articles";
-    }
 
     const { articles, message } = response.data;
-    // const authorsObject = mapValues(
-    //   arrayToObject(articles, "userId"),
-    //   article => ({ ...article.author, id: article.userId })
-    // );
     const authors = Object.values(arrayToObject(articles, "userId")).map(
       article => ({ ...article.author, id: article.userId })
     );

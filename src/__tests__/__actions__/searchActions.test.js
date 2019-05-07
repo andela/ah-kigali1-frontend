@@ -12,7 +12,6 @@ import {
   ARTICLE_SEARCH_SUCCESS,
   CLEAR_SEARCH_RESULTS,
   SET_SUGGESTED_ARTICLES
-
 } from "../../redux/actionTypes";
 import { arrayToObject } from "../../utils/helperFunctions";
 
@@ -20,7 +19,6 @@ const keyword = "hello_world";
 dotenv.config();
 const mockStore = storeConfig([thunk]);
 let store;
-
 const push = jest.fn();
 const history = {};
 const { API_URL } = process.env;
@@ -30,6 +28,7 @@ describe("Search Action Creators", () => {
     moxios.install(axios);
     history.push = push;
   });
+
   afterEach(() => {
     moxios.uninstall(axios);
     history.push.mockClear();
@@ -104,6 +103,7 @@ describe("Search Action Creators", () => {
   });
 
   test("should dispatch ARTICLE_SEARCH_FAILED action creator", () => {
+    const pageNumber = 1;
     const expectedActions = [
       {
         type: SEARCHING_ARTICLES
@@ -171,32 +171,6 @@ describe("Search Action Creators", () => {
       status: 500,
       response: payload
     });
-    store = mockStore({});
-    return store.dispatch(actions.authSuggestArticles(query)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-
-  test("should dispatch SET_SUGGESTED_ARTICLES", () => {
-    const query = "hello world";
-    const expectedActions = [
-      {
-        type: SEARCH_QUERY_CHANGE,
-        payload: query
-      },
-      {
-        type: SET_SUGGESTED_ARTICLES,
-        payload: { articles: { ...arrayToObject(articles, "id") } }
-      }
-    ];
-    moxios.stubRequest(
-      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
-      {
-        status: 200,
-        response: {
-          articles
-        }
-      }
-    );
     store = mockStore({});
     return store.dispatch(actions.authSuggestArticles(query)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);

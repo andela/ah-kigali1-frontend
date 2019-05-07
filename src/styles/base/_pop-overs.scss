@@ -38,37 +38,19 @@
         text-transform: uppercase;
       }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
     .popover-content {
       max-height: "250px";
     }
-=======
->>>>>>> [Feature #163518658] add popover card for suggested articles
-=======
-    .popover-content {
-      max-height: "250px";
-    }
->>>>>>> [Feature #163518658] reaplaces require with import
     ul {
       margin-top: 5px;
       margin-bottom: 0;
       list-style: none;
       padding: 0px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> [Feature #163518658] improves the user exp
       li:not(:last-child) {
         .link {
           border-bottom: 0.25px solid $color-primary;
         }
       }
-<<<<<<< HEAD
-=======
->>>>>>> [Feature #163518658] add popover card for suggested articles
-=======
->>>>>>> [Feature #163518658] improves the user exp
       .list-item {
         list-style: none;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -77,21 +59,8 @@
         text-align: start;
         list-style: none;
         .link {
-<<<<<<< HEAD
-<<<<<<< HEAD
           display: flex;
           padding: 5px 0px;
-=======
-          display: block;
-          padding: 5px 14px;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
->>>>>>> [Feature #163518658] add popover card for suggested articles
-=======
-          display: flex;
-          padding: 5px 0px;
->>>>>>> [Feature #163518658] improves the user exp
           .avatar {
             width: 32px;
             height: 32px;
@@ -99,10 +68,6 @@
             display: inline-block;
             vertical-align: middle;
           }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> [Feature #163518658] improves the user exp
 
           .article-author {
             display: block;
@@ -130,11 +95,6 @@
               }
             }
           }
-<<<<<<< HEAD
-=======
->>>>>>> [Feature #163518658] add popover card for suggested articles
-=======
->>>>>>> [Feature #163518658] improves the user exp
         }
       }
     }
