@@ -164,7 +164,8 @@ Navbar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }).isRequired,
-  suggestedArticles: PropTypes.shape({})
+  suggestedArticles: PropTypes.shape({}),
+  currentUser: PropTypes.shape({}).isRequired
 };
 
 Navbar.defaultProps = {
