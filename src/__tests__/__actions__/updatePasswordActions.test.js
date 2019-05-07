@@ -54,7 +54,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_FAILED,
-        payload
+        payload: { ...payload }
       }
     ];
     return store
@@ -70,11 +70,10 @@ describe("update password actions ceators", () => {
       token: "1234567qwertyui",
       password: "password"
     };
-    moxios.stubRequest(
-      `${process.env.API_BASE_URL}/users/${params.token}/password`,
-      {
-        status: 200,
-        response: payload
+    moxios.stubRequest(`${API_URL}/users/${params.token}/password`, {
+      status: 200,
+      response: {
+        ...payload
       }
     });
     const expectedActions = [
@@ -83,7 +82,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_SUCCESS,
-        payload
+        payload: { ...payload }
       }
     ];
     return store

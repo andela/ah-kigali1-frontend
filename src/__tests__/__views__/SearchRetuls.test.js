@@ -18,7 +18,7 @@ const props = {
   handleInputChange,
   fetchResults,
   clearSearchResults,
-  searchQuery: "hello_world",
+  searchQuery: "helloWorld",
   articles: {},
   authors: {},
   history: {
@@ -91,7 +91,7 @@ describe("Search Results Component", () => {
     });
 
     test("should respond on change input text", () => {
-      const value = "hello_world";
+      const value = props.searchQuery;
       findElements(TextInput)
         .at(0)
         .simulate("change", {

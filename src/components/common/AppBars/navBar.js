@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Logo from "../../../assets/img/quill-drawing-a-line.svg";
 import UserIcon from "../../../assets/img/user.jpg";
-import Logo from "../../../assets/img/quill-drawing-a-line.svg";
-
 import TextInput from "../Inputs/TextInput";
 import {
   fetchResults,
@@ -64,14 +62,9 @@ export class Navbar extends Component {
   };
 
   render() {
-    const { toggle } = this.state;
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      return <React.Fragment />;
-    }
     const { toggle, popOverOpen, searchQuery } = this.state;
     const { history, suggestedArticles } = this.props;
+
     return (
       <div>
         <section
@@ -157,16 +150,10 @@ export class Navbar extends Component {
   }
 }
 
-const mapStateToProps = ({ auth: { currentUser } }) => ({
+const mapStateToProps = ({ auth: { currentUser }, search }) => ({
+  ...search,
   currentUser
 });
-
-const mapStateToProps = state => {
-  const { search } = state;
-  return {
-    ...search
-  };
-};
 
 Navbar.propTypes = {
   authSuggestArticles: PropTypes.func.isRequired,
@@ -177,6 +164,7 @@ Navbar.propTypes = {
   }).isRequired,
   suggestedArticles: PropTypes.shape({})
 };
+
 Navbar.defaultProps = {
   searchQuery: "",
   suggestedArticles: {}
