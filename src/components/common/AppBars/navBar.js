@@ -63,7 +63,7 @@ export class Navbar extends Component {
 
   render() {
     const { toggle, popOverOpen, searchQuery } = this.state;
-    const { history, suggestedArticles } = this.props;
+    const { history, suggestedArticles, currentUser } = this.props;
 
     return (
       <div>
@@ -117,7 +117,9 @@ export class Navbar extends Component {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/profile">Profile</Link>
+                        <Link to={`/profiles/${currentUser.username}`}>
+                          Profile
+                        </Link>
                       </li>
                       <li>
                         <Link to="/stats">Stats</Link>
