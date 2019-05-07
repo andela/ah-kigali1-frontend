@@ -28,6 +28,8 @@ import heartIcon from "../assets/img/heart.svg";
 import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 import moreIcon from "../assets/icons/more.svg";
 import ratingIcon from "../assets/icons/star.svg";
+import emailIcon from "../assets/img/paper-plane.svg";
+import ShareIcon from "../components/common/Link/Social";
 
 export const mapStateToProps = state => ({
   currentUser: state.auth.currentUser,
@@ -224,7 +226,10 @@ export class Article extends Component {
       ({ username, firstName, lastName, image } = author);
     }
     const isAuthor = isCurrentUserAuthor(username, currentUser);
-
+    const {
+      location: { host, pathname }
+    } = window;
+    const currentUrl = `${host}${pathname}`;
     return (
       <div>
         {message && message !== "Article found successfully" ? (
@@ -325,8 +330,19 @@ export class Article extends Component {
                 <img className="share-icon" src={thumbsUp} alt="logo" />
                 <img className="share-icon" src={dislikeIcon} alt="logo" />
                 <img className="share-icon" src={bookmarkIcon} alt="logo" />
-                <img className="share-icon" src={facebookIcon} alt="logo" />
-                <img className="share-icon" src={twitterIcon} alt="logo" />
+
+                <ShareIcon
+                  image={facebookIcon}
+                  href={`https://www.facebook.com/sharer/sharer.php?&u=${currentUrl}`}
+                />
+                <ShareIcon
+                  image={twitterIcon}
+                  href={`http://twitter.com/share?url=${currentUrl}&text=${title}&hashtags=authorsHeaven,software development`}
+                />
+                <ShareIcon
+                  image={emailIcon}
+                  href={`mailto:?subject=Sharing the inspiring article&body=<a href=${currentUrl}>New</a>`}
+                />
                 <img className="share-icon" src={ratingIcon} alt="logo" />
                 <img
                   className="share-icon"
@@ -374,6 +390,7 @@ export class Article extends Component {
     );
   }
 }
+
 Article.propTypes = {
   fetchOneArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
