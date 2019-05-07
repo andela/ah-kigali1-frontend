@@ -1,5 +1,4 @@
 import "@babel/polyfill";
-import { mapValues } from "lodash";
 import axios from "../../utils/axios";
 import {
   SEARCHING_ARTICLES,
@@ -22,6 +21,7 @@ export const handleInputChange = value => ({
 export const clearSearchResults = () => ({
   type: CLEAR_SEARCH_RESULTS
 });
+
 const searchFailed = (message, errors) => ({
   type: ARTICLE_SEARCH_FAILED,
   payload: { message, ...errors }
@@ -43,17 +43,19 @@ export const fetchResults = (
       dispatch(clearSearchResults());
     }
     const { articles, message } = response.data;
-    const authorsObject = mapValues(
-      arrayToObject(articles, "userId"),
+    // const authorsObject = mapValues(
+    //   arrayToObject(articles, "userId"),
+    //   article => ({ ...article.author, id: article.userId })
+    // );
+    const authors = Object.values(arrayToObject(articles, "userId")).map(
       article => ({ ...article.author, id: article.userId })
     );
-
     dispatch({
       type: ARTICLE_SEARCH_SUCCESS,
       payload: {
         message,
-        articles: { ...arrayToObject(articles, "id") },
-        authors: { ...authorsObject }
+        articles: arrayToObject(articles, "id"),
+        authors: arrayToObject(authors, "id")
       }
     });
   } catch (error) {
@@ -74,7 +76,7 @@ export const authSuggestArticles = searchQuery => async dispatch => {
     const { articles } = response.data;
     dispatch({
       type: SET_SUGGESTED_ARTICLES,
-      payload: { articles: { ...arrayToObject(articles, "id") } }
+      payload: { articles: arrayToObject(articles, "id") }
     });
   } catch (error) {
     const {

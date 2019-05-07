@@ -30,6 +30,7 @@ TextInput.propTypes = {
   value: PropTypes.string,
   onKeyDown: PropTypes.func
 };
+
 TextInput.defaultProps = {
   id: "",
   value: PropTypes.string,
