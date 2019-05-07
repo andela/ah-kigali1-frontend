@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { values } from "lodash";
 import BasicButton from "../components/common/Buttons/BasicButton";
 import Input from "../components/common/Inputs/TextInput";
 import {
@@ -15,7 +14,8 @@ import {
   filterByTag,
   getTags,
   isEmpty,
-  isBottom
+  isBottom,
+  values
 } from "../utils/helperFunctions";
 import Card from "../components/common/Cards/AnimatedCard";
 import AuthorCard from "../components/common/Cards/AuthorCard";
@@ -195,7 +195,7 @@ export class SearchResults extends Component {
               className="search-input"
               onChange={e => this.handleOnChange(e.target.value)}
               value={searchQuery}
-              onKeyDown={e => this.handleEnterPress(e)}
+              onKeyDown={this.handleEnterPress}
             />
           </div>
           <div className="results" id="results-container">

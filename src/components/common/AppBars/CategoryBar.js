@@ -32,7 +32,7 @@ class Categories extends Component {
           </div>
         </div>
         <div
-          onClick={() => onMoreClick()}
+          onClick={onMoreClick}
           className="category-right"
           data-test="btn-more"
         >

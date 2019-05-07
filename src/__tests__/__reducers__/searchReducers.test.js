@@ -46,14 +46,14 @@ describe("Search Action Reducers", () => {
       searchReducers(INITIAL_STATE, {
         type: ARTICLE_SEARCH_SUCCESS,
         payload: {
-          articles: { ...arrayToObject(articles) },
+          articles: arrayToObject(articles, "id"),
           authors: { ...authors }
         }
       })
     ).toEqual({
       ...INITIAL_STATE,
       isLoading: false,
-      articles: { ...INITIAL_STATE.articles, ...arrayToObject(articles) },
+      articles: { ...INITIAL_STATE.articles, ...arrayToObject(articles, "id") },
       authors: { ...INITIAL_STATE.authors, ...authors }
     });
   });
@@ -73,11 +73,11 @@ describe("Search Action Reducers", () => {
   });
 
   test("should set suggested articles", () => {
-    const payload = { articles: { ...arrayToObject(articles) } };
+    const payload = { articles: arrayToObject(articles, "id") };
     expect(
       searchReducers(INITIAL_STATE, {
         type: SET_SUGGESTED_ARTICLES,
-        payload: { ...payload }
+        payload
       })
     ).toEqual({ ...INITIAL_STATE, suggestedArticles: { ...payload.articles } });
   });

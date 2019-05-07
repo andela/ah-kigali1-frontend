@@ -54,7 +54,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_FAILED,
-        payload: { ...payload }
+        payload
       }
     ];
     return store
@@ -73,9 +73,7 @@ describe("update password actions ceators", () => {
       `${process.env.API_BASE_URL}/users/${params.token}/password`,
       {
         status: 200,
-        response: {
-          ...payload
-        }
+        response: payload
       }
     );
     const expectedActions = [
@@ -84,7 +82,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_SUCCESS,
-        payload: { ...payload }
+        payload
       }
     ];
     return store

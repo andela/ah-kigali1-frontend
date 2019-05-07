@@ -53,7 +53,7 @@ describe("ResetPassword action creators", () => {
         },
         {
           type: RESET_PASSWORD_LINK_SUCCESS,
-          payload: { ...payload }
+          payload
         }
       ];
 
@@ -76,7 +76,7 @@ describe("ResetPassword action creators", () => {
         },
         {
           type: RESET_PASSWORD_LINK_FAILED,
-          payload: { ...payload }
+          payload
         }
       ];
 

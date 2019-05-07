@@ -15,6 +15,7 @@ describe("Category Bar Component", () => {
   test("should match the snapshot", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
   test("should response to onClick", () => {
     wrapper
       .find(`[data-test="btn-more"]`)

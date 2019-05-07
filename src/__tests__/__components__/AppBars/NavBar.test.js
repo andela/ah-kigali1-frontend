@@ -26,9 +26,11 @@ describe("NavBar component", () => {
     test("should match the snapshot", () => {
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+
     test("should contain text input", () => {
       expect(wrapper.find(TextInput).length).toEqual(1);
     });
+
     test("should search popover not displayed", () => {
       expect(wrapper.find(SearchPopOver).length).toEqual(0);
     });
@@ -43,11 +45,13 @@ describe("NavBar component", () => {
       jest.spyOn(instance, "closeSearchPopOver");
       jest.spyOn(instance, "handleOnChange");
     });
+
     afterEach(() => {
       instance.handleEnterPress.mockClear();
       instance.closeSearchPopOver.mockClear();
       instance.handleOnChange.mockClear();
     });
+
     test("should response to search input change", () => {
       wrapper
         .find(TextInput)
@@ -67,6 +71,7 @@ describe("NavBar component", () => {
         wrapper.state().searchQuery
       );
     });
+
     test("should response to search input change", () => {
       wrapper.setState({
         searchQuery: "Hello world"

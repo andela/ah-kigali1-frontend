@@ -57,7 +57,7 @@ describe("Login action creators", () => {
         },
         {
           type: LOGIN_SUCCESS,
-          payload: { ...payload }
+          payload
         },
         {
           type: SET_CURRENT_USER,
@@ -84,15 +84,13 @@ describe("Login action creators", () => {
         },
         {
           type: LOGIN_FAILED,
-          payload: { ...payload }
+          payload
         }
       ];
 
       moxios.stubRequest(`${process.env.API_BASE_URL}/users/login`, {
         status: 400,
-        response: {
-          ...payload
-        }
+        response: payload
       });
 
       return store.dispatch(handleSignIn({ ...data })).then(() => {

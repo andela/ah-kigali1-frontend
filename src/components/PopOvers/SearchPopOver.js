@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { values } from "lodash";
+import { values } from "../../utils/helperFunctions";
 import NoImg from "../../assets/img/no-thumbnail.png";
 
 export const SearchPopOver = ({ searchQuery, articles }) => (
