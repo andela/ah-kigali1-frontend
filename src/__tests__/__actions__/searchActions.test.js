@@ -21,7 +21,7 @@ const mockStore = storeConfig([thunk]);
 let store;
 const push = jest.fn();
 const history = {};
-const { API_BASE_URL } = process.env;
+const { API_URL } = process.env;
 
 describe("Search Action Creators", () => {
   beforeEach(() => {
@@ -59,15 +59,12 @@ describe("Search Action Creators", () => {
         }
       }
     ];
-    moxios.stubRequest(
-      `${API_BASE_URL}/articles?keyword=${keyword}&page=${1}`,
-      {
-        status: 200,
-        response: {
-          articles
-        }
+    moxios.stubRequest(`${API_URL}/articles?keyword=${keyword}&page=${1}`, {
+      status: 200,
+      response: {
+        articles
       }
-    );
+    });
     store = mockStore({});
     return store
       .dispatch(actions.fetchResults(keyword, undefined, history))
@@ -90,15 +87,12 @@ describe("Search Action Creators", () => {
         }
       }
     ];
-    moxios.stubRequest(
-      `${API_BASE_URL}/articles?keyword=${keyword}&page=${2}`,
-      {
-        status: 200,
-        response: {
-          articles
-        }
+    moxios.stubRequest(`${API_URL}/articles?keyword=${keyword}&page=${2}`, {
+      status: 200,
+      response: {
+        articles
       }
-    );
+    });
     store = mockStore({});
     return store.dispatch(actions.fetchResults(keyword, 2)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
@@ -121,15 +115,12 @@ describe("Search Action Creators", () => {
         }
       }
     ];
-    moxios.stubRequest(
-      `${API_BASE_URL}${actions.searchURL(keyword, pageNumber)}`,
-      {
-        status: 401,
-        response: {
-          message: "Unauthorized"
-        }
+    moxios.stubRequest(`${API_URL}${actions.searchURL(keyword, pageNumber)}`, {
+      status: 401,
+      response: {
+        message: "Unauthorized"
       }
-    );
+    });
     store = mockStore({});
     return store
       .dispatch(actions.fetchResults(keyword, pageNumber, history))
@@ -151,15 +142,12 @@ describe("Search Action Creators", () => {
         payload: { articles: arrayToObject(articles, "id") }
       }
     ];
-    moxios.stubRequest(
-      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
-      {
-        status: 200,
-        response: {
-          articles
-        }
+    moxios.stubRequest(`${API_URL}${actions.searchURL(query)}&limit=${4}`, {
+      status: 200,
+      response: {
+        articles
       }
-    );
+    });
     store = mockStore({});
     return store.dispatch(actions.authSuggestArticles(query)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
@@ -179,13 +167,10 @@ describe("Search Action Creators", () => {
         payload
       }
     ];
-    moxios.stubRequest(
-      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
-      {
-        status: 500,
-        response: payload
-      }
-    );
+    moxios.stubRequest(`${API_URL}${actions.searchURL(query)}&limit=${4}`, {
+      status: 500,
+      response: payload
+    });
     store = mockStore({});
     return store.dispatch(actions.authSuggestArticles(query)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
