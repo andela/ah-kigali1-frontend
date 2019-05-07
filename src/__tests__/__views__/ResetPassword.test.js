@@ -19,20 +19,20 @@ const props = {
   isSuccess: false,
   successMessage: ""
 };
-const warper = shallow(<ResetPassword {...props} />);
-const findElement = (element, index) => warper.find(element).at(index);
+const wrapper = shallow(<ResetPassword {...props} />);
+const findElement = (element, index) => wrapper.find(element).at(index);
 
 describe("Login component", () => {
   describe("component render", () => {
     it("should match the snapshot", () => {
-      expect(toJson(warper)).toMatchSnapshot();
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
     it("should render two TextInputs and button", () => {
-      expect(warper.find(TextInput).length).toBe(1);
-      expect(warper.find(FormButton).length).toBe(1);
+      expect(wrapper.find(TextInput).length).toBe(1);
+      expect(wrapper.find(FormButton).length).toBe(1);
     });
     it("should render component with initial props", () => {
-      warper.find(TextInput).forEach(input => {
+      wrapper.find(TextInput).forEach(input => {
         expect(input.props().value).toBe(userInput.email);
       });
     });
@@ -40,7 +40,7 @@ describe("Login component", () => {
   describe("component properites", () => {
     let instance;
     beforeEach(() => {
-      instance = warper.instance();
+      instance = wrapper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
     });
@@ -67,13 +67,13 @@ describe("Login component", () => {
       expect(sendResetLink).toBeCalledWith({ ...userInput });
     });
     it("returns validation errors", () => {
-      warper.setProps({
+      wrapper.setProps({
         email: ""
       });
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(sendResetLink.mock.calls.length).toBe(0);
-      expect(sendResetLink).not.toBeCalledWith({ email: warper.props().email });
+      expect(sendResetLink).not.toBeCalledWith({ email: wrapper.props().email });
     });
   });
 });

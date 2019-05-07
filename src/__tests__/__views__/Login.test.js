@@ -25,14 +25,14 @@ const props = {
   handleTextInput,
   socialAuth
 };
-const warper = shallow(<Login {...props} />);
+const wrapper = shallow(<Login {...props} />);
 
-const findElement = (element, index) => warper.find(element).at(index);
+const findElement = (element, index) => wrapper.find(element).at(index);
 
 describe("Login component", () => {
   describe("component snapshot", () => {
     it("should match the right snapshot", () => {
-      expect(toJson(warper)).toMatchSnapshot();
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
 
@@ -49,7 +49,7 @@ describe("Login component", () => {
       }
     };
     beforeEach(() => {
-      instance = warper.instance();
+      instance = wrapper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
       jest.spyOn(instance, "handleNavigation");
@@ -63,7 +63,7 @@ describe("Login component", () => {
       mockedFormData.mockClear();
       handleSignIn.mockClear();
       handleTextInput.mockClear();
-      warper.setProps({
+      wrapper.setProps({
         ...props
       });
     });
@@ -92,13 +92,13 @@ describe("Login component", () => {
     it("should signIn user if email and password are provided", () => {
       mockedFormData.mockReturnValue({});
       Validator.formData = mockedFormData.bind(Validator);
-      warper.setProps({
+      wrapper.setProps({
         password: formData.password.value,
         email: formData.email.value
       });
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
-      warper.setProps({
+      wrapper.setProps({
         loginSuccess: true
       });
       expect(instance.handleNavigation).toBeCalledWith("");
@@ -111,7 +111,7 @@ describe("Login component", () => {
       const errors = { email: "Email is required" };
       mockedFormData.mockReturnValue({ ...errors });
       Validator.formData = mockedFormData.bind(Validator);
-      warper.setProps({
+      wrapper.setProps({
         email: "",
         password: "password"
       });
@@ -121,7 +121,7 @@ describe("Login component", () => {
         email: props.email,
         password: props.password
       });
-      expect(warper.state().errors).toEqual({
+      expect(wrapper.state().errors).toEqual({
         ...errors
       });
       expect(instance.handleNavigation).not.toBeCalled();
@@ -148,37 +148,37 @@ describe("Login component", () => {
   describe("rendered component", () => {
     let instance;
     beforeEach(() => {
-      instance = warper.instance();
+      instance = wrapper.instance();
       jest.spyOn(instance, "handleNavigation");
     });
     afterEach(() => [
-      warper.setProps({
+      wrapper.setProps({
         ...props
       })
     ]);
     it("should render without an error", () => {
-      expect(warper.find(`[data-test="login"]`).length).toBe(1);
+      expect(wrapper.find(`[data-test="login"]`).length).toBe(1);
     });
     it("should render two part of the screen", () => {
-      expect(warper.find(`[data-test="auth-left"]`).length).toBe(1);
-      expect(warper.find(`[data-test="auth-right"]`).length).toBe(1);
+      expect(wrapper.find(`[data-test="auth-left"]`).length).toBe(1);
+      expect(wrapper.find(`[data-test="auth-right"]`).length).toBe(1);
     });
     it("should render all basic components", () => {
-      expect(warper.find(`[data-test="logo"]`).length).toBe(2);
-      expect(warper.find(`[data-test="login-form"]`).length).toBe(1);
-      expect(warper.find(`[data-test="nav-link"]`).length).toBe(2);
-      expect(warper.find(SocialButton).length).toBe(3);
+      expect(wrapper.find(`[data-test="logo"]`).length).toBe(2);
+      expect(wrapper.find(`[data-test="login-form"]`).length).toBe(1);
+      expect(wrapper.find(`[data-test="nav-link"]`).length).toBe(2);
+      expect(wrapper.find(SocialButton).length).toBe(3);
     });
     it("should render two TextInputs and button", () => {
-      expect(warper.find(TextInput).length).toBe(2);
-      expect(warper.find(FormButton).length).toBe(1);
+      expect(wrapper.find(TextInput).length).toBe(2);
+      expect(wrapper.find(FormButton).length).toBe(1);
     });
     it("should navigate to sign up page", () => {
       findElement(BasicButton, 0).simulate("click");
       expect(instance.handleNavigation.mock.calls.length).toBe(1);
     });
     it("should render component with initial props", () => {
-      warper.find(TextInput).forEach(input => {
+      wrapper.find(TextInput).forEach(input => {
         expect(input.props().value).toBe("");
       });
     });

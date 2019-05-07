@@ -11,12 +11,12 @@ const props = {
   socialAuthSuccess: false,
   socialAuthFailed: false
 };
-const warper = shallow(<SocialAuth {...props} />);
+const wrapper = shallow(<SocialAuth {...props} />);
 
 describe("Social auth component", () => {
   let instance;
   beforeEach(() => {
-    instance = warper.instance();
+    instance = wrapper.instance();
     jest.spyOn(instance, "handleFailure");
     jest.spyOn(instance, "handleSuccess");
   });
@@ -24,16 +24,16 @@ describe("Social auth component", () => {
     handleUserLogin.mockClear();
     instance.handleFailure.mockClear();
     instance.handleSuccess.mockClear();
-    warper.setProps({
+    wrapper.setProps({
       ...props
     });
   });
   it("should match the snapshot", () => {
-    expect(toJson(warper)).toMatchSnapshot();
+    expect(toJson(wrapper)).toMatchSnapshot();
     expect(handleUserLogin).toHaveBeenCalledWith("23qwertyuhjbgty");
   });
   it("return failure and redirect to sign_in page", () => {
-    warper.setProps({
+    wrapper.setProps({
       isSubmitting: false,
       socialAuthFailed: true
     });
@@ -41,7 +41,7 @@ describe("Social auth component", () => {
     expect(instance.handleFailure.mock.calls.length).toBe(1);
   });
   it("return failure and redirect to sign_in page", () => {
-    warper.setProps({
+    wrapper.setProps({
       isSubmitting: false,
       socialAuthSuccess: true
     });
