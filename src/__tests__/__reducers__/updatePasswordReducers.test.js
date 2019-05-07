@@ -67,7 +67,7 @@ describe("Update password reducers", () => {
     expect(
       updatePassword(INITIAL_STATE, {
         type: PASSWORD_UPDATE_FAILED,
-        payload: { ...payload }
+        payload
       })
     ).toEqual({
       ...INITIAL_STATE,

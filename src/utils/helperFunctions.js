@@ -1,6 +1,5 @@
 import ReactHtmlParser from "react-html-parser";
-
-import { filter, flatten, values, keyBy } from "lodash";
+import { flatten } from "lodash";
 /**
  * @description check if value is empty
  * @param {*} value - input to validate
@@ -74,17 +73,20 @@ export const calculateTimeStamp = time => {
  * @param {string} key - Attribute that should be object key
  * @returns {object} - an object with key value pair
  */
-export const arrayToObject = (items, key) => keyBy(items, item => item[key]);
-
-/**
- *
+export const arrayToObject = (items = [], key = "id") =>
+  items.reduce((itemsObj, item) => {
+    itemsObj[item[key]] = item;
+    return itemsObj;
+  }, {});
+/*
  * @param {array} items - array of items to be sorted
  * @param {string} tag - value for array to be filtered by
  * @returns {array} - an array with filtered articles
  */
-export const filterByTag = (items, tag) =>
-  filter(items, item => item.tagsList.includes(tag));
 
+export const values = (items = {}) => Object.values(items);
+export const filterByTag = (items, tag) =>
+  values(items).filter(item => item.tagsList.includes(tag));
 /**
  *
  * @param {object} items - Object containing articles with tags.

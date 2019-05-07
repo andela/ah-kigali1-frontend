@@ -335,8 +335,8 @@ export const articles = [
   }
 ];
 
-export const authors = {
-  "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa": {
+export const authors = [
+  {
     following: false,
     username: "luc123",
     image: null,
@@ -344,4 +344,4 @@ export const authors = {
     lastName: null,
     id: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa"
   }
-};
+];

@@ -21,6 +21,7 @@ const mockStore = storeConfig([thunk]);
 let store;
 const push = jest.fn();
 const history = {};
+const { API_BASE_URL } = process.env;
 
 describe("Search Action Creators", () => {
   beforeEach(() => {
@@ -53,13 +54,13 @@ describe("Search Action Creators", () => {
       {
         type: ARTICLE_SEARCH_SUCCESS,
         payload: {
-          articles: { ...arrayToObject(articles, "id") },
-          authors: { ...authors }
+          articles: arrayToObject(articles, "id"),
+          authors: arrayToObject(authors, "id")
         }
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}/articles?keyword=${keyword}&page=${1}`,
+      `${API_BASE_URL}/articles?keyword=${keyword}&page=${1}`,
       {
         status: 200,
         response: {
@@ -84,13 +85,13 @@ describe("Search Action Creators", () => {
       {
         type: ARTICLE_SEARCH_SUCCESS,
         payload: {
-          articles: { ...arrayToObject(articles, "id") },
-          authors: { ...authors }
+          articles: arrayToObject(articles, "id"),
+          authors: arrayToObject(authors, "id")
         }
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}/articles?keyword=${keyword}&page=${2}`,
+      `${API_BASE_URL}/articles?keyword=${keyword}&page=${2}`,
       {
         status: 200,
         response: {
@@ -121,7 +122,7 @@ describe("Search Action Creators", () => {
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}${actions.searchURL(keyword, pageNumber)}`,
+      `${API_BASE_URL}${actions.searchURL(keyword, pageNumber)}`,
       {
         status: 401,
         response: {
@@ -147,11 +148,11 @@ describe("Search Action Creators", () => {
       },
       {
         type: SET_SUGGESTED_ARTICLES,
-        payload: { articles: { ...arrayToObject(articles, "id") } }
+        payload: { articles: arrayToObject(articles, "id") }
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
+      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
       {
         status: 200,
         response: {
@@ -179,12 +180,10 @@ describe("Search Action Creators", () => {
       }
     ];
     moxios.stubRequest(
-      `${process.env.API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
+      `${API_BASE_URL}${actions.searchURL(query)}&limit=${4}`,
       {
         status: 500,
-        response: {
-          ...payload
-        }
+        response: payload
       }
     );
     store = mockStore({});

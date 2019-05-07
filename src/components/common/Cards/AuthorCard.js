@@ -26,13 +26,16 @@ const AuthorCard = props => {
     </div>
   );
 };
+
 AuthorCard.propTypes = {
   following: PropTypes.bool,
   image: PropTypes.string,
   username: PropTypes.string.isRequired
 };
+
 AuthorCard.defaultProps = {
   following: false,
   image: null
 };
+
 export default AuthorCard;
