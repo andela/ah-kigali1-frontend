@@ -116,11 +116,15 @@ export class Navbar extends Component {
                           New Story
                         </Link>
                       </li>
-                      <li>
-                        <Link to={`/profiles/${currentUser.username}`}>
-                          Profile
-                        </Link>
-                      </li>
+
+                      {!isEmpty(currentUser) && (
+                        <li>
+                          <Link to={`/profiles/${currentUser.username}`}>
+                            Profile
+                          </Link>
+                        </li>
+                      )}
+
                       <li>
                         <Link to="/stats">Stats</Link>
                       </li>
@@ -165,12 +169,13 @@ Navbar.propTypes = {
     push: PropTypes.func
   }).isRequired,
   suggestedArticles: PropTypes.shape({}),
-  currentUser: PropTypes.shape({}).isRequired
+  currentUser: PropTypes.shape({})
 };
 
 Navbar.defaultProps = {
   searchQuery: "",
-  suggestedArticles: {}
+  suggestedArticles: {},
+  currentUser: {}
 };
 
 export default withRouter(

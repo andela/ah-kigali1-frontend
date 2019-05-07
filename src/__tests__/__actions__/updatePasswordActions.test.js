@@ -54,7 +54,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_FAILED,
-        payload: { ...payload }
+        payload
       }
     ];
     return store
@@ -82,7 +82,7 @@ describe("update password actions ceators", () => {
       },
       {
         type: PASSWORD_UPDATE_SUCCESS,
-        payload: { ...payload }
+        payload
       }
     ];
     return store
