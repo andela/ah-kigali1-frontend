@@ -42,20 +42,10 @@ describe("update password actions ceators", () => {
       password: "password"
     };
 
-<<<<<<< HEAD
     moxios.stubRequest(`${API_URL}/users/${params.token}/password`, {
       status: 404,
       response: {
         ...payload
-=======
-    moxios.stubRequest(
-      `${process.env.API_URL}/users/${params.token}/password`,
-      {
-        status: 404,
-        response: {
-          ...payload
-        }
->>>>>>> chore(fix):  reporting form
       }
     });
     const expectedActions = [
