@@ -30,7 +30,7 @@ import moreIcon from "../assets/icons/more.svg";
 import ratingIcon from "../assets/icons/star.svg";
 
 export const mapStateToProps = state => ({
-  currentUser: state.login.currentUser,
+  currentUser: state.auth.currentUser,
   asideArticles: state.fetchedArticle.asideArticles,
   article: state.fetchedArticle
 });
@@ -452,6 +452,7 @@ Article.propTypes = {
     })
   }).isRequired
 };
+
 export default withRouter(
   connect(
     mapStateToProps,
