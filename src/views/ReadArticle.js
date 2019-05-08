@@ -34,7 +34,10 @@ import {
   calculateTimeStamp,
   isBottom,
   getSelectedLocation,
-  markUserHighlight
+  markUserHighlight,
+  getSelectedLocation,
+  customHighlightColor,
+  removeCustomHighligh
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
