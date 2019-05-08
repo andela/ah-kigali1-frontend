@@ -29,6 +29,13 @@ export const article3 = {
   description: "Hello world"
 };
 export const props1 = {
+  deleteOneArticle: jest.fn(() => "Hello world"),
+  currentUser: {
+    firstName: "Yves",
+    lastName: "John",
+    image: "",
+    username: "Yves2019"
+  },
   history: {
     push: jest.fn()
   },
@@ -69,10 +76,16 @@ export const props1 = {
       tagsList: ["manchester", "united"]
     }
   },
-  fetchOneArticle: jest.fn(),
-  deleteOneArticle: jest.fn()
+  fetchOneArticle: jest.fn()
 };
 export const props2 = {
+  deleteOneArticle: jest.fn(() => "Hello world"),
+  currentUser: {
+    firstName: "Yves",
+    lastName: "John",
+    image: "",
+    username: "Yves2019"
+  },
   history: {
     push: jest.fn()
   },
@@ -112,10 +125,15 @@ export const props2 = {
       tagsList: []
     }
   },
-  fetchOneArticle: jest.fn(),
-  deleteOneArticle: jest.fn()
+  fetchOneArticle: jest.fn()
 };
 export const props3 = {
+  currentUser: {
+    firstName: "Yves",
+    lastName: "John",
+    image: "",
+    username: "John203"
+  },
   history: {
     push: jest.fn()
   },
@@ -133,6 +151,12 @@ export const props3 = {
   deleteOneArticle: jest.fn(() => "hello world")
 };
 export const props4 = {
+  currentUser: {
+    firstName: "Yves",
+    lastName: "John",
+    image: "",
+    username: "John203"
+  },
   history: {
     push: jest.fn()
   },
@@ -150,6 +174,12 @@ export const props4 = {
   deleteOneArticle: jest.fn()
 };
 export const props5 = {
+  currentUser: {
+    firstName: "Yves",
+    lastName: "John",
+    image: "",
+    username: "John203"
+  },
   history: {
     push: jest.fn()
   },
@@ -206,7 +236,7 @@ export const mainCardProps1 = {
         },
         like: 1,
         body: "Hello world",
-        id: 1,
+        id: "1",
         createdAt: "2019-04-20T09:37:50.006Z"
       }
     ],
@@ -238,7 +268,7 @@ export const mainCardProps2 = {
         },
         like: 1,
         body: "Hello world",
-        id: 1,
+        id: "1",
         createdAt: "2019-04-20T09:37:50.006Z"
       }
     ],

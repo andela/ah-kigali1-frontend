@@ -7,6 +7,7 @@ import {
 } from "../../views/ReadArticle";
 import { props1, props2, props3, props4, props5 } from "../__mocks__/testData";
 
+jest.useFakeTimers();
 describe(" Read article", () => {
   test("render the full component with aside articles", () => {
     const wrapper = shallow(<Article {...props1} />);
@@ -84,5 +85,50 @@ describe(" Read article", () => {
       }
     });
     expect(secondCall).toEqual(false);
+  });
+
+  test("should display more reactions model", () => {
+    const wrapper = shallow(<Article {...props1} />);
+    wrapper.instance().toggleReportingModal();
+    expect(wrapper.state().reportingForm).toEqual(true);
+    wrapper.instance().toggleReportingModal();
+    expect(wrapper.state().reportingForm).toEqual(false);
+  });
+
+  test("should display reporting form ", () => {
+    const wrapper = shallow(<Article {...props1} />);
+    wrapper.instance().toggleReactionsModal();
+    expect(wrapper.state().displayModal).toEqual(true);
+    wrapper.instance().toggleReactionsModal();
+    expect(wrapper.state().displayModal).toEqual(false);
+  });
+
+  test("should redirect to edit article ", () => {
+    const wrapper = shallow(<Article {...props1} />);
+    wrapper.instance().redirectToEdit();
+    expect(props1.history.push).toHaveBeenCalled();
+  });
+
+  test("should test the presence of edit and deleting buttons", () => {
+    const wrapper = shallow(<Article {...props1} />);
+    expect(wrapper.find(".delete_article")).toHaveLength(1);
+  });
+
+  test("should test deleting an article", async () => {
+    const wrapper = shallow(<Article {...props1} />);
+    await props1.deleteOneArticle.mockResolvedValue({ status: 200 });
+    wrapper
+      .find(".delete_article")
+      .at(0)
+      .simulate("click");
+    expect(props1.history.push).toHaveBeenCalled();
+  });
+
+  test("should test deleting an article", async () => {
+    const wrapper = shallow(<Article {...props2} />);
+    props2.deleteOneArticle.mockClear();
+    await props2.deleteOneArticle.mockResolvedValue({ status: 400 });
+    wrapper.find(".delete_article").simulate("click");
+    expect(props2.history.push).not.toHaveBeenCalled();
   });
 });

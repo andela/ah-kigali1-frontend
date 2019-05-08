@@ -18,7 +18,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const BASE_URL = process.env.API_BASE_URL;
+const { API_URL } = process.env;
 describe("fetching article", () => {
   test("should return fetching article action", () => {
     expect(fetchingArticle()).toEqual({ type: FETCHING_ARTICLE });
@@ -49,13 +49,13 @@ describe("Fetching and deleting an article ", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/helloWorld`, {
+    await moxios.stubRequest(`${API_URL}/articles/helloWorld`, {
       status: 200,
       response: {
         message: "Article fetched"
       }
     });
-    await moxios.stubRequest(`${BASE_URL}/articles?limit=7`, {
+    await moxios.stubRequest(`${API_URL}/articles?limit=7`, {
       status: 200,
       response: {
         articles: [""]
@@ -76,7 +76,7 @@ describe("Fetching and deleting an article ", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/helloWorld`, {
+    await moxios.stubRequest(`${API_URL}/articles/helloWorld`, {
       status: 404,
       response: {
         message: "Error is thrown"
@@ -97,7 +97,7 @@ describe("Fetching and deleting an article ", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/helloWorld`, {
+    await moxios.stubRequest(`${API_URL}/articles/helloWorld`, {
       status: 200,
       response: {
         message: "Article deleted successfully"
@@ -118,7 +118,7 @@ describe("Fetching and deleting an article ", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/helloWorld`, {
+    await moxios.stubRequest(`${API_URL}/articles/helloWorld`, {
       status: 404,
       response: {
         message: "Error is thrown"

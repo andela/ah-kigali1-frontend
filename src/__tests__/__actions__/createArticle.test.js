@@ -29,7 +29,7 @@ dotenv.config();
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-const BASE_URL = process.env.API_BASE_URL;
+const { API_URL } = process.env;
 describe("article action creators", () => {
   test("should return the on input change action", () => {
     const data = {
@@ -78,7 +78,7 @@ describe("async action creator ", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles`, {
+    await moxios.stubRequest(`${API_URL}/articles`, {
       status: 201,
       response: {
         message: "Article Created"
@@ -97,7 +97,7 @@ describe("async action creator ", () => {
         payload: "Sorry, we are unable to authenticate you"
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles`, {
+    await moxios.stubRequest(`${API_URL}/articles`, {
       status: 401,
       response: {
         message: "Sorry, we are unable to authenticate you"
@@ -133,7 +133,7 @@ describe("Edit article", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/hello-world`, {
+    await moxios.stubRequest(`${API_URL}/articles/hello-world`, {
       status: 201,
       response: {
         message: "Article updated"
@@ -152,7 +152,7 @@ describe("Edit article", () => {
         payload: "Sorry, we are unable to authenticate you"
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/hello-world`, {
+    await moxios.stubRequest(`${API_URL}/articles/hello-world`, {
       status: 401,
       response: {
         message: "Sorry, we are unable to authenticate you"
@@ -172,7 +172,7 @@ describe("Edit article", () => {
         }
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/hell-world`, {
+    await moxios.stubRequest(`${API_URL}/articles/hell-world`, {
       status: 200,
       response: {
         message: "Article retrieved"
@@ -190,7 +190,7 @@ describe("Edit article", () => {
         payload: "No article with that slug"
       }
     ];
-    await moxios.stubRequest(`${BASE_URL}/articles/hello-world`, {
+    await moxios.stubRequest(`${API_URL}/articles/hello-world`, {
       status: 404,
       response: {
         message: "No article with that slug"
