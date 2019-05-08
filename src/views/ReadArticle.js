@@ -28,7 +28,10 @@ import {
   isCurrentUserAuthor,
   stringToHtmlElement,
   calculateTimeStamp,
-  isBottom
+  isBottom,
+  getSelectedLocation,
+  customHighlightColor,
+  removeCustomHighligh
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -43,6 +46,8 @@ import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 import Loading from "../components/Animations/LoadingDots";
+import HighlighPopover from "../components/PopOvers/HighlighPopover";
+import CommentModel from "../components/PopOvers/CommentModel";
 
 export const mapStateToProps = ({
   auth,
@@ -89,7 +94,11 @@ export class Article extends Component {
     displayModal: false,
     reportingForm: false,
     page: 1,
-    isCommentEmpty: true
+    isCommentEmpty: true,
+    top: 0,
+    left: 0,
+    highlightedText: "",
+    commentModelOpen: false
   };
 
   componentDidMount = () => {
@@ -110,6 +119,7 @@ export class Article extends Component {
   componentWillMount = () => {
     this.getMoreArticles();
     document.addEventListener("scroll", () => this.handleScroll(), true);
+    document.addEventListener("select", this.handleHighlight);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -263,7 +273,10 @@ export class Article extends Component {
       displayModal,
       reportingForm,
       slug,
-      isCommentEmpty
+      isCommentEmpty,
+      top,
+      left,
+      commentModelOpen
     } = this.state;
     const {
       article,
@@ -359,9 +372,25 @@ export class Article extends Component {
               </div>
               <div className="article-content">
                 <div className="article-title">{title}</div>
-                <div className="article-text">
+                <section
+                  className="article-text"
+                  onMouseUp={this.handleHighlight}
+                  onMouseMove={this.handleHighlight}
+                  ref={this.setArticleBodyRef}
+                  id="article-body"
+                >
                   {stringToHtmlElement(body).body}
-                </div>
+                  <HighlighPopover
+                    top={top}
+                    left={left}
+                    onClick={() => {
+                      customHighlightColor(highlightedText);
+                      this.setState({
+                        commentModelOpen: true
+                      });
+                    }}
+                  />
+                </section>
                 {isAuthor ? (
                   <div>
                     <Button
@@ -498,6 +527,15 @@ export class Article extends Component {
         ) : (
           ""
         )}
+        <CommentModel
+          isOpen={commentModelOpen}
+          onClose={() =>
+            this.setState({
+              commentModelOpen: false
+            })
+          }
+          id="comment-model"
+        />
       </div>
     );
   }

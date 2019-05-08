@@ -154,3 +154,53 @@ export const checkNextProps = (nextProps, currentProps) => {
   }
   return true;
 };
+/**
+ * @description - Get the highlighted text
+ * @returns {string} - text
+ */
+
+export const getHighlightedText = () => window.getSelection().toString();
+
+/**
+ * @description - get location of highlighted text
+ * @return {object} - Top and left
+ */
+
+export const getSelectedLocation = () => {
+  const selection = window.getSelection(),
+    range = selection.getRangeAt(0),
+    refTop = range.getBoundingClientRect().top,
+    refLeft = range.getBoundingClientRect().left;
+  return {
+    top: window.scrollY + refTop - 28,
+    left: refLeft / 1.5 + 156
+  };
+};
+
+/**
+ * @description - highlight a highlighted text with different color
+ */
+
+export const customHighlightColor = highlightedText => {
+  const range = window.getSelection().getRangeAt(0);
+  const spanElement = document.createElement("span");
+  spanElement.setAttribute("class", "highlighted");
+  const textNode = highlightedText;
+  spanElement.append(textNode);
+  range.deleteContents();
+  range.insertNode(spanElement);
+};
+/**
+ * @description - remove custom background on highlighted text
+ * @returns {undefined} - returns nothing
+ */
+export const removeCustomHighligh = () => {
+  const highlightedSpans = document.querySelectorAll(
+    "#article-body span.highlighted"
+  );
+  if (highlightedSpans) {
+    highlightedSpans.forEach(element =>
+      element.classList.remove("highlighted")
+    );
+  }
+};
