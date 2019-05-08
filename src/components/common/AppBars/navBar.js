@@ -166,12 +166,13 @@ Navbar.propTypes = {
     push: PropTypes.func
   }).isRequired,
   suggestedArticles: PropTypes.shape({}),
-  currentUser: PropTypes.shape({}).isRequired
+  currentUser: PropTypes.shape({})
 };
 
 Navbar.defaultProps = {
   searchQuery: "",
-  suggestedArticles: {}
+  suggestedArticles: {},
+  currentUser: {}
 };
 
 export default withRouter(
