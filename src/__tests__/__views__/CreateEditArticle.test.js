@@ -37,6 +37,7 @@ describe("Create/Edit article", () => {
     jest.useFakeTimers();
     jest.runAllTimers();
   });
+
   test("should render the creating article interface", () => {
     const { wrapper } = shallowSetup(undefined, article);
     expect(wrapper.find(".cancel")).toHaveLength(0);
@@ -62,6 +63,7 @@ describe("Create/Edit article", () => {
     wrapper.find(".publish").simulate("click");
     expect(props.createArticle).toHaveBeenCalled();
   });
+
   test("should call edit article method with correct input ", () => {
     const { wrapper, props } = shallowSetup(
       "/articles/helloWorld/edit",
@@ -79,6 +81,7 @@ describe("Create/Edit article", () => {
     wrapper.find(".publish").simulate("click");
     expect(props.editOneArticle).toHaveBeenCalled();
   });
+
   test("should cancel edit ", () => {
     const { wrapper, props } = shallowSetup(
       "/articles/helloWorld/edit",
@@ -88,6 +91,7 @@ describe("Create/Edit article", () => {
     wrapper.instance().cancelEdit();
     expect(props.history.push).toHaveBeenCalledWith("/");
   });
+
   test("should not call edit article method with empty title", () => {
     const { wrapper, props } = shallowSetup(undefined, article1);
     wrapper.find(".title__input").simulate("change", {
@@ -105,16 +109,19 @@ describe("Create/Edit article", () => {
     expect(wrapper.find(".error").text()).toEqual("<ErrorMessage />");
     expect(props.editOneArticle).not.toHaveBeenCalled();
   });
+
   test("should not edit article method with no description", () => {
     const { wrapper, props } = shallowSetup(undefined, article2);
     wrapper.find(".publish").simulate("click");
     expect(props.editOneArticle).not.toHaveBeenCalled();
   });
+
   test("should handle editor changes", () => {
     const { wrapper } = shallowSetup(article);
     wrapper.instance().onEditorChange("hello world");
     expect(wrapper.state().value).toEqual("hello world");
   });
+
   test("should add tag in state", () => {
     const { wrapper } = shallowSetup(undefined, article);
     wrapper
@@ -122,6 +129,7 @@ describe("Create/Edit article", () => {
       .simulate("change", { target: { value: "hello world", name: "tag" } });
     expect(wrapper.state().tag).toEqual("hello world");
   });
+
   test("should add new tag in tagsList", () => {
     const { wrapper } = shallowSetup(undefined, article);
     wrapper.find(".tag").simulate("change", {
@@ -130,11 +138,13 @@ describe("Create/Edit article", () => {
     wrapper.find(".tag").simulate("keyDown", { keyCode: 13 });
     expect(wrapper.state().tagsList).toEqual(["hello world"]);
   });
+
   test("should not add an empty tag", () => {
     const { wrapper } = shallowSetup(undefined, article);
     wrapper.instance().handleNewTag({ keyCode: 13 });
     expect(wrapper.state().tagsList).toEqual([]);
   });
+
   test("should handle removing tag", () => {
     const { wrapper } = shallowSetup(undefined, article);
     wrapper.find(".tag").simulate("change", {
@@ -154,6 +164,7 @@ describe("Component lifecycle method", () => {
     expect(wrapper.state().title).toEqual("");
     expect(wrapper.state().description).toEqual("");
   });
+
   test("should call componentWillReceiveProps with different props", () => {
     const { wrapper } = shallowSetup(undefined, article);
     wrapper.instance().componentWillReceiveProps({
@@ -162,6 +173,7 @@ describe("Component lifecycle method", () => {
     expect(wrapper.state().title).toEqual("Hello world");
     expect(wrapper.state().description).toEqual("Hello world");
   });
+
   test("should call componentWillReceiveProps with article error", () => {
     jest.useFakeTimers();
     jest.runAllTimers();
@@ -179,11 +191,13 @@ describe("Edit/create article mapDispatchToProps", () => {
     mapDispatchToProps(dispatch).fetchArticleToEdit("hello-world");
     expect(dispatch.mock.calls[0][0]).toBeDefined();
   });
+
   test("should return fetching creating article ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).createArticle(article);
     expect(dispatch.mock.calls[0][0]).toBeDefined();
   });
+
   test("should return editing one article ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).editOneArticle(article, "hello-world");

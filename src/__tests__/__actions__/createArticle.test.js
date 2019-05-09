@@ -28,6 +28,7 @@ describe("async action creator ", () => {
   beforeEach(() => {
     moxios.install(axios);
   });
+
   afterEach(() => {
     moxios.uninstall(axios);
   });
@@ -85,6 +86,7 @@ describe("Edit article", () => {
   beforeEach(() => {
     moxios.install(axios);
   });
+
   afterEach(() => {
     moxios.uninstall(axios);
   });
@@ -125,6 +127,7 @@ describe("Edit article", () => {
         expect(store.getActions()).toEqual(actions);
       });
   });
+
   test("should dispatch article error, in edit article", async () => {
     const store = mockStore({});
     const actions = [
