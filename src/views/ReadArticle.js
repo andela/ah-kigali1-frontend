@@ -31,10 +31,10 @@ import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 
-export const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser,
-  asideArticles: state.fetchedArticle.asideArticles,
-  article: state.fetchedArticle
+export const mapStateToProps = ({ login, fetchedArticle }) => ({
+  currentUser: login.currentUser,
+  asideArticles: fetchedArticle.asideArticles,
+  article: fetchedArticle
 });
 export const mapDispatchToProps = dispatch => ({
   deleteOneArticle: slug => dispatch(deleteArticle(slug)),
@@ -337,7 +337,7 @@ export class Article extends Component {
                 />
                 <ShareIcon
                   image={twitterIcon}
-                  href={`http://twitter.com/share?url=${currentUrl}&text=${title}&hashtags=authorsHeaven,software development`}
+                  href={`//twitter.com/share?url=${currentUrl}&text=${title}&hashtags=authorsHeaven,software development`}
                 />
                 <ShareIcon
                   image={emailIcon}

@@ -2,9 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ShareIcon = ({ href, image }) => (
-  <a href={href} className="share-icon">
+  <button
+    type="button"
+    className="share-icon"
+    href={href}
+    onClick={() => window.open(href)}
+  >
     <img className="share-icon" src={image} alt="logo" />
-  </a>
+  </button>
 );
 
 ShareIcon.propTypes = {

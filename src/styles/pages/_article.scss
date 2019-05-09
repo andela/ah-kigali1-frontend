@@ -18,6 +18,8 @@ body {
         align-items: center;
         .share-icon {
           width: 30px;
+          outline: none;
+          border: none;
           height: 30px;
           &:not(:first-child) {
             margin-top: 1em;
