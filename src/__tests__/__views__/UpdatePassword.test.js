@@ -25,8 +25,8 @@ const props = {
   location: { search: `?token=${token}` },
   history: { push: callback }
 };
-const warper = shallow(<UpdatePassword {...props} />);
-const findElement = (element, index) => warper.find(element).at(index);
+const wrapper = shallow(<UpdatePassword {...props} />);
+const findElement = (element, index) => wrapper.find(element).at(index);
 const dataFromForm = {
   password: { name: "password", value: "password" },
   confirmPassword: { name: "confirmPassword", value: "password" }
@@ -35,8 +35,8 @@ describe("Update Password", () => {
   describe("test snapshot", () => {
     it("should match the snapshot", () => {
       expect(toJson(UpdatePassword)).toMatchSnapshot();
-      expect(warper.find(TextInput).length).toEqual(2);
-      expect(warper.find(FormButton).length).toEqual(1);
+      expect(wrapper.find(TextInput).length).toEqual(2);
+      expect(wrapper.find(FormButton).length).toEqual(1);
     });
   });
   describe("test component life cycle", () => {
@@ -44,13 +44,13 @@ describe("Update Password", () => {
       const errorPayload = {
         message: "Password too short"
       };
-      warper.setProps({
+      wrapper.setProps({
         errors: {
           ...errorPayload
         }
       });
-      expect(warper.state().token).toEqual(token);
-      expect(warper.state().errors).toEqual({
+      expect(wrapper.state().token).toEqual(token);
+      expect(wrapper.state().errors).toEqual({
         ...errorPayload
       });
     });
@@ -58,7 +58,7 @@ describe("Update Password", () => {
   describe("component method", () => {
     let instance;
     beforeEach(() => {
-      instance = warper.instance();
+      instance = wrapper.instance();
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
       jest.spyOn(instance, "handleNavigation");
@@ -71,7 +71,7 @@ describe("Update Password", () => {
       mockFormData.mockClear();
       mockIsMatch.mockClear();
       callback.mockClear();
-      warper.setProps({
+      wrapper.setProps({
         ...props
       });
     });
@@ -105,12 +105,12 @@ describe("Update Password", () => {
       Validator.formData = mockFormData.bind(Validator);
       Validator.isMatch = mockIsMatch.bind(Validator);
       findElement(FormButton, 0).simulate("click");
-      warper.setProps({
+      wrapper.setProps({
         passwordUpdateSuccess: true
       });
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(handleUpdatePassword).not.toBeCalledWith({
-        token: warper.state().token,
+        token: wrapper.state().token,
         password: dataFromForm.password.value
       });
       expect(instance.handleNavigation).toBeCalledWith("sign_in");
@@ -123,7 +123,7 @@ describe("Update Password", () => {
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(handleUpdatePassword).toBeCalledWith({
-        token: warper.state().token,
+        token: wrapper.state().token,
         password: dataFromForm.password.value
       });
     });

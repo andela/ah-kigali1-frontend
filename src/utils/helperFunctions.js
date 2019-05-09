@@ -1,5 +1,5 @@
 import ReactHtmlParser from "react-html-parser";
-
+import { flatten } from "lodash";
 /**
  * @description check if value is empty
  * @param {*} value - input to validate
@@ -65,4 +65,51 @@ export const stringToHtmlElement = text => {
 export const calculateTimeStamp = time => {
   const date = new Date(time);
   return date.toDateString();
+};
+
+/**
+ * @description transforming Array into an Object with Key
+ * @param {array} items - Array to be transformed into Object
+ * @param {string} key - Attribute that should be object key
+ * @returns {object} - an object with key value pair
+ */
+export const arrayToObject = (items = [], key = "id") =>
+  items.reduce((itemsObj, item) => {
+    itemsObj[item[key]] = item;
+    return itemsObj;
+  }, {});
+/*
+ * @param {array} items - array of items to be sorted
+ * @param {string} tag - value for array to be filtered by
+ * @returns {array} - an array with filtered articles
+ */
+
+export const values = (items = {}) => Object.values(items);
+export const filterByTag = (items, tag) =>
+  values(items).filter(item => item.tagsList.includes(tag));
+/**
+ *
+ * @param {object} items - Object containing articles with tags.
+ * @returns {array} - an array of unique tags
+ */
+export const getTags = items => [
+  ...new Set(flatten([...values(items).map(item => item.tagsList)]))
+];
+
+/**
+ * @description detect if user scrolled to the bottom
+ * @returns {boolean} - true or false
+ */
+export const isBottom = () =>
+  window.innerHeight + document.documentElement.scrollTop >=
+  document.documentElement.offsetHeight;
+
+/**
+ * @description check if string contains a special character
+ * @param {string} value - string
+ * @returns {boolean} - true or false
+ */
+export const containsSpecialChar = value => {
+  const alphanumericRegex = /[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/g;
+  return alphanumericRegex.test(value);
 };

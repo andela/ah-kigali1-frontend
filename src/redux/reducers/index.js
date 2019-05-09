@@ -6,14 +6,15 @@ import socialAuthReducers from "./socialAuthReducers";
 import createArticleReducer from "./createArticleReducer";
 import readArticleReducer from "./readArticleReducer";
 import userReducer from "./userReducer";
+import searchReducers from "./searchReducers";
 
 export default combineReducers({
   auth: loginReducers,
   article: createArticleReducer,
-  login: loginReducers,
   resetPassword: resetPasswordReducers,
   updatePassword: updatePasswordReducers,
   socialAuth: socialAuthReducers,
   fetchedArticle: readArticleReducer,
-  user: userReducer
+  user: userReducer,
+  search: searchReducers
 });

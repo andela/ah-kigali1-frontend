@@ -24,13 +24,18 @@ class Categories extends Component {
                 }}
                 key={Number(index)}
                 className={category === focused ? "current" : null}
+                data-test="single-category"
               >
                 {category}
               </li>
             ))}
           </div>
         </div>
-        <div onClick={() => onMoreClick()} className="category-right">
+        <div
+          onClick={onMoreClick}
+          className="category-right"
+          data-test="btn-more"
+        >
           MORE
         </div>
       </div>

@@ -37,7 +37,7 @@ describe(" Read article", () => {
 
   test("should map states to props", () => {
     const state = {
-      login: {
+      auth: {
         currentUser: {
           username: "yves"
         }
