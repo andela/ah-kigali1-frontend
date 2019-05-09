@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Button from "../common/Buttons/FormButton";
 
-class CommentModel extends Component {
+export class CommentModel extends Component {
   state = {
     comment: ""
   };
@@ -31,6 +31,7 @@ class CommentModel extends Component {
             className="close"
             onClick={onClose}
             onKeyDown={onClose}
+            data-test="close-btn"
           >
             &times;
           </button>
@@ -41,6 +42,7 @@ class CommentModel extends Component {
             spellCheck="true"
             value={comment}
             onChange={e => this.setState({ comment: e.target.value })}
+            data-test="comment-model-input"
           />
           <Button value="Submit" />
         </div>

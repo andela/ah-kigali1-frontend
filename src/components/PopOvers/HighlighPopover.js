@@ -8,7 +8,12 @@ const HighlighPopover = ({ top, left, onClick }) => (
     style={{ left: `${left}px`, top: `${top}px` }}
   >
     <div className="highlightMenu-inner">
-      <button type="button" className="button-set" onClick={onClick}>
+      <button
+        type="button"
+        className="button-set"
+        data-test="button-set"
+        onClick={onClick}
+      >
         <img src={CommentIcon} alt="icon" />
       </button>
     </div>

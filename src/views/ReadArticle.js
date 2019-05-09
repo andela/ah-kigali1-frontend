@@ -378,6 +378,7 @@ export class Article extends Component {
                   onMouseMove={this.handleHighlight}
                   ref={this.setArticleBodyRef}
                   id="article-body"
+                  test-data="article-body"
                 >
                   {stringToHtmlElement(body).body}
                   <HighlighPopover
