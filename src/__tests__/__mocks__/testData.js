@@ -29,7 +29,6 @@ export const article3 = {
   description: "Hello world"
 };
 export const props1 = {
-<<<<<<< HEAD
   deleteOneArticle: jest.fn(() => "Hello world"),
   currentUser: {
     firstName: "Yves",
@@ -37,14 +36,12 @@ export const props1 = {
     image: "",
     username: "Yves2019"
   },
-=======
   following: {
     status: true,
     isFetching: false
   },
   followAuthor: jest.fn(),
   followUser: jest.fn(),
->>>>>>> [Feature #163518655] add following functionality
   history: {
     push: jest.fn()
   },
@@ -64,7 +61,7 @@ export const props1 = {
       createdAt: "2019-04-20T09:37:50.006Z",
       readTime: 1,
       author: {
-        username: "Yves2019",
+        username: "Yves2018",
         firstName: "Kagarama",
         lastName: "Iraguha"
       },
@@ -88,18 +85,16 @@ export const props1 = {
   fetchOneArticle: jest.fn()
 };
 export const props2 = {
-<<<<<<< HEAD
   deleteOneArticle: jest.fn(() => "Hello world"),
   currentUser: {
     firstName: "Yves",
     lastName: "John",
     image: "",
     username: "Yves2019"
-=======
+  },
   following: {
     status: true,
     isFetching: false
->>>>>>> [Feature #163518655] add following functionality
   },
   history: {
     push: jest.fn()
@@ -143,17 +138,15 @@ export const props2 = {
   fetchOneArticle: jest.fn()
 };
 export const props3 = {
-<<<<<<< HEAD
   currentUser: {
     firstName: "Yves",
     lastName: "John",
     image: "",
     username: "John203"
-=======
+  },
   following: {
     status: true,
     isFetching: false
->>>>>>> [Feature #163518655] add following functionality
   },
   history: {
     push: jest.fn()
@@ -172,17 +165,15 @@ export const props3 = {
   deleteOneArticle: jest.fn(() => "hello world")
 };
 export const props4 = {
-<<<<<<< HEAD
   currentUser: {
     firstName: "Yves",
     lastName: "John",
     image: "",
     username: "John203"
-=======
+  },
   following: {
     status: true,
     isFetching: false
->>>>>>> [Feature #163518655] add following functionality
   },
   history: {
     push: jest.fn()
@@ -201,17 +192,15 @@ export const props4 = {
   deleteOneArticle: jest.fn()
 };
 export const props5 = {
-<<<<<<< HEAD
   currentUser: {
     firstName: "Yves",
     lastName: "John",
     image: "",
     username: "John203"
-=======
+  },
   following: {
     status: true,
     isFetching: false
->>>>>>> [Feature #163518655] add following functionality
   },
   history: {
     push: jest.fn()

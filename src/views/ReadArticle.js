@@ -194,7 +194,7 @@ export class Article extends Component {
     deleteOneArticle(slug).then(response => {
       if (response.status === 200) {
         this.setState({ response: "Article deleted successfully" });
-        setTimeout(() => history.push("/"), 3000);
+        return setTimeout(() => history.push("/"), 3000);
       }
     });
   };
