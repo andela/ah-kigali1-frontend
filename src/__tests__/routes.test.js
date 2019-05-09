@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import Routes from "../views";
 import AuthRoutes from "../views/routes/AuthRoutes";
 import MainRoutes, { routes } from "../views/routes/MainRoutes";
-import Navbar from "../components/common/AppBars/navBar";
+import Navbar from "../components/common/AppBars/Navbar";
 
 const wrapperAuth = shallow(<Routes />);
 let allPaths = [];

@@ -1,4 +1,5 @@
 export const ADD_ARTICLE = "ADD_ARTICLE";
+
 /**
  * @description authentication actions
  */
@@ -7,6 +8,7 @@ export const SUBMITTING_LOGIN_CREDENTIALS = "IS_SUBMITTING_LOGIN_CREDENTIALS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESSFULLY";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
 /**
  * @description reset password action creator
  */
@@ -28,6 +30,7 @@ export const SUBMITTING_SOCIAL_AUTH = "SUBMITTING_SOCIAL_AUTH";
 export const SETTING_TOKEN_SOCIAL_AUTH = "SETTING_TOKEN_SOCIAL_AUTH";
 export const SOCIAL_AUTH_SUCCESS = "SOCIAL_AUTH_SUCCESS";
 export const SOCIAL_AUTH_FAILED = "SOCIAL_AUTH_FAILED";
+
 /**
  * @description Creating article action types
  */
@@ -55,6 +58,7 @@ export const FETCHING_ASIDE_ARTICLES = "FETCHING_ASIDE_ARTICLES";
  * @description delete article action types
  */
 export const DELETE_ARTICLE = " DELETE_ARTICLE";
+
 /**
  * @description profile actions
  */
@@ -76,9 +80,18 @@ export const ARTICLE_SEARCH_FAILED = "ARTICLE_SEARCH_FAILED";
 export const SEARCH_QUERY_CHANGE = "SEARCH_QUERY_CHANGE";
 export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 export const SET_SUGGESTED_ARTICLES = "SET_SUGGESTED_ARTICLES";
+
 /**
  * @description following action types
  */
 export const FOLLOWING_SUCCESS = "FOLLOWING_SUCCESS";
 export const WAITING_RESPONSE = "WAITING_RESPONSE";
 export const FOLLOWING_FAILED = "FOLLOWING_FAILED";
+
+/**
+ * @description notification action types
+ */
+export const FETCHING_NOTIFICATION = "FETCHING_NOTIFICATION";
+export const NOTIFICATION_SUCCESS = "NOTIFICATION_SUCCESS";
+export const NOTIFICATION_FAILED = "NOTIFICATION_FAILED";
+export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";
