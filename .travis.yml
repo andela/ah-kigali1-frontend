@@ -7,11 +7,7 @@ cache:
 install:
   - npm install
 script:
-<<<<<<< HEAD
   - npm test -u
-=======
-  - npm test -- -u
->>>>>>> 9c0e8d8e45f6383623a7f956cef9d1ff91adbcf4
 after_success:
   - npm run coveralls
   - "stable"
