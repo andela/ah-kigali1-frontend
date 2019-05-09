@@ -57,16 +57,6 @@ export class Navbar extends Component {
     this.wrapperRef = node;
   };
 
-  openNotification = () =>
-    this.setState(prevState => ({
-      isNotificationOpen: !prevState.isNotificationOpen
-    }));
-
-  openSideMenu = () =>
-    this.setState(prevState => ({
-      isUserDetailsOpen: !prevState.isUserDetailsOpen
-    }));
-
   handleClickOutside = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState(() => ({ isNotificationOpen: false }));
@@ -104,6 +94,16 @@ export class Navbar extends Component {
     });
     this.timeOut = setTimeout(() => getSuggestions(value), 1000);
   };
+
+  openNotification = () =>
+    this.setState(prevState => ({
+      isNotificationOpen: !prevState.isNotificationOpen
+    }));
+
+  openSideMenu = () =>
+    this.setState(prevState => ({
+      isUserDetailsOpen: !prevState.isUserDetailsOpen
+    }));
 
   render() {
     const {
