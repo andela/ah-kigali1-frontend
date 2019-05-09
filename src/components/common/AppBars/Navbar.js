@@ -57,14 +57,14 @@ export class Navbar extends Component {
     this.wrapperRef = node;
   };
 
+  setSearchPopOverRef = node => {
+    this.searchPopOverRef = node;
+  };
+
   handleClickOutside = event => {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState(() => ({ isNotificationOpen: false }));
     }
-  };
-
-  setSearchPopOverRef = node => {
-    this.searchPopOverRef = node;
   };
 
   handleEnterPress = e => {
