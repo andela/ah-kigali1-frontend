@@ -31,8 +31,8 @@ import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 
-export const mapStateToProps = ({ login, fetchedArticle }) => ({
-  currentUser: login.currentUser,
+export const mapStateToProps = ({ auth, fetchedArticle }) => ({
+  currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
   article: fetchedArticle
 });
