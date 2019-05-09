@@ -19,6 +19,7 @@ import {
   calculateTimeStamp
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
+import { followUser } from "../redux/actions/followingActions";
 import twitterIcon from "../assets/icons/twitter-icon.svg";
 import facebookIcon from "../assets/icons/fb-icon.svg";
 import thumbsUp from "../assets/img/like-icon.svg";
@@ -31,15 +32,17 @@ import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 
-export const mapStateToProps = ({ auth, fetchedArticle }) => ({
+export const mapStateToProps = ({ auth, fetchedArticle, following }) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
-  article: fetchedArticle
+  article: fetchedArticle,
+  following
 });
 
 export const mapDispatchToProps = dispatch => ({
   deleteOneArticle: slug => dispatch(deleteArticle(slug)),
-  fetchOneArticle: slug => dispatch(fetchArticle(slug))
+  fetchOneArticle: slug => dispatch(fetchArticle(slug)),
+  followUser: username => dispatch(followUser(username))
 });
 
 export class Article extends Component {
@@ -191,9 +194,14 @@ export class Article extends Component {
     deleteOneArticle(slug).then(response => {
       if (response.status === 200) {
         this.setState({ response: "Article deleted successfully" });
-        setTimeout(() => history.push("/"), 3000);
+        return setTimeout(() => history.push("/"), 3000);
       }
     });
+  };
+
+  followAuthor = username => {
+    const { followUser: followOther } = this.props;
+    followOther(username);
   };
 
   render() {
@@ -212,7 +220,8 @@ export class Article extends Component {
       readTime,
       image,
       firstName,
-      lastName;
+      lastName,
+      following;
     if (retrievedArticle) {
       ({
         author,
@@ -224,13 +233,17 @@ export class Article extends Component {
         readTime,
         comments
       } = retrievedArticle);
-      ({ username, firstName, lastName, image } = author);
+      ({ username, firstName, following, lastName, image } = author);
     }
     const isAuthor = isCurrentUserAuthor(username, currentUser);
     const {
       location: { host, pathname }
     } = window;
     const currentUrl = `${host}${pathname}`;
+    const { following: followObject } = this.props;
+    if (typeof followObject.status === "boolean") {
+      following = followObject.status;
+    }
     return (
       <div>
         {message && message !== "Article found successfully" ? (
@@ -263,8 +276,17 @@ export class Article extends Component {
                 {isAuthor ? (
                   false
                 ) : (
-                  <button className="author-follow" type="button">
-                    Follow
+                  <button
+                    className={following ? "focus" : "author-follow"}
+                    style={{
+                      cursor: followObject.isFetching ? "progress" : "pointer"
+                    }}
+                    type="button"
+                    disabled={followObject.isFetching}
+                    onClick={() => this.followAuthor(username)}
+                    data-test="follow_author"
+                  >
+                    {following ? "Following" : "Follow"}
                   </button>
                 )}
               </div>
@@ -279,6 +301,7 @@ export class Article extends Component {
                       className="btn delete_article"
                       onClick={this.handleDeleteArticle}
                       title="Delete"
+                      data-test="delete_article"
                     />
                     <Button
                       className="btn edit_article"
@@ -314,8 +337,8 @@ export class Article extends Component {
                       type="text"
                       value="Add new comment here"
                       placeholder="Add new comment here"
-                      onChange={() => <p>Value have changed</p>}
                       name="new-comment"
+                      data-test="new-comment"
                     />
                   </div>
                   {this.displayCommentsOnDesktop(comments)}
@@ -468,7 +491,9 @@ Article.propTypes = {
     params: PropTypes.shape({
       slug: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  followUser: PropTypes.func.isRequired,
+  following: PropTypes.bool.isRequired
 };
 
 export default withRouter(

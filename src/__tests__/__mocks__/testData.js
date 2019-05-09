@@ -36,6 +36,12 @@ export const props1 = {
     image: "",
     username: "Yves2019"
   },
+  following: {
+    status: true,
+    isFetching: false
+  },
+  followAuthor: jest.fn(),
+  followUser: jest.fn(),
   history: {
     push: jest.fn()
   },
@@ -55,7 +61,7 @@ export const props1 = {
       createdAt: "2019-04-20T09:37:50.006Z",
       readTime: 1,
       author: {
-        username: "Yves2019",
+        username: "Yves2018",
         firstName: "Kagarama",
         lastName: "Iraguha"
       },
@@ -85,6 +91,10 @@ export const props2 = {
     lastName: "John",
     image: "",
     username: "Yves2019"
+  },
+  following: {
+    status: true,
+    isFetching: false
   },
   history: {
     push: jest.fn()
@@ -134,6 +144,10 @@ export const props3 = {
     image: "",
     username: "John203"
   },
+  following: {
+    status: true,
+    isFetching: false
+  },
   history: {
     push: jest.fn()
   },
@@ -157,6 +171,10 @@ export const props4 = {
     image: "",
     username: "John203"
   },
+  following: {
+    status: true,
+    isFetching: false
+  },
   history: {
     push: jest.fn()
   },
@@ -179,6 +197,10 @@ export const props5 = {
     lastName: "John",
     image: "",
     username: "John203"
+  },
+  following: {
+    status: true,
+    isFetching: false
   },
   history: {
     push: jest.fn()

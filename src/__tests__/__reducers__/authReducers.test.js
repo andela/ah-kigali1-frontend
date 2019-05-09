@@ -5,6 +5,7 @@ import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   LOGIN_INPUT_CHANGE,
+  SET_CURRENT_USER,
   SUBMITTING_LOGIN_CREDENTIALS,
   IS_OPENING_SOCIAL_AUTH_PROVIDER,
   CANCEL_SOCIAL_AUTH
@@ -19,6 +20,7 @@ describe("Login reducers", () => {
       ...INITIAL_STATE
     });
   });
+
   it("should handle LOGIN_INPUT_CHANGE", () => {
     expect(
       loginReducers(INITIAL_STATE, {
@@ -39,6 +41,7 @@ describe("Login reducers", () => {
       [passwordInput.name]: passwordInput.value
     });
   });
+
   it("should handle SUBMITTING_LOGIN_CREDENTIALS", () => {
     expect(
       loginReducers(INITIAL_STATE, {
@@ -49,6 +52,7 @@ describe("Login reducers", () => {
       isSubmitting: true
     });
   });
+
   it("should handle LOGIN_FAILED", () => {
     const errorPayload = { message: "Invalid email or password", errors: {} };
     expect(
@@ -61,6 +65,7 @@ describe("Login reducers", () => {
       errors: { message: errorPayload.message, ...errorPayload.errors }
     });
   });
+
   it("should handle LOGIN_SUCCESS", () => {
     const successPayload = {
       message: "Sign in successfully",
@@ -77,6 +82,7 @@ describe("Login reducers", () => {
       token: successPayload.token
     });
   });
+
   it("should handle  IS_OPENING_SOCIAL_AUTH_PROVIDER", () => {
     expect(
       loginReducers(INITIAL_STATE, {
@@ -93,6 +99,18 @@ describe("Login reducers", () => {
     ).toEqual({
       ...INITIAL_STATE,
       isSubmitting: false
+    });
+  });
+
+  it("should handle  SET_CURRENT_USER", () => {
+    expect(
+      loginReducers(INITIAL_STATE, {
+        type: SET_CURRENT_USER,
+        payload: { name: "musigwa" }
+      })
+    ).toEqual({
+      ...INITIAL_STATE,
+      currentUser: { name: "musigwa" }
     });
   });
 });

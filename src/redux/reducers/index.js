@@ -7,6 +7,7 @@ import createArticleReducer from "./createArticleReducer";
 import readArticleReducer from "./readArticleReducer";
 import userReducer from "./userReducer";
 import searchReducers from "./searchReducers";
+import following from "./followingReducer";
 
 export default combineReducers({
   auth: loginReducers,
@@ -16,5 +17,6 @@ export default combineReducers({
   socialAuth: socialAuthReducers,
   fetchedArticle: readArticleReducer,
   user: userReducer,
-  search: searchReducers
+  search: searchReducers,
+  following
 });
