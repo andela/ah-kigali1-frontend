@@ -155,3 +155,9 @@ export const RATING_FOUND = "RATING_FOUND ";
  */
 
 export const BOOKMARK_ARTICLE = "BOOKMARK_ARTICLE";
+/**
+ * @description All articles action types
+ */
+export const ALL_ARTICLES = "ALL_ARTICLES";
+export const FETCHING_ALL_ARTICLES = "FETCHING_ALL_ARTICLES";
+export const ALL_ARTICLES_ERROR = "ALL_ARTICLES_ERROR";

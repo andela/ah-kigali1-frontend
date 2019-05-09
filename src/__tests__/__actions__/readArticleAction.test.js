@@ -15,8 +15,8 @@ import {
   DELETE_ARTICLE
 } from "../../redux/actionTypes";
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const middleWares = [thunk];
+const mockStore = configureMockStore(middleWares);
 
 const { API_URL } = process.env;
 describe("fetching article", () => {

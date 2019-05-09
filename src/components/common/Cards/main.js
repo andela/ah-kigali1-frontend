@@ -64,7 +64,7 @@ export class MainCard extends Component {
         </div>
         <div className="tex-content">
           <h3>{title}</h3>
-          <div className="tex-content__body">
+          <div className="tex-content__body" style={{ marginBottom: 20 }}>
             {stringToHtmlElement(body).body}
           </div>
           <div className="icons">

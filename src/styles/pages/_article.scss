@@ -277,6 +277,11 @@ body {
         }
         @include border-left-right;
         @include border-bottom-line;
+        .article-card {
+          .main-article-img {
+            height: 100px;
+          }
+        }
       }
     }
 >>>>>>> 31895d2... [ft #[163518661]] fix css issue on coment

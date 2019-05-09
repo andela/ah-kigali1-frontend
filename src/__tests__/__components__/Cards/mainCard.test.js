@@ -21,8 +21,7 @@ describe("main card ", () => {
 
   test("should render one main card without firstName, and lastNamve", () => {
     const wrapper = shallow(<MainCard {...mainCardProps1} />);
-    wrapper.find(".left").simulate("click");
+    wrapper.find(".article-card").simulate("click");
     expect(mainCardProps1.history.push).toHaveBeenCalled();
-    expect(wrapper.find(".left")).toHaveLength(1);
   });
 });
