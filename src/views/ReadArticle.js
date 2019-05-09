@@ -36,6 +36,7 @@ export const mapStateToProps = ({ auth, fetchedArticle }) => ({
   asideArticles: fetchedArticle.asideArticles,
   article: fetchedArticle
 });
+
 export const mapDispatchToProps = dispatch => ({
   deleteOneArticle: slug => dispatch(deleteArticle(slug)),
   fetchOneArticle: slug => dispatch(fetchArticle(slug))
