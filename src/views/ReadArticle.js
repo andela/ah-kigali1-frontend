@@ -365,7 +365,7 @@ export class Article extends Component {
                 />
                 <ShareIcon
                   image={emailIcon}
-                  href={`mailto:?subject=Sharing the inspiring article&body=<a href=${currentUrl}>New</a>`}
+                  href={`mailto:?subject=Sharing the inspiring article&body=${currentUrl}`}
                 />
                 <img className="share-icon" src={ratingIcon} alt="logo" />
                 <img
