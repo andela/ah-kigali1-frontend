@@ -17,9 +17,11 @@ body {
         justify-content: center;
         align-items: center;
         .share-icon {
-          margin-top: 1.5em;
-          widows: 30px;
+          width: 30px;
           height: 30px;
+          &:not(:first-child) {
+            margin-top: 1em;
+          }
         }
       }
       .popup__report {
@@ -99,7 +101,7 @@ body {
       }
     }
     .article {
-      margin-left: 10%;
+      margin-left: 1%;
       @include column;
       width: 70%;
       @include border-left-right;
