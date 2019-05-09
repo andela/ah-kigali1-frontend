@@ -28,7 +28,7 @@ const { API_URL } = process.env;
 describe("Login action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
-    it("should create an action to update text input value", () => {
+    test("should create an action to update text input value", () => {
       const expectedAction = {
         type: LOGIN_INPUT_CHANGE,
         payload: data
@@ -42,10 +42,12 @@ describe("Login action creators", () => {
       moxios.install(axios);
       store = mockStore({});
     });
+
     afterEach(() => {
       moxios.uninstall(axios);
     });
-    it("dispatches LOGIN_SUCCESS after successfully signing in", () => {
+
+    test("dispatches LOGIN_SUCCESS after successfully signing in", () => {
       store = mockStore({ login: reduxStore.login });
       data = { name: "email", value: "me@example.com" };
       const payload = {
@@ -65,7 +67,6 @@ describe("Login action creators", () => {
           payload: null
         }
       ];
-
       moxios.stubRequest(`${API_URL}/users/login`, {
         status: 201,
         response: {
@@ -76,7 +77,8 @@ describe("Login action creators", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-    it("dispatches LOGIN_FAILED after providing invalid credentials", () => {
+
+    test("dispatches LOGIN_FAILED after providing invalid credentials", () => {
       store = mockStore({ login: reduxStore.login });
       const payload = { message: "Sign in failed", errors: {} };
       const expectedActions = [
@@ -88,17 +90,16 @@ describe("Login action creators", () => {
           payload
         }
       ];
-
       moxios.stubRequest(`${API_URL}/users/login`, {
         status: 400,
         response: payload
       });
-
       return store.dispatch(handleSignIn({ ...data })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-    it("dispatches IS_OPENING_SOCIAL_AUTH_PROVIDER action creator", () => {
+
+    test("dispatches IS_OPENING_SOCIAL_AUTH_PROVIDER action creator", () => {
       global.open = jest.fn();
       const expectedAction = [
         {
@@ -110,7 +111,7 @@ describe("Login action creators", () => {
       });
     });
 
-    it("dispatches CANCEL_SOCIAL_AUTH action creator", () => {
+    test("dispatches CANCEL_SOCIAL_AUTH action creator", () => {
       /* eslint no-throw-literal: "off" */
       global.open = jest.fn(() => {
         throw "error";

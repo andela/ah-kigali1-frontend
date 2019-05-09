@@ -8,7 +8,7 @@ import {
 
 describe("Helper Functions", () => {
   describe("isEmpty validator", () => {
-    it("returns isEmpty true", () => {
+    test("returns isEmpty true", () => {
       expect(isEmpty("")).toBe(true);
       expect(isEmpty({})).toBe(true);
       expect(isEmpty([])).toBe(true);
@@ -18,7 +18,7 @@ describe("Helper Functions", () => {
   });
 
   describe("capitalize", () => {
-    it("should capitalize the first letter", () => {
+    test("should capitalize the first letter", () => {
       expect(capitalize("luc")).toBe("Luc");
       expect(capitalize("luc abayo")).toBe("Luc abayo");
       expect(capitalize(1)).toBe(1);

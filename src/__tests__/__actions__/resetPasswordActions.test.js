@@ -25,7 +25,7 @@ const { API_URL } = process.env;
 describe("ResetPassword action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
-    it("should create an action to update text input value", () => {
+    test("should create an action to update text input value", () => {
       const expectedAction = {
         type: RESET_PASSWORD_INPUT_CHANGE,
         payload: data
@@ -42,7 +42,8 @@ describe("ResetPassword action creators", () => {
     afterEach(() => {
       moxios.uninstall(axios);
     });
-    it("dispatches RESET_PASSWORD_LINK_SUCCESS after successfully sending link", () => {
+
+    test("dispatches RESET_PASSWORD_LINK_SUCCESS after successfully sending link", () => {
       store = mockStore({ login: reduxStore.resetPassword });
       data = { name: "email", value: "me@example.com" };
       const payload = {
@@ -58,7 +59,6 @@ describe("ResetPassword action creators", () => {
           payload
         }
       ];
-
       moxios.stubRequest(`${API_URL}/users/reset_password`, {
         status: 200,
         response: {
@@ -69,7 +69,7 @@ describe("ResetPassword action creators", () => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
-    it("dispatches RESET_PASSWORD_LINK_FAILED sending reset password link failed", () => {
+    test("dispatches RESET_PASSWORD_LINK_FAILED sending reset password link failed", () => {
       store = mockStore({ login: reduxStore.login });
       const payload = { message: "User not found" };
       const expectedActions = [
@@ -88,7 +88,6 @@ describe("ResetPassword action creators", () => {
           ...payload
         }
       });
-
       return store.dispatch(sendResetLink({ ...data })).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });

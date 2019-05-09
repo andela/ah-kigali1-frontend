@@ -19,6 +19,7 @@ describe("article reducer", () => {
       body: ""
     });
   });
+
   test("should return the initial state on wrong action", () => {
     expect(
       reducer(undefined, { type: "ADD TITLE", payload: "hello world" })
@@ -29,6 +30,7 @@ describe("article reducer", () => {
       tagsList: []
     });
   });
+
   test("should handle on input change", () => {
     expect(
       reducer(
@@ -43,11 +45,13 @@ describe("article reducer", () => {
       )
     ).toEqual({ title: "Hello world" });
   });
+
   test("should handle new article action", () => {
     expect(reducer({}, { type: NEW_ARTICLE, payload: "hello world" })).toEqual({
       response: "hello world"
     });
   });
+
   test("should handle article error ", () => {
     expect(
       reducer({}, { type: ARTICLE_ERROR, payload: "hello world" })
@@ -56,11 +60,13 @@ describe("article reducer", () => {
       article_error: "hello world"
     });
   });
+
   test("should handle submitting action ", () => {
     expect(reducer({}, { type: SUBMITTING_ARTICLE })).toEqual({
       isSubmitting: true
     });
   });
+
   test("should handle adding tag ", () => {
     expect(
       reducer({ tagsList: [] }, { type: NEW_TAG, payload: "hello world" })
@@ -68,6 +74,7 @@ describe("article reducer", () => {
       tagsList: ["hello world"]
     });
   });
+
   test("should handle removing a tag ", () => {
     expect(
       reducer(
@@ -78,6 +85,7 @@ describe("article reducer", () => {
       tagsList: []
     });
   });
+
   test("should handle fetching article to edit ", () => {
     expect(
       reducer(
@@ -95,6 +103,7 @@ describe("article reducer", () => {
       title: "hello world"
     });
   });
+
   test("should handle article updated successfully ", () => {
     expect(
       reducer(

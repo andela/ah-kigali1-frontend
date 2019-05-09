@@ -19,6 +19,7 @@ describe("render tag component", () => {
     expect(wrapper.find("span").text()).toEqual("Reactjs ");
     expect(wrapper.find("i")).toHaveLength(1);
   });
+
   test("should contain span element ", () => {
     const { wrapper, props } = shallowSetup();
     wrapper.find("i").simulate("click");

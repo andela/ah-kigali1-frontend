@@ -47,12 +47,15 @@ describe("Search Results Component", () => {
     test("should match the snapshot", () => {
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+
     test("should render right number of TextInput", () => {
       expect(findElements(TextInput).length).toBe(1);
     });
+
     test("should not render article card if isLoading true", () => {
       expect(findElements(AnimatedCard).length).toBe(0);
     });
+
     test("should render the right number of article card", () => {
       wrapper.setProps({
         articles: { ...articlesObj },
@@ -119,6 +122,7 @@ describe("Search Results Component", () => {
       expect(wrapper.state().pageNumber).toBe(1);
       expect(instance.searchArticle).toHaveBeenCalledWith(props.searchQuery);
     });
+
     test("should response on ENTER key press", () => {
       const { searchQuery } = props;
       wrapper.setState({
@@ -189,6 +193,7 @@ describe("Search Results Component", () => {
       expect(wrapper.state().articles).toEqual(articlesObj);
       expect(wrapper.state().activeTag).toEqual(null);
     });
+
     test("should render fetch error message", () => {
       wrapper.setProps({
         errors: {

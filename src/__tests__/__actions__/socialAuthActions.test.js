@@ -27,7 +27,7 @@ describe("Social Auth action", () => {
   afterEach(() => {
     moaxios.uninstall(axios);
   });
-  it("should set new token", () => {
+  test("should set new token", () => {
     const store = mockStore({});
     const expectedActions = [
       {
@@ -54,7 +54,7 @@ describe("Social Auth action", () => {
       });
   });
 
-  it("should not set token", () => {
+  test("should not set token", () => {
     const store = mockStore({});
     const expectedActions = [
       {

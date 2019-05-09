@@ -16,12 +16,13 @@ const notifications = [
 const errorMessage = "There are no notifiactions";
 
 describe("Notification reducers", () => {
-  it("should return initial state", () => {
+  test("should return initial state", () => {
     expect(notificationReducer(undefined, {})).toEqual({
       ...initialState
     });
   });
-  it("should handle FETCHING", () => {
+
+  test("should handle FETCHING", () => {
     expect(
       notificationReducer(initialState, { type: FETCHING_NOTIFICATION })
     ).toEqual({
@@ -29,7 +30,8 @@ describe("Notification reducers", () => {
       isFetching: true
     });
   });
-  it("should handle FETCHING SUCCESS", () => {
+
+  test("should handle FETCHING SUCCESS", () => {
     expect(
       notificationReducer(initialState, {
         type: NOTIFICATION_SUCCESS,
@@ -38,7 +40,7 @@ describe("Notification reducers", () => {
     ).toEqual({ ...initialState, notifications });
   });
 
-  it("should handle FETCHING_NOTIFICATION FAILED", () => {
+  test("should handle FETCHING_NOTIFICATION FAILED", () => {
     expect(
       notificationReducer(initialState, {
         type: NOTIFICATION_FAILED,
@@ -47,7 +49,7 @@ describe("Notification reducers", () => {
     ).toEqual({ ...initialState, errorMessage });
   });
 
-  it("should handle DELETING NOTIFICATION", () => {
+  test("should handle DELETING NOTIFICATION", () => {
     expect(
       notificationReducer(
         { ...initialState, notifications },

@@ -96,6 +96,7 @@ describe("test the notification actions", () => {
           expect(store.getActions()).toEqual(expected);
         });
     });
+
     test("should dispatch the failed action when there was an error deleting the notification", () => {
       store = mockStore({});
       errorMessage = "Invalid request";

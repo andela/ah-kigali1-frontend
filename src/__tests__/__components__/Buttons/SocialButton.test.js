@@ -9,12 +9,14 @@ const props = {
   alt: "fb",
   onClick: jest.fn()
 };
+
 describe("SocialButton", () => {
   let component;
   beforeEach(() => {
     component = setUp(props);
   });
-  it("should render SocialButton component", () => {
+
+  test("should render SocialButton component", () => {
     expect(toJson(component)).toMatchSnapshot();
   });
 });

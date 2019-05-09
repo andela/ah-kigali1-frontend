@@ -22,10 +22,11 @@ describe("update password actions ceators", () => {
     moxios.install(axios);
     store = mockStore({});
   });
+
   afterEach(() => {
     moxios.uninstall(axios);
   });
-  it("dispatches UPDATE_PASSWORD_INPUT_CHANGE", () => {
+  test("dispatches UPDATE_PASSWORD_INPUT_CHANGE", () => {
     const payload = { field: "password", value: "password" };
     const expectedActions = {
       type: UPDATE_PASSWORD_INPUT_CHANGE,
@@ -35,7 +36,8 @@ describe("update password actions ceators", () => {
       expectedActions
     );
   });
-  it("dispatches PASSWORD_UPDATE_FAILED", () => {
+
+  test("dispatches PASSWORD_UPDATE_FAILED", () => {
     const payload = { message: "Invalid or expired token", errors: {} };
     const params = {
       token: "1234567qwertyui",
@@ -64,7 +66,7 @@ describe("update password actions ceators", () => {
       });
   });
 
-  it("dispatches PASSWORD_UPDATE_SUCCESS", () => {
+  test("dispatches PASSWORD_UPDATE_SUCCESS", () => {
     const payload = { message: "Password updated successfully" };
     const params = {
       token: "1234567qwertyui",

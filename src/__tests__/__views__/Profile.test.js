@@ -22,6 +22,7 @@ let props = {
   currentUser: jest.fn(),
   loggedInUser: { username: "username" }
 };
+
 describe("Profile", () => {
   test("when loading is true", () => {
     props = { ...props, loading: true };

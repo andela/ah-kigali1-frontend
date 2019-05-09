@@ -8,9 +8,14 @@ import {
 import TextInput from "../../../components/common/Inputs/TextInput";
 import SearchPopOver from "../../../components/PopOvers/SearchPopOver";
 
-const [authSuggestArticles, fetchResults, push,fetchNotifications, deleteNotification, readNotification] = new Array(
-  6
-).fill(jest.fn());
+const [
+  authSuggestArticles,
+  fetchResults,
+  push,
+  fetchNotifications,
+  deleteNotification,
+  readNotification
+] = new Array(6).fill(jest.fn());
 
 const props = {
   authSuggestArticles,
@@ -122,6 +127,7 @@ describe("NavBar component", () => {
         props.notifier.notifications[0]
       );
     });
+
     test("should call close notificaiton", () => {
       wrapper
         .find(`[data-test="notif-close"]`)
