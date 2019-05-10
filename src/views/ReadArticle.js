@@ -38,7 +38,8 @@ import {
   markUserHighlight,
   getSelectedLocation,
   customHighlightColor,
-  removeCustomHighligh
+  removeCustomHighligh,
+  getSelectedLocation
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
