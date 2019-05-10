@@ -381,7 +381,7 @@ export class Article extends Component {
                 />
                 <ShareIcon
                   image={twitterIcon}
-                  href={`//twitter.com/share?url=${currentUrl}&text=${title}&hashtags=authorsHeaven,software development`}
+                  href={`//twitter.com/share?url=${currentUrl}&text=${currentUrl}&hashtags=authorsHeaven,software development`}
                 />
                 <ShareIcon
                   image={emailIcon}
