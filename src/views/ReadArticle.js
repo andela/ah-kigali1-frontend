@@ -137,6 +137,35 @@ export class Article extends Component {
     return false;
   };
 
+  setArticleBodyRef = node => {
+    this.articleBodyRef = node;
+  };
+
+  handleHighlight = e => {
+    const commentModelRef = document.getElementById("comment-model");
+    const text = window.getSelection().toString();
+    if (
+      this.articleBodyRef &&
+      this.articleBodyRef.contains(e.target) &&
+      this.articleBodyRef.contains(window.getSelection().anchorNode) &&
+      text
+    ) {
+      const { top, left } = getSelectedLocation();
+      this.setState({
+        top,
+        left,
+        highlightedText: text
+      });
+    } else if (commentModelRef && commentModelRef.contains(e.target)) {
+      return this.state;
+    } else {
+      this.setState({
+        top: 0,
+        left: 0
+      });
+    }
+  };
+
   setWrapperRef = node => {
     this.wrapperRef = node;
   };
@@ -392,7 +421,7 @@ export class Article extends Component {
                     top={top}
                     left={left}
                     onClick={() => {
-                      customHighlightColor(highlightedText);
+                      markHighlight(body, true);
                       this.setState({
                         commentModelOpen: true
                       });

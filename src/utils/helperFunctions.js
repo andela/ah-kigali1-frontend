@@ -190,17 +190,15 @@ export const customHighlightColor = highlightedText => {
   range.deleteContents();
   range.insertNode(spanElement);
 };
+
 /**
- * @description - remove custom background on highlighted text
- * @returns {undefined} - returns nothing
+ * @description -check all html tags in highlighted text
+ * @return {boolean} - true or false
  */
-export const removeCustomHighligh = () => {
-  const highlightedSpans = document.querySelectorAll(
-    "#article-body span.highlighted"
-  );
-  if (highlightedSpans) {
-    highlightedSpans.forEach(element =>
-      element.classList.remove("highlighted")
-    );
-  }
+
+export const isHtmlTag = string => /<[a-z][\s\S]*>/i.test(string);
+
+export const setEmptyLine = textWithTag => {
+  const reg = new RegExp(`><`, "gi");
+  return textWithTag.replace(reg, ">\n<");
 };

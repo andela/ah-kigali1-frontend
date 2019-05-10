@@ -4,7 +4,8 @@ import {
   ARTICLE_ERROR,
   FETCHING_ASIDE_ARTICLES,
   FETCHING_ARTICLE,
-  DELETE_ARTICLE
+  DELETE_ARTICLE,
+  MARK_HIGHLIGHTED_SECTION
 } from "../actionTypes";
 
 const initialState = {
@@ -19,6 +20,14 @@ const readArticleReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
         isFetching: false
+      };
+    case MARK_HIGHLIGHTED_SECTION:
+      return {
+        ...state,
+        article: {
+          ...state.article,
+          body: action.payload
+        }
       };
     case FETCHING_ASIDE_ARTICLES:
       return {
