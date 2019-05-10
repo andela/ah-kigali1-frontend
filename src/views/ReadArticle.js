@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import Input from "../components/common/Inputs/TextInput";
 import Button from "../components/common/Buttons/BasicButton";
 import { ReportingForm } from "../components/reportingForm/ReportingForm";
-import { MoreReactions } from "../components/reportingForm/MoreReactionsModal";
 import {
   fetchArticle,
   deleteArticle
@@ -66,6 +65,7 @@ export class Article extends Component {
 
     this.setState({ slug });
     fetchOneArticle(slug);
+    document.addEventListener("mousedown", this.handleClickOutside);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -78,6 +78,16 @@ export class Article extends Component {
       fetchOneArticle(nextProps.match.params.slug);
     }
     return false;
+  };
+
+  setWrapperRef = node => {
+    this.wrapperRef = node;
+  };
+
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState(() => ({ displayModal: false }));
+    }
   };
 
   toggleReactionsModal = () => {
@@ -284,7 +294,7 @@ export class Article extends Component {
                   </div>
                 </div>
                 {isAuthor ? (
-                  false
+                  ""
                 ) : (
                   <button
                     className={following ? "focus" : "author-follow"}
@@ -386,11 +396,16 @@ export class Article extends Component {
                 />
               </div>
               {displayModal ? (
-                <MoreReactions
-                  displayReportArticleForm={this.toggleReportingModal}
-                />
+                <div className="popup__report" ref={this.setWrapperRef}>
+                  <div>
+                    <p onClick={this.toggleReportingModal}>Report </p>
+                    <hr />
+                    <p>Rate</p>
+                    <hr />
+                  </div>
+                </div>
               ) : (
-                false
+                ""
               )}
             </aside>
             {reportingForm ? (
@@ -400,7 +415,7 @@ export class Article extends Component {
                 cancelReport={this.toggleReportingModal}
               />
             ) : (
-              false
+              ""
             )}
             <div className="right article-others">
               <div className="right">
@@ -413,12 +428,12 @@ export class Article extends Component {
                         <MainArticle article={asideArticle} />
                       </div>
                     ))
-                  : false}
+                  : ""}
               </div>
             </div>
           </div>
         ) : (
-          false
+          ""
         )}
       </div>
     );
