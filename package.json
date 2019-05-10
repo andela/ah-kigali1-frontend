@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "yarn run clean && webpack --mode production",
+    "build": "rm -rf dist && webpack --mode production",
     "start": "webpack-dev-server --open --hot",
     "test": "jest --coverage",
     "test:u": "jest --coverage -u",
