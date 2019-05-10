@@ -128,3 +128,7 @@ export const CREATE_NEW_COMMENT = "CREATE_NEW_COMMENT";
  * @description like on comments actions
  */
 export const CHANGE_LIKE = "CHANGE_LIKE";
+/**
+ * @description highlight and comment types
+ */
+export const MARK_HIGHLIGHTED_SECTION = "MARK_HIGHLIGHTED_TEXT";

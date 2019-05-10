@@ -14,6 +14,7 @@ import {
 } from "../redux/actions/readArticleActionCreator";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
+import { markHighlightSection } from "../redux/actions/highlightCommentActions";
 import {
   inputHandleAsync,
   handleCommentsInputEdit,
@@ -84,7 +85,10 @@ export const mapDispatchToProps = dispatch => ({
   onFetchComments: (commentId, slug) =>
     dispatch(fetchComments(commentId, slug)),
   onSetBodyEdit: payload => dispatch(setBodyEdit(payload)),
-  onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug))
+  onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug)),
+  onFetchProfile: username => dispatch(fetchCurrentUser(username)),
+  markHighlight: (articleBody, save = false) =>
+    dispatch(markHighlightSection(articleBody, save))
 });
 
 export class Article extends Component {
@@ -276,7 +280,8 @@ export class Article extends Component {
       isCommentEmpty,
       top,
       left,
-      commentModelOpen
+      commentModelOpen,
+      highlightedText
     } = this.state;
     const {
       article,
@@ -288,7 +293,9 @@ export class Article extends Component {
       comments,
       updatedBody,
       onSetBodyEdit,
-      loading
+      loading,
+      profile,
+      markHighlight
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -390,6 +397,7 @@ export class Article extends Component {
                         commentModelOpen: true
                       });
                     }}
+                    onHighlight={() => markHighlight(body, true)}
                   />
                 </section>
                 {isAuthor ? (
@@ -559,6 +567,7 @@ Article.propTypes = {
   fetchOneArticle: PropTypes.func.isRequired,
   reportArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
+  markHighlight: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
@@ -636,6 +645,10 @@ Article.propTypes = {
   followUser: PropTypes.func.isRequired,
   following: PropTypes.bool.isRequired,
   location: PropTypes.shape([]).isRequired
+};
+
+Article.defaultProps = {
+  markHighlight: () => ""
 };
 
 export default withRouter(
