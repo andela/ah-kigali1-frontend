@@ -21,6 +21,7 @@ body {
           outline: none;
           border: none;
           height: 30px;
+          cursor: pointer;
           &:not(:first-child) {
             margin-top: 1em;
           }
@@ -29,6 +30,7 @@ body {
       .popup__report {
         p {
           margin-top: 10px;
+          cursor: pointer;
         }
         border: 1px solid black;
         border-radius: 5px;
@@ -48,7 +50,10 @@ body {
         align-items: center;
         justify-content: center;
       }
-      div {
+      .report_error {
+        height: 40px;
+      }
+      .report_article {
         height: 30%;
         width: 40%;
         border-radius: 5px;
@@ -65,12 +70,11 @@ body {
           border: 1px solid #000000;
           box-sizing: border-box;
           border-radius: 5px;
-          input {
+          textarea {
             width: 100%;
             border: none;
-            height: auto;
-            text-indent: 20px;
-            text-overflow: true;
+            height: 90%;
+            font-size: 16px;
             &::placeholder {
               font-size: 16px;
             }
@@ -93,7 +97,7 @@ body {
             max-width: 150px;
             &:hover {
               background: $color-primary;
-              color: white;
+              color: $white-primary;
             }
             &:disabled {
               background: gray;

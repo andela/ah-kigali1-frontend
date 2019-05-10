@@ -24,6 +24,7 @@ export const routes = [
     path: "/articles/:slug",
     component: ReadArticle
   },
+
   {
     path: "/articles/:slug/edit",
     component: EditArticle

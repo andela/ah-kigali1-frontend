@@ -9,6 +9,7 @@ import userReducer from "./userReducer";
 import searchReducers from "./searchReducers";
 import following from "./followingReducer";
 import notifier from "./notificationReducer";
+import { reportArticle } from "./reportReducer";
 
 export default combineReducers({
   auth: loginReducers,
@@ -20,5 +21,6 @@ export default combineReducers({
   user: userReducer,
   search: searchReducers,
   following,
-  notifier
+  notifier,
+  report: reportArticle
 });
