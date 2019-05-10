@@ -18,6 +18,7 @@ import {
 } from "../redux/actions/highlightCommentActions";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
+import { markHighlightSection } from "../redux/actions/highlightCommentActions";
 import {
   inputHandleAsync,
   handleCommentsInputEdit,
@@ -724,6 +725,10 @@ Article.defaultProps = {
   highlights: {
     articleHighlights: {}
   }
+};
+
+Article.defaultProps = {
+  markHighlight: () => ""
 };
 
 export default withRouter(
