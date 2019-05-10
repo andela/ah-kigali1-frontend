@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "rm -rf dist && webpack --mode production",
-    "start": "webpack-dev-server --open --hot",
+    "start": "webpack-dev-server",
     "test": "jest --coverage",
     "test:u": "jest --coverage -u",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
@@ -61,7 +61,8 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -106,8 +107,7 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-cli": "^3.3.0"
   },
   "engines": {
     "node": "10.15.0"
