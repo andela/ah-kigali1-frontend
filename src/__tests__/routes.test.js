@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import Routes from "../views";
 import AuthRoutes from "../views/routes/AuthRoutes";
 import MainRoutes, { routes } from "../views/routes/MainRoutes";
-import Navbar from "../components/common/AppBars/Navbar";
+import NavbarComponent from "../components/common/AppBars/Navbar";
 
 const wrapperAuth = shallow(<Routes />);
 let allPaths = [];
@@ -23,7 +23,7 @@ describe("All routes", () => {
   });
 
   test("should include all route and navbar on main routers", () => {
-    expect(wrapperMain.find(Navbar).length).toBe(1);
+    expect(wrapperMain.find(NavbarComponent).length).toBe(1);
     routes.forEach(route => expect(allPaths).toContain(route.path));
   });
 });

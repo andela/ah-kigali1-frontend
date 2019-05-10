@@ -1,12 +1,11 @@
 import React from "react";
 
-const NotFound = () => (
-  <div className="grid-container">
-    <div className="center">
-      <h1 className="not-found" style={{ display: "grid", margin: "auto" }}>
-        404 The page does not exist
-      </h1>
-    </div>
+const Notfound = () => (
+  <div>
+    <h1>Ahhhhh!!!!!!! this page does not exist .</h1>
+    <h2>
+      The page you‘re trying to reach does not exist :(. Check the address.
+    </h2>
   </div>
 );
-export default NotFound;
+export default Notfound;

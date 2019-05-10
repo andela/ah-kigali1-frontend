@@ -23,7 +23,11 @@
   "rules": {
     "prettier/prettier": "error",
     "newlines-between": "always",
-    "react/prefer-stateless-function": "off",
+    "react/forbid-prop-types": [2,
+      {
+        "forbid": ["object", "array"], "checkContextTypes": false, "checkChildContextTypes": false
+      }
+    ],
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -54,17 +58,22 @@
     "no-shadow": [
       "error",
       {
-        "hoist": "functions"
+        "hoist": "functions",
+        "allow": [
+          "req",
+          "res",
+          "err",
+          "done"
+        ]
       }
     ],
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [
-      2,
+    "import/no-unresolved": [2, { "commonjs": true }],
+    "react/prefer-stateless-function": [0,
       {
-        "commonjs": true
+        "ignorePureComponents": true
       }
     ],
-    "import/no-named-as-default": "off",
     "valid-jsdoc": [
       "error",
       {

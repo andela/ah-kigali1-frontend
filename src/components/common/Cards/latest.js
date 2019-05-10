@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-/* eslint global-require: "off" */
 
 export default class Latest extends Component {
   render() {
