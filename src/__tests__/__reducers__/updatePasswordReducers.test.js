@@ -14,12 +14,13 @@ describe("Update password reducers", () => {
     password: { field: "password", value: "password" },
     confirmPassword: { field: "password", value: "password12" }
   };
-  it("returns initial state", () => {
+  test("returns initial state", () => {
     expect(updatePassword(undefined, {})).toEqual({
       ...INITIAL_STATE
     });
   });
-  it("updates the state on UPDATE_PASSWORD_INPUT_CHANGE action", () => {
+
+  test("updates the state on UPDATE_PASSWORD_INPUT_CHANGE action", () => {
     expect(
       updatePassword(INITIAL_STATE, {
         type: UPDATE_PASSWORD_INPUT_CHANGE,
@@ -39,7 +40,8 @@ describe("Update password reducers", () => {
       [data.confirmPassword.field]: data.confirmPassword.value
     });
   });
-  it("updates state on  UPDATING_PASSWORD", () => {
+
+  test("updates state on  UPDATING_PASSWORD", () => {
     expect(
       updatePassword(INITIAL_STATE, {
         type: UPDATING_PASSWORD
@@ -49,7 +51,8 @@ describe("Update password reducers", () => {
       isSubmitting: true
     });
   });
-  it("updates state on PASSWORD_UPDATE_SUCCESS", () => {
+
+  test("updates state on PASSWORD_UPDATE_SUCCESS", () => {
     const payload = { message: "Password updated successfully" };
     expect(
       updatePassword(INITIAL_STATE, {
@@ -62,7 +65,8 @@ describe("Update password reducers", () => {
       passwordUpdateSuccess: true
     });
   });
-  it("updates state on  PASSWORD_UPDATE_FAILED", () => {
+
+  test("updates state on  PASSWORD_UPDATE_FAILED", () => {
     const payload = { message: "Invalid password", errors: {} };
     expect(
       updatePassword(INITIAL_STATE, {

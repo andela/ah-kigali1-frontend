@@ -41,6 +41,7 @@ describe("article action creators", () => {
       payload: { field: "body", value: "Hello world" }
     });
   });
+
   test("should return the remove tag action", () => {
     const tag = "Hello world";
 
@@ -49,6 +50,7 @@ describe("article action creators", () => {
       payload: tag
     });
   });
+
   test("should return the add tag tag action", () => {
     const data = {
       tag: "Hello world"
@@ -67,6 +69,7 @@ describe("async action creator ", () => {
   afterEach(() => {
     moxios.uninstall(axios);
   });
+
   test("should dispatch the create article action", async () => {
     const store = mockStore({});
     const actions = [
@@ -88,6 +91,7 @@ describe("async action creator ", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch the auth_error action", async () => {
     const store = mockStore({});
     const actions = [
@@ -116,12 +120,14 @@ describe("Edit article", () => {
   afterEach(() => {
     moxios.uninstall(axios);
   });
+
   test("should return article updated action", () => {
     expect(articleUpdated({ data: "article updated" })).toEqual({
       type: ARTICLE_UPDATED,
       payload: "article updated"
     });
   });
+
   test("should dispatch the edit article action", async () => {
     const store = mockStore({});
     const actions = [
@@ -143,6 +149,7 @@ describe("Edit article", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch article, in edit article", async () => {
     const store = mockStore({});
     const actions = [
@@ -162,6 +169,7 @@ describe("Edit article", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch fetch article to edit action", async () => {
     const store = mockStore({});
     const actions = [
@@ -182,6 +190,7 @@ describe("Edit article", () => {
       expect(store.getActions()).toEqual(actions);
     });
   });
+
   test("should dispatch fetch article to edit error", async () => {
     const store = mockStore({});
     const actions = [

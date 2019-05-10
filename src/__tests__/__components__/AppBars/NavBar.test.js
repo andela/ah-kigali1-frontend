@@ -1,11 +1,21 @@
 import React from "react";
 import toJson from "enzyme-to-json";
 import { shallow } from "enzyme";
-import { Navbar } from "../../../components/common/AppBars/navBar";
+import {
+  Navbar,
+  mapStateToProps
+} from "../../../components/common/AppBars/Navbar";
 import TextInput from "../../../components/common/Inputs/TextInput";
 import SearchPopOver from "../../../components/PopOvers/SearchPopOver";
 
-const [authSuggestArticles, fetchResults, push] = new Array(3).fill(jest.fn());
+const [
+  authSuggestArticles,
+  fetchResults,
+  push,
+  fetchNotifications,
+  deleteNotification,
+  readNotification
+] = new Array(6).fill(jest.fn());
 
 const props = {
   authSuggestArticles,
@@ -17,8 +27,17 @@ const props = {
       pathname: "/"
     }
   },
-  suggestedArticles: {}
+  suggestedArticles: {},
+  isLoggedIn: true,
+  notifier: {
+    notifications: [{ id: "1", ref: "lkadj", message: "hadlfkj" }],
+    isFetching: false
+  },
+  fetchNotifications,
+  readNotification,
+  deleteNotification
 };
+
 const wrapper = shallow(<Navbar {...props} />);
 jest.useFakeTimers();
 
@@ -45,6 +64,10 @@ describe("NavBar component", () => {
       jest.spyOn(instance, "handleEnterPress");
       jest.spyOn(instance, "closeSearchPopOver");
       jest.spyOn(instance, "handleOnChange");
+      jest.spyOn(instance, "onNotificationClick");
+      jest.spyOn(instance, "onNotificationClose");
+      jest.spyOn(instance, "setWrapperRef");
+      jest.spyOn(instance, "handleClickOutside");
     });
 
     afterEach(() => {
@@ -86,6 +109,74 @@ describe("NavBar component", () => {
         shiftKey: false
       });
       expect(fetchResults).toBeCalled();
+    });
+
+    test("should call onNotificationClick", () => {
+      wrapper
+        .find(`[data-test="notif-click"]`)
+        .at(0)
+        .simulate("click");
+      expect(instance.onNotificationClick).toHaveBeenCalledWith(
+        props.notifier.notifications[0]
+      );
+      wrapper
+        .find(`[data-test="notif-click"]`)
+        .at(0)
+        .simulate("keypress", { which: 13 });
+      expect(instance.onNotificationClick).toHaveBeenCalledWith(
+        props.notifier.notifications[0]
+      );
+    });
+
+    test("should call close notificaiton", () => {
+      wrapper
+        .find(`[data-test="notif-close"]`)
+        .at(0)
+        .simulate(`click`);
+      expect(instance.onNotificationClose).toHaveBeenCalledWith(
+        props.notifier.notifications[0]
+      );
+    });
+
+    test("should call setWrapperRef", () => {
+      wrapper
+        .find(`[data-test="notif-close"]`)
+        .at(0)
+        .simulate(`click`);
+      expect(instance.onNotificationClose).toHaveBeenCalledWith(
+        props.notifier.notifications[0]
+      );
+      expect(deleteNotification).toHaveBeenCalledWith(
+        props.notifier.notifications[0].id
+      );
+    });
+
+    test("should toggle the isUserDetailsOpen state from FALSE to TRUE and vice-versa", () => {
+      const previous = instance.state.isUserDetailsOpen;
+      wrapper.find(`[data-test="user-dropdown"]`).simulate(`click`);
+      expect(instance.state.isUserDetailsOpen).toBe(!previous);
+    });
+
+    test("should toggle the isNotificationOpen state from FALSE to TRUE and vice-versa", () => {
+      const previous = instance.state.isNotificationOpen;
+      wrapper.find(`[data-test="notif-button"]`).simulate(`click`);
+      expect(instance.state.isNotificationOpen).toBe(!previous);
+    });
+
+    describe("map state and dispatch to props", () => {
+      it("should show previously rolled value", () => {
+        const initialState = {
+          notifier: {
+            isFetching: false,
+            errorMessage: null,
+            notifications: []
+          },
+          auth: { currenrUser: "Diane" }
+        };
+        expect(mapStateToProps(initialState).notifier.isFetching).toEqual(
+          false
+        );
+      });
     });
   });
 });

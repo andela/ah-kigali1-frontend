@@ -74,6 +74,7 @@ describe("Settings", () => {
       expect(props.currentUser).toHaveBeenCalled();
     });
   });
+
   describe("updatedUser()", () => {
     test("should change notifications button", () => {
       const wrapper = mount(<Settings {...props} />);

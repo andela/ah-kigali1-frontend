@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RichTextEditor from "react-rte";
-import Navbar from "../components/common/AppBars/navBar";
+import Navbar from "../components/common/AppBars/Navbar";
 import Validator from "../utils/validator";
 import Input from "../components/common/Inputs/TextInput";
 import Button from "../components/common/Buttons/BasicButton";

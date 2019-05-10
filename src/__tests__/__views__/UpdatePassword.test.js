@@ -25,6 +25,7 @@ const props = {
   location: { search: `?token=${token}` },
   history: { push: callback }
 };
+
 const wrapper = shallow(<UpdatePassword {...props} />);
 const findElement = (element, index) => wrapper.find(element).at(index);
 const dataFromForm = {
@@ -33,14 +34,15 @@ const dataFromForm = {
 };
 describe("Update Password", () => {
   describe("test snapshot", () => {
-    it("should match the snapshot", () => {
+    test("should match the snapshot", () => {
       expect(toJson(UpdatePassword)).toMatchSnapshot();
       expect(wrapper.find(TextInput).length).toEqual(2);
       expect(wrapper.find(FormButton).length).toEqual(1);
     });
   });
+
   describe("test component life cycle", () => {
-    it("should update state once props updated", () => {
+    test("should update state once props updated", () => {
       const errorPayload = {
         message: "Password too short"
       };
@@ -75,7 +77,8 @@ describe("Update Password", () => {
         ...props
       });
     });
-    it("responds to user input on password field", () => {
+
+    test("responds to user input on password field", () => {
       findElement(TextInput, 0).simulate("change", {
         target: {
           ...dataFromForm.password
@@ -87,7 +90,8 @@ describe("Update Password", () => {
         dataFromForm.password.value
       );
     });
-    it("responds to user input for  confirmPassword field", () => {
+
+    test("responds to user input for  confirmPassword field", () => {
       findElement(TextInput, 1).simulate("change", {
         target: {
           ...dataFromForm.confirmPassword
@@ -99,7 +103,8 @@ describe("Update Password", () => {
         dataFromForm.confirmPassword.value
       );
     });
-    it("should return validation errors", () => {
+
+    test("should return validation errors", () => {
       mockFormData.mockReturnValue({});
       mockIsMatch.mockReturnValue({ message: "Password miss match" });
       Validator.formData = mockFormData.bind(Validator);
@@ -115,7 +120,8 @@ describe("Update Password", () => {
       });
       expect(instance.handleNavigation).toBeCalledWith("sign_in");
     });
-    it("should return validation errors", () => {
+
+    test("should return validation errors", () => {
       mockFormData.mockReturnValue({});
       mockIsMatch.mockReturnValue({});
       Validator.formData = mockFormData.bind(Validator);

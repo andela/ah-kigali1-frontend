@@ -1,7 +1,7 @@
 import Validator from "../../utils/validator";
 
 describe("Validator Class", () => {
-  it("should validator formData", () => {
+  test("should validator formData", () => {
     const validFormData = {
       email: "me@example.com",
       password: "password"
@@ -16,7 +16,8 @@ describe("Validator Class", () => {
       password: "Password is required"
     });
   });
-  it("should validate matching of two values", () => {
+
+  test("should validate matching of two values", () => {
     expect(Validator.isMatch("password", "1234", "1234ad")).toEqual({
       message: "Your passwords  do not match!"
     });

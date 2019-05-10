@@ -52,16 +52,19 @@ describe("Creating article interactions", () => {
       value: "hello world"
     });
   });
+
   test("should call edit article method with correct input ", () => {
     const { wrapper, props } = shallowSetup(article);
     wrapper.find(".publish").simulate("click");
     expect(props.editOneArticle).toHaveBeenCalled();
   });
+
   test("should cancel edit ", () => {
     const { wrapper, props } = shallowSetup(article);
     wrapper.find(".cancel").simulate("click");
     expect(props.history.push).toHaveBeenCalled();
   });
+
   test("should not call edit article method with empty title", () => {
     const { wrapper, props } = shallowSetup(article1);
     wrapper.find(".title__input").simulate("change", {
@@ -71,6 +74,7 @@ describe("Creating article interactions", () => {
     expect(wrapper.find(".error").text()).toEqual("<ErrorMessage />");
     expect(props.editOneArticle).not.toHaveBeenCalled();
   });
+
   test("should not call edit article method with short body", () => {
     const { wrapper, props } = shallowSetup(article3);
     wrapper.instance().onEditorChange("hello world");
@@ -78,11 +82,13 @@ describe("Creating article interactions", () => {
     expect(wrapper.find(".error").text()).toEqual("<ErrorMessage />");
     expect(props.editOneArticle).not.toHaveBeenCalled();
   });
+
   test("should not edit article method with no description", () => {
     const { wrapper, props } = shallowSetup(article2);
     wrapper.find(".publish").simulate("click");
     expect(props.editOneArticle).not.toHaveBeenCalled();
   });
+
   test("should handle editor changes", () => {
     const { wrapper, props } = shallowSetup(article);
     wrapper.instance().onEditorChange("hello world");
@@ -110,6 +116,7 @@ describe("Creating article interactions", () => {
     wrapper.instance().handleNewTag({ keyCode: 13 });
     expect(props.newTag).not.toHaveBeenCalled();
   });
+
   test("should handle removing tag", () => {
     const { wrapper, props } = shallowSetup(article);
     wrapper.instance().onRemoveTag("hello world");
@@ -126,6 +133,7 @@ describe("Component lifecycle method", () => {
     expect(wrapper.state().title).toEqual("Hello world");
     expect(wrapper.state().description).toEqual("Hello world");
   });
+
   test("should call componentWillReceiveProps with different props", () => {
     const { wrapper } = shallowSetup(article);
     wrapper.instance().componentWillReceiveProps({
@@ -134,6 +142,7 @@ describe("Component lifecycle method", () => {
     expect(wrapper.state().title).toEqual("Hello world");
     expect(wrapper.state().description).toEqual("Hello world");
   });
+
   test("should call componentWillReceiveProps with article error", () => {
     const { wrapper } = shallowSetup(article);
     wrapper.instance().componentWillReceiveProps({
@@ -160,6 +169,7 @@ describe("Edit article mapDispatchToProps", () => {
       }
     });
   });
+
   test("should return the adding a new tag ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).newTag({ tag: "politics" });
@@ -168,6 +178,7 @@ describe("Edit article mapDispatchToProps", () => {
       payload: "politics"
     });
   });
+
   test("should return removing a tag ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).handleRemoveTag("politics");
@@ -176,11 +187,13 @@ describe("Edit article mapDispatchToProps", () => {
       payload: "politics"
     });
   });
+
   test("should return fetching the article to edit ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).fetchArticleToEdit("hello-world");
     expect(dispatch.mock.calls[0][0]).toBeDefined();
   });
+
   test("should return editing one article ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).editOneArticle(article, "hello-world");

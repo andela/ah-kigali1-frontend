@@ -8,6 +8,7 @@ import readArticleReducer from "./readArticleReducer";
 import userReducer from "./userReducer";
 import searchReducers from "./searchReducers";
 import following from "./followingReducer";
+import notifier from "./notificationReducer";
 
 export default combineReducers({
   auth: loginReducers,
@@ -18,5 +19,6 @@ export default combineReducers({
   fetchedArticle: readArticleReducer,
   user: userReducer,
   search: searchReducers,
-  following
+  following,
+  notifier
 });

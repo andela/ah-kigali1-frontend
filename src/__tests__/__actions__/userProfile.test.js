@@ -226,6 +226,7 @@ describe("profile actions", () => {
           expect(actions[1].payload).toEqual("Profile updated successfully");
         });
       });
+
       test("should test timeout on update", () => {
         const payload = {
           address: "Rwanda-Kigali",
@@ -248,6 +249,7 @@ describe("profile actions", () => {
           expect(setTimeout).toHaveBeenCalledTimes(2);
         });
       });
+
       test("should fail to update", () => {
         const expectedResults = [
           { type: "SET_ERROR", payload: "Not authorized" }
@@ -334,6 +336,7 @@ describe("profile actions", () => {
         });
       });
     });
+
     describe("changePassword()", () => {
       test("should updated user successfully", () => {
         const expectedResults = [

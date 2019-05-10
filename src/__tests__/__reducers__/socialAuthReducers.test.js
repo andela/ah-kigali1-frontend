@@ -11,17 +11,19 @@ const INITIAL_STATE = {
   socialAuthFailed: false
 };
 describe("Social Auth reducers", () => {
-  it("initial state", () => {
+  test("initial state", () => {
     expect(socialAuth(undefined, {})).toEqual({ ...INITIAL_STATE });
   });
-  it("should set submitting to true", () => {
+
+  test("should set submitting to true", () => {
     expect(
       socialAuth(INITIAL_STATE, {
         type: SUBMITTING_SOCIAL_AUTH
       })
     ).toEqual({ ...INITIAL_STATE, isSubmitting: true });
   });
-  it("should set socialAuthFailed to false", () => {
+
+  test("should set socialAuthFailed to false", () => {
     expect(
       socialAuth(INITIAL_STATE, {
         type: SOCIAL_AUTH_FAILED
@@ -32,7 +34,8 @@ describe("Social Auth reducers", () => {
       socialAuthFailed: true
     });
   });
-  it("should set socialAuthSuccess to false", () => {
+
+  test("should set socialAuthSuccess to false", () => {
     expect(
       socialAuth(undefined, {
         type: SOCIAL_AUTH_SUCCESS

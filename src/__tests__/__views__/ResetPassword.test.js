@@ -24,19 +24,22 @@ const findElement = (element, index) => wrapper.find(element).at(index);
 
 describe("Login component", () => {
   describe("component render", () => {
-    it("should match the snapshot", () => {
+    test("should match the snapshot", () => {
       expect(toJson(wrapper)).toMatchSnapshot();
     });
-    it("should render two TextInputs and button", () => {
+
+    test("should render two TextInputs and button", () => {
       expect(wrapper.find(TextInput).length).toBe(1);
       expect(wrapper.find(FormButton).length).toBe(1);
     });
-    it("should render component with initial props", () => {
+
+    test("should render component with initial props", () => {
       wrapper.find(TextInput).forEach(input => {
         expect(input.props().value).toBe(userInput.email);
       });
     });
   });
+
   describe("component properites", () => {
     let instance;
     beforeEach(() => {
@@ -44,6 +47,7 @@ describe("Login component", () => {
       jest.spyOn(instance, "handleOnChange");
       jest.spyOn(instance, "handleSubmit");
     });
+
     afterEach(() => {
       instance.handleOnChange.mockClear();
       instance.handleSubmit.mockClear();
@@ -51,7 +55,8 @@ describe("Login component", () => {
       sendResetLink.mockClear();
       mockedFormData.mockClear();
     });
-    it("should call handleOnChange when user enter input", () => {
+
+    test("should call handleOnChange when user enter input", () => {
       findElement(TextInput, 0).simulate("change", {
         target: {
           name: "email",
@@ -61,12 +66,14 @@ describe("Login component", () => {
       expect(instance.handleOnChange.mock.calls.length).toBe(1);
       expect(handleInputChange).toBeCalledWith("email", "example@yahoo.com");
     });
-    it("returns sendResetLink action creator", () => {
+
+    test("returns sendResetLink action creator", () => {
       findElement(FormButton, 0).simulate("click");
       expect(instance.handleSubmit.mock.calls.length).toBe(1);
       expect(sendResetLink).toBeCalledWith({ ...userInput });
     });
-    it("returns validation errors", () => {
+
+    test("returns validation errors", () => {
       wrapper.setProps({
         email: ""
       });

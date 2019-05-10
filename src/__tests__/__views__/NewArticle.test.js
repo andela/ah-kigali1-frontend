@@ -122,6 +122,7 @@ describe("Mapping dispatch to props new article", () => {
       }
     });
   });
+
   test("should return the adding a new tag ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).newTag({ tag: "politics" });
@@ -130,6 +131,7 @@ describe("Mapping dispatch to props new article", () => {
       payload: "politics"
     });
   });
+
   test("should return removing a tag ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).handleRemoveTag("politics");
@@ -138,6 +140,7 @@ describe("Mapping dispatch to props new article", () => {
       payload: "politics"
     });
   });
+
   test("should return creating an article ", () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).createArticle(article);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../Home";
-import Navbar from "../../components/common/AppBars/navBar";
+import Navbar from "../../components/common/AppBars/Navbar";
 import NewArticle from "../NewArticle";
 import EditArticle from "../EditArticle";
 import ReadArticle from "../ReadArticle";

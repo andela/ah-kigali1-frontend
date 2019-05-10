@@ -15,13 +15,13 @@ const emailInput = { name: "email", value: "me@example.com" };
 const passwordInput = { name: "email", value: "password" };
 
 describe("Login reducers", () => {
-  it("should return initial state", () => {
+  test("should return initial state", () => {
     expect(loginReducers(undefined, {})).toEqual({
       ...INITIAL_STATE
     });
   });
 
-  it("should handle LOGIN_INPUT_CHANGE", () => {
+  test("should handle LOGIN_INPUT_CHANGE", () => {
     expect(
       loginReducers(INITIAL_STATE, {
         type: LOGIN_INPUT_CHANGE,
@@ -42,7 +42,7 @@ describe("Login reducers", () => {
     });
   });
 
-  it("should handle SUBMITTING_LOGIN_CREDENTIALS", () => {
+  test("should handle SUBMITTING_LOGIN_CREDENTIALS", () => {
     expect(
       loginReducers(INITIAL_STATE, {
         type: SUBMITTING_LOGIN_CREDENTIALS
@@ -53,7 +53,7 @@ describe("Login reducers", () => {
     });
   });
 
-  it("should handle LOGIN_FAILED", () => {
+  test("should handle LOGIN_FAILED", () => {
     const errorPayload = { message: "Invalid email or password", errors: {} };
     expect(
       loginReducers(INITIAL_STATE, {
@@ -66,7 +66,7 @@ describe("Login reducers", () => {
     });
   });
 
-  it("should handle LOGIN_SUCCESS", () => {
+  test("should handle LOGIN_SUCCESS", () => {
     const successPayload = {
       message: "Sign in successfully",
       token: "qwertyuiop.1234567890"
@@ -83,7 +83,7 @@ describe("Login reducers", () => {
     });
   });
 
-  it("should handle  IS_OPENING_SOCIAL_AUTH_PROVIDER", () => {
+  test("should handle  IS_OPENING_SOCIAL_AUTH_PROVIDER", () => {
     expect(
       loginReducers(INITIAL_STATE, {
         type: IS_OPENING_SOCIAL_AUTH_PROVIDER

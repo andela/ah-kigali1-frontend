@@ -14,9 +14,11 @@ describe("Basic button", () => {
   beforeEach(() => {
     component = setUp(props);
   });
+
   test("should match the snapshot", () => {
     expect(toJson(component)).toMatchSnapshot();
   });
+
   test("should render button", () => {
     expect(component.props().title).toEqual(props.title);
     expect(component.hasClass(props.className)).toBe(true);

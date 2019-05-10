@@ -20,6 +20,7 @@ describe("Social auth component", () => {
     jest.spyOn(instance, "handleFailure");
     jest.spyOn(instance, "handleSuccess");
   });
+
   afterEach(() => {
     handleUserLogin.mockClear();
     instance.handleFailure.mockClear();
@@ -28,11 +29,13 @@ describe("Social auth component", () => {
       ...props
     });
   });
-  it("should match the snapshot", () => {
+
+  test("should match the snapshot", () => {
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(handleUserLogin).toHaveBeenCalledWith("23qwertyuhjbgty");
   });
-  it("return failure and redirect to sign_in page", () => {
+
+  test("return failure and redirect to sign_in page", () => {
     wrapper.setProps({
       isSubmitting: false,
       socialAuthFailed: true
@@ -40,7 +43,8 @@ describe("Social auth component", () => {
     expect(instance.handleSuccess.mock.calls.length).toBe(0);
     expect(instance.handleFailure.mock.calls.length).toBe(1);
   });
-  it("return failure and redirect to sign_in page", () => {
+
+  test("return failure and redirect to sign_in page", () => {
     wrapper.setProps({
       isSubmitting: false,
       socialAuthSuccess: true
