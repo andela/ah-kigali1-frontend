@@ -520,7 +520,8 @@ Article.propTypes = {
     })
   }).isRequired,
   followUser: PropTypes.func.isRequired,
-  following: PropTypes.bool.isRequired
+  following: PropTypes.bool.isRequired,
+  location: PropTypes.shape([]).isRequired
 };
 
 export default withRouter(
