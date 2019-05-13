@@ -34,7 +34,6 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "react/prefer-stateless-function": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -62,7 +61,6 @@
     "no-named-as-default": "off",
     "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
-    "prettier/prettier":0,
     "no-shadow": [
       "error",
       {
