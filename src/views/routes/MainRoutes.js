@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../Home";
 import Navbar from "../../components/common/AppBars/Navbar";
-import NewArticle from "../NewArticle";
-import EditArticle from "../EditArticle";
-import Navbar from "../../components/common/AppBars/navBar";
 import CreateEditArticle from "../CreateEditHolder";
-
 import ReadArticle from "../ReadArticle";
 import NotFound from "../NotFound";
 import EditProfile from "../EditProfile";
