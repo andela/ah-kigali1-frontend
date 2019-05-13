@@ -62,7 +62,7 @@ export class Article extends Component {
     const { articleError } = nextProps;
     if (articleError) {
       this.setState({ error: articleError });
-      return setTimeout(() => this.setState({ error: "" }), 3000);
+      return setTimeout(() => this.setState({ error: "" }), 5000);
     }
     const { article } = this.props;
 
@@ -154,7 +154,7 @@ export class Article extends Component {
   };
 
   clearErrorMessage = () =>
-    setTimeout(() => this.setState({ error: "" }), 3000);
+    setTimeout(() => this.setState({ error: "" }), 5000);
 
   displayErrorMessage = () => {
     const { error } = this.state;

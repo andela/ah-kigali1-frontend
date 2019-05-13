@@ -41,7 +41,7 @@ export const newArticle = (article, history) => async dispatch => {
   } catch (error) {
     const { message } = error.response.data;
     dispatch({ type: ARTICLE_ERROR, payload: message });
-    setTimeout(() => dispatch(clearResponse()), 3000);
+    setTimeout(() => dispatch(clearResponse()), 5000);
   }
 };
 
