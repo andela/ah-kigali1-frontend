@@ -97,8 +97,6 @@ export class Article extends Component {
     const {
       fetchOneArticle,
       onFetchComments,
-      currentUser,
-      onFetchProfile,
       match: {
         params: { slug }
       }
@@ -108,7 +106,6 @@ export class Article extends Component {
     fetchOneArticle(slug);
     document.addEventListener("mousedown", this.handleClickOutside);
     onFetchComments(slug, 1);
-    onFetchProfile(currentUser.username);
   };
 
   componentWillMount = () => {
@@ -498,7 +495,6 @@ export class Article extends Component {
 
 Article.propTypes = {
   profile: PropTypes.shape({}).isRequired,
-  onFetchProfile: PropTypes.func.isRequired,
   loading: PropTypes.func.isRequired,
   onSetBodyEdit: PropTypes.func.isRequired,
   comments: PropTypes.shape({}).isRequired,
