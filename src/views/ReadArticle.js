@@ -35,8 +35,7 @@ import {
   isBottom,
   getSelectedLocation,
   customHighlightColor,
-  removeCustomHighligh
-  getSelectedLocation,
+  removeCustomHighligh,
   markUserHighlight
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
@@ -577,7 +576,7 @@ export class Article extends Component {
             {reportingForm ? (
               <ReportingForm
                 reportArticle={reportArticle}
-                slug={slug}
+                slug={retrievedArticle.slug}
                 cancelReport={this.toggleReportingModal}
               />
             ) : (
@@ -722,7 +721,9 @@ Article.propTypes = {
 Article.defaultProps = {
   markHighlight: () => "",
   fetchHighLights: () => "",
-  highlights: {}
+  highlights: {
+    articleHighlights: {}
+  }
 };
 
 export default withRouter(
