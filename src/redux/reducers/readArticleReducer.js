@@ -5,7 +5,7 @@ import {
   FETCHING_ASIDE_ARTICLES,
   FETCHING_ARTICLE,
   DELETE_ARTICLE,
-  MARK_HIGHLIGHTED_SECTION
+  UPDATE_BODY_WITH_HIGHLIGHT
 } from "../actionTypes";
 
 const initialState = {
@@ -21,7 +21,7 @@ const readArticleReducer = (state = initialState, action) => {
         ...action.payload,
         isFetching: false
       };
-    case MARK_HIGHLIGHTED_SECTION:
+    case UPDATE_BODY_WITH_HIGHLIGHT:
       return {
         ...state,
         article: {

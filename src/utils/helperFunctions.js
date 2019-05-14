@@ -202,3 +202,28 @@ export const setEmptyLine = textWithTag => {
   const reg = new RegExp(`><`, "gi");
   return textWithTag.replace(reg, ">\n<");
 };
+
+/**
+ * @description mark user highlight
+ * @param {string} - body
+ * @param {object} - highlights
+ * @returns {string} - string
+ */
+
+export const markUserHighlight = (body, highlights = {}) => {
+  try {
+    let bodyWithHighlights = body;
+    const sortedHighlights = Object.values(highlights).sort(
+      (a, b) => b.highlightedText.length - a.highlightedText.length
+    );
+    sortedHighlights.forEach(highlight => {
+      bodyWithHighlights = bodyWithHighlights.replace(
+        highlight.highlightedText,
+        `<span class="highlighted">${highlight.highlightedText}</span>`
+      );
+    });
+    return bodyWithHighlights;
+  } catch (error) {
+    return body;
+  }
+};

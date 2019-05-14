@@ -12,9 +12,12 @@ import {
   fetchArticle,
   deleteArticle
 } from "../redux/actions/readArticleActionCreator";
+import {
+  fetchHighLights,
+  markHighlightSection
+} from "../redux/actions/highlightCommentActions";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
-import { markHighlightSection } from "../redux/actions/highlightCommentActions";
 import {
   inputHandleAsync,
   handleCommentsInputEdit,
@@ -33,6 +36,8 @@ import {
   getSelectedLocation,
   customHighlightColor,
   removeCustomHighligh
+  getSelectedLocation,
+  markUserHighlight
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -54,7 +59,9 @@ export const mapStateToProps = ({
   auth,
   fetchedArticle,
   following,
-  fetchedComments
+  fetchedComments,
+  user,
+  highlights
 }) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
@@ -65,7 +72,9 @@ export const mapStateToProps = ({
   success: fetchedComments.success,
   error: fetchedComments.error,
   comments: fetchedComments.comments,
-  loading: fetchedComments.isLoading
+  loading: fetchedComments.isLoading,
+  profile: user.profile,
+  highlights: highlights.articleHighlights
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -88,7 +97,8 @@ export const mapDispatchToProps = dispatch => ({
   onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug)),
   onFetchProfile: username => dispatch(fetchCurrentUser(username)),
   markHighlight: (articleBody, save = false) =>
-    dispatch(markHighlightSection(articleBody, save))
+    dispatch(markHighlightSection(articleBody, save)),
+  fetchHighLights: slug => dispatch(fetchHighLights(slug))
 });
 
 export class Article extends Component {
@@ -109,6 +119,7 @@ export class Article extends Component {
     const {
       fetchOneArticle,
       onFetchComments,
+      fetchHighLights,
       match: {
         params: { slug }
       }
@@ -116,6 +127,7 @@ export class Article extends Component {
 
     this.setState({ slug });
     fetchOneArticle(slug);
+    fetchHighLights(slug);
     document.addEventListener("mousedown", this.handleClickOutside);
     onFetchComments(slug, 1);
   };
@@ -136,6 +148,11 @@ export class Article extends Component {
     }
     return false;
   };
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.removeEventListener("select", this.handleHighlight);
+  }
 
   setArticleBodyRef = node => {
     this.articleBodyRef = node;
@@ -164,6 +181,22 @@ export class Article extends Component {
         left: 0
       });
     }
+  };
+
+  markHighlightText = save => {
+    const {
+      markHighlight,
+      article: {
+        article: { body, slug }
+      }
+    } = this.props;
+    const { highlightedText } = this.state;
+    markHighlight({
+      body,
+      slug,
+      text: highlightedText,
+      save
+    });
   };
 
   setWrapperRef = node => {
@@ -309,8 +342,7 @@ export class Article extends Component {
       isCommentEmpty,
       top,
       left,
-      commentModelOpen,
-      highlightedText
+      commentModelOpen
     } = this.state;
     const {
       article,
@@ -324,7 +356,8 @@ export class Article extends Component {
       onSetBodyEdit,
       loading,
       profile,
-      markHighlight
+      markHighlight,
+      highlights
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -416,17 +449,20 @@ export class Article extends Component {
                   id="article-body"
                   test-data="article-body"
                 >
-                  {stringToHtmlElement(body).body}
+                  {
+                    stringToHtmlElement(markUserHighlight(body, highlights))
+                      .body
+                  }
                   <HighlighPopover
                     top={top}
                     left={left}
                     onClick={() => {
-                      markHighlight(body, true);
+                      this.markHighlightText(false);
                       this.setState({
                         commentModelOpen: true
                       });
                     }}
-                    onHighlight={() => markHighlight(body, true)}
+                    onHighlight={() => this.markHighlightText(true)}
                   />
                 </section>
                 {isAuthor ? (
@@ -565,15 +601,20 @@ export class Article extends Component {
         ) : (
           ""
         )}
-        <CommentModel
-          isOpen={commentModelOpen}
-          onClose={() =>
-            this.setState({
-              commentModelOpen: false
-            })
-          }
-          id="comment-model"
-        />
+        {retrievedArticle ? (
+          <CommentModel
+            isOpen={commentModelOpen}
+            onClose={() =>
+              this.setState({
+                commentModelOpen: false
+              })
+            }
+            id="comment-model"
+            slug={retrievedArticle.slug}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -597,6 +638,8 @@ Article.propTypes = {
   reportArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
   markHighlight: PropTypes.func,
+  fetchHighLights: PropTypes.func,
+  highlights: PropTypes.shape({}),
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
@@ -677,7 +720,9 @@ Article.propTypes = {
 };
 
 Article.defaultProps = {
-  markHighlight: () => ""
+  markHighlight: () => "",
+  fetchHighLights: () => "",
+  highlights: {}
 };
 
 export default withRouter(

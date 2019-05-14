@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { saveHighlight } from "../../redux/actions/highlightCommentActions";
 import Button from "../common/Buttons/FormButton";
 
 export class CommentModel extends Component {
@@ -18,6 +20,13 @@ export class CommentModel extends Component {
     this.setState({
       comment: ""
     });
+  };
+
+  saveComment = () => {
+    const { start, end, saveHighlight: save, slug, onClose } = this.props;
+    const { comment } = this.state;
+    save({ startIndex: start, endIndex: end, comment, slug });
+    onClose();
   };
 
   render() {
@@ -44,7 +53,7 @@ export class CommentModel extends Component {
             onChange={e => this.setState({ comment: e.target.value })}
             data-test="comment-model-input"
           />
-          <Button value="Submit" />
+          <Button value="Submit" onClick={this.saveComment} />
         </div>
       </div>
     );
@@ -54,11 +63,23 @@ export class CommentModel extends Component {
 CommentModel.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string,
+  start: PropTypes.number,
+  end: PropTypes.number,
+  saveHighlight: PropTypes.func.isRequired,
+  slug: PropTypes.string.isRequired
 };
 
 CommentModel.defaultProps = {
   isOpen: false,
-  id: "comment-model"
+  id: "comment-model",
+  start: 0,
+  end: 0
 };
-export default CommentModel;
+
+const mapStateToProps = state => ({ ...state.highlights });
+
+export default connect(
+  mapStateToProps,
+  { saveHighlight }
+)(CommentModel);
