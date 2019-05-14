@@ -57,9 +57,15 @@ const commentReducer = (state = initialState, action) => {
       };
     case UPDATE_COMMENT:
       const { commentId, body } = action.payload;
-      state.comments[commentId].body = body;
       return {
-        ...state
+        ...state,
+        comments: {
+          ...state.comments,
+          [commentId]: {
+            ...state.comments[commentId],
+            body
+          }
+        }
       };
     case CREATE_NEW_COMMENT:
       return {
