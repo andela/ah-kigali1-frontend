@@ -741,7 +741,9 @@ Article.defaultProps = {
 Article.defaultProps = {
   markHighlight: () => "",
   fetchHighLights: () => "",
-  highlights: {}
+  highlights: {
+    articleHighlights: {}
+  }
 };
 
 export default withRouter(
