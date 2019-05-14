@@ -64,11 +64,13 @@
   }
   .time-ago {
     color: grey;
-    margin-right: 15px;
-    text-align: right;
+    margin-top: -25px;
+    margin-right: 10px;
+    position: absolute;
+    right: 31%;
   }
   .comment-body {
-    margin: 5px 15px 15px 15px;
+    margin: 30px 15px 15px 15px;
   }
   .article-comments--existing__desktop,
   .article-comments--existing__mobile {
