@@ -21,20 +21,13 @@ const props = {
   ],
   onSetBodyEdit: jest.fn(),
   editComment: jest.fn(),
-  profile: {
-    email: "",
-    username: "",
-    address: "",
-    allowNotifications: true,
-    bio: "",
-    firstName: "",
-    gender: "",
-    image: "",
-    lastName: "",
-    password: "",
-    phone: "",
-    socialId: ""
-  }
+  currentUser: {
+    email: "email@email.com",
+    username: "username4"
+  },
+  onLikeComment: jest.fn(),
+  reportArticle: jest.fn(),
+  likeComment: jest.fn()
 };
 const body = "comment";
 const slug = "slugofanarticle";
@@ -45,6 +38,13 @@ describe("Comments", () => {
       const wrapper = shallow(<Comments {...props} />);
       wrapper.find(".edit-comment").simulate("click");
       expect(props.onSetBodyEdit).toHaveBeenCalled();
+    });
+
+    test("should simulate click on onLike", () => {
+      const wrapper = shallow(<Comments {...props} />);
+      wrapper.setState({ ind: 0, editMode: false });
+      wrapper.find("#like-heart").simulate("click");
+      expect(props.likeComment).toHaveBeenCalled();
     });
 
     test("should simulate click on editComment", () => {
@@ -192,6 +192,17 @@ describe("Comments", () => {
     test("onSetBodyEdit()", () => {
       const dispatch = jest.fn();
       mapDispatchToProps(dispatch).onSetBodyEdit(body);
+      expect(dispatch.mock.calls[0][0]).toBeDefined();
+    });
+
+    test("onLikeComment()", () => {
+      const dispatch = jest.fn();
+      mapDispatchToProps(dispatch).onLikeComment(commentId, slug);
+      expect(dispatch.mock.calls[0][0]).toBeDefined();
+    });
+    test("reportArticle()", () => {
+      const dispatch = jest.fn();
+      mapDispatchToProps(dispatch).reportArticle("dkjflkdsf", slug);
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
   });

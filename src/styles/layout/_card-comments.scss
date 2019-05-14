@@ -90,6 +90,16 @@
       .comment-like {
         .icons {
           display: flex;
+          .fa-heart {
+            cursor: pointer;
+            margin-top: 3px;
+            margin-right: 3px;
+          }
+          .fa-heart-o {
+            cursor: pointer;
+            margin-top: 3px;
+            margin-right: 3px;
+          }
           .likes {
             margin-right: 0.5em;
             margin-left: 10px;

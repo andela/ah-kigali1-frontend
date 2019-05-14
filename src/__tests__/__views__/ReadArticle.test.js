@@ -102,21 +102,7 @@ describe(" Read article", () => {
         success: "success",
         error: "error message",
         comments: "comment body",
-        loading: false,
-        profile: {
-          email: "",
-          username: "",
-          address: "",
-          allowNotifications: true,
-          bio: "",
-          firstName: "",
-          gender: "",
-          image: "",
-          lastName: "",
-          password: "",
-          phone: "",
-          socialId: ""
-        }
+        loading: false
       });
     });
 
