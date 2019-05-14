@@ -149,6 +149,7 @@ describe("comments actions", () => {
         });
       });
     });
+
     describe("deleteComment()", () => {
       test("should delete comment successfully", () => {
         const expectedActions = [

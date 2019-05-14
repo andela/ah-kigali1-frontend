@@ -72,6 +72,7 @@ describe("team reducer", () => {
       bodyEdit: "hello"
     });
   });
+
   test("should handle SET_SUCCESS_MESSAGE", () => {
     expect(
       commentReducer(initialState, {
@@ -83,6 +84,7 @@ describe("team reducer", () => {
       success: "success message"
     });
   });
+
   test("should handle SET_ERROR_MESSAGE", () => {
     expect(
       commentReducer(initialState, {

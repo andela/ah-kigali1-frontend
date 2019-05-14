@@ -9,6 +9,7 @@ const props = {
   deleteComment: jest.fn(),
   handleClose: jest.fn()
 };
+
 describe("Dialog()", () => {
   test("should trigger click event", () => {
     const component = shallow(<Dialog {...props} />);
