@@ -42,7 +42,6 @@ export class CommentModel extends Component {
           {/* {displayReportResponse("hello world", "damn")} */}
         </div>
         <div className="modal-content">
-<<<<<<< HEAD
           <div className="form-header">
             <h3>Comment on highlighted section:</h3>
             <button
@@ -55,17 +54,6 @@ export class CommentModel extends Component {
               &times;
             </button>
           </div>
-=======
-          <button
-            type="button"
-            className="close"
-            onClick={onClose}
-            onKeyDown={onClose}
-            data-test="close-btn"
-          >
-            &times;
-          </button>
->>>>>>> [Feature #163518664] add components tests
           <textarea
             className="comment-input"
             type="textarea"
@@ -74,15 +62,12 @@ export class CommentModel extends Component {
             value={comment}
             onChange={e => this.setState({ comment: e.target.value })}
             data-test="comment-model-input"
-<<<<<<< HEAD
           />
           <Button
             value="Submit"
             onClick={this.saveComment}
             data-test="save-btn"
             className="btn report"
-=======
->>>>>>> [Feature #163518664] add components tests
           />
         </div>
       </div>

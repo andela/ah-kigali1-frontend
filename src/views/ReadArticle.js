@@ -18,7 +18,6 @@ import {
 } from "../redux/actions/highlightCommentActions";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
-import { markHighlightSection } from "../redux/actions/highlightCommentActions";
 import {
   inputHandleAsync,
   handleCommentsInputEdit,
@@ -36,10 +35,8 @@ import {
   isBottom,
   getSelectedLocation,
   markUserHighlight,
-  getSelectedLocation,
   customHighlightColor,
-  removeCustomHighligh,
-  getSelectedLocation
+  removeCustomHighligh
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -356,12 +353,15 @@ export class Article extends Component {
       currentUser,
       history,
       reportArticle,
+<<<<<<< HEAD
       commentBody,
       comments,
       updatedBody,
       onSetBodyEdit,
       loading,
       profile,
+=======
+>>>>>>> [Feature #163518664] saves article highlight in db
       highlights
     } = this.props;
 
@@ -461,9 +461,19 @@ export class Article extends Component {
                   <HighlighPopover
                     top={top}
                     left={left}
+<<<<<<< HEAD
                     onClick={() => this.markHighlightText(false, "withComment")}
                     onHighlight={() => this.markHighlightText(true)}
                     data-test="selection-popover"
+=======
+                    onClick={() => {
+                      this.markHighlightText(false);
+                      this.setState({
+                        commentModelOpen: true
+                      });
+                    }}
+                    onHighlight={() => this.markHighlightText(true)}
+>>>>>>> [Feature #163518664] saves article highlight in db
                   />
                 </section>
                 {isAuthor ? (
@@ -729,7 +739,9 @@ Article.defaultProps = {
 };
 
 Article.defaultProps = {
-  markHighlight: () => ""
+  markHighlight: () => "",
+  fetchHighLights: () => "",
+  highlights: {}
 };
 
 export default withRouter(
