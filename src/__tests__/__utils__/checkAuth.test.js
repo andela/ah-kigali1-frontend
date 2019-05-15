@@ -9,7 +9,7 @@ import { checkAuthComponent } from "../../utils/checkAuthUtils";
 import { EditArticle } from "../../views/EditArticle";
 import { article } from "../__mocks__/testData";
 
-describe.only("should test the check authenticated component", () => {
+describe("should test the check authenticated component", () => {
   const initialState = { article };
   const mockStore = configureStore();
   let wrapper;
@@ -38,6 +38,7 @@ describe.only("should test the check authenticated component", () => {
       </Provider>
     ).find("AuthenticatedComponent");
   });
+
   afterEach(() => {
     localStorage.__STORE__.clear();
   });
