@@ -21,11 +21,17 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
     "newlines-between": "always",
     "react/forbid-prop-types": [2,
       {
         "forbid": ["object", "array"], "checkContextTypes": false, "checkChildContextTypes": false
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
       }
     ],
     "jsx-a11y/no-noninteractive-element-interactions": "off",
@@ -55,6 +61,7 @@
     "no-named-as-default": "off",
     "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
+    "prettier/prettier": 0,
     "no-shadow": [
       "error",
       {
