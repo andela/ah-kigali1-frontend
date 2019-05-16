@@ -83,6 +83,7 @@ export const arrayToObject = (items = [], key = "id") =>
     itemsObj[item[key]] = item;
     return itemsObj;
   }, {});
+
 /*
  * @param {array} items - array of items to be sorted
  * @param {string} tag - value for array to be filtered by

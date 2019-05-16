@@ -50,7 +50,35 @@ export const props1 = {
       slug: "hello world"
     }
   },
-  asideArticles: [{}],
+  asideArticles: [
+    {
+      title: "hello world",
+      slug: "juventus-vs-manu",
+      body: "<p>hello world</p>",
+      createdAt: "2019-04-20T09:37:50.006Z",
+      readTime: 1,
+      author: {
+        username: "Yves2019",
+        firstName: "Kagarama",
+        lastName: "Iraguha"
+      },
+      likes: [],
+      comments: [
+        {
+          author: {
+            username: "Yves2019",
+            firstName: "Kagarama",
+            lastName: "Iraguha"
+          },
+          like: 1,
+          body: "Hello world",
+          id: "hello",
+          createdAt: "2019-04-20T09:37:50.006Z"
+        }
+      ],
+      tagsList: ["manchester", "united"]
+    }
+  ],
   article: {
     message: "Article found successfully",
     isFetching: false,
@@ -82,7 +110,45 @@ export const props1 = {
       tagsList: ["manchester", "united"]
     }
   },
-  fetchOneArticle: jest.fn()
+  comments: [
+    {
+      articleId: "9ffef127-9f6c-4194-bed1-b9abdf6e41c2",
+      author: {
+        firstName: "Fabrice",
+        lastName: "NIYOMWUNGERI",
+        username: "username4"
+      },
+      body:
+        "The standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor sitThe standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor sitThe standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor",
+      id: "d0be9663-4599-411c-97c8-8ed1bef603d3"
+    }
+  ],
+  fetchOneArticle: jest.fn(),
+  onFetchComments: jest.fn(),
+  onUpdateComment: jest.fn(),
+  onCreateComments: jest.fn(),
+  onHandleCommentsInput: jest.fn().mockImplementation(() => Promise.resolve()),
+  onHandleCommentsInputEdit: jest.fn(),
+  onDeleteComment: jest.fn(),
+  commentBody: { fetchedComments: { body: "bdojifdf" } },
+  updatedBody: { fetchedComments: { bodyEdit: "dfdfd" } },
+  success: { fetchedComments: { success: "dfkdjfdf" } },
+  error: { fetchedComments: { error: "dfjdkfd" } },
+  onFetchProfile: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 export const props2 = {
   deleteOneArticle: jest.fn(() => "Hello world"),
@@ -135,7 +201,40 @@ export const props2 = {
       tagsList: []
     }
   },
-  fetchOneArticle: jest.fn()
+  comments: [
+    {
+      articleId: "9ffef127-9f6c-4194-bed1-b9abdf6e41c2",
+      author: {
+        firstName: "Fabrice",
+        lastName: "NIYOMWUNGERI",
+        username: "username4"
+      },
+      body:
+        "The standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor sitThe standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor sitThe standard Lorem Ipsum passage, used since the 1500s Lorem ipsum dolor",
+      id: "d0be9663-4599-411c-97c8-8ed1bef603d3"
+    }
+  ],
+  fetchOneArticle: jest.fn(),
+  onFetchComments: jest.fn(),
+  commentBody: { fetchedComments: { body: "bdojifdf" } },
+  updatedBody: { fetchedComments: { bodyEdit: "dfdfd" } },
+  success: { fetchedComments: { success: "dfkdjfdf" } },
+  error: { fetchedComments: { error: "dfjdkfd" } },
+  onFetchProfile: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 export const props3 = {
   currentUser: {
@@ -162,7 +261,27 @@ export const props3 = {
     isFetching: true
   },
   fetchOneArticle: jest.fn(),
-  deleteOneArticle: jest.fn(() => "hello world")
+  deleteOneArticle: jest.fn(() => "hello world"),
+  onFetchComments: jest.fn(),
+  commentBody: { fetchedComments: { body: "bdojifdf" } },
+  updatedBody: { fetchedComments: { bodyEdit: "dfdfd" } },
+  success: { fetchedComments: { success: "dfkdjfdf" } },
+  error: { fetchedComments: { error: "dfjdkfd" } },
+  onFetchProfile: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 export const props4 = {
   currentUser: {
@@ -189,7 +308,27 @@ export const props4 = {
     isFetching: true
   },
   fetchOneArticle: jest.fn(),
-  deleteOneArticle: jest.fn()
+  deleteOneArticle: jest.fn(),
+  onFetchComments: jest.fn(),
+  commentBody: { fetchedComments: { body: "bdojifdf" } },
+  updatedBody: { fetchedComments: { bodyEdit: "dfdfd" } },
+  success: { fetchedComments: { success: "dfkdjfdf" } },
+  error: { fetchedComments: { error: "dfjdkfd" } },
+  onFetchProfile: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 export const props5 = {
   currentUser: {
@@ -230,7 +369,27 @@ export const props5 = {
     }
   },
   fetchOneArticle: jest.fn(),
-  deleteOneArticle: jest.fn()
+  deleteOneArticle: jest.fn(),
+  onFetchComments: jest.fn(),
+  commentBody: { body: "bdojifdf" },
+  updatedBody: { fetchedComments: { bodyEdit: "dfdfd" } },
+  success: { fetchedComments: { success: "dfkdjfdf" } },
+  error: { fetchedComments: { error: "dfjdkfd" } },
+  onFetchProfile: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 
 export const mainCardProps1 = {

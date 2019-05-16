@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   ARTICLE_FETCHED,
   ARTICLE_ERROR,
@@ -6,7 +7,10 @@ import {
   DELETE_ARTICLE
 } from "../actionTypes";
 
-const initialState = { isFetching: true, asideArticles: {} };
+const initialState = {
+  isFetching: true,
+  asideArticles: {}
+};
 
 const readArticleReducer = (state = initialState, action) => {
   switch (action.type) {

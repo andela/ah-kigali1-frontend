@@ -1,6 +1,4 @@
 .article-comments {
-  margin-top: 1em;
-  margin-bottom: 1em;
   .article-comments--new {
     @include card {
       display: flex;
@@ -9,6 +7,14 @@
     }
 
     @include border-bottom-line;
+    .comment-textarea {
+      margin: 18px 7px 7px 7px;
+      border-radius: 2em;
+    }
+    .delete_article {
+      width: 7em;
+      height: 2em;
+    }
   }
   .article-comments--new-text {
     margin-left: 5em;
@@ -22,45 +28,76 @@
       display: flex;
       flex: auto;
       flex-direction: row;
-      padding-top: 1.5em;
-      padding-bottom: 1.5em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
     }
     @include border-bottom-line;
+    .article-comments--existing-text {
+      #edit-comment-textarea {
+        margin: 15px 7px 7px;
+        border-radius: 2em;
+        height: 46px;
+        width: 633px;
+      }
+    }
   }
 
   .article-comments--existing__mobile {
     display: none;
   }
 
-  .article-comments--existing-text {
-    margin-left: 5em;
-  }
-  .article-comments--actions {
+  .comment-edit-delete {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 0.6em;
-    .comment-edit-delete {
-      margin-right: 5em;
-      .comment-edit {
-        margin-right: 3em;
-      }
+    flex-direction: row-reverse;
+    margin-right: 10px;
+    position: absolute;
+    right: 31%;
+    .edit-comment {
+      margin-right: 5px;
+      height: 20px;
+      width: 20px;
+      color: grey;
     }
+    .delete-comment {
+      color: grey;
+    }
+  }
+  .time-ago {
+    color: grey;
+    margin-top: -25px;
+    margin-right: 10px;
+    position: absolute;
+    right: 31%;
+  }
+  .comment-body {
+    margin: 30px 15px 15px 15px;
   }
   .article-comments--existing__desktop,
   .article-comments--existing__mobile {
+    &:hover {
+      .delete-comment {
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .edit-comment {
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
     .article-comments--actions {
       .comment-like {
         .icons {
           display: flex;
-
           .likes {
             margin-right: 0.5em;
+            margin-left: 10px;
           }
         }
       }
       .comment-delete {
-        color: red;
+        color: white;
       }
     }
   }
@@ -71,6 +108,12 @@
     .comment-author_name {
       text-align: center;
     }
+  }
+  .edit-comment-textarea {
+    margin: 15px 7px 7px;
+    border-radius: 2em;
+    height: 64px;
+    width: 640px;
   }
   .article-comments--more {
     text-align: center;

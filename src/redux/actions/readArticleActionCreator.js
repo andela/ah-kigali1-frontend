@@ -7,6 +7,7 @@ import {
   ARTICLE_ERROR,
   DELETE_ARTICLE
 } from "../actionTypes";
+import { fetchComments } from "./commentActions";
 
 export const fetchingArticle = () => ({ type: FETCHING_ARTICLE });
 
@@ -26,6 +27,7 @@ export const fetchArticle = slug => async dispatch => {
       },
       {}
     );
+    dispatch(fetchComments(slug, 1));
     dispatch({
       type: FETCHING_ASIDE_ARTICLES,
       payload: newArticles
