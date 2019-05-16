@@ -145,7 +145,7 @@ describe(" Read article", () => {
   describe("Follow an author", () => {
     test("should map followUser article to props", () => {
       const dispatch = jest.fn();
-      const location = { pathname: "gdfjbjhgdsfj" };
+      const location = { pathname: "/another/fake-url/" };
       const history = { push: jest.fn() };
       mapDispatchToProps(dispatch).followUser("claude", { location, history });
       expect(dispatch.mock.calls[0][0]).toBeDefined();

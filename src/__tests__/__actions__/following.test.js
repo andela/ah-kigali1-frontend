@@ -24,7 +24,7 @@ describe("test the following actions", () => {
   });
 
   describe("test fetch following", () => {
-    const location = { pathname: "gdfjbjhgdsfj" };
+    const location = { pathname: "/a-fake/path" };
     const history = { push: jest.fn() };
     test("should dispatch the success action after successfully following the user", () => {
       store = mockStore({});

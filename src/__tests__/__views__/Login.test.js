@@ -115,7 +115,8 @@ describe("Login component", () => {
         password: formData.password.value
       });
     });
-    it("should redirect the user to the next url on log in", () => {
+
+    test("should redirect the user to the next url on log in", () => {
       localStorage.__STORE__.setItem("token", "helloWorld");
       mockedFormData.mockReturnValue({});
       Validator.formData = mockedFormData.bind(Validator);
@@ -131,7 +132,7 @@ describe("Login component", () => {
       localStorage.__STORE__.clear();
     });
 
-    it("should not signIn user if email and password are not provided", () => {
+    test("should not signIn user if email and password are not provided", () => {
       const errors = { email: "Email is required" };
       mockedFormData.mockReturnValue({ ...errors });
       Validator.formData = mockedFormData.bind(Validator);
