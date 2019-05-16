@@ -34,8 +34,6 @@ import {
   calculateTimeStamp,
   isBottom,
   getSelectedLocation,
-  customHighlightColor,
-  removeCustomHighligh,
   markUserHighlight
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
@@ -342,7 +340,6 @@ export class Article extends Component {
       response,
       displayModal,
       reportingForm,
-      slug,
       isCommentEmpty,
       top,
       left,
@@ -360,7 +357,6 @@ export class Article extends Component {
       onSetBodyEdit,
       loading,
       profile,
-      markHighlight,
       highlights
     } = this.props;
 
