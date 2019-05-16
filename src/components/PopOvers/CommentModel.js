@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { saveHighlight } from "../../redux/actions/highlightCommentActions";
 import Button from "../common/Buttons/FormButton";
+import { isEmpty } from "../../utils/helperFunctions";
 
 export class CommentModel extends Component {
   state = {
@@ -25,6 +26,9 @@ export class CommentModel extends Component {
   saveComment = () => {
     const { start, end, saveHighlight: save, slug, onClose } = this.props;
     const { comment } = this.state;
+    if (isEmpty(comment)) {
+      return;
+    }
     save({ startIndex: start, endIndex: end, comment, slug });
     onClose();
   };
@@ -53,7 +57,11 @@ export class CommentModel extends Component {
             onChange={e => this.setState({ comment: e.target.value })}
             data-test="comment-model-input"
           />
-          <Button value="Submit" onClick={this.saveComment} />
+          <Button
+            value="Submit"
+            onClick={this.saveComment}
+            data-test="save-btn"
+          />
         </div>
       </div>
     );

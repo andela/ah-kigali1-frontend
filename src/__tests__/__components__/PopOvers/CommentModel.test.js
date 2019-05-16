@@ -5,8 +5,10 @@ import { CommentModel } from "../../../components/PopOvers/CommentModel";
 import Button from "../../../components/common/Buttons/FormButton";
 
 const onClose = jest.fn();
+const saveHighlight = jest.fn();
 const props = {
   isOpen: false,
+  saveHighlight,
   onClose,
   id: "the-comment-model"
 };
@@ -15,11 +17,13 @@ describe("Comment PopUp Model", () => {
   const instance = component.instance();
   beforeEach(() => {
     jest.spyOn(instance, "componentWillReceiveProps");
-    jest.spyOn(component.instance(), "closeModel");
+    jest.spyOn(instance, "closeModel");
+    jest.spyOn(instance, "saveComment");
   });
   afterEach(() => {
     instance.componentWillReceiveProps.mockClear();
     instance.closeModel.mockClear();
+    saveHighlight.mockClear();
   });
   test("should match the snapshot", () => {
     expect(toJson(component)).toMatchSnapshot();
@@ -58,5 +62,20 @@ describe("Comment PopUp Model", () => {
     });
     component.update();
     expect(component.state().comment).toBe("");
+  });
+  test("should call save handler, but not save empty comment", () => {
+    const saveBtn = component.find(`[data-test="save-btn"]`).at(0);
+    saveBtn.simulate("click");
+    expect(instance.saveComment).toBeCalled();
+    expect(saveHighlight).not.toBeCalled();
+  });
+  test("should call save handler, but not save empty comment", () => {
+    component.setState({
+      comment: "Hello world"
+    });
+    const saveBtn = component.find(`[data-test="save-btn"]`).at(0);
+    saveBtn.simulate("click");
+    expect(instance.saveComment).toBeCalled();
+    expect(saveHighlight).toBeCalled();
   });
 });
