@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import queryString from "query-string";
 import {
   handleTextInput,
   handleSignIn,
@@ -53,10 +54,23 @@ export class Login extends Component {
   }
 
   render() {
-    const { email, password, message, isSubmitting, loginSuccess } = this.props;
+    const {
+      email,
+      password,
+      message,
+      isSubmitting,
+      loginSuccess,
+      history,
+      location
+    } = this.props;
     const { errors } = this.state;
-    if (loginSuccess) {
-      return this.handleNavigation("");
+    if (loginSuccess && location) {
+      const { next: nextUrl } = queryString.parse(location.search);
+      if (!nextUrl) {
+        history.push("/");
+      } else if (localStorage.getItem("token")) {
+        history.push(nextUrl);
+      }
     }
     return (
       <div className="auth" data-test="login">
@@ -155,11 +169,17 @@ Login.propTypes = {
   handleTextInput: PropTypes.func.isRequired,
   message: PropTypes.string,
   loginSuccess: PropTypes.bool.isRequired,
-  socialAuth: PropTypes.func.isRequired
+  socialAuth: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  history: PropTypes.arrayOf(PropTypes.string).isRequired
 };
+
 Login.defaultProps = {
   message: ""
 };
+
 export const mapStateToProps = state => {
   const { auth } = state;
   return {

@@ -67,7 +67,8 @@ export const mapStateToProps = ({
 export const mapDispatchToProps = dispatch => ({
   deleteOneArticle: slug => dispatch(deleteArticle(slug)),
   fetchOneArticle: slug => dispatch(fetchArticle(slug)),
-  followUser: username => dispatch(followUser(username)),
+  followUser: (username, { location, history }) =>
+    dispatch(followUser(username, { location, history })),
   reportArticle: (description, slug) =>
     dispatch(reportedArticle(description, slug)),
   onHandleCommentsInput: payload => dispatch(inputHandleAsync(payload)),
@@ -244,8 +245,8 @@ export class Article extends Component {
   };
 
   followAuthor = username => {
-    const { followUser: followOther } = this.props;
-    followOther(username);
+    const { followUser: followOther, history, location } = this.props;
+    followOther(username, { history, location });
   };
 
   render() {
@@ -584,7 +585,8 @@ Article.propTypes = {
     })
   }).isRequired,
   followUser: PropTypes.func.isRequired,
-  following: PropTypes.bool.isRequired
+  following: PropTypes.bool.isRequired,
+  location: PropTypes.shape([]).isRequired
 };
 
 export default withRouter(

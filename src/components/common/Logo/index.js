@@ -1,20 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
+import logoImage from "../../../assets/img/quill-drawing-a-line.svg";
 
-const Logo = ({ className, ...props }) => (
-  <img
-    src={require("../../../assets/img/quill-drawing-a-line.svg")}
-    alt="logo"
-    className="logo"
-    {...props}
-  />
-);
+const Logo = () => <img src={logoImage} alt="logo" className="logo" />;
 
-Logo.propTypes = {
-  className: PropTypes.string
-};
-
-Logo.defaultProps = {
-  className: "logo"
-};
 export default Logo;

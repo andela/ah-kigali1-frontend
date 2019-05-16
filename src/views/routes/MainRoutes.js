@@ -9,6 +9,7 @@ import EditProfile from "../EditProfile";
 import Profile from "../Profile";
 import Settings from "../Settings";
 import Search from "../SearchResults";
+import { checkAuthComponent } from "../../utils/checkAuthUtils";
 
 export const routes = [
   {
@@ -21,7 +22,8 @@ export const routes = [
   },
   {
     path: "/articles/new",
-    component: CreateEditArticle
+    component: CreateEditArticle,
+    requireAuth: true
   },
   {
     path: "/articles/:slug",
@@ -30,7 +32,8 @@ export const routes = [
 
   {
     path: "/articles/:slug/edit",
-    component: CreateEditArticle
+    component: CreateEditArticle,
+    requireAuth: true
   },
   {
     path: "/profiles/:username",
@@ -56,14 +59,23 @@ export default class MainRoutes extends Component {
       <div>
         <Navbar />
         <Switch>
-          {routes.map((route, index) => (
-            <Route
-              exact
-              path={route.path}
-              component={route.component}
-              key={Number(index)}
-            />
-          ))}
+          {routes.map((route, index) =>
+            route.requireAuth ? (
+              <Route
+                exact
+                path={route.path}
+                component={checkAuthComponent(route.component)}
+                key={Number(index)}
+              />
+            ) : (
+              <Route
+                exact
+                path={route.path}
+                component={route.component}
+                key={Number(index)}
+              />
+            )
+          )}
           <Route component={NotFound} />
         </Switch>
       </div>

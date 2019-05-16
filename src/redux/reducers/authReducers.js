@@ -61,7 +61,7 @@ export default (state = INITIAL_STATE, action) => {
       };
     case SET_CURRENT_USER:
       return {
-        ...INITIAL_STATE,
+        ...state,
         currentUser: payload
       };
     default:

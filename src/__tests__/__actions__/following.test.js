@@ -24,6 +24,8 @@ describe("test the following actions", () => {
   });
 
   describe("test fetch following", () => {
+    const location = { pathname: "/a-fake/path" };
+    const history = { push: jest.fn() };
     test("should dispatch the success action after successfully following the user", () => {
       store = mockStore({});
       const expectedActions = [
@@ -34,9 +36,11 @@ describe("test the following actions", () => {
         status: 201,
         response: { message: "Follow successful" }
       });
-      return store.dispatch(followUser("claude")).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(followUser("claude", { location, history }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
 
     test("should dispatch the success action after successfully unfollowing the user", () => {
@@ -49,9 +53,11 @@ describe("test the following actions", () => {
         status: 202,
         response: { message: "You have unfollowed this author" }
       });
-      return store.dispatch(followUser("claude")).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(followUser("claude", { location, history }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
 
     test("should dispatch the failed action if there was a problem while following the user", () => {
@@ -64,9 +70,11 @@ describe("test the following actions", () => {
         status: 500,
         response: { message: "Error while following the user" }
       });
-      return store.dispatch(followUser("claude")).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+      return store
+        .dispatch(followUser("claude", { location, history }))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
   });
 });
