@@ -42,6 +42,7 @@ describe("should test the check authenticated component", () => {
   afterEach(() => {
     localStorage.__STORE__.clear();
   });
+
   test("should redirect to next url if not logged in", () => {
     localStorage.__STORE__.setItem("token", "");
     expect(wrapper.props().history).toContain(`/sign_in?next=${nextUrl}`);
