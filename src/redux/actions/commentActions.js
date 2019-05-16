@@ -44,9 +44,11 @@ export const setBodyEdit = payload => ({
   type: UPDATE_COMMENT_BODY,
   payload
 });
+
 export const setLoading = () => ({
   type: SET_LOADING_COMMENTS
 });
+
 export const inputHandleAsync = payload => dispatch =>
   new Promise(resolve => {
     dispatch(handleCommentsInput(payload));
@@ -59,7 +61,7 @@ export const fetchComments = (slug, page) => async dispatch => {
     const response = await axios.get(
       `/articles/${slug}/comments?pageNumber=${page}`
     );
-    const { comments } = response.data.article;
+    const { comments } = response.data;
     dispatch(setComments(comments, page));
   } catch (errorResponse) {
     const { message } = errorResponse.response.data;
@@ -84,6 +86,7 @@ export const createComment = (comments, slug) => async dispatch => {
     dispatch(setErrorMessage(message));
   }
 };
+
 export const deleteComment = (commentId, slug) => async dispatch => {
   try {
     const response = await axios.delete(

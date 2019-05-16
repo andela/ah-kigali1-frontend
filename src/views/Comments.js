@@ -45,84 +45,77 @@ export class Comments extends Component {
       handleCommentsInputEdit
     } = this.props;
 
-    return Object.values(comments).length
-      ? Object.values(comments).map((comment, index) => {
-          const { body, like, id, createdAt, author } = comment;
-          const { image, lastName, firstName, username } = author;
-          return (
-            <div className="article-comments--existing__desktop" key={id}>
-              <div className="avatar-wrapper comment-avatar-wrapper">
-                <img
-                  src={image || authorImage}
-                  alt="Avatar"
-                  className="avatar"
+    return Object.values(comments).map((comment, index) => {
+      const { body, like, id, createdAt, author } = comment;
+      const { image, lastName, firstName, username } = author;
+      return (
+        <div className="article-comments--existing__desktop" key={id}>
+          <div className="avatar-wrapper comment-avatar-wrapper">
+            <img src={image || authorImage} alt="Avatar" className="avatar" />
+            <span className="comment-author_name ">
+              {username && firstName && lastName
+                ? `${firstName} ${lastName.charAt(0) || username.charAt(0)}.`
+                : username}
+            </span>
+          </div>
+          <div className="article-comments--existing-text">
+            {editMode && Number(commentIndex) === index ? (
+              <div>
+                <Textarea
+                  id="edit-comment-textarea"
+                  type="textarea"
+                  onChange={handleCommentsInputEdit}
+                  onKeyDown={e => this.onEnterPress(e, id)}
+                  name="bodyEdit"
+                  value={updatedBody}
                 />
-                <span className="comment-author_name ">
-                  {username && firstName && lastName
-                    ? `${firstName} ${lastName.charAt(0) ||
-                        username.charAt(0)}.`
-                    : username}
-                </span>
+                <Button
+                  id="update-comment"
+                  className="btn delete_article"
+                  onClick={() => this.handleComment(id)}
+                  title="Update"
+                />
+                <Button
+                  id="close-update-comment"
+                  className="btn delete_article"
+                  onClick={() => this.setState({ editMode: false })}
+                  title="Cancel"
+                />
               </div>
-              <div className="article-comments--existing-text">
-                {editMode && Number(commentIndex) === index ? (
-                  <div>
-                    <Textarea
-                      id="edit-comment-textarea"
-                      type="textarea"
-                      onChange={handleCommentsInputEdit}
-                      onKeyDown={e => this.onEnterPress(e, id)}
-                      name="bodyEdit"
-                      value={updatedBody}
-                    />
-                    <Button
-                      id="update-comment"
-                      className="btn delete_article"
-                      onClick={() => this.handleComment(id)}
-                      title="Update"
-                    />
-                    <Button
-                      id="close-update-comment"
-                      className="btn delete_article"
-                      onClick={() => this.setState({ editMode: false })}
-                      title="Cancel"
-                    />
+            ) : (
+              <div>
+                <div className="time-ago">
+                  Posted {moment(createdAt).fromNow()}
+                </div>
+                <div className="comment-body" key={id}>
+                  {body}
+                </div>
+                <div className="comment-edit-delete">
+                  <DeleteDialogue
+                    id="delete-comment"
+                    deleteComment={() => deleteComment(id)}
+                  />
+                  <div
+                    className="edit-comment"
+                    onClick={() => this.isEditing(body, index)}
+                  >
+                    <i className="fa fa-edit" />
                   </div>
-                ) : (
-                  <div>
-                    <div className="time-ago">
-                      Posted {moment(createdAt).fromNow()}
+                </div>
+                <div className="article-comments--actions">
+                  <span className="comment-like">
+                    <div className="icons">
+                      <img src={heartIcon} alt="likes" className="likes" />
+                      <div>{like}</div>
                     </div>
-                    <div className="comment-body" key={id}>
-                      {body}
-                    </div>
-                    <div className="comment-edit-delete">
-                      <DeleteDialogue
-                        id="delete-comment"
-                        deleteComment={() => deleteComment(id)}
-                      />
-                      <div
-                        className="edit-comment"
-                        onClick={() => this.isEditing(body, index)}
-                      >
-                        <i className="fa fa-edit" />
-                      </div>
-                    </div>
-                    <div className="article-comments--actions">
-                      <span className="comment-like">
-                        <div className="icons">
-                          <img src={heartIcon} alt="likes" className="likes" />
-                          <div>{like}</div>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                )}
+                  </span>
+                </div>
               </div>
-            </div>
-          );
-        })
-      : "";
+            )}
+          </div>
+        </div>
+      );
+    });
   }
 }
 
