@@ -353,15 +353,12 @@ export class Article extends Component {
       currentUser,
       history,
       reportArticle,
-<<<<<<< HEAD
       commentBody,
       comments,
       updatedBody,
       onSetBodyEdit,
       loading,
       profile,
-=======
->>>>>>> [Feature #163518664] saves article highlight in db
       highlights
     } = this.props;
 
@@ -461,19 +458,9 @@ export class Article extends Component {
                   <HighlighPopover
                     top={top}
                     left={left}
-<<<<<<< HEAD
                     onClick={() => this.markHighlightText(false, "withComment")}
                     onHighlight={() => this.markHighlightText(true)}
                     data-test="selection-popover"
-=======
-                    onClick={() => {
-                      this.markHighlightText(false);
-                      this.setState({
-                        commentModelOpen: true
-                      });
-                    }}
-                    onHighlight={() => this.markHighlightText(true)}
->>>>>>> [Feature #163518664] saves article highlight in db
                   />
                 </section>
                 {isAuthor ? (
@@ -741,9 +728,7 @@ Article.defaultProps = {
 Article.defaultProps = {
   markHighlight: () => "",
   fetchHighLights: () => "",
-  highlights: {
-    articleHighlights: {}
-  }
+  highlights: {}
 };
 
 export default withRouter(
