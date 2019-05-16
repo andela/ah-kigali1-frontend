@@ -159,6 +159,17 @@ export class Article extends Component {
     this.wrapperRef = node;
   };
 
+  getMoreArticles = () => {
+    const { page } = this.state;
+    const {
+      onFetchComments,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onFetchComments(slug, page);
+  };
+
   handleHighlight = e => {
     const commentModelRef = document.getElementById("comment-model");
     const text = window.getSelection().toString();
@@ -234,17 +245,6 @@ export class Article extends Component {
       const { slug } = this.state;
       onCreateComments(commentBody, slug);
     }
-  };
-
-  getMoreArticles = () => {
-    const { page } = this.state;
-    const {
-      onFetchComments,
-      match: {
-        params: { slug }
-      }
-    } = this.props;
-    onFetchComments(slug, page);
   };
 
   handleScroll = () => {
