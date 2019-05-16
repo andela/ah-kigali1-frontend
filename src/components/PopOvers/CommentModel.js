@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { saveHighlight } from "../../redux/actions/highlightCommentActions";
 import Button from "../common/Buttons/FormButton";
-import { isEmpty, displayReportResponse } from "../../utils/helperFunctions";
+import { isEmpty } from "../../utils/helperFunctions";
 
 export class CommentModel extends Component {
   state = {
