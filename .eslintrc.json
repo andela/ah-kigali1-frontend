@@ -61,6 +61,7 @@
     "no-named-as-default": "off",
     "arrow-body-style": ["error", "as-needed"],
     "import/no-dynamic-require": "off",
+    "prettier/prettier": 0,
     "no-shadow": [
       "error",
       {
