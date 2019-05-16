@@ -151,12 +151,6 @@ describe("NavBar component", () => {
       );
     });
 
-    // test("should toggle the isUserDetailsOpen state from FALSE to TRUE and vice-versa", () => {
-    //   const previous = instance.state.isUserDetailsOpen;
-    //   wrapper.find(`[data-test="user-dropdown"]`).simulate(`click`);
-    //   expect(instance.state.isUserDetailsOpen).toBe(!previous);
-    // });
-
     test("should toggle the isNotificationOpen state from FALSE to TRUE and vice-versa", () => {
       const previous = instance.state.isNotificationOpen;
       wrapper.find(`[data-test="notif-button"]`).simulate(`click`);
