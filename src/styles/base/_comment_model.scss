@@ -13,6 +13,10 @@
   border-radius: 5px;
   &.active {
     display: flex;
+    flex-direction: column;
+  }
+  .notification {
+    align-self: center;
   }
   .modal-content {
     background-color: #fefefe;

@@ -66,36 +66,38 @@ export class ReportingForm extends Component {
       return <Redirect to="/sign_in" />;
     }
     return (
-      <div className="reporting__form__container">
-        <div className="report_error">
+      <div id="report-form" className={`comment-modal ${true && "active"}`}>
+        <div className="notification">
           {displayReportResponse(reportError, reportSuccess)}
         </div>
-        <div className="report_article">
-          <h3>Why are you reporting this article?</h3>
-          <div className="report_input">
-            <textarea
-              className="report_text_area"
-              placeholder="Tell your reason"
-              type="text"
-              value={value}
-              name="description"
-              onChange={e => this.onFormInputChange(e)}
-            />
-          </div>
-          <div className="submit_report">
-            <Button
-              title="Submit"
-              disabled={isSubmitting}
-              className="btn report"
-              onClick={this.onSubmitReport}
-            />
-            <Button
-              title="Cancel"
-              disabled={isSubmitting}
-              className="btn report"
-              onClick={cancelReport}
-            />
-          </div>
+        <div className="modal-content">
+          <button
+            type="button"
+            className="close report"
+            onClick={cancelReport}
+            data-test="button"
+          >
+            &times;
+          </button>
+          <textarea
+            className="comment-input"
+            type="textarea"
+            rows="5"
+            spellCheck="true"
+            data-test="comment-model-input"
+            placeholder="Tell your reason"
+            value={value}
+            name="description"
+            onChange={e => this.onFormInputChange(e)}
+          />
+          <Button
+            title="Submit"
+            disabled={isSubmitting}
+            onClick={this.onSubmitReport}
+            value="Submit"
+            className="btn report"
+            data-test="button"
+          />
         </div>
       </div>
     );

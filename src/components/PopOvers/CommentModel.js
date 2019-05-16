@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { saveHighlight } from "../../redux/actions/highlightCommentActions";
 import Button from "../common/Buttons/FormButton";
-import { isEmpty } from "../../utils/helperFunctions";
+import { isEmpty, displayReportResponse } from "../../utils/helperFunctions";
 
 export class CommentModel extends Component {
   state = {
@@ -38,6 +38,9 @@ export class CommentModel extends Component {
     const { comment } = this.state;
     return (
       <div id={id} className={`comment-modal ${isOpen && "active"}`}>
+        <div className="notification">
+          {displayReportResponse("hello world", "damn")}
+        </div>
         <div className="modal-content">
           <button
             type="button"
@@ -61,6 +64,7 @@ export class CommentModel extends Component {
             value="Submit"
             onClick={this.saveComment}
             data-test="save-btn"
+            className="btn report"
           />
         </div>
       </div>
