@@ -1,10 +1,15 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureMockStore from "redux-mock-store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { mapDispatchToProps, Article } from "../../views/ReadArticle";
 import { Comments } from "../../views/Comments";
 import { props1 } from "../__mocks__/testData";
 
+const mockStore = configureMockStore([thunk]);
+const store = mockStore({});
 const props = {
   comments: [
     {
@@ -72,9 +77,11 @@ describe("Comments", () => {
 
     test("should simulate click on creat a comment on enter", () => {
       const wrapper = mount(
-        <Router>
-          <Article {...props1} />
-        </Router>
+        <Provider store={store}>
+          <Router>
+            <Article {...props1} />
+          </Router>
+        </Provider>
       );
       const input = wrapper.find(".comment-textarea").at(1);
       input.simulate("change", { target: { value: "abcdefg" } });
@@ -93,9 +100,11 @@ describe("Comments", () => {
 
     test("should simulate click on creat a comment", () => {
       const wrapper = mount(
-        <Router>
-          <Article {...props1} />
-        </Router>
+        <Provider store={store}>
+          <Router>
+            <Article {...props1} />
+          </Router>
+        </Provider>
       );
       wrapper.setState({ isCommentEmpty: false });
       const input = wrapper.find(".delete_article").at(1);
@@ -106,9 +115,11 @@ describe("Comments", () => {
     describe("Article > Comment", () => {
       test("should change state after editing", () => {
         const wrapper = mount(
-          <Router>
-            <Article {...props1} />
-          </Router>
+          <Provider store={store}>
+            <Router>
+              <Article {...props1} />
+            </Router>
+          </Provider>
         );
         const component = wrapper
           .find("Comments")
@@ -122,9 +133,11 @@ describe("Comments", () => {
 
       test("should change call function to set input", () => {
         const wrapper = mount(
-          <Router>
-            <Article {...props1} />
-          </Router>
+          <Provider store={store}>
+            <Router>
+              <Article {...props1} />
+            </Router>
+          </Provider>
         );
         wrapper.find("Comments");
         wrapper
@@ -136,9 +149,11 @@ describe("Comments", () => {
 
       test("should change call function to set input on edit", () => {
         const wrapper = mount(
-          <Router>
-            <Article {...props1} />
-          </Router>
+          <Provider store={store}>
+            <Router>
+              <Article {...props1} />
+            </Router>
+          </Provider>
         );
         wrapper.find("Comments").setState({ ind: 0, editMode: true });
         wrapper

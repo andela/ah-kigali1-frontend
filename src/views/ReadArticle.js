@@ -34,9 +34,7 @@ import {
   calculateTimeStamp,
   isBottom,
   getSelectedLocation,
-  markUserHighlight,
-  customHighlightColor,
-  removeCustomHighligh
+  markUserHighlight
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -509,6 +507,7 @@ export class Article extends Component {
                       onKeyDown={e => this.onEnterPress(e)}
                       name="body"
                       value={commentBody}
+                      data-test="comment-textarea"
                     />
                     <Button
                       className="btn delete_article"
