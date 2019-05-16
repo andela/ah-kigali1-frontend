@@ -14,6 +14,7 @@ describe("Highlight Popover", () => {
   test("should match the snapshot", () => {
     expect(toJson(component)).toMatchSnapshot();
   });
+
   test("should response on click", () => {
     component
       .find(`[data-test="button-set"]`)
