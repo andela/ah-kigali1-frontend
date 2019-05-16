@@ -6,7 +6,7 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import { checkAuthComponent } from "../../utils/checkAuthUtils";
-import { EditArticle } from "../../views/EditArticle";
+import { Article } from "../../views/CreateEditHolder";
 import { article } from "../__mocks__/testData";
 
 describe("should test the check authenticated component", () => {
@@ -29,7 +29,7 @@ describe("should test the check authenticated component", () => {
       history: []
     };
     store = mockStore(initialState);
-    ConditionalComponent = checkAuthComponent(EditArticle);
+    ConditionalComponent = checkAuthComponent(Article);
     wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
