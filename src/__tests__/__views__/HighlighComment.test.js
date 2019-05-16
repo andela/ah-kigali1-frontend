@@ -36,6 +36,7 @@ describe("Text highligh and comment", () => {
     expect(component.state().left).not.toBe(left);
     expect(component.state().highlightedText).not.toBe(highlightedText);
   });
+
   test("should mark highlight in another color", () => {
     const popover = component.find(`[data-test="selection-popover"]`).at(0);
     popover.prop("onClick")();
