@@ -151,11 +151,11 @@ describe("NavBar component", () => {
       );
     });
 
-    test("should toggle the isUserDetailsOpen state from FALSE to TRUE and vice-versa", () => {
-      const previous = instance.state.isUserDetailsOpen;
-      wrapper.find(`[data-test="user-dropdown"]`).simulate(`click`);
-      expect(instance.state.isUserDetailsOpen).toBe(!previous);
-    });
+    // test("should toggle the isUserDetailsOpen state from FALSE to TRUE and vice-versa", () => {
+    //   const previous = instance.state.isUserDetailsOpen;
+    //   wrapper.find(`[data-test="user-dropdown"]`).simulate(`click`);
+    //   expect(instance.state.isUserDetailsOpen).toBe(!previous);
+    // });
 
     test("should toggle the isNotificationOpen state from FALSE to TRUE and vice-versa", () => {
       const previous = instance.state.isNotificationOpen;
@@ -170,6 +170,9 @@ describe("NavBar component", () => {
             isFetching: false,
             errorMessage: null,
             notifications: []
+          },
+          user: {
+            profile: { username: "hello" }
           },
           auth: { currenrUser: "Diane" }
         };
