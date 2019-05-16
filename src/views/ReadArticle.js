@@ -157,6 +157,10 @@ export class Article extends Component {
     this.articleBodyRef = node;
   };
 
+  setWrapperRef = node => {
+    this.wrapperRef = node;
+  };
+
   handleHighlight = e => {
     const commentModelRef = document.getElementById("comment-model");
     const text = window.getSelection().toString();
@@ -201,10 +205,6 @@ export class Article extends Component {
       text: highlightedText,
       save
     });
-  };
-
-  setWrapperRef = node => {
-    this.wrapperRef = node;
   };
 
   handleClickOutside = event => {

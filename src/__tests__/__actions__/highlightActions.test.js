@@ -37,9 +37,11 @@ describe("Highlight and comment actions", () => {
       })
     });
   });
+
   afterEach(() => {
     moxios.uninstall(axios);
   });
+
   test("should fetch article highlights and dispatch SET_HIGHLIGHTS", () => {
     const expectations = [
       {
@@ -58,6 +60,7 @@ describe("Highlight and comment actions", () => {
       expect(store.getActions()).toEqual(expectations);
     });
   });
+
   test("should dispatch RESET_ARTICLE_HIGHLIGHT on fetch failure", () => {
     const expectations = [
       {
@@ -96,6 +99,7 @@ describe("Highlight and comment actions", () => {
       expect(store.getActions()).toEqual(expectations);
     });
   });
+
   test("should dispatch SET_HIGHLIGHTS on request failure", () => {
     document.createElement = jest.fn().mockReturnValue({
       appendChild: () => {},
@@ -119,6 +123,7 @@ describe("Highlight and comment actions", () => {
       expect(store.getActions()).toEqual(expectations);
     });
   });
+
   test("should dispatch SET_HIGHLIGHTED_SECTION", () => {
     const bodyHighlight = article.body.replace(
       data.text,
@@ -149,10 +154,12 @@ describe("Highlight and comment actions", () => {
         expect(store.getActions()).toEqual(expectations);
       });
   });
+
   test("should dispatch UPDATE_BODY_WITH_HIGHLIGHT  and RESET_ARTICLE_HIGHLIGHT on failure", () => {
     document.createElement = jest
       .fn()
       .mockReturnValue(new Error("No selection"));
+
     const expectations = [
       {
         type: UPDATE_BODY_WITH_HIGHLIGHT,
@@ -162,7 +169,9 @@ describe("Highlight and comment actions", () => {
         type: RESET_ARTICLE_HIGHLIGHT
       }
     ];
+
     store = mockStore({});
+
     return store
       .dispatch(
         actions.markHighlightSection({

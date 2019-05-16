@@ -14,12 +14,13 @@ describe("Highlight Popover", () => {
   test("should match the snapshot", () => {
     expect(toJson(component)).toMatchSnapshot();
   });
+
   test("should response on click", () => {
-     component
+    component
       .find(`[data-test="button-set"]`)
       .at(0)
       .simulate("click");
-    expect(onHighlight).toBeCalled()
+    expect(onHighlight).toBeCalled();
     component
       .find(`[data-test="button-set"]`)
       .at(1)

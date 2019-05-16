@@ -15,10 +15,12 @@ const INITIAL_STATE = {
   comment: "",
   articleHighlights: {}
 };
+
 describe("Highlight reducers", () => {
   test("should return initial state", () => {
     expect(highlightReducers(undefined, {})).toEqual({ ...INITIAL_STATE });
   });
+
   test("should set highlights", () => {
     expect(
       highlightReducers(INITIAL_STATE, {
@@ -27,11 +29,13 @@ describe("Highlight reducers", () => {
       })
     ).toEqual({ ...INITIAL_STATE, articleHighlights: { ...highlightsOb } });
   });
+
   test("should reset some of article highlights attributes", () => {
     expect(
       highlightReducers(INITIAL_STATE, { type: RESET_ARTICLE_HIGHLIGHT })
     ).toEqual({ ...INITIAL_STATE });
   });
+
   test("should set start and end of highlighted text", () => {
     expect(
       highlightReducers(INITIAL_STATE, {
