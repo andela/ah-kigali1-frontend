@@ -71,14 +71,17 @@ export class ReportingForm extends Component {
           {displayReportResponse(reportError, reportSuccess)}
         </div>
         <div className="modal-content">
-          <button
-            type="button"
-            className="close report"
-            onClick={cancelReport}
-            data-test="button"
-          >
-            &times;
-          </button>
+          <div className="form-header">
+            <h3>Why are you reporting this article?</h3>
+            <button
+              type="button"
+              className="close report"
+              onClick={cancelReport}
+              data-test="button"
+            >
+              &times;
+            </button>
+          </div>
           <textarea
             className="comment-input"
             type="textarea"

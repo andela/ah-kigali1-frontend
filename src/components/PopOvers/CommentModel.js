@@ -39,18 +39,21 @@ export class CommentModel extends Component {
     return (
       <div id={id} className={`comment-modal ${isOpen && "active"}`}>
         <div className="notification">
-          {displayReportResponse("hello world", "damn")}
+          {/* {displayReportResponse("hello world", "damn")} */}
         </div>
         <div className="modal-content">
-          <button
-            type="button"
-            className="close"
-            onClick={onClose}
-            onKeyDown={onClose}
-            data-test="close-btn"
-          >
-            &times;
-          </button>
+          <div className="form-header">
+            <h3>Comment on highlighted section:</h3>
+            <button
+              type="button"
+              className="close"
+              onClick={onClose}
+              onKeyDown={onClose}
+              data-test="close-btn"
+            >
+              &times;
+            </button>
+          </div>
           <textarea
             className="comment-input"
             type="textarea"

@@ -182,7 +182,7 @@ export class Article extends Component {
     }
   };
 
-  markHighlightText = save => {
+  markHighlightText = (save, withComment = "") => {
     const {
       markHighlight,
       article: {
@@ -190,6 +190,11 @@ export class Article extends Component {
       }
     } = this.props;
     const { highlightedText } = this.state;
+    if (withComment) {
+      this.setState({
+        commentModelOpen: true
+      });
+    }
     markHighlight({
       body,
       slug,
@@ -455,12 +460,7 @@ export class Article extends Component {
                   <HighlighPopover
                     top={top}
                     left={left}
-                    onClick={() => {
-                      this.markHighlightText(false);
-                      this.setState({
-                        commentModelOpen: true
-                      });
-                    }}
+                    onClick={() => this.markHighlightText(false, "withComment")}
                     onHighlight={() => this.markHighlightText(true)}
                   />
                 </section>
