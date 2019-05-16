@@ -19,6 +19,7 @@ describe("Text highligh and comment", () => {
     });
 
     instance.setArticleBodyRef({ contains: jest.fn() });
+    jest.spyOn(instance, "markHighlightText");
   });
 
   test("should render highlight popover", () => {
@@ -34,5 +35,12 @@ describe("Text highligh and comment", () => {
     expect(component.state().top).not.toBe(top);
     expect(component.state().left).not.toBe(left);
     expect(component.state().highlightedText).not.toBe(highlightedText);
+  });
+  test("should mark highlight in another color", () => {
+    const popover = component.find(`[data-test="selection-popover"]`).at(0);
+    popover.prop("onClick")();
+    expect(instance.markHighlightText).toBeCalledWith(false, "withComment");
+    popover.prop("onHighlight")();
+    expect(instance.markHighlightText).toBeCalledWith(true);
   });
 });

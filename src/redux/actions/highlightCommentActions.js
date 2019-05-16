@@ -68,20 +68,19 @@ export const markHighlightSection = ({
   slug,
   text,
   save
-}) => dispatch => {
+}) => async dispatch => {
   try {
     const selection = window.getSelection();
     const range = selection.getRangeAt(0);
     const clonedSelection = range.cloneContents();
-    const div = document.createElement("div");
+    const div = await document.createElement("div");
     div.appendChild(clonedSelection);
     const highlightedText = div.innerHTML.toString();
     let startIndex, endIndex, newArticleBody;
-
     if (body.indexOf(highlightedText) > 0) {
       startIndex = body.indexOf(highlightedText);
       endIndex = startIndex + (highlightedText.length - 1);
-      newArticleBody = body.replace(
+      newArticleBody = await body.replace(
         highlightedText,
         `<span class="highlighted">${highlightedText}</span>`
       );

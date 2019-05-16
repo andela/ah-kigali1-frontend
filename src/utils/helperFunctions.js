@@ -154,12 +154,6 @@ export const checkNextProps = (nextProps, currentProps) => {
   }
   return true;
 };
-/**
- * @description - Get the highlighted text
- * @returns {string} - text
- */
-
-export const getHighlightedText = () => window.getSelection().toString();
 
 /**
  * @description - get location of highlighted text
@@ -175,32 +169,6 @@ export const getSelectedLocation = () => {
     top: window.scrollY + refTop - 28,
     left: refLeft / 1.5 + 156
   };
-};
-
-/**
- * @description - highlight a highlighted text with different color
- */
-
-export const customHighlightColor = highlightedText => {
-  const range = window.getSelection().getRangeAt(0);
-  const spanElement = document.createElement("span");
-  spanElement.setAttribute("class", "highlighted");
-  const textNode = highlightedText;
-  spanElement.append(textNode);
-  range.deleteContents();
-  range.insertNode(spanElement);
-};
-
-/**
- * @description -check all html tags in highlighted text
- * @return {boolean} - true or false
- */
-
-export const isHtmlTag = string => /<[a-z][\s\S]*>/i.test(string);
-
-export const setEmptyLine = textWithTag => {
-  const reg = new RegExp(`><`, "gi");
-  return textWithTag.replace(reg, ">\n<");
 };
 
 /**

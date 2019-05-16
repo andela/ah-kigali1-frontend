@@ -462,6 +462,7 @@ export class Article extends Component {
                     left={left}
                     onClick={() => this.markHighlightText(false, "withComment")}
                     onHighlight={() => this.markHighlightText(true)}
+                    data-test="selection-popover"
                   />
                 </section>
                 {isAuthor ? (

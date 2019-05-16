@@ -556,3 +556,27 @@ export const authors = [
     id: "ceb3cd84-c5c2-4faa-9c4a-bbf1925d13fa"
   }
 ];
+
+export const highlights = [
+  {
+    id: "2828bc26-029d-4669-b3be-a1a50e6b709c",
+    startIndex: 90,
+    endIndex: 120,
+    userId: "93e85da2-dd1a-4668-9106-db63de2d764e",
+    articleId: "8f70d0a0-cde6-468e-8eb4-a2295200d10d",
+    highlightedText: "e I had to pass data down the ",
+    createdAt: "2019-05-14T10:49:02.304Z",
+    updatedAt: "2019-05-14T10:49:02.304Z",
+    comment: {
+      id: "26449d24-a5b2-40bc-8bd0-7ce1c6be4282",
+      body: "It is trying to work!",
+      like: 0,
+      highlightId: "2828bc26-029d-4669-b3be-a1a50e6b709c",
+      createdAt: "2019-05-14T10:49:02.324Z",
+      updatedAt: "2019-05-14T10:49:02.324Z",
+      deletedAt: null,
+      articleId: "8f70d0a0-cde6-468e-8eb4-a2295200d10d",
+      userId: "93e85da2-dd1a-4668-9106-db63de2d764e"
+    }
+  }
+];
