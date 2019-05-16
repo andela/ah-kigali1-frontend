@@ -36,10 +36,8 @@ export const SOCIAL_AUTH_FAILED = "SOCIAL_AUTH_FAILED";
  */
 export const NEW_ARTICLE = "NEW_ARTICLE";
 export const ARTICLE_ERROR = "ARTICLE_ERROR";
-export const INPUT_CHANGE = "INPUT_CHANGE";
 export const SUBMITTING_ARTICLE = "SUBMITTING_ARTICLE";
-export const NEW_TAG = "NEW_TAG";
-export const REMOVE_TAG = "REMOVE_TAG";
+export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
 
 /**
  * @description edit article

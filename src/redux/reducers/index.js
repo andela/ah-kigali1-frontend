@@ -16,6 +16,7 @@ import commentReducer from "./CommentReducer";
 export default combineReducers({
   auth: loginReducers,
   article: createArticleReducer,
+  newArticle: createArticleReducer,
   resetPassword: resetPasswordReducers,
   updatePassword: updatePasswordReducers,
   socialAuth: socialAuthReducers,

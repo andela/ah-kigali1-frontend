@@ -15,7 +15,7 @@ describe("fetching one article reducer ", () => {
     });
   });
 
-  test("should return the error message on article_error action", () => {
+  test("should return the error message on articleError action", () => {
     expect(
       articleReducer(undefined, {
         type: ARTICLE_ERROR,

@@ -23,4 +23,28 @@ describe("Validator Class", () => {
     });
     expect(Validator.isMatch("password", "1234", "1234")).toEqual({});
   });
+
+  it("should validate new article", () => {
+    expect(
+      Validator.newArticleValidation({
+        title: "hello",
+        body: "hello world",
+        description: "hello world"
+      })
+    ).toEqual("Title should be more than 10 characters long");
+    expect(
+      Validator.newArticleValidation({
+        title: "hello world",
+        body: "hello world",
+        description: "hello"
+      })
+    ).toEqual("Description should be more than 10 characters long");
+    expect(
+      Validator.newArticleValidation({
+        title: "hello world",
+        body: "hello world",
+        description: "hello world"
+      })
+    ).toEqual("Body should be more than 100 words");
+  });
 });

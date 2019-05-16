@@ -1,19 +1,19 @@
 import {
   NEW_ARTICLE,
-  INPUT_CHANGE,
   ARTICLE_ERROR,
   SUBMITTING_ARTICLE,
   FETCH_ARTICLE_TO_EDIT,
   ARTICLE_UPDATED,
-  NEW_TAG,
-  REMOVE_TAG
+  CLEAR_RESPONSE
 } from "../actionTypes";
 
 const initialState = {
-  title: "",
-  body: "",
-  description: "",
-  tagsList: []
+  article: {
+    title: "",
+    body: "",
+    description: "",
+    tagsList: []
+  }
 };
 
 const createArticleReducer = (state = initialState, action) => {
@@ -21,38 +21,43 @@ const createArticleReducer = (state = initialState, action) => {
     case NEW_ARTICLE:
       return {
         ...state,
-        response: action.payload
+        article: { ...state.article, ...action.payload.article },
+        message: action.payload.message,
+        response: action.payload.article,
+        isSubmitting: false
       };
     case ARTICLE_UPDATED:
       return {
         ...state,
-        response: action.payload
+        article: { ...state.article, ...action.payload.article },
+        message: action.payload.message,
+        response: action.payload.article,
+        isSubmitting: false
       };
-    case INPUT_CHANGE:
-      return { ...state, [action.payload.field]: action.payload.value };
+
     case ARTICLE_ERROR:
-      return { ...state, article_error: action.payload, isSubmitting: false };
+      return {
+        ...state,
+        articleError: action.payload,
+        isSubmitting: false
+      };
     case SUBMITTING_ARTICLE:
       return {
         ...state,
         isSubmitting: true
       };
-    case NEW_TAG:
+    case CLEAR_RESPONSE:
       return {
         ...state,
-        tagsList: [...state.tagsList, action.payload]
-      };
-    case REMOVE_TAG:
-      return {
-        ...state,
-        tagsList: state.tagsList.filter(tag => tag !== action.payload)
+        message: null,
+        articleError: null,
+        response: null
       };
     case FETCH_ARTICLE_TO_EDIT:
       return {
         ...state,
-        ...action.payload.article
+        article: { ...state.article, ...action.payload.article }
       };
-
     default:
       return {
         ...state
