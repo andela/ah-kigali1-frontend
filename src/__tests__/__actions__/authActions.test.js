@@ -24,7 +24,13 @@ let data;
 const mockStore = configureMockStore([thunk]);
 let store;
 const { API_URL } = process.env;
-
+const userProfile = {
+  email: "iraguhayves@gmail.com",
+  iat: 1558020564,
+  id: "7ed00c09-664b-414f-8896-80c4f4d4630b",
+  roleId: "d81bedff-958a-4dd8-8c05-bc4684a38374",
+  username: "yves2018"
+};
 describe("Login action creators", () => {
   describe("handle user input action creator", () => {
     data = { name: "email", value: "me@example.com" };
@@ -52,7 +58,8 @@ describe("Login action creators", () => {
       data = { name: "email", value: "me@example.com" };
       const payload = {
         message: "Sign in failed",
-        token: "qwertyuiop123456789"
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlyYWd1aGF5dmVzQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoieXZlczIwMTgiLCJpZCI6IjdlZDAwYzA5LTY2NGItNDE0Zi04ODk2LTgwYzRmNGQ0NjMwYiIsInJvbGVJZCI6ImQ4MWJlZGZmLTk1OGEtNGRkOC04YzA1LWJjNDY4NGEzODM3NCIsImlhdCI6MTU1ODAyMDU2NH0.Ky17ZyGMtnoj-8X3ZkXOmMZ7K671EG7WZD2UIHmkBRA"
       };
       const expectedActions = [
         {
@@ -64,7 +71,7 @@ describe("Login action creators", () => {
         },
         {
           type: SET_CURRENT_USER,
-          payload: null
+          payload: userProfile
         }
       ];
       moxios.stubRequest(`${API_URL}/users/login`, {
