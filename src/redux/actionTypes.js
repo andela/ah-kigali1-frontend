@@ -100,7 +100,7 @@ export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";
 export const ARTICLE_REPORTED = "ARTICLE_REPORTED";
 export const REPORT_ERROR = "REPORT_ERROR ";
 export const REPORTING_ARTICLE = "REPORTING_ARTICLE";
-/*
+/**
  * @description registration action creator
  */
 export const REGISTER_REQUESTED = "REGISTER_REQUESTED";
@@ -136,3 +136,10 @@ export const SET_HIGHLIGHTED_SECTION = "SET_HIGHLIGHTED_TEXT";
 export const RESET_ARTICLE_HIGHLIGHT = "RESET_ARTICLE_HIGHLIGHT";
 export const SET_HIGHLIGHTS = "SET_HIGHLIGHTS";
 export const MARK_HIGHLIGHTED_SECTION = "MARK_HIGHLIGHTED_TEXT";
+/**
+ * @description rate article action types
+ */
+export const RATING_ARTICLE = "RATING_ARTICLE";
+export const RATING_FAILURE = "RATING_FAILURE";
+export const RATING_SUCCESS = "RATING_FAILURE";
+export const RATING_FOUND = "RATING_FOUND ";

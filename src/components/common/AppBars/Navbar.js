@@ -255,7 +255,12 @@ export class Navbar extends Component {
                         <Link to="/settings">Settings</Link>
                       </li>
                       <li>
-                        <Link to="/sign_in">Sign out</Link>
+                        <Link
+                          to="/sign_in"
+                          onClick={() => localStorage.removeItem("token")}
+                        >
+                          Sign out
+                        </Link>
                       </li>
                     </ul>
                   </div>

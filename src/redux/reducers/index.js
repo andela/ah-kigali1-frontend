@@ -10,6 +10,7 @@ import searchReducers from "./searchReducers";
 import following from "./followingReducer";
 import notifier from "./notificationReducer";
 import { reportArticle } from "./reportReducer";
+import rateArticle from "./ratingReducer";
 import registration from "./registrationReducers";
 import commentReducer from "./CommentReducer";
 import highlights from "./highlightReducers";
@@ -24,6 +25,7 @@ export default combineReducers({
   socialAuth: socialAuthReducers,
   fetchedArticle: readArticleReducer,
   user: userReducer,
+  rate: rateArticle,
   search: searchReducers,
   following,
   notifier,

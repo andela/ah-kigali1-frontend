@@ -32,7 +32,22 @@ const props = {
   },
   onLikeComment: jest.fn(),
   reportArticle: jest.fn(),
-  likeComment: jest.fn()
+  likeComment: jest.fn(),
+  fetchRatings: jest.fn(),
+  profile: {
+    email: "",
+    username: "",
+    address: "",
+    allowNotifications: true,
+    bio: "",
+    firstName: "",
+    gender: "",
+    image: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    socialId: ""
+  }
 };
 const body = "comment";
 const slug = "slugofanarticle";
