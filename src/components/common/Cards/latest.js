@@ -27,6 +27,7 @@ class Latest extends Component {
       createdAt,
       author,
       comments,
+      description,
       likesCount
     } = article;
     const { firstName, lastName, image, username } = author;
@@ -59,9 +60,7 @@ class Latest extends Component {
             </div>
           </div>
           <h3>{title}</h3>
-          <div className="tex-content__body">
-            {stringToHtmlElement(body.substring(1, 150)).body}
-          </div>
+          <div className="tex-content__body">{description}</div>
           <span className="cat">FILM</span>
           <div className="icons">
             <div className="left-icons">
@@ -91,6 +90,7 @@ Latest.propTypes = {
     body: PropTypes.string,
     readTime: PropTypes.number,
     createdAt: PropTypes.string,
+    description: PropTypes.string,
     author: PropTypes.shape({
       firstName: PropTypes.string,
       lastName: PropTypes.string,

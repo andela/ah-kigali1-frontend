@@ -29,7 +29,8 @@ export class MainCard extends Component {
       comments,
       likesCount,
       slug,
-      bookmarked: isBookmarked
+      bookmarked: isBookmarked,
+      description
     } = article;
     const { firstName, lastName, image, username } = author;
 
@@ -65,7 +66,7 @@ export class MainCard extends Component {
         <div className="tex-content">
           <h3>{title}</h3>
           <div className="tex-content__body" style={{ marginBottom: 20 }}>
-            {stringToHtmlElement(body).body}
+            {description}
           </div>
           <div className="icons">
             <div className="left-icons">
@@ -111,6 +112,7 @@ MainCard.propTypes = {
       image: PropTypes.string,
       username: PropTypes.string
     }),
+    description: PropTypes.string,
     comments: PropTypes.arrayOf(
       PropTypes.shape({
         author: PropTypes.shape({

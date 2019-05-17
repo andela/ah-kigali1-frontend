@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MainArticle from "../components/common/Cards/main";
+import MainArticle, { MainCard } from "../components/common/Cards/main";
 import { fetchAllArticles } from "../redux/actions/readAllArticlesActions";
 import Latest from "../components/common/Cards/latest";
 import CategoryBar from "../components/common/AppBars/CategoryBar";
@@ -47,26 +47,14 @@ export class Home extends Component {
         </div>
         <div className="featured_article">
           <div className="left">
-            {allArticles.length ? (
-              <MainArticle article={allArticles[0]} />
-            ) : (
-              false
-            )}
+            {allArticles.length > 0 && <MainCard article={allArticles[0]} />}
           </div>
           <div className="right">
             <div className="top">
-              {allArticles.length ? (
-                <MainArticle article={allArticles[1]} />
-              ) : (
-                false
-              )}
+              {allArticles.length > 1 && <MainCard article={allArticles[1]} />}
             </div>
             <div className="down">
-              {allArticles.length ? (
-                <MainArticle article={allArticles[2]} />
-              ) : (
-                false
-              )}
+              {allArticles.length > 2 && <MainCard article={allArticles[2]} />}
             </div>
           </div>
         </div>
@@ -76,26 +64,25 @@ export class Home extends Component {
             <div className="latest_article_title">
               <h2>Latest Articles</h2>
             </div>
-
-            <div>
-              {allArticles.map(newArticle => (
-                <div className="latest_article_content" key={newArticle.id}>
-                  <Latest article={newArticle} />
-                </div>
-              ))}
-            </div>
+            {allArticles.map(article => (
+              <Latest article={article} key={article.id} />
+            ))}
           </div>
           <div className="article_header_right">
             <div className="popular_article_title">
               <h2>Popular Articles</h2>
             </div>
-            <div>
-              {allArticles.map(newArticle => (
-                <div className="popular_article_content" key={newArticle.id}>
-                  <MainArticle article={newArticle} />{" "}
+            {allArticles
+              .filter(
+                item =>
+                  item.likeCount > 5 ||
+                  (item.comments && item.comments.length > 5)
+              )
+              .map(article => (
+                <div className="popular_article_content">
+                  <MainArticle article={article} key={article.id} />
                 </div>
               ))}
-            </div>
           </div>
         </div>
       </div>
