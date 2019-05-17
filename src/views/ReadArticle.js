@@ -380,7 +380,6 @@ export class Article extends Component {
       image,
       firstName,
       lastName,
-      slug,
       isBookmarked,
       following;
     if (retrievedArticle) {
@@ -391,7 +390,6 @@ export class Article extends Component {
         tagsList,
         createdAt,
         readTime,
-        slug,
         bookmarked: isBookmarked
       } = retrievedArticle);
       ({ username, firstName, following, lastName, image } = author);
