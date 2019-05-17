@@ -343,6 +343,7 @@ export class Article extends Component {
   render() {
     const {
       response,
+      slug,
       displayModal,
       reportingForm,
       isCommentEmpty,
@@ -354,6 +355,7 @@ export class Article extends Component {
       article,
       asideArticles,
       currentUser,
+      rate,
       history,
       reportArticle,
       commentBody,
@@ -362,8 +364,6 @@ export class Article extends Component {
       onSetBodyEdit,
       loading,
       highlights,
-      profile,
-      rate,
       following: followObject,
       fetchRatings,
       rateArticle
