@@ -244,6 +244,7 @@ describe("comments actions", () => {
           });
       });
     });
+
     describe("likeAComment()", () => {
       test("should like successfully", () => {
         const expectedActions = [

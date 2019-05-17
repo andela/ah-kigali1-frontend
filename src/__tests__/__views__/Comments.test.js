@@ -200,6 +200,7 @@ describe("Comments", () => {
       mapDispatchToProps(dispatch).onLikeComment(commentId, slug);
       expect(dispatch.mock.calls[0][0]).toBeDefined();
     });
+
     test("reportArticle()", () => {
       const dispatch = jest.fn();
       mapDispatchToProps(dispatch).reportArticle("dkjflkdsf", slug);

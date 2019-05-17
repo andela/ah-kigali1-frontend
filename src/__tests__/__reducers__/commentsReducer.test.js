@@ -112,6 +112,7 @@ describe("team reducer", () => {
       isLoading: true
     });
   });
+
   test("should handle CHANGE_LIKE", () => {
     const comments = {
       commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
@@ -134,6 +135,7 @@ describe("team reducer", () => {
       isLoading: false
     });
   });
+
   test("should handle CREATE_NEW_COMMENT", () => {
     const comments = {
       id: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
@@ -157,6 +159,7 @@ describe("team reducer", () => {
       isLoading: false
     });
   });
+
   test("should handle UPDATE_COMMENT", () => {
     const comments = {
       commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
@@ -180,6 +183,7 @@ describe("team reducer", () => {
       isLoading: false
     });
   });
+
   test("should handle DELETE_COMMENT", () => {
     const comments = {
       commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
