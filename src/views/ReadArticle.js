@@ -355,7 +355,6 @@ export class Article extends Component {
       updatedBody,
       onSetBodyEdit,
       loading,
-      profile,
       highlights
     } = this.props;
 
