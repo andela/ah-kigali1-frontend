@@ -7,6 +7,7 @@ import {
   SET_HIGHLIGHTS
 } from "../actionTypes";
 import { isEmpty, arrayToObject } from "../../utils/helperFunctions";
+import { createComment } from "./commentActions";
 
 export const fetchHighLights = slug => async dispatch => {
   try {
@@ -56,6 +57,9 @@ export const saveHighlight = ({
       type: SET_HIGHLIGHTS,
       payload
     });
+    if (!isEmpty(comment)) {
+      dispatch(createComment(comment, slug));
+    }
   } catch (error) {
     dispatch({
       type: RESET_ARTICLE_HIGHLIGHT

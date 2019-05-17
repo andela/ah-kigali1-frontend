@@ -38,9 +38,6 @@ export class CommentModel extends Component {
     const { comment } = this.state;
     return (
       <div id={id} className={`comment-modal ${isOpen && "active"}`}>
-        <div className="notification">
-          {/* {displayReportResponse("hello world", "damn")} */}
-        </div>
         <div className="modal-content">
           <div className="form-header">
             <h3>Comment on highlighted section:</h3>
