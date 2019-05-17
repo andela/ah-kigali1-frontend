@@ -49,17 +49,17 @@ body {
             opacity: 0.7;
           }
         }
-        .popup__report {
-          p {
-            margin-top: 10px;
-            cursor: pointer;
-          }
-          border: 1px solid black;
-          border-radius: 5px;
-          padding: 10px;
-          top: 500px;
-          position: fixed;
+      }
+      .popup__report {
+        p {
+          margin-top: 10px;
+          cursor: pointer;
         }
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        top: 500px;
+        position: fixed;
       }
       .reporting__form__container {
         margin-top: -4%;
@@ -170,14 +170,6 @@ body {
             }
           }
         }
-<<<<<<< HEAD
-        .article-title {
-          align-content: center;
-          text-align: center;
-          font-size: $font-size-large;
-          margin-bottom: 1em;
-          font-weight: bold;
-=======
       }
     }
     .article {
@@ -199,7 +191,6 @@ body {
         margin-bottom: 2em;
         .author-profile {
           justify-content: flex-start;
->>>>>>> 31895d2... [ft #[163518661]] fix css issue on coment
         }
         .tags {
           .tag {
@@ -244,7 +235,8 @@ body {
         }
       }
       @media (max-width: #{$break-point-tablet - 1}px) {
-        .article-others, .right {
+        .article-others,
+        .right {
           display: none;
         }
       }
@@ -259,8 +251,6 @@ body {
         }
       }
     }
-<<<<<<< HEAD
-=======
     .article-others {
       @include column;
       width: 22%;
@@ -284,7 +274,6 @@ body {
         }
       }
     }
->>>>>>> 31895d2... [ft #[163518661]] fix css issue on coment
     @media (max-width: #{$break-point-tablet - 1}px) {
       .article-container {
         margin-left: 0em;
@@ -317,9 +306,11 @@ body {
       }
     }
   }
-  .delete_article, .edit_article {
-    width: 20%;
-    height: 20px;
-    min-width: 60px;
-    max-width: 100px;
-  }
+}
+.delete_article,
+.edit_article {
+  width: 20%;
+  height: 20px;
+  min-width: 60px;
+  max-width: 100px;
+}
