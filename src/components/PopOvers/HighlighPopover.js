@@ -46,4 +46,5 @@ HighlighPopover.defaultProps = {
   top: 0,
   left: 0
 };
+
 export default HighlighPopover;

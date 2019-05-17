@@ -11,8 +11,7 @@ const INITIAL_STATE = {
   articleHighlights: {}
 };
 
-export default (state = INITIAL_STATE, action) => {
-  const { type, payload } = action;
+export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case SET_HIGHLIGHTED_SECTION:
       return {
