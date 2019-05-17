@@ -216,19 +216,4 @@ describe(" Read article", () => {
       );
     });
   });
-
-  describe("Follow an author", () => {
-    test("should map followUser article to props", () => {
-      const dispatch = jest.fn();
-      mapDispatchToProps(dispatch).followUser("claude");
-      expect(dispatch.mock.calls[0][0]).toBeDefined();
-    });
-
-    test("should call followAuthor when the follow button is clicked", () => {
-      wrp.find(`[data-test="follow_author"]`).simulate("click");
-      expect(inst.followAuthor).toHaveBeenCalledWith(
-        props1.article.article.author.username
-      );
-    });
-  });
 });
