@@ -77,18 +77,8 @@ export class MainCard extends Component {
               <img src={commentIcon} alt="comments" className="comments" />
               <div className="numbers">{comments.length}</div>
             </div>
-            <div className="icons">
-              <div className="left-icons">
-                <img src={thumbsUp} alt="likes" className="likes" />
-                <div className="numbers">{likesCount}</div>
-                <img src={thumbsDown} alt="dislikes" className="dislikes" />
-                <div className="numbers">3,844</div>
-                <img src={commentIcon} alt="comments" className="comments" />
-                <div className="numbers">{comments.length}</div>
-              </div>
-              <div className="right-icons">
-                <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
-              </div>
+            <div className="right-icons">
+              <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
             </div>
           </div>
         </div>
