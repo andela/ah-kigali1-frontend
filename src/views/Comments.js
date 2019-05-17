@@ -96,7 +96,7 @@ export class Comments extends Component {
                 <div className="comment-body" key={id}>
                   {body}
                 </div>
-                {username === currentUser.username ? (
+                {currentUser && username === currentUser.username ? (
                   <div className="comment-edit-delete">
                     <DeleteDialogue
                       id="delete-comment"
