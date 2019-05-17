@@ -43,7 +43,7 @@ import { followUser } from "../redux/actions/followingActions";
 import twitterIcon from "../assets/icons/twitter-icon.svg";
 import facebookIcon from "../assets/icons/fb-icon.svg";
 import thumbsUp from "../assets/img/like-icon.svg";
-import authorImage from "../assets/img/user.jpg";
+import authorImage from "../assets/img/author.svg";
 import dislikeIcon from "../assets/img/dislike-icon.svg";
 import moreIcon from "../assets/icons/more.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
