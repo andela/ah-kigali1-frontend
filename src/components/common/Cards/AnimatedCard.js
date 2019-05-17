@@ -6,7 +6,7 @@ import NoAvatar from "../../../assets/img/user.png";
 import LikeIcon from "../../../assets/img/like-icon.svg";
 import DisLikeIcon from "../../../assets/img/dislike-icon.svg";
 import CommentIcon from "../../../assets/img/comment-icon.svg";
-import BookmarkIcon from "../../../assets/img/bookmark-icons.svg";
+import BookmarkComponent from "../../../views/Bookmark";
 
 export const AnimatedCard = ({
   title,
@@ -16,7 +16,8 @@ export const AnimatedCard = ({
   author,
   readTime,
   createdAt,
-  slug
+  slug,
+  isBookmarked
 }) => (
   <div className="blog-card">
     <div className="meta" data-test="thumbnail">
@@ -67,7 +68,7 @@ export const AnimatedCard = ({
         </div>
         <div className="push-right">
           <div className="icon-action" data-test="action-icon">
-            <img src={BookmarkIcon} alt="bookmark" className="icon-bookmark" />
+            <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
           </div>
         </div>
       </div>
@@ -87,7 +88,8 @@ AnimatedCard.propTypes = {
   }).isRequired,
   readTime: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
-  slug: PropTypes.string
+  slug: PropTypes.string,
+  isBookmarked: PropTypes.bool.isRequired
 };
 AnimatedCard.defaultProps = {
   slug: ""

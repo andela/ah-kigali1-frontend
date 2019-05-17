@@ -14,6 +14,7 @@ import rateArticle from "./ratingReducer";
 import registration from "./registrationReducers";
 import commentReducer from "./CommentReducer";
 import highlights from "./highlightReducers";
+import bookmarkReducer from "./bookmarkReducers";
 
 export default combineReducers({
   highlights,
@@ -31,5 +32,6 @@ export default combineReducers({
   notifier,
   report: reportArticle,
   registration,
-  fetchedComments: commentReducer
+  fetchedComments: commentReducer,
+  bookmark: bookmarkReducer
 });

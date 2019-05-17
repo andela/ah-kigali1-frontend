@@ -157,6 +157,7 @@ export class SearchResults extends Component {
             readTime={article.readTime}
             createdAt={calculateTimeStamp(article.createdAt)}
             slug={article.slug}
+            isBookmarked={article.bookmarked}
           />
         </div>
       ))}
@@ -183,7 +184,6 @@ export class SearchResults extends Component {
       activeTag,
       tagsList
     } = { ...this.props, ...this.state };
-
     return (
       <div className="search-results">
         <div className="left-side">

@@ -102,7 +102,7 @@ describe("Login reducers", () => {
     });
   });
 
-  it("should handle  SET_CURRENT_USER", () => {
+  test("should handle  SET_CURRENT_USER", () => {
     expect(
       loginReducers(INITIAL_STATE, {
         type: SET_CURRENT_USER,

@@ -7,9 +7,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { mapDispatchToProps, Article } from "../../views/ReadArticle";
 import { Comments } from "../../views/Comments";
 import { props1 } from "../__mocks__/testData";
+import { initialState } from "../../redux/reducers/bookmarkReducers";
 
 const mockStore = configureMockStore([thunk]);
-const store = mockStore({});
+const store = mockStore({
+  bookmark: initialState,
+  article: { slug: "fake-fake" }
+});
 const props = {
   comments: [
     {
@@ -52,6 +56,18 @@ const props = {
 const body = "comment";
 const slug = "slugofanarticle";
 const commentId = "dflkdjflksd84n839";
+
+const mountArticle = () => {
+  const wrapper = mount(
+    <Provider store={store}>
+      <Router>
+        <Article {...props1} />
+      </Router>
+    </Provider>
+  );
+  return wrapper;
+};
+
 describe("Comments", () => {
   describe("Event Handlers", () => {
     test("should simulate click on onSetBodyEdit", () => {
@@ -91,13 +107,7 @@ describe("Comments", () => {
     });
 
     test("should simulate click on creat a comment on enter", () => {
-      const wrapper = mount(
-        <Provider store={store}>
-          <Router>
-            <Article {...props1} />
-          </Router>
-        </Provider>
-      );
+      const wrapper = mountArticle();
       const input = wrapper.find(".comment-textarea").at(1);
       input.simulate("change", { target: { value: "abcdefg" } });
       input.simulate("keydown", { keyCode: 13, shiftKey: false });
@@ -114,13 +124,7 @@ describe("Comments", () => {
     });
 
     test("should simulate click on creat a comment", () => {
-      const wrapper = mount(
-        <Provider store={store}>
-          <Router>
-            <Article {...props1} />
-          </Router>
-        </Provider>
-      );
+      const wrapper = mountArticle();
       wrapper.setState({ isCommentEmpty: false });
       const input = wrapper.find(".delete_article").at(1);
       input.simulate("click");
@@ -129,13 +133,7 @@ describe("Comments", () => {
 
     describe("Article > Comment", () => {
       test("should change state after editing", () => {
-        const wrapper = mount(
-          <Provider store={store}>
-            <Router>
-              <Article {...props1} />
-            </Router>
-          </Provider>
-        );
+        const wrapper = mountArticle();
         const component = wrapper
           .find("Comments")
           .setState({ ind: 0, editMode: true });
@@ -147,13 +145,7 @@ describe("Comments", () => {
       });
 
       test("should change call function to set input", () => {
-        const wrapper = mount(
-          <Provider store={store}>
-            <Router>
-              <Article {...props1} />
-            </Router>
-          </Provider>
-        );
+        const wrapper = mountArticle();
         wrapper.find("Comments");
         wrapper
           .find(".comment-textarea")
@@ -163,13 +155,7 @@ describe("Comments", () => {
       });
 
       test("should change call function to set input on edit", () => {
-        const wrapper = mount(
-          <Provider store={store}>
-            <Router>
-              <Article {...props1} />
-            </Router>
-          </Provider>
-        );
+        const wrapper = mountArticle();
         wrapper.find("Comments").setState({ ind: 0, editMode: true });
         wrapper
           .find("#edit-comment-textarea")

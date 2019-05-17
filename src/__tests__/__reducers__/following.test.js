@@ -8,18 +8,18 @@ import {
 } from "../../redux/actionTypes";
 
 describe("Following reducers", () => {
-  it("should return initial state", () => {
+  test("should return initial state", () => {
     expect(followingReducer(undefined, {})).toEqual(initialState);
   });
 
-  it("should handle FOLLOWING", () => {
+  test("should handle FOLLOWING", () => {
     expect(followingReducer(initialState, { type: WAITING_RESPONSE })).toEqual({
       ...initialState,
       isFetching: true
     });
   });
 
-  it("should handle FOLLOWING SUCCESS, if followed, the status must be true", () => {
+  test("should handle FOLLOWING SUCCESS, if followed, the status must be true", () => {
     expect(
       followingReducer(initialState, {
         type: FOLLOWING_SUCCESS,
@@ -28,7 +28,7 @@ describe("Following reducers", () => {
     ).toEqual({ ...initialState, status: true });
   });
 
-  it("should handle FOLLOWING SUCCESS, if unfollowed, the status must be false", () => {
+  test("should handle FOLLOWING SUCCESS, if unfollowed, the status must be false", () => {
     expect(
       followingReducer(initialState, {
         type: FOLLOWING_SUCCESS,
@@ -37,7 +37,7 @@ describe("Following reducers", () => {
     ).toEqual({ ...initialState, status: false });
   });
 
-  it("should handle WAITING_RESPONSE FAILED", () => {
+  test("should handle WAITING_RESPONSE FAILED", () => {
     expect(
       followingReducer(initialState, {
         type: FOLLOWING_FAILED,

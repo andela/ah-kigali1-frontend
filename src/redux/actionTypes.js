@@ -1,3 +1,9 @@
+/**
+ * @description global action creators
+ */
+export const REQUEST_SUBMITTED = "REQUEST_SUBMITTED";
+export const REQUEST_FAILED = "REQUEST_FAILED";
+
 export const ADD_ARTICLE = "ADD_ARTICLE";
 
 /**
@@ -109,6 +115,7 @@ export const REGISTER_REQUEST_SUCCEEDED = "REGISTER_REQUEST_SUCCEEDED";
 export const REGISTER_REQUEST_FAILED = "REGISTER_REQUEST_FAILED";
 export const REGISTER_INPUT_CHANGE = "REGISTER_INPUT_CHANGE";
 export const REGISTER_VALIDATE_INPUT = "REGISTER_VALIDATE_INPUT";
+
 /**
  * @description comments on an article actions
  */
@@ -143,3 +150,8 @@ export const RATING_ARTICLE = "RATING_ARTICLE";
 export const RATING_FAILURE = "RATING_FAILURE";
 export const RATING_SUCCESS = "RATING_FAILURE";
 export const RATING_FOUND = "RATING_FOUND ";
+/*
+ * @description bookmark actions
+ */
+
+export const BOOKMARK_ARTICLE = "BOOKMARK_ARTICLE";

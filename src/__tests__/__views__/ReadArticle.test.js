@@ -28,6 +28,11 @@ describe(" Read article", () => {
       expect(wrapper.find(".article-container")).toHaveLength(1);
     });
 
+    test("should display bookmark icon", () => {
+      const wrapper = shallow(<Article {...props2} />);
+      expect(wrapper.find("withRouter(Connect(Bookmark))")).toHaveLength(1);
+    });
+
     test("render the component while it is still fetching", () => {
       const wrapper = shallow(<Article {...props3} />);
       expect(wrapper.find(".article-container")).not.toHaveLength(1);

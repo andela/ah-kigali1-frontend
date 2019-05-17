@@ -37,12 +37,12 @@ describe("Render the sign up page", () => {
     </MemoryRouter>
   ).find("SignUp");
 
-  it("snapshot testing for the component", () => {
+  test("snapshot testing for the component", () => {
     expect(toJson(registerComponent)).toMatchSnapshot();
     expect(registerComponent).toBeTruthy();
   });
 
-  it("should render 3 text input and a button", () => {
+  test("should render 3 text input and a button", () => {
     expect(registerComponent.find("input").length).toBe(4);
     expect(
       registerComponent
@@ -52,7 +52,7 @@ describe("Render the sign up page", () => {
     ).toEqual("Sign Up");
   });
 
-  it("should not display error message when rendering the  component", () => {
+  test("should not display error message when rendering the  component", () => {
     expect(registerComponent.find(".auth-errors").length).toBeFalsy();
   });
 
@@ -71,7 +71,7 @@ describe("Render the sign up page", () => {
       jest.restoreAllMocks();
     });
 
-    it("should handle on change for username", () => {
+    test("should handle on change for username", () => {
       const usernameInput = registerComponent.find("input").at(0);
       usernameInput.simulate("change", {
         target: {
@@ -82,7 +82,7 @@ describe("Render the sign up page", () => {
       expect(instance.handleChange).toHaveBeenCalled();
     });
 
-    it("should handle on change for email", () => {
+    test("should handle on change for email", () => {
       const usernameInput = registerComponent.find("input").at(0);
       usernameInput.simulate("change", {
         target: {
@@ -93,7 +93,7 @@ describe("Render the sign up page", () => {
       expect(instance.handleChange).toHaveBeenCalled();
     });
 
-    it("should handle on change for password", () => {
+    test("should handle on change for password", () => {
       const usernameInput = registerComponent.find("input").at(0);
       usernameInput.simulate("change", {
         target: {
@@ -104,7 +104,7 @@ describe("Render the sign up page", () => {
       expect(instance.handleChange).toHaveBeenCalled();
     });
 
-    it("should handle on  blur on all field", () => {
+    test("should handle on  blur on all field", () => {
       registerComponent.find("input").forEach(inputField => {
         inputField.simulate("blur", {
           target: {
@@ -117,13 +117,13 @@ describe("Render the sign up page", () => {
       });
     });
 
-    it("should handle on submit", () => {
+    test("should handle on submit", () => {
       const submitButton = registerComponent.find("input").at(3);
       submitButton.simulate("click", {});
       expect(instance.handleSubmit).toHaveBeenCalled();
     });
 
-    it("should handle click on sign in button", () => {
+    test("should handle click on sign in button", () => {
       const signInButton = registerComponent.find("BasicButton").at(0);
       signInButton.simulate("click", {});
       expect(registerComponent.props().history).toContain("/sign_in");
@@ -132,7 +132,7 @@ describe("Render the sign up page", () => {
 });
 
 describe("test if the component displays correct errors message", () => {
-  it("should display error message for invalid field", () => {
+  test("should display error message for invalid field", () => {
     const { props } = setup();
     Array.of("email", "username", "password").forEach(field => {
       props.message = `Invalid ${field}`;
@@ -150,7 +150,7 @@ describe("test if the component displays correct errors message", () => {
 });
 
 describe("test if history is updated when registration is successful", () => {
-  it("check if pushed", () => {
+  test("check if pushed", () => {
     const { props } = setup();
     props.success = true;
     const registerComponent = mount(
@@ -162,7 +162,7 @@ describe("test if history is updated when registration is successful", () => {
   });
 });
 
-it("should test map state to props", () => {
+test("should test map state to props", () => {
   const initialState = {
     user: {
       email: "",

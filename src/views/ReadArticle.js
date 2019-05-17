@@ -45,13 +45,13 @@ import facebookIcon from "../assets/icons/fb-icon.svg";
 import thumbsUp from "../assets/img/like-icon.svg";
 import authorImage from "../assets/img/user.jpg";
 import dislikeIcon from "../assets/img/dislike-icon.svg";
-import bookmarkIcon from "../assets/img/bookmark-icons.svg";
 import moreIcon from "../assets/icons/more.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 import Loading from "../components/Animations/LoadingDots";
 import HighlighPopover from "../components/PopOvers/HighlighPopover";
 import CommentModel from "../components/PopOvers/CommentModel";
+import Bookmark from "./Bookmark";
 
 export const mapStateToProps = ({
   auth,
@@ -370,7 +370,6 @@ export class Article extends Component {
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
-
     let author,
       body,
       title,
@@ -381,6 +380,7 @@ export class Article extends Component {
       image,
       firstName,
       lastName,
+      isBookmarked,
       following;
     if (retrievedArticle) {
       ({
@@ -389,7 +389,8 @@ export class Article extends Component {
         title,
         tagsList,
         createdAt,
-        readTime
+        readTime,
+        bookmarked: isBookmarked
       } = retrievedArticle);
       ({ username, firstName, following, lastName, image } = author);
     }
@@ -544,8 +545,7 @@ export class Article extends Component {
               <div className="share-icons">
                 <img className="share-icon" src={thumbsUp} alt="logo" />
                 <img className="share-icon" src={dislikeIcon} alt="logo" />
-                <img className="share-icon" src={bookmarkIcon} alt="logo" />
-
+                <Bookmark slug={slug} isBookmarked={isBookmarked} />
                 <ShareIcon
                   image={facebookIcon}
                   href={`https://www.facebook.com/sharer/sharer.php?&u=${currentUrl}`}
