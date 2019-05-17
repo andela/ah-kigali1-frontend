@@ -2,6 +2,7 @@ import "@babel/polyfill";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import axios from "../../utils/axios";
+import { nullRemover } from "../../helpers/helpers";
 import {
   LOGIN_INPUT_CHANGE,
   SUBMITTING_LOGIN_CREDENTIALS,
@@ -9,7 +10,8 @@ import {
   LOGIN_SUCCESS,
   IS_OPENING_SOCIAL_AUTH_PROVIDER,
   CANCEL_SOCIAL_AUTH,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  SET_PROFILE
 } from "../actionTypes";
 
 dotenv.config();
@@ -22,10 +24,12 @@ const updateIsSubmitting = () => ({
   type: SUBMITTING_LOGIN_CREDENTIALS
 });
 
-export const setCurrentUser = user => ({
-  type: SET_CURRENT_USER,
-  payload: user
-});
+export const setCurrentUser = user => async dispatch => {
+  dispatch({ type: SET_CURRENT_USER, payload: user });
+  const response = await axios.get(`/profiles/${user.username}`);
+  const { profile } = response.data;
+  dispatch({ type: SET_PROFILE, payload: nullRemover(profile) });
+};
 
 const loginSuccess = payload => {
   const { token, message } = payload;

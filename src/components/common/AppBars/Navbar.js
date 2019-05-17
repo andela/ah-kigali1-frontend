@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 import TextInput from "../Inputs/TextInput";
+import ProfilePicture from "./ProfilePicture";
 import {
   fetchResults,
   authSuggestArticles
@@ -14,7 +15,6 @@ import checked from "../../../assets/icons/check.svg";
 import circle from "../../../assets/icons/fire.svg";
 import close from "../../../assets/icons/close.svg";
 import notifs from "../../../assets/icons/notification.svg";
-import defaultAvatar from "../../../assets/img/avatar.jpg";
 import Thumbnail from "../Logo/Thumbnail";
 
 import {
@@ -117,7 +117,8 @@ export class Navbar extends Component {
       suggestedArticles,
       currentUser,
       isLoggedIn = true,
-      notifier
+      notifier,
+      profile
     } = this.props;
     const { notifications, isFetching } = notifier;
     return (
@@ -225,22 +226,7 @@ export class Navbar extends Component {
                   ""
                 )}
               </div>
-              {isLoggedIn ? (
-                <button
-                  type="button"
-                  className="current-user hide-sm"
-                  onClick={this.openSideMenu}
-                  id="user-dropdown"
-                  data-test="user-dropdown"
-                >
-                  <img src={defaultAvatar} alt="user" className="user-avatar" />
-                  <div className="user-name">
-                    <p>John Doe</p>
-                  </div>
-                </button>
-              ) : (
-                ""
-              )}
+              <ProfilePicture profile={profile} onClick={this.openSideMenu} />
               <div className="other-actions">
                 <div className="menu-container hide-md" />
                 <div
@@ -295,10 +281,12 @@ export class Navbar extends Component {
 
 export const mapStateToProps = ({
   auth: { currentUser },
+  user: { profile },
   search,
   notifier
 }) => ({
   ...search,
+  profile,
   currentUser,
   notifier
 });
@@ -320,6 +308,7 @@ Navbar.propTypes = {
   }).isRequired,
   suggestedArticles: PropTypes.shape({}),
   currentUser: PropTypes.shape({}),
+  profile: PropTypes.shape({}),
   isLoggedIn: PropTypes.bool,
   notifier: PropTypes.shape({
     erroMessage: PropTypes.string,
@@ -335,6 +324,7 @@ Navbar.defaultProps = {
   searchQuery: "",
   suggestedArticles: {},
   currentUser: {},
+  profile: {},
   isLoggedIn: true
 };
 
