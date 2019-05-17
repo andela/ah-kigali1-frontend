@@ -128,3 +128,11 @@ export const CREATE_NEW_COMMENT = "CREATE_NEW_COMMENT";
  * @description like on comments actions
  */
 export const CHANGE_LIKE = "CHANGE_LIKE";
+/**
+ * @description highlight and comment types
+ */
+export const UPDATE_BODY_WITH_HIGHLIGHT = "UPDATE_BODY_WITH_HIGHLIGHT";
+export const SET_HIGHLIGHTED_SECTION = "SET_HIGHLIGHTED_TEXT";
+export const RESET_ARTICLE_HIGHLIGHT = "RESET_ARTICLE_HIGHLIGHT";
+export const SET_HIGHLIGHTS = "SET_HIGHLIGHTS";
+export const MARK_HIGHLIGHTED_SECTION = "MARK_HIGHLIGHTED_TEXT";

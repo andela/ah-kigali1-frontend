@@ -154,3 +154,44 @@ export const checkNextProps = (nextProps, currentProps) => {
   }
   return true;
 };
+
+/**
+ * @description - get location of highlighted text
+ * @return {object} - Top and left
+ */
+
+export const getSelectedLocation = () => {
+  const selection = window.getSelection(),
+    range = selection.getRangeAt(0),
+    refTop = range.getBoundingClientRect().top,
+    refLeft = range.getBoundingClientRect().left;
+  return {
+    top: window.scrollY + refTop - 28,
+    left: refLeft / 1.5 + 156
+  };
+};
+
+/**
+ * @description mark user highlight
+ * @param {string} - body
+ * @param {object} - highlights
+ * @returns {string} - string
+ */
+
+export const markUserHighlight = (body, highlights = {}) => {
+  try {
+    let bodyWithHighlights = body;
+    const sortedHighlights = Object.values(highlights).sort(
+      (a, b) => b.highlightedText.length - a.highlightedText.length
+    );
+    sortedHighlights.forEach(highlight => {
+      bodyWithHighlights = bodyWithHighlights.replace(
+        highlight.highlightedText,
+        `<span class="highlighted">${highlight.highlightedText}</span>`
+      );
+    });
+    return bodyWithHighlights;
+  } catch (error) {
+    return body;
+  }
+};

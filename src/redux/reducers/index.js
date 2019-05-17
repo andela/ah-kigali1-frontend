@@ -12,8 +12,10 @@ import notifier from "./notificationReducer";
 import { reportArticle } from "./reportReducer";
 import registration from "./registrationReducers";
 import commentReducer from "./CommentReducer";
+import highlights from "./highlightReducers";
 
 export default combineReducers({
+  highlights,
   auth: loginReducers,
   article: createArticleReducer,
   newArticle: createArticleReducer,

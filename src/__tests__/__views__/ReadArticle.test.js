@@ -84,7 +84,8 @@ describe(" Read article", () => {
             phone: "",
             socialId: ""
           }
-        }
+        },
+        highlights: { articleHighlights: {} }
       };
       expect(mapStateToProps(state)).toEqual({
         currentUser: { username: "yves" },
@@ -102,7 +103,22 @@ describe(" Read article", () => {
         success: "success",
         error: "error message",
         comments: "comment body",
-        loading: false
+        loading: false,
+        profile: {
+          email: "",
+          username: "",
+          address: "",
+          allowNotifications: true,
+          bio: "",
+          firstName: "",
+          gender: "",
+          image: "",
+          lastName: "",
+          password: "",
+          phone: "",
+          socialId: ""
+        },
+        highlights: {}
       });
     });
 

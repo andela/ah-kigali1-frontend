@@ -12,6 +12,10 @@ import {
   fetchArticle,
   deleteArticle
 } from "../redux/actions/readArticleActionCreator";
+import {
+  fetchHighLights,
+  markHighlightSection
+} from "../redux/actions/highlightCommentActions";
 import { reportedArticle } from "../redux/actions/reportArticleActions";
 
 import {
@@ -28,7 +32,9 @@ import {
   isCurrentUserAuthor,
   stringToHtmlElement,
   calculateTimeStamp,
-  isBottom
+  isBottom,
+  getSelectedLocation,
+  markUserHighlight
 } from "../utils/helperFunctions";
 import MainArticle from "../components/common/Cards/main";
 import { followUser } from "../redux/actions/followingActions";
@@ -43,12 +49,16 @@ import ratingIcon from "../assets/icons/star.svg";
 import emailIcon from "../assets/img/paper-plane.svg";
 import ShareIcon from "../components/common/Link/Social";
 import Loading from "../components/Animations/LoadingDots";
+import HighlighPopover from "../components/PopOvers/HighlighPopover";
+import CommentModel from "../components/PopOvers/CommentModel";
 
 export const mapStateToProps = ({
   auth,
   fetchedArticle,
   following,
-  fetchedComments
+  fetchedComments,
+  user,
+  highlights
 }) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
@@ -59,7 +69,9 @@ export const mapStateToProps = ({
   success: fetchedComments.success,
   error: fetchedComments.error,
   comments: fetchedComments.comments,
-  loading: fetchedComments.isLoading
+  loading: fetchedComments.isLoading,
+  profile: user.profile,
+  highlights: highlights.articleHighlights
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -79,7 +91,10 @@ export const mapDispatchToProps = dispatch => ({
   onFetchComments: (commentId, slug) =>
     dispatch(fetchComments(commentId, slug)),
   onSetBodyEdit: payload => dispatch(setBodyEdit(payload)),
-  onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug))
+  onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug)),
+  markHighlight: (articleBody, save = false) =>
+    dispatch(markHighlightSection(articleBody, save)),
+  fetchHighLights: slug => dispatch(fetchHighLights(slug))
 });
 
 export class Article extends Component {
@@ -89,13 +104,18 @@ export class Article extends Component {
     displayModal: false,
     reportingForm: false,
     page: 1,
-    isCommentEmpty: true
+    isCommentEmpty: true,
+    top: 0,
+    left: 0,
+    highlightedText: "",
+    commentModelOpen: false
   };
 
   componentDidMount = () => {
     const {
       fetchOneArticle,
       onFetchComments,
+      fetchHighLights,
       match: {
         params: { slug }
       }
@@ -103,6 +123,7 @@ export class Article extends Component {
 
     this.setState({ slug });
     fetchOneArticle(slug);
+    fetchHighLights(slug);
     document.addEventListener("mousedown", this.handleClickOutside);
     onFetchComments(slug, 1);
   };
@@ -110,6 +131,7 @@ export class Article extends Component {
   componentWillMount = () => {
     this.getMoreArticles();
     document.addEventListener("scroll", () => this.handleScroll(), true);
+    document.addEventListener("select", this.handleHighlight);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -123,8 +145,74 @@ export class Article extends Component {
     return false;
   };
 
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.removeEventListener("select", this.handleHighlight);
+  }
+
+  setArticleBodyRef = node => {
+    this.articleBodyRef = node;
+  };
+
   setWrapperRef = node => {
     this.wrapperRef = node;
+  };
+
+  getMoreArticles = () => {
+    const { page } = this.state;
+    const {
+      onFetchComments,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onFetchComments(slug, page);
+  };
+
+  handleHighlight = e => {
+    const commentModelRef = document.getElementById("comment-model");
+    const text = window.getSelection().toString();
+    if (
+      this.articleBodyRef &&
+      this.articleBodyRef.contains(e.target) &&
+      this.articleBodyRef.contains(window.getSelection().anchorNode) &&
+      text
+    ) {
+      const { top, left } = getSelectedLocation();
+      this.setState({
+        top,
+        left,
+        highlightedText: text
+      });
+    } else if (commentModelRef && commentModelRef.contains(e.target)) {
+      return this.state;
+    } else {
+      this.setState({
+        top: 0,
+        left: 0
+      });
+    }
+  };
+
+  markHighlightText = (save, withComment = "") => {
+    const {
+      markHighlight,
+      article: {
+        article: { body, slug }
+      }
+    } = this.props;
+    const { highlightedText } = this.state;
+    if (withComment) {
+      this.setState({
+        commentModelOpen: true
+      });
+    }
+    markHighlight({
+      body,
+      slug,
+      text: highlightedText,
+      save
+    });
   };
 
   handleClickOutside = event => {
@@ -156,17 +244,6 @@ export class Article extends Component {
       const { slug } = this.state;
       onCreateComments(commentBody, slug);
     }
-  };
-
-  getMoreArticles = () => {
-    const { page } = this.state;
-    const {
-      onFetchComments,
-      match: {
-        params: { slug }
-      }
-    } = this.props;
-    onFetchComments(slug, page);
   };
 
   handleScroll = () => {
@@ -262,8 +339,10 @@ export class Article extends Component {
       response,
       displayModal,
       reportingForm,
-      slug,
-      isCommentEmpty
+      isCommentEmpty,
+      top,
+      left,
+      commentModelOpen
     } = this.state;
     const {
       article,
@@ -275,7 +354,8 @@ export class Article extends Component {
       comments,
       updatedBody,
       onSetBodyEdit,
-      loading
+      loading,
+      highlights
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -359,9 +439,26 @@ export class Article extends Component {
               </div>
               <div className="article-content">
                 <div className="article-title">{title}</div>
-                <div className="article-text">
-                  {stringToHtmlElement(body).body}
-                </div>
+                <section
+                  className="article-text"
+                  onMouseUp={this.handleHighlight}
+                  onMouseMove={this.handleHighlight}
+                  ref={this.setArticleBodyRef}
+                  id="article-body"
+                  test-data="article-body"
+                >
+                  {
+                    stringToHtmlElement(markUserHighlight(body, highlights))
+                      .body
+                  }
+                  <HighlighPopover
+                    top={top}
+                    left={left}
+                    onClick={() => this.markHighlightText(false, "withComment")}
+                    onHighlight={() => this.markHighlightText(true)}
+                    data-test="selection-popover"
+                  />
+                </section>
                 {isAuthor ? (
                   <div>
                     <Button
@@ -408,6 +505,7 @@ export class Article extends Component {
                       onKeyDown={e => this.onEnterPress(e)}
                       name="body"
                       value={commentBody}
+                      data-test="comment-textarea"
                     />
                     <Button
                       className="btn delete_article"
@@ -474,7 +572,7 @@ export class Article extends Component {
             {reportingForm ? (
               <ReportingForm
                 reportArticle={reportArticle}
-                slug={slug}
+                slug={retrievedArticle.slug}
                 cancelReport={this.toggleReportingModal}
               />
             ) : (
@@ -495,6 +593,20 @@ export class Article extends Component {
               </div>
             </div>
           </div>
+        ) : (
+          ""
+        )}
+        {retrievedArticle ? (
+          <CommentModel
+            isOpen={commentModelOpen}
+            onClose={() =>
+              this.setState({
+                commentModelOpen: false
+              })
+            }
+            id="comment-model"
+            slug={retrievedArticle.slug}
+          />
         ) : (
           ""
         )}
@@ -520,6 +632,9 @@ Article.propTypes = {
   fetchOneArticle: PropTypes.func.isRequired,
   reportArticle: PropTypes.func.isRequired,
   deleteOneArticle: PropTypes.func.isRequired,
+  markHighlight: PropTypes.func,
+  fetchHighLights: PropTypes.func,
+  highlights: PropTypes.shape({}),
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
@@ -597,6 +712,20 @@ Article.propTypes = {
   followUser: PropTypes.func.isRequired,
   following: PropTypes.bool.isRequired,
   location: PropTypes.shape([]).isRequired
+};
+
+Article.defaultProps = {
+  markHighlight: () => "",
+  fetchHighLights: () => "",
+  highlights: {
+    articleHighlights: {}
+  }
+};
+
+Article.defaultProps = {
+  markHighlight: () => "",
+  fetchHighLights: () => "",
+  highlights: {}
 };
 
 export default withRouter(

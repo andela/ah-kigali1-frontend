@@ -31,48 +31,57 @@ describe("Report article component", () => {
   });
 
   test("should render the component for creating a report", () => {
-    expect(wrapper.find(Button)).toHaveLength(2);
+    expect(wrapper.find(`[data-test="button"]`)).toHaveLength(2);
   });
 
   test("should respond on input change", () => {
-    wrapper.find(".report_text_area").simulate("change", {
-      target: {
-        value: "hello"
-      }
-    });
+    wrapper
+      .find(`[data-test="comment-model-input"]`)
+      .at(0)
+      .simulate("change", {
+        target: {
+          value: "hello"
+        }
+      });
     expect(wrapper.state().reportDescription).toEqual("hello");
   });
 
   test("should submit a report", async () => {
-    wrapper.find(".report_text_area").simulate("change", {
-      target: {
-        value: "hello world, this is a report"
-      }
-    });
+    wrapper
+      .find(`[data-test="comment-model-input"]`)
+      .at(0)
+      .simulate("change", {
+        target: {
+          value: "hello world, this is a report"
+        }
+      });
     await props.reportArticle.mockResolvedValue({
       status: 200,
       message: "Article reported"
     });
     wrapper
       .find(".report")
-      .at(0)
+      .at(1)
       .simulate("click");
     expect(props.reportArticle).toHaveBeenCalled();
   });
 
   test("should handle report error", async () => {
-    wrapper.find(".report_text_area").simulate("change", {
-      target: {
-        value: "hello world, this is a report"
-      }
-    });
+    wrapper
+      .find(`[data-test="comment-model-input"]`)
+      .at(0)
+      .simulate("change", {
+        target: {
+          value: "hello world, this is a report"
+        }
+      });
     await props.reportArticle.mockResolvedValue({
       status: 409,
       message: "Article already reported"
     });
     wrapper
       .find(".report")
-      .at(0)
+      .at(1)
       .simulate("click");
     expect(props.reportArticle).toHaveBeenCalled();
   });
@@ -80,7 +89,7 @@ describe("Report article component", () => {
   test("should try to submit a report without description", () => {
     wrapper
       .find(".report")
-      .at(0)
+      .at(1)
       .simulate("click");
     expect(wrapper.state().reportError).toEqual(
       "Report should be more than 10 and less 255 characters long"
@@ -89,7 +98,7 @@ describe("Report article component", () => {
   test("should cancel report form", () => {
     wrapper
       .find(".report")
-      .at(1)
+      .at(0)
       .simulate("click");
     expect(props.cancelReport).toHaveBeenCalled();
   });
