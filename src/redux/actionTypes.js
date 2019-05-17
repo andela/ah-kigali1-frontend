@@ -123,3 +123,8 @@ export const SET_LOADING_COMMENTS = "SET_LOADING_COMMENTS";
 export const DELETE_COMMENT = " DELETE_COMMENT";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
 export const CREATE_NEW_COMMENT = "CREATE_NEW_COMMENT";
+
+/**
+ * @description like on comments actions
+ */
+export const CHANGE_LIKE = "CHANGE_LIKE";

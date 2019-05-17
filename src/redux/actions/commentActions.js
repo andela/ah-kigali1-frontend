@@ -10,7 +10,8 @@ import {
   SET_LOADING_COMMENTS,
   DELETE_COMMENT,
   UPDATE_COMMENT,
-  CREATE_NEW_COMMENT
+  CREATE_NEW_COMMENT,
+  CHANGE_LIKE
 } from "../actionTypes";
 import { arrayToObject } from "../../utils/helperFunctions";
 
@@ -117,6 +118,24 @@ export const updateComment = (
     dispatch({
       type: UPDATE_COMMENT,
       payload: { commentId, body: comments }
+    });
+  } catch (errorResponse) {
+    const { message } = errorResponse.response.data;
+    dispatch(setErrorMessage(message));
+  }
+};
+
+export const likeAComment = (id, slug) => async dispatch => {
+  try {
+    const response = await axios.post(`/articles/${slug}/comments/${id}/likes`);
+    const { updatedComment, message } = response.data;
+    dispatch({
+      type: CHANGE_LIKE,
+      payload: {
+        commentId: id,
+        like: updatedComment[0].like,
+        liked: message === "Comment liked"
+      }
     });
   } catch (errorResponse) {
     const { message } = errorResponse.response.data;

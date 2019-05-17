@@ -7,7 +7,6 @@ import moment from "moment";
 import authorImage from "../assets/img/user.png";
 import Button from "../components/common/Buttons/BasicButton";
 import DeleteDialogue from "../components/common/Dialog/DeleteDialogue";
-import heartIcon from "../assets/img/heart.svg";
 
 export class Comments extends Component {
   state = {
@@ -36,17 +35,24 @@ export class Comments extends Component {
     this.setState({ editMode: false });
   };
 
+  handleLike = (id, index) => {
+    const { likeComment } = this.props;
+    likeComment(id);
+    this.setState({ index });
+  };
+
   render() {
     const { editMode, index: commentIndex } = this.state;
     const {
       comments,
       updatedBody,
       deleteComment,
-      handleCommentsInputEdit
+      handleCommentsInputEdit,
+      currentUser
     } = this.props;
 
     return Object.values(comments).map((comment, index) => {
-      const { body, like, id, createdAt, author } = comment;
+      const { body, like, id, createdAt, author, liked } = comment;
       const { image, lastName, firstName, username } = author;
       return (
         <div className="article-comments--existing__desktop" key={id}>
@@ -90,23 +96,31 @@ export class Comments extends Component {
                 <div className="comment-body" key={id}>
                   {body}
                 </div>
-                <div className="comment-edit-delete">
-                  <DeleteDialogue
-                    id="delete-comment"
-                    deleteComment={() => deleteComment(id)}
-                  />
-                  <div
-                    className="edit-comment"
-                    onClick={() => this.isEditing(body, index)}
-                  >
-                    <i className="fa fa-edit" />
+                {currentUser && username === currentUser.username ? (
+                  <div className="comment-edit-delete">
+                    <DeleteDialogue
+                      id="delete-comment"
+                      deleteComment={() => deleteComment(id)}
+                    />
+                    <div
+                      className="edit-comment"
+                      onClick={() => this.isEditing(body, index)}
+                    >
+                      <i className="fa fa-edit" />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  ""
+                )}
                 <div className="article-comments--actions">
                   <span className="comment-like">
                     <div className="icons">
-                      <img src={heartIcon} alt="likes" className="likes" />
-                      <div>{like}</div>
+                      <i
+                        id="like-heart"
+                        className={liked ? "fa fa-heart" : "fa fa-heart-o"}
+                        onClick={() => this.handleLike(id, index)}
+                      />
+                      <div className="likesCounter">{like}</div>
                     </div>
                   </span>
                 </div>
@@ -125,7 +139,9 @@ Comments.propTypes = {
   onSetBodyEdit: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
   editComment: PropTypes.func.isRequired,
-  handleCommentsInputEdit: PropTypes.func.isRequired
+  handleCommentsInputEdit: PropTypes.func.isRequired,
+  likeComment: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({}).isRequired
 };
 
 export default Comments;

@@ -21,9 +21,9 @@ import {
   deleteComment,
   updateComment,
   fetchComments,
+  likeAComment,
   setBodyEdit
 } from "../redux/actions/commentActions";
-import { fetchCurrentUser } from "../redux/actions/profileActions";
 import {
   isCurrentUserAuthor,
   stringToHtmlElement,
@@ -48,8 +48,7 @@ export const mapStateToProps = ({
   auth,
   fetchedArticle,
   following,
-  fetchedComments,
-  user
+  fetchedComments
 }) => ({
   currentUser: auth.currentUser,
   asideArticles: fetchedArticle.asideArticles,
@@ -60,8 +59,7 @@ export const mapStateToProps = ({
   success: fetchedComments.success,
   error: fetchedComments.error,
   comments: fetchedComments.comments,
-  loading: fetchedComments.isLoading,
-  profile: user.profile
+  loading: fetchedComments.isLoading
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -81,7 +79,7 @@ export const mapDispatchToProps = dispatch => ({
   onFetchComments: (commentId, slug) =>
     dispatch(fetchComments(commentId, slug)),
   onSetBodyEdit: payload => dispatch(setBodyEdit(payload)),
-  onFetchProfile: username => dispatch(fetchCurrentUser(username))
+  onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug))
 });
 
 export class Article extends Component {
@@ -191,6 +189,16 @@ export class Article extends Component {
     onUpdateComment({ comments: updatedBody, commentId: id }, slug);
   };
 
+  handleLikeComment = id => {
+    const {
+      onLikeComment,
+      match: {
+        params: { slug }
+      }
+    } = this.props;
+    onLikeComment(id, slug);
+  };
+
   deleteComment = id => {
     const {
       onDeleteComment,
@@ -267,8 +275,7 @@ export class Article extends Component {
       comments,
       updatedBody,
       onSetBodyEdit,
-      loading,
-      profile
+      loading
     } = this.props;
 
     const { isFetching, message, article: retrievedArticle } = article;
@@ -388,7 +395,7 @@ export class Article extends Component {
                   <div className="article-comments--new">
                     <div className="avatar-wrapper comment-avatar-wrapper">
                       <img
-                        src={profile.image || authorImage}
+                        src={image || authorImage}
                         alt="Avatar"
                         className="avatar"
                       />
@@ -416,6 +423,8 @@ export class Article extends Component {
                     deleteComment={this.deleteComment}
                     editComment={this.editComment}
                     handleCommentsInputEdit={this.handleCommentsInputEdit}
+                    likeComment={this.handleLikeComment}
+                    currentUser={currentUser}
                   />
                 </div>
               </div>
@@ -495,6 +504,7 @@ export class Article extends Component {
 }
 
 Article.propTypes = {
+  onLikeComment: PropTypes.func.isRequired,
   profile: PropTypes.shape({}).isRequired,
   loading: PropTypes.func.isRequired,
   onSetBodyEdit: PropTypes.func.isRequired,

@@ -9,7 +9,8 @@ import {
   SET_LOADING_COMMENTS,
   DELETE_COMMENT,
   UPDATE_COMMENT,
-  CREATE_NEW_COMMENT
+  CREATE_NEW_COMMENT,
+  CHANGE_LIKE
 } from "../actionTypes";
 
 const initialState = {
@@ -71,6 +72,18 @@ const commentReducer = (state = initialState, action) => {
       return {
         ...state,
         comments: { [action.payload.id]: action.payload, ...state.comments }
+      };
+    case CHANGE_LIKE:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.payload.commentId]: {
+            ...state.comments[action.payload.commentId],
+            like: action.payload.like,
+            liked: action.payload.liked
+          }
+        }
       };
     default:
       return {

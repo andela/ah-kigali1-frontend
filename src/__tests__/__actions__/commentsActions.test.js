@@ -10,7 +10,8 @@ import {
   fetchComments,
   createComment,
   deleteComment,
-  updateComment
+  updateComment,
+  likeAComment
 } from "../../redux/actions/commentActions";
 import {
   FETCHING_COMMENTS,
@@ -18,7 +19,9 @@ import {
   SET_LOADING_COMMENTS,
   SET_SUCCESS_MESSAGE,
   SET_ERROR_MESSAGE,
-  COMMENTS_INPUT
+  COMMENTS_INPUT,
+  UPDATE_COMMENT,
+  CHANGE_LIKE
 } from "../../redux/actionTypes";
 
 const { API_URL } = process.env;
@@ -59,7 +62,7 @@ describe("comments actions", () => {
     });
   });
 
-  describe("async actions creates", () => {
+  describe("async actions", () => {
     beforeEach(() => {
       moxios.install(axios);
       store = mockStore({});
@@ -197,7 +200,7 @@ describe("comments actions", () => {
           { payload: "Comment updated", type: "SET_SUCCESS_MESSAGE" },
           {
             payload: { body: "new comment", commentId: "3885730kjdjfkskd" },
-            type: "UPDATE_COMMENT"
+            type: UPDATE_COMMENT
           }
         ];
         moxios.stubRequest(
@@ -239,6 +242,53 @@ describe("comments actions", () => {
             const actions = store.getActions();
             expect(actions).toEqual(expectedActions);
           });
+      });
+    });
+
+    describe("likeAComment()", () => {
+      test("should like successfully", () => {
+        const expectedActions = [
+          {
+            type: CHANGE_LIKE,
+            payload: {
+              commentId: "3885730kjdjfkskd",
+              like: undefined,
+              liked: true
+            }
+          }
+        ];
+        moxios.stubRequest(
+          `${API_URL}/articles/${slug}/comments/${commentId}/likes`,
+          {
+            status: 200,
+            response: {
+              message: "Comment liked",
+              updatedComment: "Hello world"
+            }
+          }
+        );
+        return store.dispatch(likeAComment(commentId, slug)).then(() => {
+          const actions = store.getActions();
+          expect(actions).toEqual(expectedActions);
+        });
+      });
+      test("should fail to like", () => {
+        const expectedActions = [
+          { type: "SET_ERROR_MESSAGE", payload: "Error" }
+        ];
+        moxios.stubRequest(
+          `${API_URL}/articles/${slug}/comments/${commentId}/likes`,
+          {
+            status: 400,
+            response: {
+              message: "Error"
+            }
+          }
+        );
+        return store.dispatch(likeAComment(commentId, slug)).then(() => {
+          const actions = store.getActions();
+          expect(actions).toEqual(expectedActions);
+        });
       });
     });
   });

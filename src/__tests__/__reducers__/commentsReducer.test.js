@@ -5,7 +5,12 @@ import {
   COMMENTS_INPUT,
   COMMENTS_INPUT_EDIT,
   FETCHING_COMMENTS,
-  UPDATE_COMMENT_BODY
+  UPDATE_COMMENT_BODY,
+  SET_LOADING_COMMENTS,
+  CHANGE_LIKE,
+  CREATE_NEW_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT
 } from "../../redux/actionTypes";
 
 const testInput = { field: "body", value: "hello" };
@@ -95,5 +100,100 @@ describe("team reducer", () => {
       ...initialState,
       error: "error message"
     });
+  });
+  test("should handle SET_LOADING_COMMENTS", () => {
+    expect(
+      commentReducer(initialState, {
+        type: SET_LOADING_COMMENTS,
+        isLoading: true
+      })
+    ).toEqual({
+      ...initialState,
+      isLoading: true
+    });
+  });
+
+  test("should handle CHANGE_LIKE", () => {
+    const comments = {
+      commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
+      like: 0,
+      liked: false
+    };
+    expect(
+      commentReducer(initialState, {
+        type: CHANGE_LIKE,
+        payload: comments
+      })
+    ).toEqual({
+      body: "",
+      bodyEdit: "",
+      success: "",
+      error: "",
+      comments: {
+        "9324fbf4-095a-4637-8aff-05d871fc5fc0": { like: 0, liked: false }
+      },
+      isLoading: false
+    });
+  });
+
+  test("should handle CREATE_NEW_COMMENT", () => {
+    const comments = {
+      id: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
+      body: "hello world"
+    };
+    const cr = commentReducer(initialState, {
+      type: CREATE_NEW_COMMENT,
+      payload: comments
+    });
+    expect(cr).toEqual({
+      body: "",
+      bodyEdit: "",
+      success: "",
+      error: "",
+      comments: {
+        "9324fbf4-095a-4637-8aff-05d871fc5fc0": {
+          id: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
+          body: "hello world"
+        }
+      },
+      isLoading: false
+    });
+  });
+
+  test("should handle UPDATE_COMMENT", () => {
+    const comments = {
+      commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
+      body: "hello world"
+    };
+    expect(
+      commentReducer(initialState, {
+        type: UPDATE_COMMENT,
+        payload: comments
+      })
+    ).toEqual({
+      body: "",
+      bodyEdit: "",
+      success: "",
+      error: "",
+      comments: {
+        "9324fbf4-095a-4637-8aff-05d871fc5fc0": {
+          body: "hello world"
+        }
+      },
+      isLoading: false
+    });
+  });
+
+  test("should handle DELETE_COMMENT", () => {
+    const comments = {
+      commentId: "9324fbf4-095a-4637-8aff-05d871fc5fc0",
+      body: "hello world"
+    };
+    expect(
+      commentReducer(initialState, {
+        type: DELETE_COMMENT,
+        payload: comments.commentId
+      })
+    ).toEqual(initialState);
   });
 });
