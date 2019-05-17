@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import Textarea from "react-textarea-autosize";
 import PropTypes from "prop-types";
 import moment from "moment";
-import authorImage from "../assets/img/user.png";
+import authorImage from "../assets/img/author.svg";
 import Button from "../components/common/Buttons/BasicButton";
 import DeleteDialogue from "../components/common/Dialog/DeleteDialogue";
 

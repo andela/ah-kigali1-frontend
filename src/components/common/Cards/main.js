@@ -29,57 +29,56 @@ export class MainCard extends Component {
       comments,
       likesCount,
       slug,
-      bookmarked: isBookmarked
+      bookmarked: isBookmarked,
+      description
     } = article;
     const { firstName, lastName, image, username } = author;
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-      <div className="left" onClick={() => this.redirectToArticle()}>
-        <div className="article-card">
-          <div className="avatar-wrapper">
-            <img
-              src={image || authorDefaultImage}
-              alt="Avatar"
-              className="avatar"
-            />
-            <div className="name_minutes medium-main">
-              <span className="author_name">
-                {username && firstName && lastName
-                  ? `${firstName} ${lastName}`
-                  : username}
-              </span>
-              <br />
-              <span className="date_read_time">
-                {calculateTimeStamp(createdAt)}, {readTime}min read
-              </span>
-            </div>
+      <div className="article-card" onClick={() => this.redirectToArticle()}>
+        <div className="avatar-wrapper">
+          <img
+            src={image || authorDefaultImage}
+            alt="Avatar"
+            className="avatar"
+          />
+          <div className="name_minutes medium-main">
+            <span className="author_name">
+              {username && firstName && lastName
+                ? `${firstName} ${lastName}`
+                : username}
+            </span>
+            <br />
+            <span className="date_read_time">
+              {calculateTimeStamp(createdAt)}, {readTime}min read
+            </span>
           </div>
-          <div
-            className="main-article-img"
-            style={{
-              backgroundImage: `url(${stringToHtmlElement(body).firstImage})`
-            }}
-          >
-            <span className="cat">TECH</span>
+        </div>
+        <div
+          className="main-article-img"
+          style={{
+            backgroundImage: `url(${stringToHtmlElement(body).firstImage})`
+          }}
+        >
+          <span className="cat">TECH</span>
+        </div>
+        <div className="tex-content">
+          <h3>{title}</h3>
+          <div className="tex-content__body" style={{ marginBottom: 20 }}>
+            {description}
           </div>
-          <div className="tex-content">
-            <h3>{title}</h3>
-            <div className="tex-content__body">
-              {stringToHtmlElement(body).body}
+          <div className="icons">
+            <div className="left-icons">
+              <img src={thumbsUp} alt="likes" className="likes" />
+              <div className="numbers">{likesCount}</div>
+              <img src={thumbsDown} alt="dislikes" className="dislikes" />
+              <div className="numbers">3,844</div>
+              <img src={commentIcon} alt="comments" className="comments" />
+              <div className="numbers">{comments.length}</div>
             </div>
-            <div className="icons">
-              <div className="left-icons">
-                <img src={thumbsUp} alt="likes" className="likes" />
-                <div className="numbers">{likesCount}</div>
-                <img src={thumbsDown} alt="dislikes" className="dislikes" />
-                <div className="numbers">3,844</div>
-                <img src={commentIcon} alt="comments" className="comments" />
-                <div className="numbers">{comments.length}</div>
-              </div>
-              <div className="right-icons">
-                <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
-              </div>
+            <div className="right-icons">
+              <BookmarkComponent slug={slug} isBookmarked={isBookmarked} />
             </div>
           </div>
         </div>
@@ -103,6 +102,7 @@ MainCard.propTypes = {
       image: PropTypes.string,
       username: PropTypes.string
     }),
+    description: PropTypes.string,
     comments: PropTypes.arrayOf(
       PropTypes.shape({
         author: PropTypes.shape({

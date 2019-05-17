@@ -1,11 +1,32 @@
 import React from "react";
-import { mount } from "enzyme";
-import App from "../../App";
+import { shallow } from "enzyme";
+import { Home, mapStateToProps } from "../../views/Home";
 
+const props = {
+  fetchAllArticles: jest.fn(),
+  allArticles: [{ title: "the fish climbed the tree" }]
+};
+
+const allArticles = [
+  {
+    title: "the fish climbed the tree",
+    body: "fdkhrsgdjfkheiusdhfkjgdhfbjkhbjk"
+  }
+];
+
+const wrapper = shallow(<Home {...props} />);
 describe("Home component", () => {
   test("matches the snapshot", () => {
-    const warper = mount(<App />);
-    expect(warper.find("h2").text()).toEqual("Hello world, from Titan-Devs");
-    expect(true).toBe(true);
+    expect(wrapper).toMatchSnapshot();
+  });
+  test("testing component will receive props", () => {
+    wrapper.setProps({ allArticles });
+    expect(wrapper.state().allArticles).toEqual(allArticles);
+    wrapper.setProps({ allArticles });
+    expect(wrapper.state().allArticles).toEqual(allArticles);
+  });
+
+  test("map state to props", () => {
+    mapStateToProps({ allArticles });
   });
 });

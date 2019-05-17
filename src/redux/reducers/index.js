@@ -6,6 +6,7 @@ import socialAuthReducers from "./socialAuthReducers";
 import createArticleReducer from "./createArticleReducer";
 import readArticleReducer from "./readArticleReducer";
 import userReducer from "./userReducer";
+import allArticleReducer from "./allArticlesReducer";
 import searchReducers from "./searchReducers";
 import following from "./followingReducer";
 import notifier from "./notificationReducer";
@@ -19,6 +20,7 @@ import bookmarkReducer from "./bookmarkReducers";
 export default combineReducers({
   highlights,
   auth: loginReducers,
+  allArticles: allArticleReducer,
   article: createArticleReducer,
   newArticle: createArticleReducer,
   resetPassword: resetPasswordReducers,
