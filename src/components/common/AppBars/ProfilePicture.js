@@ -19,6 +19,7 @@ const ProfilePicture = ({ profile, onClick }) => {
     </button>
   );
 };
+
 ProfilePicture.propTypes = {
   onClick: PropTypes.func.isRequired,
   profile: PropTypes.func.isRequired
