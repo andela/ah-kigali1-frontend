@@ -92,7 +92,6 @@ export const mapDispatchToProps = dispatch => ({
     dispatch(fetchComments(commentId, slug)),
   onSetBodyEdit: payload => dispatch(setBodyEdit(payload)),
   onLikeComment: (commentId, slug) => dispatch(likeAComment(commentId, slug)),
-  onFetchProfile: username => dispatch(fetchCurrentUser(username)),
   markHighlight: (articleBody, save = false) =>
     dispatch(markHighlightSection(articleBody, save)),
   fetchHighLights: slug => dispatch(fetchHighLights(slug))
